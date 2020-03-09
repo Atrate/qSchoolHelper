@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>main_window</class>
+ <widget class="QMainWindow" name="main_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -97,12 +97,12 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuas">
     <property name="title">
-     <string>File</string>
+     <string>Fi&amp;le</string>
     </property>
     <addaction name="actionInitial_setup"/>
     <addaction name="separator"/>
@@ -121,25 +121,22 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
   </action>
   <action name="actionOpen_help">
    <property name="text">
-    <string>Open help</string>
+    <string>&amp;Open help</string>
    </property>
   </action>
   <action name="actionInitial_setup">
    <property name="text">
-    <string>Initial setup</string>
-   </property>
-   <property name="shortcut">
-    <string>I</string>
+    <string>&amp;Initial setup</string>
    </property>
   </action>
  </widget>

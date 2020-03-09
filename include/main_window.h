@@ -1,0 +1,35 @@
+/*
+ * Copyright (C) 2020 Atrate <atrate@protonmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
+
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
+
+#include <QMainWindow>
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class main_window; }
+QT_END_NAMESPACE
+
+class main_window : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    main_window(QWidget *parent = nullptr);
+    ~main_window();
+
+private:
+    Ui::main_window *ui;
+};
+#endif // MAIN_WINDOW_H

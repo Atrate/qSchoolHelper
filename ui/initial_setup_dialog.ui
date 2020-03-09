@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InitialSetupDialog</class>
- <widget class="QDialog" name="InitialSetupDialog">
+ <class>initial_setup_dialog</class>
+ <widget class="QDialog" name="initial_setup_dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -145,7 +145,7 @@ This can also be used on very unclean systems to quickly clean them and install 
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>InitialSetupDialog</receiver>
+   <receiver>initial_setup_dialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -161,7 +161,7 @@ This can also be used on very unclean systems to quickly clean them and install 
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>InitialSetupDialog</receiver>
+   <receiver>initial_setup_dialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

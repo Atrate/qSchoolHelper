@@ -5,6 +5,7 @@
 *.autosave
 *.a
 *.core
+moc_*.h
 *.moc
 *.o
 *.obj
@@ -70,4 +71,4 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
+qSchoolHelper
