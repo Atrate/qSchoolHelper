@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InstallDialog</class>
+ <widget class="QDialog" name="InstallDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>643</width>
+    <height>383</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Install Software</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>320</y>
+     <width>91</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Close</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>280</y>
+     <width>100</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Install</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>140</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Firefox
+(Web browser)</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_2">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>140</y>
+     <width>191</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LibreOffice
+(Document Manager)</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_3">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>200</y>
+     <width>151</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Adobe Reader
+(PDF Viewer)</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>621</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Hello! Which of these programs are missing and you would like to install?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_4">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>200</y>
+     <width>261</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <kerning>false</kerning>
+    </font>
+   </property>
+   <property name="text">
+    <string>PowerPoint Viewer
+(Viewer for .pptx Presentations)</string>
+   </property>
+   <property name="tristate">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_5">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>140</y>
+     <width>211</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VLC Media Player
+(Video and Audio Player)</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>InstallDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>InstallDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
