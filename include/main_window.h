@@ -17,12 +17,16 @@
 
 #include <QMainWindow>
 #include "problem_dialog.h"
+#include "about_dialog.h"
 #include "install_dialog.h"
 #include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class main_window; }
+namespace Ui
+{
+    class main_window;
+}
 QT_END_NAMESPACE
 
 class main_window : public QMainWindow
@@ -37,10 +41,12 @@ class main_window : public QMainWindow
         Ui::main_window *ui;
         problem_dialog *problem;
         initial_setup_dialog *initial_setup;
+        about_dialog *about;
 
     private slots:
         void problem_button_clicked();
         void initial_setup_triggered();
+        void about_triggered();
 
 };
 #endif // MAIN_WINDOW_H

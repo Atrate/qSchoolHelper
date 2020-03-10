@@ -11,15 +11,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/install_dialog.cpp \
     src/main.cpp \
+    src/main_window.cpp \
+    src/about_dialog.cpp \
+    src/install_dialog.cpp \
     src/cleaning_dialog.cpp \
     src/problem_dialog.cpp \
     src/initial_setup_dialog.cpp \
-    src/main_window.cpp
 
 HEADERS += \
     include/main_window.h \
+    include/about_dialog.h \
     include/cleaning_dialog.h \
     include/problem_dialog.h \
     include/initial_setup_dialog.h \

@@ -14,6 +14,7 @@
 
 #include "main_window.h"
 #include "ui_main_window.h"
+#include "about_dialog.h"
 #include "problem_dialog.h"
 #include "install_dialog.h"
 #include "initial_setup_dialog.h"
@@ -39,4 +40,9 @@ void main_window::initial_setup_triggered()
 {
     initial_setup = new initial_setup_dialog(this);
     initial_setup->show();
+}
+void main_window::about_triggered()
+{
+    about = new about_dialog(this);
+    about->show();
 }
