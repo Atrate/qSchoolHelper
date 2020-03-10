@@ -40,6 +40,8 @@
    </property>
    <property name="font">
     <font>
+     <weight>75</weight>
+     <bold>true</bold>
      <kerning>false</kerning>
     </font>
    </property>
@@ -50,7 +52,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QTextBrowser" name="cleaning_log">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -81,54 +83,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>130</y>
-     <width>118</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Simple</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_2">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>160</y>
-     <width>118</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Deep</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>90</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <kerning>false</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Cleaning type:</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="toolButton">
+  <widget class="QToolButton" name="clean_button">
    <property name="geometry">
     <rect>
      <x>470</x>
@@ -140,6 +95,47 @@
    <property name="text">
     <string>Clean!</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>110</y>
+     <width>160</width>
+     <height>86</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cleaning type:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton">
+      <property name="text">
+       <string>Simple</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_2">
+      <property name="text">
+       <string>Deep</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

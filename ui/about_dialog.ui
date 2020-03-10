@@ -67,9 +67,10 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>qSchoolHelper is a Qt project designed to help
-non-tech-inclined peopledeal with simple problems on a Windows
-computer without the need to call support.</string>
+       <string>qSchoolHelper is a Qt project designed to help non-tech-inclined peopledeal with simple problems on a Windows computer without the need to call support.</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -96,6 +97,9 @@ computer without the need to call support.</string>
        <string>Icon adapted from https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon</string>
       </property>
       <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="openExternalLinks">
        <bool>true</bool>
       </property>
      </widget>

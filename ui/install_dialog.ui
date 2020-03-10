@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Close</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="install_button">
    <property name="geometry">
     <rect>
      <x>280</x>
@@ -40,48 +40,6 @@
    </property>
    <property name="text">
     <string>Install</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>140</y>
-     <width>141</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Firefox
-(Web browser)</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_2">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>140</y>
-     <width>191</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>LibreOffice
-(Document Manager)</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_3">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>200</y>
-     <width>151</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Adobe Reader
-(PDF Viewer)</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -106,41 +64,65 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox_4">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>200</y>
-     <width>261</width>
-     <height>51</height>
+     <x>110</x>
+     <y>100</y>
+     <width>454</width>
+     <height>149</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <kerning>false</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>PowerPoint Viewer
-(Viewer for .pptx Presentations)</string>
-   </property>
-   <property name="tristate">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_5">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>140</y>
-     <width>211</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>VLC Media Player
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QCheckBox" name="checkBox">
+      <property name="text">
+       <string>Firefox
+(Web browser)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCheckBox" name="checkBox_5">
+      <property name="text">
+       <string>VLC Media Player
 (Video and Audio Player)</string>
-   </property>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="checkBox_2">
+      <property name="text">
+       <string>LibreOffice
+(Document Manager)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QCheckBox" name="checkBox_3">
+      <property name="text">
+       <string>Adobe Reader
+(PDF Viewer)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QCheckBox" name="checkBox_4">
+      <property name="font">
+       <font>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="text">
+       <string>PowerPoint Viewer
+(Viewer for .pptx Presentations)</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
