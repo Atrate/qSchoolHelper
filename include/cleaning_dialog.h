@@ -24,9 +24,11 @@ namespace Ui {
 class cleaning_dialog : public QDialog
 {
         Q_OBJECT
+
     public:
         explicit cleaning_dialog(QWidget *parent = nullptr);
         ~cleaning_dialog();
+
     private:
         Ui::cleaning_dialog *ui;
 

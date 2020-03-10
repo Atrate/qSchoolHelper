@@ -24,9 +24,11 @@ namespace Ui {
 class initial_setup_dialog : public QDialog
 {
         Q_OBJECT
+
     public:
         explicit initial_setup_dialog(QWidget *parent = nullptr);
         ~initial_setup_dialog();
+
     private:
         Ui::initial_setup_dialog *ui;
 

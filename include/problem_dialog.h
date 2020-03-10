@@ -24,9 +24,11 @@ namespace Ui {
 class problem_dialog : public QDialog
 {
         Q_OBJECT
+
     public:
         explicit problem_dialog(QWidget *parent = nullptr);
         ~problem_dialog();
+
     private:
         Ui::problem_dialog *ui;
 

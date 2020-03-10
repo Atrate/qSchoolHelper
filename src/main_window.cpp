@@ -14,6 +14,10 @@
 
 #include "main_window.h"
 #include "ui_main_window.h"
+#include "problem_dialog.h"
+#include "install_dialog.h"
+#include "initial_setup_dialog.h"
+#include "cleaning_dialog.h"
 
 main_window::main_window(QWidget *parent)
     : QMainWindow(parent)
@@ -26,4 +30,8 @@ main_window::~main_window()
 {
     delete ui;
 }
-
+void main_window::problem_button_triggered()
+{
+    problem = new problem_dialog(this);
+    problem->show();
+}

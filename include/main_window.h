@@ -16,6 +16,10 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
+#include "problem_dialog.h"
+#include "install_dialog.h"
+#include "initial_setup_dialog.h"
+#include "cleaning_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class main_window; }
@@ -23,13 +27,18 @@ QT_END_NAMESPACE
 
 class main_window : public QMainWindow
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    main_window(QWidget *parent = nullptr);
-    ~main_window();
+    public:
+        main_window(QWidget *parent = nullptr);
+        ~main_window();
 
-private:
-    Ui::main_window *ui;
+    private:
+        Ui::main_window *ui;
+        problem_dialog *problem;
+
+    private slots:
+        void problem_button_triggered();
+
 };
 #endif // MAIN_WINDOW_H
