@@ -30,8 +30,13 @@ main_window::~main_window()
 {
     delete ui;
 }
-void main_window::problem_button_triggered()
+void main_window::problem_button_clicked()
 {
     problem = new problem_dialog(this);
     problem->show();
+}
+void main_window::initial_setup_triggered()
+{
+    initial_setup = new initial_setup_dialog(this);
+    initial_setup->show();
 }

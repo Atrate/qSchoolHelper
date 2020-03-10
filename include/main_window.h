@@ -36,9 +36,11 @@ class main_window : public QMainWindow
     private:
         Ui::main_window *ui;
         problem_dialog *problem;
+        initial_setup_dialog *initial_setup;
 
     private slots:
-        void problem_button_triggered();
+        void problem_button_clicked();
+        void initial_setup_triggered();
 
 };
 #endif // MAIN_WINDOW_H

@@ -180,7 +180,7 @@
    <sender>pushButton_2</sender>
    <signal>clicked()</signal>
    <receiver>main_window</receiver>
-   <slot>problem_button_triggered()</slot>
+   <slot>problem_button_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>596</x>
@@ -192,8 +192,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionInitial_setup</sender>
+   <signal>triggered()</signal>
+   <receiver>main_window</receiver>
+   <slot>initial_setup_triggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>problem_button_triggered()</slot>
+  <slot>problem_button_clicked()</slot>
+  <slot>initial_setup_triggered()</slot>
  </slots>
 </ui>
