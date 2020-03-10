@@ -81,7 +81,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QCheckBox" name="firefox_checkBox">
       <property name="text">
        <string>Firefox
 (Web browser)</string>
@@ -89,7 +89,7 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QCheckBox" name="checkBox_5">
+     <widget class="QCheckBox" name="vlc_checkBox">
       <property name="text">
        <string>VLC Media Player
 (Video and Audio Player)</string>
@@ -97,7 +97,7 @@
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QCheckBox" name="checkBox_2">
+     <widget class="QCheckBox" name="libreoffice_checkBox">
       <property name="text">
        <string>LibreOffice
 (Document Manager)</string>
@@ -105,7 +105,7 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QCheckBox" name="checkBox_3">
+     <widget class="QCheckBox" name="reader_checkBox_3">
       <property name="text">
        <string>Adobe Reader
 (PDF Viewer)</string>
@@ -113,7 +113,7 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QCheckBox" name="checkBox_4">
+     <widget class="QCheckBox" name="viewer_checkBox">
       <property name="font">
        <font>
         <kerning>false</kerning>
