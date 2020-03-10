@@ -73,8 +73,13 @@
      <height>111</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <italic>false</italic>
+    </font>
+   </property>
    <property name="text">
-    <string>Rzutnik nie działa</string>
+    <string>The projector doesn't work</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -88,6 +93,19 @@
    </property>
    <property name="text">
     <string>Speakers</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>250</y>
+     <width>301</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Presentations look bad</string>
    </property>
   </widget>
  </widget>

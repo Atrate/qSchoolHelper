@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
+    <width>654</width>
     <height>392</height>
    </rect>
   </property>
@@ -53,7 +53,7 @@
     <rect>
      <x>110</x>
      <y>60</y>
-     <width>504</width>
+     <width>521</width>
      <height>251</height>
     </rect>
    </property>
@@ -86,6 +86,16 @@ computer without the need to call support.</string>
        <string>Source code: https://www.gitlab.com/Atrate/qSchoolHelper</string>
       </property>
       <property name="openExternalLinks">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Icon adapted from https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon</string>
+      </property>
+      <property name="wordWrap">
        <bool>true</bool>
       </property>
      </widget>
