@@ -46,3 +46,13 @@ void main_window::about_triggered()
     about = new about_dialog(this);
     about->show();
 }
+void main_window::install_button_clicked()
+{
+    install = new install_dialog(this);
+    install->show();
+}
+void main_window::cleaning_button_clicked()
+{
+    cleaning = new cleaning_dialog(this);
+    cleaning->show();
+}

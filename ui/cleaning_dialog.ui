@@ -19,9 +19,9 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>480</x>
      <y>430</y>
-     <width>341</width>
+     <width>101</width>
      <height>32</height>
     </rect>
    </property>
@@ -129,6 +129,9 @@
       <property name="text">
        <string>Simple</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item>
@@ -150,8 +153,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>556</x>
+     <y>430</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -166,12 +169,28 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>488</x>
+     <y>430</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clean_button</sender>
+   <signal>clicked()</signal>
+   <receiver>cleaning_log</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>511</x>
+     <y>324</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>366</x>
+     <y>302</y>
     </hint>
    </hints>
   </connection>

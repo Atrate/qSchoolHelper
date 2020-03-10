@@ -224,10 +224,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>clean_button</sender>
+   <signal>clicked()</signal>
+   <receiver>main_window</receiver>
+   <slot>cleaning_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>229</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>software_button</sender>
+   <signal>clicked()</signal>
+   <receiver>main_window</receiver>
+   <slot>install_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>386</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>problem_button_clicked()</slot>
   <slot>initial_setup_triggered()</slot>
   <slot>about_triggered()</slot>
+  <slot>cleaning_button_clicked()</slot>
+  <slot>install_button_clicked()</slot>
  </slots>
 </ui>
