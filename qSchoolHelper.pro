@@ -40,6 +40,7 @@ TRANSLATIONS += \
     data/translations/qSchoolHelper_pl_PL.ts
 
 RC_FILE = data/icons/icon.ico
+RESOURCES = ui/resources.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
