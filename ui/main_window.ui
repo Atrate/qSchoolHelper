@@ -48,8 +48,8 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="problem_button">
+     <item row="2" column="0">
+      <widget class="QPushButton" name="software_button">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -57,7 +57,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>I have a problem</string>
+        <string>Install software</string>
        </property>
       </widget>
      </item>
@@ -74,6 +74,19 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="problem_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>I have a problem</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="1">
       <widget class="QPushButton" name="pushButton_4">
        <property name="sizePolicy">
@@ -87,16 +100,19 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QPushButton" name="software_button">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item row="3" column="0" colspan="2">
+      <widget class="QPushButton" name="initial_setup_button">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Initial Setup has already been run on this computer. If you with to run it again, please select if from File -&amp;gt; Initial Setup.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>Install software</string>
+        <string>Initial Setup</string>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -138,7 +154,7 @@
   </action>
   <action name="actionInitial_setup">
    <property name="text">
-    <string>&amp;Initial setup</string>
+    <string>&amp;Initial Setup</string>
    </property>
   </action>
   <action name="actionOpen_help">

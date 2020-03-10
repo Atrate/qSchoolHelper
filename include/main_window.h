@@ -45,6 +45,8 @@ class main_window : public QMainWindow
         install_dialog *install;
         cleaning_dialog *cleaning;
 
+        void config_setup();
+
     private slots:
         void problem_button_clicked();
         void initial_setup_triggered();

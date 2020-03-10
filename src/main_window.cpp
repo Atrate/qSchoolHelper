@@ -11,6 +11,8 @@
  * GNU General Public License for more details.
  *
  */
+#include <fstream>
+#include <filesystem>
 
 #include "main_window.h"
 #include "ui_main_window.h"
@@ -20,16 +22,40 @@
 #include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
 
+namespace fs = std::filesystem;
+
 main_window::main_window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::main_window)
 {
     ui->setupUi(this);
+    config_setup();
 }
 
 main_window::~main_window()
 {
     delete ui;
+}
+void main_window::config_setup()
+{
+    // Set-up the config folder
+    // ------------------------
+    std::string config_folder = "/tmp/qTmp/"; // TODO: "C:/ProgramData/qSchoolHelper/";
+    std::string initial_setup_done = config_folder + "initial_setup_done.txt";
+    if (!fs::exists(config_folder))
+    {
+        fs::create_directory(config_folder);
+    }
+
+    if (fs::exists(initial_setup_done))
+    {
+        ui->initial_setup_button->setEnabled(false);
+        // Move to initial_setup on button press
+        //std::ofstream isdf;
+        //isdf.open(initial_setup_done);
+        //isdf << std::endl;
+        //isdf.close();
+    }
 }
 void main_window::problem_button_clicked()
 {
