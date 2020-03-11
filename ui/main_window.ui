@@ -272,6 +272,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>initial_setup_button</sender>
+   <signal>clicked()</signal>
+   <receiver>main_window</receiver>
+   <slot>initial_setup_triggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>474</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>513</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>problem_button_clicked()</slot>
