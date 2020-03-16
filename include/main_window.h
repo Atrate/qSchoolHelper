@@ -21,6 +21,7 @@
 #include "install_dialog.h"
 #include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
+#include "help_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -44,6 +45,7 @@ class main_window : public QMainWindow
         about_dialog *about;
         install_dialog *install;
         cleaning_dialog *cleaning;
+        help_dialog *help;
 
         void config_setup();
 
@@ -53,6 +55,7 @@ class main_window : public QMainWindow
         void about_triggered();
         void install_button_clicked();
         void cleaning_button_clicked();
+        void help_triggered();
 
 };
 #endif // MAIN_WINDOW_H

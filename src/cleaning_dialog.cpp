@@ -12,8 +12,11 @@
  *
  */
 
+#include <filesystem>
 #include "cleaning_dialog.h"
 #include "ui_cleaning_dialog.h"
+
+namespace fs = std::filesystem;
 
 cleaning_dialog::cleaning_dialog(QWidget *parent) :
     QDialog(parent),
@@ -25,4 +28,28 @@ cleaning_dialog::cleaning_dialog(QWidget *parent) :
 cleaning_dialog::~cleaning_dialog()
 {
     delete ui;
+}
+void cleaning_dialog::clean()
+{
+    ui->cleaning_log->append("Starting cleaner…\n-----------------");
+
+    ui->cleaning_log->append("Removing .bat files from the desktop…");
+    std::string path = "C:\\Users\\";
+    for (const auto &entry : fs::directory_iterator(path))
+    {
+        if (fs::is_directory(entry.path()))
+        {
+            fs::remove_all(entry.path()/"Desktop"/"*.bat");
+            fs::remove_all(entry.path()/"Desktop"/"*.cmd");
+            //std::string cmd = "del " + entry.path().u8string() + "\\Desktop\\*.bat";
+            //char cmdc[1024];
+            //strncpy(cmdc,cmd.c_str(), sizeof(cmdc));
+            //cmdc[sizeof(cmdc) - 1] = 0;
+            //system(cmdc);
+        }
+    }
+
+    ui->cleaning_log->append("Cleaning temporary files and caches…");
+    // TODO: Verify BleachBit checksum
+
 }

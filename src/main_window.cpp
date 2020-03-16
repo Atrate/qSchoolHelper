@@ -21,6 +21,7 @@
 #include "install_dialog.h"
 #include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
+#include "help_dialog.h"
 
 namespace fs = std::filesystem;
 
@@ -81,4 +82,9 @@ void main_window::cleaning_button_clicked()
 {
     cleaning = new cleaning_dialog(this);
     cleaning->show();
+}
+void main_window::help_triggered()
+{
+    help = new help_dialog(this);
+    help->show();
 }

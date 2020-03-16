@@ -194,5 +194,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>clean_button</sender>
+   <signal>clicked()</signal>
+   <receiver>cleaning_dialog</receiver>
+   <slot>clean()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>552</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>clean()</slot>
+ </slots>
 </ui>

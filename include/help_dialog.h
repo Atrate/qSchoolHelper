@@ -12,28 +12,26 @@
  *
  */
 
-#ifndef CLEANING_DIALOG_H
-#define CLEANING_DIALOG_H
+#ifndef HELP_DIALOG_H
+#define HELP_DIALOG_H
 
 #include <QDialog>
 
 namespace Ui {
-    class cleaning_dialog;
+    class help_dialog;
 }
 
-class cleaning_dialog : public QDialog
+class help_dialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit cleaning_dialog(QWidget *parent = nullptr);
-        ~cleaning_dialog();
+        explicit help_dialog(QWidget *parent = nullptr);
+        ~help_dialog();
 
     private:
-        Ui::cleaning_dialog *ui;
-    private slots:
-        void clean();
+        Ui::help_dialog *ui;
 
 };
 
-#endif // CLEANING_DIALOG_H
+#endif // HELP_DIALOG_H
