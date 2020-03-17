@@ -41,7 +41,7 @@ void main_window::config_setup()
 {
     // Set-up the config folder
     // ------------------------
-    std::string config_folder = "/tmp/qTmp/"; // TODO: "C:/ProgramData/qSchoolHelper/";
+    std::string config_folder = "C:\\ProgramData\\qSchoolHelper";
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
     if (!fs::exists(config_folder))
     {

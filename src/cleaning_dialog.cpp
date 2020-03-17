@@ -31,25 +31,38 @@ cleaning_dialog::~cleaning_dialog()
 }
 void cleaning_dialog::clean()
 {
+    ui->clean_button->setEnabled(false);
+    ui->cleaning_log->clear();
     ui->cleaning_log->append("Starting cleaner…\n-----------------");
+    ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
-    ui->cleaning_log->append("Removing .bat files from the desktop…");
     std::string path = "C:\\Users\\";
     for (const auto &entry : fs::directory_iterator(path))
     {
-        if (fs::is_directory(entry.path()))
+        if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
         {
-            fs::remove_all(entry.path()/"Desktop"/"*.bat");
-            fs::remove_all(entry.path()/"Desktop"/"*.cmd");
-            //std::string cmd = "del " + entry.path().u8string() + "\\Desktop\\*.bat";
-            //char cmdc[1024];
-            //strncpy(cmdc,cmd.c_str(), sizeof(cmdc));
-            //cmdc[sizeof(cmdc) - 1] = 0;
-            //system(cmdc);
+            try
+            {
+                for (const auto &file : fs::directory_iterator(entry.path()/"Desktop"))
+                {
+                    if (file.path().extension() == ".cmd" || file.path().extension() == ".bat")
+                    {
+                        fs::remove(file.path());
+                    }
+                }
+            }
+            catch (const std::exception)
+            {
+                // Catch permission denied errors. We can't really do much about them, though,
+                // since the application is supposed to run as administrator anyways.
+            }
+
         }
     }
-
     ui->cleaning_log->append("Cleaning temporary files and caches…");
     // TODO: Verify BleachBit checksum
+    // ...
+    ui->cleaning_log->append("All done!");
+    ui->clean_button->setEnabled(true);
 
 }
