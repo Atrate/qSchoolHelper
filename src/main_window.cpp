@@ -39,8 +39,8 @@ main_window::~main_window()
 }
 void main_window::config_setup()
 {
-    // Set-up the config folder
-    // ------------------------
+    // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
+    // -------------------------------------------------------------------------------------
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
     if (!fs::exists(config_folder))
@@ -51,11 +51,6 @@ void main_window::config_setup()
     if (fs::exists(initial_setup_done))
     {
         ui->initial_setup_button->setEnabled(false);
-        // Move to initial_setup on button press
-        //std::ofstream isdf;
-        //isdf.open(initial_setup_done);
-        //isdf << std::endl;
-        //isdf.close();
     }
 }
 void main_window::problem_button_clicked()

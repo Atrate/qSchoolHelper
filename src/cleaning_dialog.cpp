@@ -36,6 +36,8 @@ void cleaning_dialog::clean()
     ui->cleaning_log->append("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
+    // Find and remove all .bat and .cmd files from all users' desktops
+    // ----------------------------------------------------------------
     std::string path = "C:\\Users\\";
     for (const auto &entry : fs::directory_iterator(path))
     {
@@ -59,10 +61,15 @@ void cleaning_dialog::clean()
 
         }
     }
+    // Run BleachBit to clean temporary files
+    // --------------------------------------
     ui->progress_bar->setValue(10);
     ui->cleaning_log->append("Cleaning temporary files and caches…");
     // TODO: Verify BleachBit checksum
     // ...
+
+    // Finalize — set UI element states
+    // --------------------------------
     ui->progress_bar->setValue(100);
     ui->cleaning_log->append("All done!");
     ui->clean_button->setEnabled(true);
