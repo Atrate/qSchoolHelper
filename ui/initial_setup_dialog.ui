@@ -108,7 +108,7 @@ This can also be used on very unclean systems to quickly clean them and install 
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
-     <widget class="QProgressBar" name="progressBar">
+     <widget class="QProgressBar" name="progress_bar">
       <property name="enabled">
        <bool>false</bool>
       </property>
@@ -118,7 +118,7 @@ This can also be used on very unclean systems to quickly clean them and install 
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="setup_label">
       <property name="enabled">
        <bool>false</bool>
       </property>
@@ -174,22 +174,6 @@ This can also be used on very unclean systems to quickly clean them and install 
   <connection>
    <sender>start_button</sender>
    <signal>clicked()</signal>
-   <receiver>progressBar</receiver>
-   <slot>reset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>457</x>
-     <y>49</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>452</x>
-     <y>202</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>start_button</sender>
-   <signal>clicked()</signal>
    <receiver>setup_log</receiver>
    <slot>clear()</slot>
    <hints>
@@ -203,5 +187,24 @@ This can also be used on very unclean systems to quickly clean them and install 
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>start_button</sender>
+   <signal>clicked()</signal>
+   <receiver>initial_setup_dialog</receiver>
+   <slot>initial_setup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>initial_setup()</slot>
+ </slots>
 </ui>

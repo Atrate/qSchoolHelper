@@ -26,3 +26,21 @@ initial_setup_dialog::~initial_setup_dialog()
 {
     delete ui;
 }
+void initial_setup_dialog::initial_setup()
+{
+    ui->start_button->setEnabled(false);
+    ui->cancel_button->setEnabled(true);
+    ui->setup_label->setEnabled(true);
+    ui->setup_log->setEnabled(true);
+    ui->progress_bar->setEnabled(true);
+    ui->progress_bar->setValue(0);
+    ui->setup_log->append("Starting initial setup…\n——————————");
+    //
+    //
+    //
+    ui->progress_bar->setValue(100);
+    ui->setup_log->append("All done!");
+    ui->start_button->setEnabled(true);
+    ui->cancel_button->setEnabled(false);
+
+}

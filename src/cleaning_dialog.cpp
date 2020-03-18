@@ -32,8 +32,8 @@ cleaning_dialog::~cleaning_dialog()
 void cleaning_dialog::clean()
 {
     ui->clean_button->setEnabled(false);
-    ui->cleaning_log->clear();
-    ui->cleaning_log->append("Starting cleaner…\n-----------------");
+    ui->progress_bar->setValue(0);
+    ui->cleaning_log->append("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
     std::string path = "C:\\Users\\";
@@ -51,7 +51,7 @@ void cleaning_dialog::clean()
                     }
                 }
             }
-            catch (const std::exception)
+            catch (const std::exception &e)
             {
                 // Catch permission denied errors. We can't really do much about them, though,
                 // since the application is supposed to run as administrator anyways.
@@ -59,9 +59,11 @@ void cleaning_dialog::clean()
 
         }
     }
+    ui->progress_bar->setValue(10);
     ui->cleaning_log->append("Cleaning temporary files and caches…");
     // TODO: Verify BleachBit checksum
     // ...
+    ui->progress_bar->setValue(100);
     ui->cleaning_log->append("All done!");
     ui->clean_button->setEnabled(true);
 
