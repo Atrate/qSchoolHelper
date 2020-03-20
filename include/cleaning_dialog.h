@@ -31,6 +31,7 @@ class cleaning_dialog : public QDialog
 
     private:
         Ui::cleaning_dialog *ui;
+
     private slots:
         void clean();
 

@@ -165,5 +165,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>install_button</sender>
+   <signal>clicked()</signal>
+   <receiver>install_dialog</receiver>
+   <slot>install()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>300</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>install()</slot>
+ </slots>
 </ui>

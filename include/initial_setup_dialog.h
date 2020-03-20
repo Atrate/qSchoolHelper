@@ -31,6 +31,7 @@ class initial_setup_dialog : public QDialog
 
     private:
         Ui::initial_setup_dialog *ui;
+
     private slots:
         void initial_setup();
 

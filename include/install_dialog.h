@@ -31,6 +31,10 @@ class install_dialog : public QDialog
 
     private:
         Ui::install_dialog *ui;
+
+    private slots:
+        void install();
+        void download(const char *url, const char *pagefilename);
 };
 
 #endif // INSTALL_DIALOG_H

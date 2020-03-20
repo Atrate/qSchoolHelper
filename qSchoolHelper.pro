@@ -45,6 +45,8 @@ TRANSLATIONS += \
 RC_FILE = data/icons/icon.ico
 RESOURCES = ui/resources.qrc
 
+QMAKE_LFLAGS += -lcurl
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
