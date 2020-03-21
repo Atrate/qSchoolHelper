@@ -128,6 +128,34 @@ void install_dialog::install()
             ui->progress_bar->setValue((i+1)*10);
         }
     }
+
+    // Install
+    // -------
+    for (int i = 0; i < DL_ARRAY_SIZE; i++)
+    {
+        if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
+        {
+            // TODO: Add a check, if the same version of the app is already installed, just create a shortcut on the desktop.
+            std::string cmd = download_array[i][1];
+            if (i == 0)
+            {
+                cmd.append("/S");
+            }
+            else if (i == 3)
+            {
+                cmd.append("/L=1033");
+            }
+            system(cmd.c_str());
+            // Reference commands
+            ///system("installers\\vlc-3.0.8-win64.exe /L=1033 /S");
+            /// system("installers\\\"Firefox Installer.exe\" /S");
+            // TODO: SILENT INSTALL
+            /// system("installers\\PowerPointViewer.exe /S");
+            /// system("installers\\LibreOffice_6.3.4_Win_x64.msi");
+            /// system("installers\\readerdc_uk_xa_install.exe");
+
+        }
+    }
     ui->install_button->setEnabled(true);
 
 }
