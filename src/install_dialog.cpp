@@ -12,13 +12,15 @@
  *
  */
 
-#include <zip.h>
+#include <filesystem>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <curl/curl.h>
 #include "install_dialog.h"
 #include "ui_install_dialog.h"
+
+namespace fs = std::filesystem;
 
 install_dialog::install_dialog(QWidget *parent) :
     QDialog(parent),
@@ -92,18 +94,27 @@ void install_dialog::download(const char *url, const char *pagefilename)
 }
 void install_dialog::install()
 {
+    const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
+    {
+        fs::create_directory(temp_folder);
+    }
+    chdir(temp_folder);
+    ui->install_button->setEnabled(false);
+    ui->progress_bar->setValue(0);
+
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
     const char *download_array[DL_ARRAY_SIZE][2];
-    download_array[0][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
-    download_array[0][1]="LibreOffice_6.4.2_Win_x64.msi";
-    download_array[1][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-    download_array[1][1]="vlc-3.0.8-win64.exe";
-    download_array[2][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-    download_array[2][1]="readerdc_en_a_install.exe";
-    download_array[3][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
-    download_array[3][1]="Firefox_Setup_74.0.msi";
+    download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
+    download_array[0][1]="Firefox_Setup_74.0.msi";
+    download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+    download_array[1][1]="readerdc_en_a_install.exe";
+    download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
+    download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
+    download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+    download_array[3][1]="vlc-3.0.8-win64.exe";
     download_array[4][0]=nullptr;
     download_array[4][1]=nullptr;
 
@@ -114,7 +125,9 @@ void install_dialog::install()
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
         {
             download(download_array[i][0],download_array[i][1]);
+            ui->progress_bar->setValue((i+1)*10);
         }
     }
+    ui->install_button->setEnabled(true);
 
 }
