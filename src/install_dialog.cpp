@@ -109,14 +109,15 @@ void install_dialog::install()
     const char *download_array[DL_ARRAY_SIZE][2];
     download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
     download_array[0][1]="Firefox_Setup_74.0.msi";
-    download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-    download_array[1][1]="readerdc_en_a_install.exe";
-    download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
-    download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
-    download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-    download_array[3][1]="vlc-3.0.8-win64.exe";
-    download_array[4][0]=nullptr;
-    download_array[4][1]=nullptr;
+    // DEBUG: Download only Firefox, no need to DL everything in early debug builds
+    ///download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+    ///download_array[1][1]="readerdc_en_a_install.exe";
+    ///download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
+    ///download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
+    ///download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+    ///download_array[3][1]="vlc-3.0.8-win64.exe";
+    ///download_array[4][0]=nullptr;
+    ///download_array[4][1]=nullptr;
 
     // Download the files
     // ------------------
@@ -145,17 +146,26 @@ void install_dialog::install()
             {
                 cmd.append("/L=1033");
             }
-            system(cmd.c_str());
+            if (system(cmd.c_str()))
+            {
+                fs::remove(download_array[i][1]); // Remove installation files after successful installation
+            }
+            else
+            {
+                // TODO: Handle installation errors
+            }
             // Reference commands
             ///system("installers\\vlc-3.0.8-win64.exe /L=1033 /S");
-            /// system("installers\\\"Firefox Installer.exe\" /S");
+            ///system("installers\\\"Firefox Installer.exe\" /S");
             // TODO: SILENT INSTALL
-            /// system("installers\\PowerPointViewer.exe /S");
-            /// system("installers\\LibreOffice_6.3.4_Win_x64.msi");
-            /// system("installers\\readerdc_uk_xa_install.exe");
+            ///system("installers\\PowerPointViewer.exe /S");
+            ///system("installers\\LibreOffice_6.3.4_Win_x64.msi");
+            ///system("installers\\readerdc_uk_xa_install.exe");
+
 
         }
     }
+
     ui->install_button->setEnabled(true);
 
 }
