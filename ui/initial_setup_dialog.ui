@@ -113,7 +113,7 @@ This can also be used on very unclean systems to quickly clean them and install 
        <bool>false</bool>
       </property>
       <property name="value">
-       <number>24</number>
+       <number>0</number>
       </property>
      </widget>
     </item>

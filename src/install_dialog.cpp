@@ -35,12 +35,12 @@ install_dialog::~install_dialog()
 }
 // Parts of the following two functions have been taken from https://curl.haxx.se/libcurl/c/url2file.html, in accordance with the license.
 // ---------------------------------------------------------------------------------------------------------------------------------------
-static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+size_t install_dialog::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
     return written;
 }
-int curl_dl(const char *url, const char *pagefilename)
+int install_dialog::curl_dl(const char *url, const char *pagefilename)
 {
     CURL *curl_handle;
 
@@ -87,11 +87,6 @@ int curl_dl(const char *url, const char *pagefilename)
 
     return 0;
 }
-void install_dialog::download(const char *url, const char *pagefilename)
-{
-    curl_dl(url, pagefilename);
-
-}
 void install_dialog::install()
 {
     const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
@@ -125,7 +120,7 @@ void install_dialog::install()
     {
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
         {
-            download(download_array[i][0],download_array[i][1]);
+            curl_dl(download_array[i][0],download_array[i][1]);
             ui->progress_bar->setValue((i+1)*10);
         }
     }
