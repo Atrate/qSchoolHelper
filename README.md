@@ -14,7 +14,7 @@ This project has been designed and configured for use on Windows 10 computers in
 ## License
 This project is licensed under the [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html).
 
-Icos adapted from:
+Icons adapted from:
 ```
 https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon
 https://www.iconfinder.com/icons/23871/app_install_installer_icon
