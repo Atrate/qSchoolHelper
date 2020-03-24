@@ -19,6 +19,7 @@ SOURCES += \
     src/cleaning_dialog.cpp \
     src/problem_dialog.cpp \
     src/initial_setup_dialog.cpp \
+    src/download.cpp
 
 HEADERS += \
     include/help_dialog.h \
@@ -27,7 +28,8 @@ HEADERS += \
     include/cleaning_dialog.h \
     include/problem_dialog.h \
     include/initial_setup_dialog.h \
-    include/install_dialog.h
+    include/install_dialog.h \
+    include/download.h
 
 FORMS += \
     ui/help_dialog.ui \
