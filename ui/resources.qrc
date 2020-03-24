@@ -1,5 +1,9 @@
 <RCC>
     <qresource>
         <file alias="icon.png">../data/icons/icon.png</file>
+        <file alias="clean.png">../data/icons/clean.png</file>
+        <file alias="install.png">../data/icons/install.png</file>
+        <file alias="error.png">../data/icons/error.png</file>
+        <file alias="go.png">../data/icons/go.png</file>
     </qresource>
 </RCC>

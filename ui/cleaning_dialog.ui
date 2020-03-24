@@ -56,31 +56,24 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QToolButton" name="clean_button">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>250</y>
-     <width>121</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Clean!</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>430</x>
      <y>100</y>
      <width>160</width>
-     <height>86</height>
+     <height>201</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <kerning>false</kerning>
@@ -111,57 +104,65 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QToolButton" name="clean_button">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Clean!</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>210</y>
+     <y>100</y>
      <width>391</width>
-     <height>221</height>
+     <height>331</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0" colspan="2">
-     <widget class="QTextBrowser" name="cleaning_log"/>
-    </item>
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
        <string>Cleaning progress:</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QProgressBar" name="progress_bar">
       <property name="value">
        <number>0</number>
       </property>
      </widget>
     </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>80</y>
-     <width>391</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>This tool will help you clean the computer and resolve any issues that might arise due to not cleaning it regularily. 
+    <item row="2" column="0" colspan="2">
+     <widget class="QTextBrowser" name="cleaning_log"/>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>This tool will help you clean the computer and resolve any issues that might arise due to not cleaning it regularily. 
 
-The &quot;simple&quot; cleaning type takes less time, but is less accurate than &quot;deep&quot;. </string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
+The &quot;simple&quot; cleaning type takes less time, but is less accurate than &quot;deep&quot;. 
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

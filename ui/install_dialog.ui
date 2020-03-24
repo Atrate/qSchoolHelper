@@ -35,84 +35,35 @@
     <set>QDialogButtonBox::Close</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="install_button">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>300</y>
-     <width>100</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Install</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>621</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Hello! Which of these programs are missing and you would like to install?</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>100</y>
-     <width>454</width>
-     <height>149</height>
+     <x>50</x>
+     <y>10</y>
+     <width>532</width>
+     <height>296</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QCheckBox" name="firefox_checkBox">
-      <property name="text">
-       <string>Firefox
-(Web browser)</string>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="vlc_checkBox">
       <property name="text">
-       <string>VLC Media Player
-(Video and Audio Player)</string>
+       <string>Hello! Which of these programs are
+missing and you would like to install?</string>
       </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QCheckBox" name="libreoffice_checkBox">
-      <property name="text">
-       <string>LibreOffice
-(Document Manager)</string>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QCheckBox" name="reader_checkBox_3">
-      <property name="text">
-       <string>Adobe Reader
-(PDF Viewer)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
      <widget class="QCheckBox" name="viewer_checkBox">
       <property name="font">
        <font>
@@ -128,20 +79,63 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QProgressBar" name="progress_bar">
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QCheckBox" name="reader_checkBox_3">
+      <property name="text">
+       <string>Adobe Reader
+(PDF Viewer)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="vlc_checkBox">
+      <property name="text">
+       <string>VLC Media Player
+(Video and Audio Player)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCheckBox" name="firefox_checkBox">
+      <property name="text">
+       <string>Firefox
+(Web browser)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="libreoffice_checkBox">
+      <property name="text">
+       <string>LibreOffice
+(Document Manager)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="install_button">
+      <property name="text">
+       <string>Install</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="cancel_button">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QProgressBar" name="progress_bar">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>260</y>
-     <width>451</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
   </widget>
  </widget>
  <resources/>
