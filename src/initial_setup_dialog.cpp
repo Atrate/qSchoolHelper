@@ -42,6 +42,18 @@ void initial_setup_dialog::initial_setup()
     ui->progress_bar->setValue(0);
     ui->setup_log->append("Starting initial setup…\n——————————");
 
+    // Disable ads
+    //system("RED ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+
+    // Disable telemetry
+    //system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
+    ui->setup_log->append("Disabling telemetry service…");
+    system("net stop DiagTrack");
+    system("sc config DiagTrack start= disabled");
+
+    ui->setup_log->append("Disabling search indexing...\n");
+    system("net stop WSearch");
+    system("sc config WSearch start= disabled");
     // -------------------
     // More code here soon
     // -------------------

@@ -13,6 +13,7 @@
  */
 
 #include <filesystem>
+#include <unistd.h>
 #include "cleaning_dialog.h"
 #include "ui_cleaning_dialog.h"
 
@@ -65,8 +66,36 @@ void cleaning_dialog::clean()
     // --------------------------------------
     ui->progress_bar->setValue(10);
     ui->cleaning_log->append("Cleaning temporary files and caches…");
+    // DEBUG: Assume BB is DLed to C:\Program Data\qSchoolHelper\utils\BleachBit-Portable
+    const char *utils_folder = "C:\\ProgramData\\qSchoolHelper\\utils";
+    if (!fs::exists(utils_folder))
+    {
+        fs::create_directory(utils_folder);
+    }
+    // TODO: DL and extract BB
     // TODO: Verify BleachBit checksum
-    // ...
+    const char *bb_folder = "C:\\ProgramData\\qSchoolHelper\\utils\\BleachBit-Portable";
+    chdir(bb_folder);
+    system("bleachbit_console.exe --clean adobe_reader.* amule.* chromium.* deepscan.tmp filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*");
+
+    // Uninstall unnecessary software (McAffee etc.)
+    // ---------------------------------------------
+
+    // Extended cleaning (repeats some steps from initial setup)
+    // ---------------------------------------------------------
+    if (ui->radio_extended->isEnabled())
+    {
+        ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
+        system("bleachbit_console.exe --clean deepscan.ds_store deepscan.thumbs_db system.logs system.memory_dump system.muicache system.prefetch system.updates");
+
+        ui->cleaning_log->append("Disabling telemetry service…");
+        system("net stop DiagTrack");
+        system("sc config DiagTrack start= disabled");
+
+        ui->cleaning_log->append("Disabling search indexing...\n");
+        system("net stop WSearch");
+        system("sc config WSearch start= disabled");
+    }
 
     // Finalize — set UI element states
     // --------------------------------
