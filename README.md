@@ -15,9 +15,10 @@ This project has been designed and configured for use on Windows 10 computers in
 This project is licensed under the [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html).
 
 Icos adapted from:
-	
-	https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon
-	https://www.iconfinder.com/icons/23871/app_install_installer_icon
-	https://www.iconfinder.com/icons/105211/alert_attention_beware_caution_cautious_danger_error_exclamation_hanger_help_important_mark_message_problem_prompt_warning_icon
-	https://www.iconfinder.com/icons/55586/clean_icon
-	
+```
+https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon
+https://www.iconfinder.com/icons/23871/app_install_installer_icon
+https://www.iconfinder.com/icons/105211/alert_attention_beware_caution_cautious_danger_error_exclamation_hanger_help_important_mark_message_problem_prompt_warning_icon
+https://www.iconfinder.com/icons/55586/clean_icon
+https://www.iconfinder.com/icons/132114/audio_button_go_multimedia_music_play_start_video_icon
+``` 
