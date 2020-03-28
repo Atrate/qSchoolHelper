@@ -36,7 +36,7 @@ install_dialog::~install_dialog()
 {
     delete ui;
 }
-int install_dialog::check_shortcut(std::string exe_path)
+bool install_dialog::check_shortcut(std::string exe_path)
 {
     if (fs::exists(exe_path))
     {
@@ -60,11 +60,11 @@ int install_dialog::check_shortcut(std::string exe_path)
 
             }
         }
-        return 1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
 void install_dialog::install()
@@ -90,12 +90,16 @@ void install_dialog::install()
     // DEBUG: Download only Firefox, no need to DL everything in early debug builds
     ///download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
     ///download_array[1][1]="readerdc_en_a_install.exe";
+    ///download_array[1][2]=nullptr;
     ///download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
     ///download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
+    ///download_array[1][2]=nullptr;
     ///download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
     ///download_array[3][1]="vlc-3.0.8-win64.exe";
+    ///download_array[1][2]=nullptr;
     ///download_array[4][0]=nullptr;
     ///download_array[4][1]=nullptr;
+    ///download_array[1][2]=nullptr;
 
     // Download the files
     // ------------------
