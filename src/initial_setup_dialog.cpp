@@ -39,6 +39,7 @@ void initial_setup_dialog::initial_setup()
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
     ui->progress_bar->setEnabled(true);
+    ui->buttonBox->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->append("Starting initial setup…\n——————————");
 

@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <curl/curl.h>
+#include <QThread>
+#include <QtConcurrent/QtConcurrentRun>
 #include "install_dialog.h"
 #include "ui_install_dialog.h"
 #include "download.h"
@@ -34,6 +36,37 @@ install_dialog::~install_dialog()
 {
     delete ui;
 }
+int install_dialog::check_shortcut(std::string exe_path)
+{
+    if (fs::exists(exe_path))
+    {
+        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
+        {
+            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
+            {
+                try
+                {
+                    std::string link_cmd = "mklink ";
+                    link_cmd.append(entry.path()/"Desktop"/exe_path.substr(exe_path.find_last_of("\\"),exe_path.length())); // TODO: Convert to title case
+                    link_cmd.append(exe_path);
+
+                    system(link_cmd.c_str());
+                }
+                catch (const std::exception &e)
+                {
+                    // Catch permission denied errors. We can't really do much about them, though,
+                    // since the application is supposed to run as administrator anyways.
+                }
+
+            }
+        }
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 void install_dialog::install()
 {
     const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
@@ -43,14 +76,17 @@ void install_dialog::install()
     }
     chdir(temp_folder);
     ui->install_button->setEnabled(false);
+    ui->cancel_button->setEnabled(true);
+    ui->buttonBox->setEnabled(false);
     ui->progress_bar->setValue(0);
 
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
-    const char *download_array[DL_ARRAY_SIZE][2];
+    const char *download_array[DL_ARRAY_SIZE][3];
     download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
     download_array[0][1]="Firefox_Setup_74.0.msi";
+    download_array[0][2]="C:\\Program Files\\Mozilla Firefox\\firefox.exe";
     // DEBUG: Download only Firefox, no need to DL everything in early debug builds
     ///download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
     ///download_array[1][1]="readerdc_en_a_install.exe";
@@ -67,7 +103,12 @@ void install_dialog::install()
     {
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
         {
-            curl_dl(download_array[i][0],download_array[i][1]);
+            QFuture<void> dl = QtConcurrent::run(curl_dl, download_array[i][0],download_array[i][1]);
+            //curl_dl(download_array[i][0],download_array[i][1]);
+            while(dl.isRunning())
+            {
+                QCoreApplication::processEvents();
+            }
             ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -78,16 +119,32 @@ void install_dialog::install()
     {
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
         {
-            // TODO: Add a check, if the same version of the app is already installed, just create a shortcut on the desktop.
+            // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
+            // --------------------------------------------------------------------------------------------------------
+            if (check_shortcut(download_array[i][2]))
+            {
+                continue;
+            }
             std::string cmd = download_array[i][1];
-            if (i == 0)
+            switch (i)
             {
-                cmd.append("/S");
+                case 0:
+                    cmd.append("/S");
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    cmd.append("/S","/L=1033");
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
             }
-            else if (i == 3)
-            {
-                cmd.append("/L=1033");
-            }
+
+
             if (system(cmd.c_str()))
             {
                 fs::remove(download_array[i][1]); // Remove installation files after successful installation
@@ -111,3 +168,4 @@ void install_dialog::install()
     ui->install_button->setEnabled(true);
 
 }
+

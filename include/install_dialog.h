@@ -31,6 +31,7 @@ class install_dialog : public QDialog
 
     private:
         Ui::install_dialog *ui;
+        int check_shortcut(std::string exe_path);
 
     private slots:
         void install();

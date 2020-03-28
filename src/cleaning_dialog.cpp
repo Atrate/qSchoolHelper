@@ -33,14 +33,14 @@ cleaning_dialog::~cleaning_dialog()
 void cleaning_dialog::clean()
 {
     ui->clean_button->setEnabled(false);
+    ui->buttonBox->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->cleaning_log->append("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
-    std::string path = "C:\\Users\\";
-    for (const auto &entry : fs::directory_iterator(path))
+    for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
     {
         if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
         {
