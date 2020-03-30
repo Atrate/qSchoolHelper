@@ -19,6 +19,7 @@
 #include <curl/curl.h>
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
+#include <QMessageBox>
 #include "install_dialog.h"
 #include "ui_install_dialog.h"
 #include "download.h"
@@ -67,6 +68,30 @@ bool install_dialog::check_shortcut(std::string exe_path)
         return false;
     }
 }
+void run_install(const char* cmd, const char* filename)
+{
+    if (system(cmd))
+    {
+        fs::remove(filename); // Remove installation files after successful installation
+    }
+    else
+    {
+        // TODO: Handle installation errors properly
+        QMessageBox failure_box;
+        failure_box.setText("The installation failed!");
+        failure_box.setModal(true);
+        failure_box.exec();
+    }
+    // Reference commands
+    ///system("installers\\vlc-3.0.8-win64.exe /L=1033 /S");
+    ///system("installers\\\"Firefox Installer.exe\" /S");
+    // TODO: SILENT INSTALL
+    ///system("installers\\PowerPointViewer.exe /S");
+    ///system("installers\\LibreOffice_6.3.4_Win_x64.msi");
+    ///system("installers\\readerdc_uk_xa_install.exe");
+
+
+}
 void install_dialog::install()
 {
     const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
@@ -88,18 +113,20 @@ void install_dialog::install()
     download_array[0][1]="Firefox_Setup_74.0.msi";
     download_array[0][2]="C:\\Program Files\\Mozilla Firefox\\firefox.exe";
     // DEBUG: Download only Firefox, no need to DL everything in early debug builds
-    ///download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-    ///download_array[1][1]="readerdc_en_a_install.exe";
-    ///download_array[1][2]=nullptr;
-    ///download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
-    ///download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
-    ///download_array[1][2]=nullptr;
-    ///download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-    ///download_array[3][1]="vlc-3.0.8-win64.exe";
-    ///download_array[1][2]=nullptr;
-    ///download_array[4][0]=nullptr;
-    ///download_array[4][1]=nullptr;
-    ///download_array[1][2]=nullptr;
+    /*
+    download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+    download_array[1][1]="readerdc_en_a_install.exe";
+    download_array[1][2]=nullptr;
+    download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
+    download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
+    download_array[1][2]=nullptr;
+    download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+    download_array[3][1]="vlc-3.0.8-win64.exe";
+    download_array[1][2]=nullptr;
+    download_array[4][0]=nullptr;
+    download_array[4][1]=nullptr;
+    download_array[4][2]=nullptr;
+    */
 
     // Download the files
     // ------------------
@@ -108,7 +135,6 @@ void install_dialog::install()
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
         {
             QFuture<void> dl = QtConcurrent::run(curl_dl, download_array[i][0],download_array[i][1]);
-            //curl_dl(download_array[i][0],download_array[i][1]);
             while(dl.isRunning())
             {
                 QCoreApplication::processEvents();
@@ -117,8 +143,8 @@ void install_dialog::install()
         }
     }
 
-    // Install
-    // -------
+    // Install the applications
+    // ------------------------
     for (int i = 0; i < DL_ARRAY_SIZE; i++)
     {
         if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
@@ -147,29 +173,20 @@ void install_dialog::install()
                 case 5:
                     break;
             }
-
-
-            if (system(cmd.c_str()))
+            QFuture<void> install = QtConcurrent::run(run_install, cmd.c_str(), download_array[i][1]);
+            while(install.isRunning())
             {
-                fs::remove(download_array[i][1]); // Remove installation files after successful installation
+                QCoreApplication::processEvents();
             }
-            else
-            {
-                // TODO: Handle installation errors
-            }
-            // Reference commands
-            ///system("installers\\vlc-3.0.8-win64.exe /L=1033 /S");
-            ///system("installers\\\"Firefox Installer.exe\" /S");
-            // TODO: SILENT INSTALL
-            ///system("installers\\PowerPointViewer.exe /S");
-            ///system("installers\\LibreOffice_6.3.4_Win_x64.msi");
-            ///system("installers\\readerdc_uk_xa_install.exe");
-
+            ui->progress_bar->setValue((i+6)*10);
 
         }
     }
-
+    QMessageBox success_box;
+    success_box.setText("The installation completed succesfully!");
+    success_box.setModal(true);
+    success_box.exec();
     ui->install_button->setEnabled(true);
-
+    ui->cancel_button->setEnabled(false);
 }
 

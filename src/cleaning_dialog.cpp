@@ -14,6 +14,9 @@
 
 #include <filesystem>
 #include <unistd.h>
+#include <QThread>
+#include <QtConcurrent/QtConcurrentRun>
+#include <QMessageBox>
 #include "cleaning_dialog.h"
 #include "ui_cleaning_dialog.h"
 
@@ -29,6 +32,16 @@ cleaning_dialog::cleaning_dialog(QWidget *parent) :
 cleaning_dialog::~cleaning_dialog()
 {
     delete ui;
+}
+void run_clean(const char* cmd)
+{
+    if (!system(cmd))
+    {
+        QMessageBox failure_box;
+        failure_box.setText("The cleaning operation failed!");
+        failure_box.setModal(true);
+        failure_box.exec();
+    }
 }
 void cleaning_dialog::clean()
 {
@@ -76,7 +89,17 @@ void cleaning_dialog::clean()
     // TODO: Verify BleachBit checksum
     const char *bb_folder = "C:\\ProgramData\\qSchoolHelper\\utils\\BleachBit-Portable";
     chdir(bb_folder);
-    system("bleachbit_console.exe --clean adobe_reader.* amule.* chromium.* deepscan.tmp filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*");
+    std::string cmd = "bleachbit_console.exe --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+                      "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
+                      "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
+                      "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
+                      "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
+                      "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+    QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
+    while(bb_clean.isRunning())
+    {
+        QCoreApplication::processEvents();
+    }
 
     // Uninstall unnecessary software (McAffee etc.)
     // ---------------------------------------------
@@ -86,7 +109,13 @@ void cleaning_dialog::clean()
     if (ui->radio_extended->isEnabled())
     {
         ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
-        system("bleachbit_console.exe --clean deepscan.ds_store deepscan.thumbs_db system.logs system.memory_dump system.muicache system.prefetch system.updates");
+        cmd = "bleachbit_console.exe --clean deepscan.ds_store deepscan.thumbs_db system.logs "
+              "system.memory_dump system.muicache system.prefetch system.updates";
+        bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
+        while(bb_clean.isRunning())
+        {
+            QCoreApplication::processEvents();
+        }
 
         ui->cleaning_log->append("Disabling telemetry service…");
         system("net stop DiagTrack");
@@ -101,6 +130,9 @@ void cleaning_dialog::clean()
     // --------------------------------
     ui->progress_bar->setValue(100);
     ui->cleaning_log->append("All done!");
+    QMessageBox success_box;
+    success_box.setText("The cleaning operation completed succesfully!");
+    success_box.setModal(true);
+    success_box.exec();
     ui->clean_button->setEnabled(true);
-
 }

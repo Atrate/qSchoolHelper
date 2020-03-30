@@ -59,6 +59,12 @@ void initial_setup_dialog::initial_setup()
     // More code here soon
     // -------------------
 
+    // Run extended cleaner
+    // --------------------
+
+    // Run install (all software)
+    // --------------------------
+
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
     std::ofstream isdf;
