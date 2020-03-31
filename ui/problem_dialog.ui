@@ -53,6 +53,16 @@
       <property name="text">
        <string>Web Browser/Internet</string>
       </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/firefox.png</normaloff>:/firefox.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
      </widget>
     </item>
     <item row="2" column="0">
@@ -71,6 +81,16 @@
       <property name="text">
        <string>Projector/TV</string>
       </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/tv.png</normaloff>:/tv.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
      </widget>
     </item>
     <item row="2" column="1">
@@ -84,6 +104,16 @@
       <property name="text">
        <string>Presentations</string>
       </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/presentation.png</normaloff>:/presentation.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
      </widget>
     </item>
     <item row="1" column="1">
@@ -96,6 +126,16 @@
       </property>
       <property name="text">
        <string>Speakers</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/speaker.png</normaloff>:/speaker.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -115,7 +155,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Hello! What do you have a problem with?</string>
+       <string>Hello! What do you require help with?</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -125,7 +165,9 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

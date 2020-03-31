@@ -5,5 +5,9 @@
         <file alias="install.png">../data/icons/install.png</file>
         <file alias="error.png">../data/icons/error.png</file>
         <file alias="go.png">../data/icons/go.png</file>
+        <file alias="firefox.png">../data/icons/firefox.png</file>
+        <file alias="speaker.png">../data/icons/speaker.png</file>
+        <file alias="tv.png">../data/icons/tv.png</file>
+        <file alias="presentation.png">../data/icons/presentation.png</file>
     </qresource>
 </RCC>

@@ -105,7 +105,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QToolButton" name="clean_button">
+     <widget class="QPushButton" name="clean_button">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -114,6 +114,16 @@
       </property>
       <property name="text">
        <string>Clean!</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/clean.png</normaloff>:/clean.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -165,7 +175,9 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
@@ -196,38 +208,6 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
     <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clean_button</sender>
-   <signal>clicked()</signal>
-   <receiver>cleaning_log</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>511</x>
-     <y>324</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>366</x>
-     <y>302</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>clean_button</sender>
-   <signal>clicked()</signal>
-   <receiver>cleaning_dialog</receiver>
-   <slot>clean()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>554</x>
-     <y>281</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>552</x>
-     <y>202</y>
     </hint>
    </hints>
   </connection>

@@ -21,4 +21,8 @@ https://www.iconfinder.com/icons/23871/app_install_installer_icon
 https://www.iconfinder.com/icons/105211/alert_attention_beware_caution_cautious_danger_error_exclamation_hanger_help_important_mark_message_problem_prompt_warning_icon
 https://www.iconfinder.com/icons/55586/clean_icon
 https://www.iconfinder.com/icons/132114/audio_button_go_multimedia_music_play_start_video_icon
+https://www.iconfinder.com/icons/291683/browser_communication_connection_firefox_fox_globe_internet_mozilla_network_web_icon
+https://www.iconfinder.com/icons/1054948/display_monitor_screen_tv_icon
+https://www.iconfinder.com/icons/1054973/audio_speaker_volume_icon
+https://www.iconfinder.com/icons/3319621/analytics_board_presentation_icon
 ``` 
