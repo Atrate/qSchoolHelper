@@ -30,14 +30,14 @@ main_window::main_window(QWidget *parent)
     , ui(new Ui::main_window)
 {
     ui->setupUi(this);
-    config_setup();
+    window_setup();
 }
 
 main_window::~main_window()
 {
     delete ui;
 }
-void main_window::config_setup()
+void main_window::window_setup()
 {
     // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
     // -------------------------------------------------------------------------------------
@@ -50,6 +50,10 @@ void main_window::config_setup()
 
     if (fs::exists(initial_setup_done))
     {
+        ui->software_button->setToolTip("Install missing software");
+        ui->problem_button->setToolTip("Help with common problems");
+        ui->clean_button->setToolTip("Clean junk and temporary files");
+        ui->pushButton_4->setToolTip("");
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip("Initial Setup has already been run on this computer. "
                                              "If you with to run it again, please select it from File -> Initial Setup.");
@@ -65,7 +69,6 @@ void main_window::config_setup()
         ui->problem_button->setToolTip(disabled_tooltip);
         ui->clean_button->setToolTip(disabled_tooltip);
         ui->pushButton_4->setToolTip(disabled_tooltip);
-        ui->software_button->setToolTip(disabled_tooltip);
     }
 }
 void main_window::problem_button_clicked()

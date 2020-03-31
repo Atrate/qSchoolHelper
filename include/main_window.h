@@ -47,7 +47,7 @@ class main_window : public QMainWindow
         cleaning_dialog *cleaning;
         help_dialog *help;
 
-        void config_setup();
+        void window_setup();
 
     private slots:
         void problem_button_clicked();
