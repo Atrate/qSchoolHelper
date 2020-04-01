@@ -32,6 +32,13 @@ class problem_dialog : public QDialog
     private:
         Ui::problem_dialog *ui;
 
+    private slots:
+        void on_back_button_clicked();
+        void on_browser_button_clicked();
+        void on_projector_button_clicked();
+        void on_speakers_button_clicked();
+        void on_presentation_button_clicked();
+
 };
 
 #endif // PROBLEM_DIALOG_H

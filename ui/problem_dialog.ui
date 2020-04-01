@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>713</width>
-    <height>512</height>
+    <width>733</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,149 +16,327 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QStackedWidget" name="stacked_widget">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>470</y>
-     <width>91</width>
-     <height>32</height>
+     <x>22</x>
+     <y>0</y>
+     <width>691</width>
+     <height>441</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>381</height>
+    </size>
    </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Close</set>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
    </property>
+   <property name="currentIndex">
+    <number>4</number>
+   </property>
+   <widget class="QWidget" name="problem_page">
+    <widget class="QWidget" name="gridLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="browser_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Web Browser/Internet</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/firefox.png</normaloff>:/firefox.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="speakers_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Speakers</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/speaker.png</normaloff>:/speaker.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="projector_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Projector/TV</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/tv.png</normaloff>:/tv.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="presentation_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Presentations</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/presentation.png</normaloff>:/presentation.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Hello! What do you require help with?</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="browser_page">
+    <widget class="QWidget" name="gridLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Browser</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="projector_page">
+    <widget class="QWidget" name="gridLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Projector/TV</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="speakers_page">
+    <widget class="QWidget" name="gridLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Speakers</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="presentation_page">
+    <widget class="QWidget" name="gridLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>691</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Presentations</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>25</y>
-     <width>651</width>
-     <height>391</height>
+     <x>547</x>
+     <y>450</y>
+     <width>171</width>
+     <height>41</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
-     <widget class="QPushButton" name="browser_button">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QToolButton" name="back_button">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Web Browser/Internet</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/firefox.png</normaloff>:/firefox.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
+       <string>Back</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="projector_button">
+    <item>
+     <widget class="QDialogButtonBox" name="buttonBox">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
-        <verstretch>1</verstretch>
+        <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="font">
-       <font>
-        <italic>false</italic>
-       </font>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="text">
-       <string>Projector/TV</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/tv.png</normaloff>:/tv.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="presentation_button">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Presentations</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/presentation.png</normaloff>:/presentation.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="spekaers_button">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Speakers</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/speaker.png</normaloff>:/speaker.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="2">
-     <widget class="QLabel" name="label">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Hello! What do you require help with?</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close</set>
       </property>
      </widget>
     </item>
@@ -176,8 +354,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>602</x>
+     <y>450</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -192,8 +370,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>602</x>
+     <y>450</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

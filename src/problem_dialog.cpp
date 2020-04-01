@@ -20,9 +20,31 @@ problem_dialog::problem_dialog(QWidget *parent) :
     ui(new Ui::problem_dialog)
 {
     ui->setupUi(this);
+    ui->stacked_widget->setCurrentIndex(0);
 }
 
 problem_dialog::~problem_dialog()
 {
     delete ui;
 }
+void problem_dialog::on_back_button_clicked()
+{
+    ui->stacked_widget->setCurrentIndex(0);
+}
+void problem_dialog::on_browser_button_clicked()
+{
+    ui->stacked_widget->setCurrentIndex(1);
+}
+void problem_dialog::on_projector_button_clicked()
+{
+    ui->stacked_widget->setCurrentIndex(2);
+}
+void problem_dialog::on_speakers_button_clicked()
+{
+    ui->stacked_widget->setCurrentIndex(3);
+}
+void problem_dialog::on_presentation_button_clicked()
+{
+    ui->stacked_widget->setCurrentIndex(4);
+}
+
