@@ -13,8 +13,15 @@
  */
 
 #include <fstream>
+#include <filesystem>
+#include <unistd.h>
+#include <QThread>
+#include <QtConcurrent/QtConcurrentRun>
 #include "initial_setup_dialog.h"
 #include "ui_initial_setup_dialog.h"
+#include "download.h"
+
+namespace fs = std::filesystem;
 
 initial_setup_dialog::initial_setup_dialog(QWidget *parent) :
     QDialog(parent),
@@ -26,6 +33,10 @@ initial_setup_dialog::initial_setup_dialog(QWidget *parent) :
 initial_setup_dialog::~initial_setup_dialog()
 {
     delete ui;
+}
+void run_install_bb(const char* bb_exe)
+{
+    system(bb_exe);
 }
 void initial_setup_dialog::initial_setup()
 {
@@ -61,6 +72,23 @@ void initial_setup_dialog::initial_setup()
 
     // Run extended cleaner
     // --------------------
+
+    // Download and install BleachBit
+    // ------------------------------
+    std::string bb_exe = "BleachBit-3.2.0-setup.exe";
+    const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
+    {
+        fs::create_directory(temp_folder);
+    }
+    chdir(temp_folder);
+    curl_dl("https://www.bleachbit.org/download/file/t?file=BleachBit-3.2.0-setup.exe", bb_exe.c_str());
+    bb_exe.append("/S /allusers");
+    QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
+    while(bb_install.isRunning())
+    {
+        QCoreApplication::processEvents();
+    }
 
     // Run install (all software)
     // --------------------------
