@@ -41,14 +41,16 @@ bool install_dialog::check_shortcut(std::string exe_path)
 {
     if (fs::exists(exe_path))
     {
+        std::string exe_name = exe_path.substr(exe_path.find_last_of("\\"),exe_path.length()); // TODO: Convert to title case
         for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
         {
-            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
+
+            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop") && !fs::exists(entry.path()/"Desktop"/exe_name))
             {
                 try
                 {
                     std::string link_cmd = "mklink ";
-                    link_cmd.append(entry.path()/"Desktop"/exe_path.substr(exe_path.find_last_of("\\"),exe_path.length())); // TODO: Convert to title case
+                    link_cmd.append(entry.path()/"Desktop"/exe_name);
                     link_cmd.append(exe_path);
 
                     system(link_cmd.c_str());
@@ -108,31 +110,64 @@ void install_dialog::install()
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
-    const char *download_array[DL_ARRAY_SIZE][3];
-    download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
-    download_array[0][1]="Firefox_Setup_74.0.msi";
-    download_array[0][2]="C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-    // DEBUG: Download only Firefox, no need to DL everything in early debug builds
-    /*
-    download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-    download_array[1][1]="readerdc_en_a_install.exe";
-    download_array[1][2]=nullptr;
-    download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
-    download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
-    download_array[1][2]=nullptr;
-    download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-    download_array[3][1]="vlc-3.0.8-win64.exe";
-    download_array[1][2]=nullptr;
-    download_array[4][0]=nullptr;
-    download_array[4][1]=nullptr;
-    download_array[4][2]=nullptr;
-    */
-
+    const char *download_array[DL_ARRAY_SIZE][4];
+    if (ui->firefox_check_box->isChecked())
+    {
+        download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
+        download_array[0][1]="Firefox_Setup_74.0.msi";
+        download_array[0][2]="C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+    }
+    else
+    {
+        download_array[0][0]=nullptr;
+    }
+    if (ui->reader_check_box->isChecked())
+    {
+        download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+        download_array[1][1]="readerdc_en_a_install.exe";
+        download_array[1][2]="C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
+    }
+    else
+    {
+        download_array[1][0]=nullptr;
+    }
+    if (ui->libreoffice_check_box->isChecked())
+    {
+        download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
+        download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
+        download_array[2][2]=nullptr;
+    }
+    else
+    {
+        download_array[2][0]=nullptr;
+    }
+    if (ui->vlc_check_box->isChecked())
+    {
+        download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+        download_array[3][1]="vlc-3.0.8-win64.exe";
+        download_array[3][2]="C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
+    }
+    else
+    {
+        download_array[3][0]=nullptr;
+    }
+    if (ui->viewer_check_box->isChecked())
+    {
+        download_array[4][0]=nullptr;
+        download_array[4][1]=nullptr;
+        download_array[4][2]=nullptr;
+    }
+    else
+    {
+        download_array[4][0]=nullptr;
+    }
     // Download the files
     // ------------------
+    bool shortcut_array[DL_ARRAY_SIZE];
     for (int i = 0; i < DL_ARRAY_SIZE; i++)
     {
-        if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
+        shortcut_array[i] = check_shortcut(download_array[i][2]);
+        if (download_array[i][0] != nullptr && !shortcut_array[i])
         {
             QFuture<void> dl = QtConcurrent::run(curl_dl, download_array[i][0],download_array[i][1]);
             while(dl.isRunning())
@@ -147,14 +182,10 @@ void install_dialog::install()
     // ------------------------
     for (int i = 0; i < DL_ARRAY_SIZE; i++)
     {
-        if (download_array[i][0] != nullptr) // DEBUG: Do not download nullptr. Nullptr will be removed from here in the future.
+        if (download_array[i][0] != nullptr && !shortcut_array[i])
         {
             // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
             // --------------------------------------------------------------------------------------------------------
-            if (check_shortcut(download_array[i][2]))
-            {
-                continue;
-            }
             std::string cmd = download_array[i][1];
             switch (i)
             {
@@ -178,9 +209,10 @@ void install_dialog::install()
             {
                 QCoreApplication::processEvents();
             }
-            ui->progress_bar->setValue((i+6)*10);
+
 
         }
+        ui->progress_bar->setValue((i+6)*10);
     }
     QMessageBox success_box;
     success_box.setText("The installation completed succesfully!");
