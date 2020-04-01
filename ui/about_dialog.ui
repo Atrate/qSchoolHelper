@@ -16,7 +16,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -32,7 +32,7 @@
     <set>QDialogButtonBox::Close</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_appname">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -124,7 +124,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="label_icon">
+  <widget class="QLabel" name="icon_label">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -164,7 +164,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>about_dialog</receiver>
    <slot>accept()</slot>
@@ -180,7 +180,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>about_dialog</receiver>
    <slot>reject()</slot>

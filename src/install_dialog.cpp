@@ -100,9 +100,9 @@ void install_dialog::install()
         fs::create_directory(temp_folder);
     }
     chdir(temp_folder);
+    ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
     ui->cancel_button->setEnabled(true);
-    ui->buttonBox->setEnabled(false);
     ui->progress_bar->setValue(0);
 
     // Declare download links and file names
@@ -186,6 +186,7 @@ void install_dialog::install()
     success_box.setText("The installation completed succesfully!");
     success_box.setModal(true);
     success_box.exec();
+    ui->button_box->setEnabled(true);
     ui->install_button->setEnabled(true);
     ui->cancel_button->setEnabled(false);
 }

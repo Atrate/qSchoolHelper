@@ -19,7 +19,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>540</x>
@@ -46,7 +46,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0" colspan="2">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="install_title_label">
       <property name="font">
        <font>
         <pointsize>14</pointsize>
@@ -141,7 +141,7 @@ missing and you would like to install?</string>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>install_dialog</receiver>
    <slot>accept()</slot>
@@ -157,7 +157,7 @@ missing and you would like to install?</string>
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>install_dialog</receiver>
    <slot>reject()</slot>

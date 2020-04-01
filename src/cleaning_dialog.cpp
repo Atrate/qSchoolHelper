@@ -46,8 +46,11 @@ void run_clean(const char* cmd)
 void cleaning_dialog::clean()
 {
     ui->clean_button->setEnabled(false);
-    ui->buttonBox->setEnabled(false);
+    ui->button_box->setEnabled(false);
+    ui->cleaning_progress_label->setEnabled(true);
+    ui->progress_bar->setEnabled(true);
     ui->progress_bar->setValue(0);
+    ui->cleaning_log->setEnabled(true);
     ui->cleaning_log->append("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
@@ -135,4 +138,6 @@ void cleaning_dialog::clean()
     success_box.setModal(true);
     success_box.exec();
     ui->clean_button->setEnabled(true);
+    ui->button_box->setEnabled(true);
+
 }

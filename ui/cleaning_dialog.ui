@@ -16,7 +16,7 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>480</x>
@@ -67,7 +67,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="cleaning_type_label">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -140,7 +140,10 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="cleaning_progress_label">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Cleaning progress:</string>
       </property>
@@ -148,16 +151,23 @@
     </item>
     <item row="1" column="1">
      <widget class="QProgressBar" name="progress_bar">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="value">
        <number>0</number>
       </property>
      </widget>
     </item>
     <item row="2" column="0" colspan="2">
-     <widget class="QTextBrowser" name="cleaning_log"/>
+     <widget class="QTextBrowser" name="cleaning_log">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item row="0" column="0" colspan="2">
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="description_label">
       <property name="text">
        <string>This tool will help you clean the computer and resolve any issues that might arise due to not cleaning it regularily. 
 
@@ -180,7 +190,7 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
  </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>cleaning_dialog</receiver>
    <slot>reject()</slot>
@@ -196,7 +206,7 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>cleaning_dialog</receiver>
    <slot>accept()</slot>

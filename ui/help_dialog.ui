@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Help</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>550</x>
@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Close</set>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QTextBrowser" name="help_text_browser">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -81,7 +81,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;These applications will automatically be installed when &lt;span style=&quot; font-style:italic;&quot;&gt;Initial Setup&lt;/span&gt; is run and can be reinstalled by using the &lt;span style=&quot; font-style:italic;&quot;&gt;Software Installer&lt;/span&gt; when needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -123,7 +123,7 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>help_dialog</receiver>
    <slot>accept()</slot>
@@ -139,7 +139,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>help_dialog</receiver>
    <slot>reject()</slot>
