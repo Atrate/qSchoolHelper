@@ -71,33 +71,37 @@ void main_window::window_setup()
         ui->pushButton_4->setToolTip(disabled_tooltip);
     }
 }
-void main_window::problem_button_clicked()
+void main_window::on_problem_button_clicked()
 {
     problem = new problem_dialog(this);
     problem->show();
 }
-void main_window::initial_setup_triggered()
+void main_window::on_initial_setup_button_clicked()
 {
     initial_setup = new initial_setup_dialog(this);
     initial_setup->show();
 }
-void main_window::about_triggered()
-{
-    about = new about_dialog(this);
-    about->show();
-}
-void main_window::install_button_clicked()
+void main_window::on_software_button_clicked()
 {
     install = new install_dialog(this);
     install->show();
 }
-void main_window::cleaning_button_clicked()
+void main_window::on_clean_button_clicked()
 {
     cleaning = new cleaning_dialog(this);
     cleaning->show();
 }
-void main_window::help_triggered()
+void main_window::on_actionOpen_help_triggered()
 {
     help = new help_dialog(this);
     help->show();
+}
+void main_window::on_actionAbout_triggered()
+{
+    about = new about_dialog(this);
+    about->show();
+}
+void main_window::on_actionInitial_setup_triggered()
+{
+    on_initial_setup_button_clicked();
 }

@@ -50,12 +50,13 @@ class main_window : public QMainWindow
         void window_setup();
 
     private slots:
-        void problem_button_clicked();
-        void initial_setup_triggered();
-        void about_triggered();
-        void install_button_clicked();
-        void cleaning_button_clicked();
-        void help_triggered();
+        void on_problem_button_clicked();
+        void on_initial_setup_button_clicked();
+        void on_actionAbout_triggered();
+        void on_software_button_clicked();
+        void on_clean_button_clicked();
+        void on_actionOpen_help_triggered();
+        void on_actionInitial_setup_triggered();
 
 };
 #endif // MAIN_WINDOW_H
