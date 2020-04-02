@@ -38,7 +38,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="problem_page">
     <widget class="QWidget" name="gridLayoutWidget">
@@ -206,14 +206,17 @@
       </item>
       <item row="1" column="0">
        <widget class="QTabWidget" name="browser_tabs">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="bro_tab_1">
          <attribute name="title">
-          <string>Tab 1</string>
+          <string>Step 1</string>
          </attribute>
         </widget>
         <widget class="QWidget" name="bro_tab_2">
          <attribute name="title">
-          <string>Tab 2</string>
+          <string>Step 2</string>
          </attribute>
         </widget>
        </widget>
@@ -251,14 +254,17 @@
       </item>
       <item row="1" column="0">
        <widget class="QTabWidget" name="projector_tabs">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="pro_tab_1">
          <attribute name="title">
-          <string>Tab 1</string>
+          <string>Step 1</string>
          </attribute>
         </widget>
         <widget class="QWidget" name="pro_tab_2">
          <attribute name="title">
-          <string>Tab 2</string>
+          <string>Step 2</string>
          </attribute>
         </widget>
        </widget>
@@ -313,12 +319,12 @@
         </property>
         <widget class="QWidget" name="spe_tab_1">
          <attribute name="title">
-          <string>Tab 1</string>
+          <string>Step 1</string>
          </attribute>
         </widget>
         <widget class="QWidget" name="spe_tab_2">
          <attribute name="title">
-          <string>Tab 2</string>
+          <string>Step 2</string>
          </attribute>
         </widget>
        </widget>
@@ -361,12 +367,12 @@
         </property>
         <widget class="QWidget" name="pre_tab_1">
          <attribute name="title">
-          <string>Tab 1</string>
+          <string>Step 1</string>
          </attribute>
         </widget>
         <widget class="QWidget" name="pre_tab_2">
          <attribute name="title">
-          <string>Tab 2</string>
+          <string>Step 2</string>
          </attribute>
         </widget>
        </widget>
