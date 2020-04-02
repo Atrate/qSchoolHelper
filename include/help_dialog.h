@@ -32,7 +32,6 @@ class help_dialog : public QDialog
 
     private:
         Ui::help_dialog *ui;
-
 };
 
 #endif // HELP_DIALOG_H

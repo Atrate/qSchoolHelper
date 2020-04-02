@@ -46,7 +46,6 @@ class main_window : public QMainWindow
         install_dialog *install;
         cleaning_dialog *cleaning;
         help_dialog *help;
-
         void window_setup();
 
     private slots:
@@ -57,6 +56,5 @@ class main_window : public QMainWindow
         void on_clean_button_clicked();
         void on_actionOpen_help_triggered();
         void on_actionInitial_setup_triggered();
-
 };
 #endif // MAIN_WINDOW_H

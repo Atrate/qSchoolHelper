@@ -38,7 +38,6 @@ class cleaning_dialog : public QDialog
 
     private slots:
         void clean();
-
 };
 
 #endif // CLEANING_DIALOG_H

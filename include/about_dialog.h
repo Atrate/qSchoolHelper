@@ -32,7 +32,6 @@ class about_dialog : public QDialog
 
     private:
         Ui::about_dialog *ui;
-
 };
 
 #endif // ABOUT_DIALOG_H

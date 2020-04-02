@@ -35,7 +35,6 @@ class initial_setup_dialog : public QDialog
 
     private slots:
         void initial_setup();
-
 };
 
 #endif // INITIAL_SETUP_DIALOG_H

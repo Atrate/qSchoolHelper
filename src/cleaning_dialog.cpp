@@ -102,7 +102,7 @@ void cleaning_dialog::clean()
     // -----------------
     if (ui->radio_extended->isEnabled())
     {
-
+        clean_extended();
     }
 
     // Finalize — set UI element states

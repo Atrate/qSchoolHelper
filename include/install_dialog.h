@@ -36,7 +36,6 @@ class install_dialog : public QDialog
 
     public slots:
         void install();
-
 };
 
 #endif // INSTALL_DIALOG_H
