@@ -222,4 +222,3 @@ void install_dialog::install()
     ui->install_button->setEnabled(true);
     ui->cancel_button->setEnabled(false);
 }
-

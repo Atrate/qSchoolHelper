@@ -17,7 +17,8 @@
 
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
     class initial_setup_dialog;
 }
 

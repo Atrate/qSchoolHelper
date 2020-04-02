@@ -17,10 +17,10 @@
 
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
     class install_dialog;
 }
-
 class install_dialog : public QDialog
 {
         Q_OBJECT
@@ -29,12 +29,14 @@ class install_dialog : public QDialog
         explicit install_dialog(QWidget *parent = nullptr);
         ~install_dialog();
 
+
     private:
         Ui::install_dialog *ui;
         bool check_shortcut(std::string exe_path);
 
-    private slots:
+    public slots:
         void install();
+
 };
 
 #endif // INSTALL_DIALOG_H

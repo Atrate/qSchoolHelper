@@ -17,7 +17,8 @@
 
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
     class cleaning_dialog;
 }
 
@@ -31,6 +32,9 @@ class cleaning_dialog : public QDialog
 
     private:
         Ui::cleaning_dialog *ui;
+
+    public slots:
+        void clean_extended();
 
     private slots:
         void clean();

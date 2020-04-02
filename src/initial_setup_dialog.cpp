@@ -20,6 +20,8 @@
 #include "initial_setup_dialog.h"
 #include "ui_initial_setup_dialog.h"
 #include "download.h"
+#include "install_dialog.h"
+#include "cleaning_dialog.h"
 
 namespace fs = std::filesystem;
 
@@ -55,23 +57,32 @@ void initial_setup_dialog::initial_setup()
     ui->setup_log->append("Starting initial setup…\n——————————");
 
     // Disable ads
-    //system("RED ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    // -----------
+    system("RED ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    ui->setup_log->append("Disabling Windows Explorer ads");
 
     // Disable telemetry
-    //system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
+    // -----------------
     ui->setup_log->append("Disabling telemetry service…");
+    system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
     system("net stop DiagTrack");
     system("sc config DiagTrack start= disabled");
 
+    // Disable search indexing
+    // -----------------------
     ui->setup_log->append("Disabling search indexing...\n");
     system("net stop WSearch");
     system("sc config WSearch start= disabled");
+
     // -------------------
     // More code here soon
     // -------------------
 
     // Run extended cleaner
     // --------------------
+    cleaning_dialog *cl = new cleaning_dialog();
+    cl->clean_extended();
+    delete cl;
 
     // Download and install BleachBit
     // ------------------------------
@@ -92,6 +103,12 @@ void initial_setup_dialog::initial_setup()
 
     // Run install (all software)
     // --------------------------
+    if(ui->install_check_box->isChecked())
+    {
+      install_dialog *id = new install_dialog();
+      id->install();
+      delete id;
+    }
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
@@ -105,6 +122,4 @@ void initial_setup_dialog::initial_setup()
     ui->start_button->setEnabled(true);
     ui->cancel_button->setEnabled(false);
     ui->button_box->setEnabled(true);
-
-
 }

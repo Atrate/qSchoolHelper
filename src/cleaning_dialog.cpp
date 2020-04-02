@@ -98,26 +98,11 @@ void cleaning_dialog::clean()
     // Uninstall unnecessary software (McAffee etc.)
     // ---------------------------------------------
 
-    // Extended cleaning (repeats some steps from initial setup)
-    // ---------------------------------------------------------
+    // Extended cleaning
+    // -----------------
     if (ui->radio_extended->isEnabled())
     {
-        ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
-        cmd = bb_path + "--clean deepscan.ds_store deepscan.thumbs_db system.logs "
-                        "system.memory_dump system.muicache system.prefetch system.updates";
-        bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
-        while(bb_clean.isRunning())
-        {
-            QCoreApplication::processEvents();
-        }
 
-        ui->cleaning_log->append("Disabling telemetry service…");
-        system("net stop DiagTrack");
-        system("sc config DiagTrack start= disabled");
-
-        ui->cleaning_log->append("Disabling search indexing...\n");
-        system("net stop WSearch");
-        system("sc config WSearch start= disabled");
     }
 
     // Finalize — set UI element states
@@ -131,4 +116,16 @@ void cleaning_dialog::clean()
     ui->clean_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 
+}
+void cleaning_dialog::clean_extended()
+{
+    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
+    std::string cmd = bb_path + "--clean deepscan.ds_store deepscan.thumbs_db system.logs "
+                    "system.memory_dump system.muicache system.prefetch system.updates";
+    QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
+    while(bb_clean.isRunning())
+    {
+        QCoreApplication::processEvents();
+    }
 }
