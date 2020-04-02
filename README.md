@@ -18,5 +18,6 @@ Icons adapted from:
 ```
 https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon
 https://www.iconfinder.com/icons/55586/clean_icon
+https://www.iconfinder.com/icons/23799/firefox_icon
 https://www.iconfinder.com/iconsets/UltimateGnome
 ``` 
