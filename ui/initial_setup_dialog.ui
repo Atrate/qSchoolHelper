@@ -102,7 +102,7 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
@@ -119,22 +119,6 @@
         </property>
         <property name="text">
          <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="cancel_button">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Cancel</string>
         </property>
        </widget>
       </item>

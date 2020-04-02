@@ -104,7 +104,6 @@ void install_dialog::install()
     chdir(temp_folder);
     ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
-    ui->cancel_button->setEnabled(true);
     ui->progress_bar->setValue(0);
 
     // Declare download links and file names
@@ -211,6 +210,7 @@ void install_dialog::install()
             }
 
 
+
         }
         ui->progress_bar->setValue((i+6)*10);
     }
@@ -220,5 +220,4 @@ void install_dialog::install()
     success_box.exec();
     ui->button_box->setEnabled(true);
     ui->install_button->setEnabled(true);
-    ui->cancel_button->setEnabled(false);
 }
