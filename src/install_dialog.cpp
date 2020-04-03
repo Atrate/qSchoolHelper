@@ -40,7 +40,7 @@ bool install_dialog::check_shortcut(std::string exe_path)
 {
     if (fs::exists(exe_path))
     {
-        std::string exe_name = exe_path.substr(exe_path.find_last_of("\\"),exe_path.length()); // TODO: Convert to title case
+        std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1),exe_path.length()); // TODO: Convert to title case
         for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
         {
 
@@ -49,7 +49,7 @@ bool install_dialog::check_shortcut(std::string exe_path)
                 try
                 {
                     std::string link_cmd = "mklink ";
-                    link_cmd.append(entry.path().string() + "\\Desktop\\" + exe_name + " " + exe_path);
+                    link_cmd.append("\"" + entry.path().string() + "\\Desktop\\" + exe_name + "\" \"" + exe_path + "\"");
                     system(link_cmd.c_str());
                 }
                 catch (const std::exception &e)
