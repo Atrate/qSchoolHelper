@@ -35,13 +35,7 @@ cleaning_dialog::~cleaning_dialog()
 }
 void run_clean(const char* cmd)
 {
-    if (!system(cmd))
-    {
-        QMessageBox failure_box;
-        failure_box.setText("The cleaning operation failed!");
-        failure_box.setModal(true);
-        failure_box.exec();
-    }
+    system(cmd);
 }
 void cleaning_dialog::clean()
 {
@@ -78,12 +72,15 @@ void cleaning_dialog::clean()
 
         }
     }
+    // Uninstall unnecessary software (McAffee etc.)
+    // ---------------------------------------------
+
     // Run BleachBit to clean temporary files
     // --------------------------------------
     ui->progress_bar->setValue(10);
     ui->cleaning_log->append("Cleaning temporary files and caches…");
-    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
-    std::string cmd = bb_path + "--clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+    std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
+    std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                                 "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
                                 "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
                                 "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
@@ -95,12 +92,10 @@ void cleaning_dialog::clean()
         QCoreApplication::processEvents();
     }
 
-    // Uninstall unnecessary software (McAffee etc.)
-    // ---------------------------------------------
 
     // Extended cleaning
     // -----------------
-    if (ui->radio_extended->isEnabled())
+    if (ui->radio_extended->isChecked())
     {
         clean_extended();
     }
@@ -119,9 +114,9 @@ void cleaning_dialog::clean()
 }
 void cleaning_dialog::clean_extended()
 {
-    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
     ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
-    std::string cmd = bb_path + "--clean deepscan.ds_store deepscan.thumbs_db system.logs "
+    std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
                     "system.memory_dump system.muicache system.prefetch system.updates";
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
