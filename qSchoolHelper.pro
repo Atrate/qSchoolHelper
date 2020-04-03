@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = qSchoolHelper
-INCLUDEPATH += include .
+INCLUDEPATH += include include/curl .
 UI_DIR = ui
 QT       += core gui
 
@@ -53,3 +53,9 @@ QMAKE_LFLAGS += -lcurl
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -lcurl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -lcurl
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/lib/ -llibcurl.dll
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/lib/ -llibcurl.dll

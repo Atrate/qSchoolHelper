@@ -15,9 +15,9 @@
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
 
-#include <curl/curl.h>
+#include <curl.h>
 
-    int curl_dl(const char *url, const char *pagefilename);
+int curl_dl(const char *url, const char *pagefilename);
 
 #endif // DOWNLOAD_H
 
