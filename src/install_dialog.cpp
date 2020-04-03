@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <curl/curl.h>
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
