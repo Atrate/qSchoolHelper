@@ -13,6 +13,8 @@
  */
 #include <fstream>
 #include <filesystem>
+#include <QLocale>
+#include <QTranslator>
 
 #include "main_window.h"
 #include "ui_main_window.h"
@@ -36,6 +38,25 @@ main_window::main_window(QWidget *parent)
 main_window::~main_window()
 {
     delete ui;
+}
+void load_translation(QString lang)
+{
+    QTranslator qsh_translator;
+    QLocale locale = QLocale::system();
+
+    if (lang == "Polish")
+    {
+        locale = QLocale::Polish;
+    }
+    else if (lang == "English")
+    {
+        locale = QLocale::English;
+    }
+    QString bin_path = qApp->applicationDirPath();
+    QString src_app_trans_path = bin_path + QLatin1String("/data/translations");
+    qsh_translator.load(locale, "translation", "_", src_app_trans_path);
+
+    qApp->installTranslator(&qsh_translator);
 }
 void main_window::window_setup()
 {
@@ -104,4 +125,8 @@ void main_window::on_actionAbout_triggered()
 void main_window::on_actionInitial_setup_triggered()
 {
     on_initial_setup_button_clicked();
+}
+void main_window::on_combo_box_currentIndexChanged()
+{
+    load_translation(ui->combo_box->currentText());
 }

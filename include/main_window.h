@@ -56,5 +56,6 @@ class main_window : public QMainWindow
         void on_clean_button_clicked();
         void on_actionOpen_help_triggered();
         void on_actionInitial_setup_triggered();
+        void on_combo_box_currentIndexChanged();
 };
 #endif // MAIN_WINDOW_H
