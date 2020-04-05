@@ -21,30 +21,66 @@ problem_dialog::problem_dialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stacked_widget->setCurrentIndex(0);
+    set_tabs(0);
+    ui->back_button->setVisible(false);
+    ui->next_button->setVisible(false);
 }
 
 problem_dialog::~problem_dialog()
 {
     delete ui;
 }
+void problem_dialog::set_tabs(int i)
+{
+    ui->browser_tabs->setCurrentIndex(i);
+    ui->presentation_tabs->setCurrentIndex(i);
+    ui->projector_tabs->setCurrentIndex(i);
+    ui->speakers_tabs->setCurrentIndex(i);
+}
 void problem_dialog::on_back_button_clicked()
 {
-    ui->stacked_widget->setCurrentIndex(0);
+    if(ui->browser_tabs->currentIndex() == 1 || ui->presentation_tabs->currentIndex() == 1
+      || ui->speakers_tabs->currentIndex() == 1 || ui->projector_tabs->currentIndex() == 1)
+    {
+        set_tabs(0);
+    }
+    else
+    {
+        ui->stacked_widget->setCurrentIndex(0);
+        ui->back_button->setVisible(false);
+        ui->next_button->setVisible(false);
+    }
+}
+void problem_dialog::on_next_button_clicked()
+{
+    set_tabs(1);
 }
 void problem_dialog::on_browser_button_clicked()
 {
+    set_tabs(0);
     ui->stacked_widget->setCurrentIndex(1);
+    ui->back_button->setVisible(true);
+    ui->next_button->setVisible(true);
 }
 void problem_dialog::on_projector_button_clicked()
 {
+    set_tabs(0);
     ui->stacked_widget->setCurrentIndex(2);
+    ui->back_button->setVisible(true);
+    ui->next_button->setVisible(true);
 }
 void problem_dialog::on_speakers_button_clicked()
 {
+    set_tabs(0);
     ui->stacked_widget->setCurrentIndex(3);
+    ui->back_button->setVisible(true);
+    ui->next_button->setVisible(true);
 }
 void problem_dialog::on_presentation_button_clicked()
 {
+    set_tabs(0);
     ui->stacked_widget->setCurrentIndex(4);
+    ui->back_button->setVisible(true);
+    ui->next_button->setVisible(true);
 }
 
