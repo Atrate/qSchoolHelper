@@ -12,24 +12,21 @@
  *
  */
 
-#include "main_window.h"
-
 #include <QApplication>
 #include <QTranslator>
-#include <QLocale>
 #include <QInputDialog>
+#include "main_window.h"
 
-#include <iostream>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     QTranslator qsh_translator;
     QString bin_path = qApp->applicationDirPath();
-    QString trans_path = bin_path + QLatin1String("/data/translations/");
-
+    QString trans_path = bin_path + QString("/data/translations/");
     QStringList languages;
     languages << "English" << "Polish";
+
     QString lang = QInputDialog::getItem(NULL, "Select Language", "Language", languages);
     if (lang == "Polish")
     {
@@ -37,7 +34,6 @@ int main(int argc, char *argv[])
         qsh_translator.load(trans_path);
         qApp->installTranslator(&qsh_translator);
     }
-
 
     main_window w;
     w.show();
