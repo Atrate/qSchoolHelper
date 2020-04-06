@@ -17,22 +17,28 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
+#include <QInputDialog>
 
-void load_translation()
-{
-    QTranslator qsh_translator;
-    QLocale locale = QLocale::system();
-
-    QString bin_path = qApp->applicationDirPath();
-    QString src_app_trans_path = bin_path + QLatin1String("/data/translations");
-    qsh_translator.load(locale, "translation", "_", src_app_trans_path);
-
-    qApp->installTranslator(&qsh_translator);
-}
+#include <iostream>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    load_translation();
+
+    QTranslator qsh_translator;
+    QString bin_path = qApp->applicationDirPath();
+    QString trans_path = bin_path + QLatin1String("/data/translations/");
+
+    QStringList languages;
+    languages << "English" << "Polish";
+    QString lang = QInputDialog::getItem(NULL, "Select Language", "Language", languages);
+    if (lang == "Polish")
+    {
+        trans_path.append("qSchoolHelper_pl_PL.qm");
+        qsh_translator.load(trans_path);
+        qApp->installTranslator(&qsh_translator);
+    }
+
+
     main_window w;
     w.show();
     return a.exec();

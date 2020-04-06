@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="qSchoolHelper_pl_PL">
+<TS version="2.0" language="pl_PL" sourcelanguage="en">
 <context>
     <name>about_dialog</name>
     <message>
         <location filename="../../ui/about_dialog.ui" line="14"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O programie</translation>
     </message>
     <message>
         <location filename="../../ui/about_dialog.ui" line="51"/>
         <source>qSchoolHelper version v0.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">qSchoolHelper wersja v0.0.1</translation>
     </message>
     <message>
         <location filename="../../ui/about_dialog.ui" line="76"/>
@@ -216,7 +216,7 @@ missing and you would like to install?</source>
     <message>
         <location filename="../../ui/main_window.ui" line="54"/>
         <source>Clean-up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Czyszczenie</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="78"/>
