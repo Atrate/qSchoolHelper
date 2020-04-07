@@ -93,6 +93,18 @@ void run_install(const char* cmd, const char* filename)
 }
 void install_dialog::install()
 {
+    // If no program has been selected, jump to end
+    // --------------------------------------------
+    if (!(ui->firefox_check_box->isChecked() || ui->reader_check_box->isChecked() ||
+          ui->vlc_check_box->isChecked() || ui->viewer_check_box->isChecked()))
+    {
+        QMessageBox no_program_selected_box;
+        no_program_selected_box.setText("Please select at least one program to be installed!");
+        no_program_selected_box.setModal(true);
+        no_program_selected_box.exec();
+        goto end;
+    }
+    {
     const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
     {
@@ -217,4 +229,6 @@ void install_dialog::install()
     success_box.exec();
     ui->button_box->setEnabled(true);
     ui->install_button->setEnabled(true);
+    }
+    end:;
 }
