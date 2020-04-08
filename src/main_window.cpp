@@ -53,7 +53,7 @@ void main_window::window_setup()
         ui->software_button->setToolTip("Install missing software");
         ui->problem_button->setToolTip("Help with common problems");
         ui->clean_button->setToolTip("Clean junk and temporary files");
-        ui->push_button->setToolTip("");
+        ui->help_button->setToolTip("");
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip("Initial Setup has already been run on this computer. "
                                              "If you with to run it again, please select it from File -> Initial Setup.");
@@ -64,11 +64,11 @@ void main_window::window_setup()
         ui->problem_button->setEnabled(false);
         ui->clean_button->setEnabled(false);
         ui->software_button->setEnabled(false);
-        ui->push_button->setEnabled(false);
+        ui->help_button->setEnabled(false);
         ui->software_button->setToolTip(disabled_tooltip);
         ui->problem_button->setToolTip(disabled_tooltip);
         ui->clean_button->setToolTip(disabled_tooltip);
-        ui->push_button->setToolTip(disabled_tooltip);
+        ui->help_button->setToolTip(disabled_tooltip);
     }
 }
 void main_window::on_problem_button_clicked()
@@ -104,4 +104,8 @@ void main_window::on_actionAbout_triggered()
 void main_window::on_actionInitial_setup_triggered()
 {
     on_initial_setup_button_clicked();
+}
+void main_window::on_help_button_clicked()
+{
+    on_actionOpen_help_triggered();
 }
