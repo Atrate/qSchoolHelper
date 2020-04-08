@@ -18,6 +18,11 @@ This project has been designed and configured for use on Windows 10 computers in
 - Curl (libcurl) (included in ./lib/)
 - MinGW or other >= C++17 compiler
 
+## Third-party components used
+
+- cURL
+- BleachBit
+
 ## License
 This project is licensed under the [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html).
 
