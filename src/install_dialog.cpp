@@ -44,7 +44,6 @@ bool install_dialog::check_shortcut(std::string exe_path)
         std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1),exe_path.length()); // TODO: Convert to title case
         for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
         {
-
             if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop") && !fs::exists(entry.path()/"Desktop"/exe_name))
             {
                 try
@@ -58,7 +57,6 @@ bool install_dialog::check_shortcut(std::string exe_path)
                     // Catch permission denied errors. We can't really do much about them, though,
                     // since the application is supposed to run as administrator anyways.
                 }
-
             }
         }
         return true;
@@ -89,8 +87,6 @@ void run_install(const char* cmd, const char* filename)
     ///system("installers\\PowerPointViewer.exe /S");
     ///system("installers\\LibreOffice_6.3.4_Win_x64.msi");
     ///system("installers\\readerdc_uk_xa_install.exe");
-
-
 }
 void install_dialog::install()
 {
@@ -201,8 +197,6 @@ void install_dialog::install()
                     cmd.append("/S","/L=1033");
                     break;
                 case 4:
-                    break;
-                case 5:
                     break;
             }
             QFuture<void> install = QtConcurrent::run(run_install, cmd.c_str(), download_array[i][1]);
