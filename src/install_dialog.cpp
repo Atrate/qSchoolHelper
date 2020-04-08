@@ -106,56 +106,56 @@ void install_dialog::install()
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
-    const char *download_array[DL_ARRAY_SIZE][4];
+    std::string download_array[DL_ARRAY_SIZE][4];
     if (ui->firefox_check_box->isChecked())
     {
-        download_array[0][0]="https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi";
-        download_array[0][1]="Firefox_Setup_74.0.msi";
-        download_array[0][2]="C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi");
+        download_array[0][1]=std::string("Firefox_Setup_74.0.msi");
+        download_array[0][2]=std::string("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
     }
     else
     {
-        download_array[0][0]=nullptr;
+        download_array[0][0]=std::string("");
     }
     if (ui->reader_check_box->isChecked())
     {
-        download_array[1][0]="https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-        download_array[1][1]="readerdc_en_a_install.exe";
-        download_array[1][2]="C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
+        download_array[1][0]=std::string("https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe");
+        download_array[1][1]=std::string("readerdc_en_a_install.exe");
+        download_array[1][2]=std::string("C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe");
     }
     else
     {
-        download_array[1][0]=nullptr;
+        download_array[1][0]=std::string("");
     }
     if (ui->libreoffice_check_box->isChecked())
     {
-        download_array[2][0]="https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi";
-        download_array[2][1]="LibreOffice_6.4.2_Win_x64.msi";
-        download_array[2][2]=nullptr;
+        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi");
+        download_array[2][1]=std::string("LibreOffice_6.4.2_Win_x64.msi");
+        download_array[2][2]=std::string("");
     }
     else
     {
-        download_array[2][0]=nullptr;
+        download_array[2][0]=std::string("");
     }
     if (ui->vlc_check_box->isChecked())
     {
-        download_array[3][0]="https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-        download_array[3][1]="vlc-3.0.8-win64.exe";
-        download_array[3][2]="C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
+        download_array[3][0]=std::string("https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe");
+        download_array[3][1]=std::string("vlc-3.0.8-win64.exe");
+        download_array[3][2]=std::string("C:\\Program Files\\VideoLAN\\VLC\\vlc.exe");
     }
     else
     {
-        download_array[3][0]=nullptr;
+        download_array[3][0]=std::string("");
     }
     if (ui->viewer_check_box->isChecked())
     {
-        download_array[4][0]=nullptr;
-        download_array[4][1]=nullptr;
-        download_array[4][2]=nullptr;
+        download_array[4][0]=std::string("");
+        download_array[4][1]=std::string("");
+        download_array[4][2]=std::string("");
     }
     else
     {
-        download_array[4][0]=nullptr;
+        download_array[4][0]=std::string("");
     }
 
     // Download the files
@@ -164,12 +164,24 @@ void install_dialog::install()
     for (int i = 0; i < DL_ARRAY_SIZE; i++)
     {
         shortcut_array[i] = check_shortcut(download_array[i][2]);
-        if (download_array[i][0] != nullptr && !shortcut_array[i])
+        if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
-            QFuture<void> dl = QtConcurrent::run(curl_dl, download_array[i][0],download_array[i][1]);
+            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(),download_array[i][1].c_str());
             while(dl.isRunning())
             {
                 QCoreApplication::processEvents();
+            }
+            if(!dl)
+            {
+                dl.~QFuture();
+                g_install_running = false;
+                QMessageBox dl_failure_box;
+                dl_failure_box.setText("The download failed! Please check your Internet connectivity!");
+                dl_failure_box.setModal(true);
+                dl_failure_box.exec();
+                ui->button_box->setEnabled(true);
+                ui->install_button->setEnabled(true);
+                return;
             }
             ui->progress_bar->setValue((i+1)*10);
         }
@@ -179,7 +191,7 @@ void install_dialog::install()
     // ------------------------
     for (int i = 0; i < DL_ARRAY_SIZE; i++)
     {
-        if (download_array[i][0] != nullptr && !shortcut_array[i])
+        if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
             // --------------------------------------------------------------------------------------------------------
@@ -199,7 +211,7 @@ void install_dialog::install()
                 case 4:
                     break;
             }
-            QFuture<void> install = QtConcurrent::run(run_install, cmd.c_str(), download_array[i][1]);
+            QFuture<void> install = QtConcurrent::run(run_install, cmd.c_str(), download_array[i][1].c_str());
             while(install.isRunning())
             {
                 QCoreApplication::processEvents();
@@ -222,8 +234,8 @@ void install_dialog::on_install_button_clicked()
 {
     // If no program has been selected, display message box
     // ----------------------------------------------------
-    if (!(ui->firefox_check_box->isChecked() || ui->reader_check_box->isChecked() ||
-          ui->vlc_check_box->isChecked() || ui->viewer_check_box->isChecked()))
+    if (!(ui->firefox_check_box->isChecked() || ui->reader_check_box->isChecked() || ui->vlc_check_box->isChecked()
+          || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
     {
         QMessageBox no_program_selected_box;
         no_program_selected_box.setText("Please select at least one program to be installed!");
