@@ -33,7 +33,7 @@ cleaning_dialog::~cleaning_dialog()
 {
     delete ui;
 }
-bool g_is_running {};
+bool g_cleaning_running {};
 void run_clean(const char* cmd)
 {
     system(cmd);
@@ -42,7 +42,7 @@ void cleaning_dialog::clean()
 {
     // Begin — set UI element states
     // -----------------------------
-    g_is_running = true;
+    g_cleaning_running = true;
     ui->clean_button->setEnabled(false);
     ui->button_box->setEnabled(false);
     ui->cleaning_progress_label->setEnabled(true);
@@ -106,7 +106,7 @@ void cleaning_dialog::clean()
 
     // Finalize — set UI element states
     // --------------------------------
-    g_is_running = false;
+    g_cleaning_running = false;
     ui->progress_bar->setValue(100);
     ui->cleaning_log->append("All done!");
     QMessageBox success_box;
@@ -131,7 +131,7 @@ void cleaning_dialog::clean_extended()
 }
 void cleaning_dialog::closeEvent(QCloseEvent *event)
 {
-    if (g_is_running)
+    if (g_cleaning_running)
     {
         //ask_confirmation(); // TODO
         event->ignore();

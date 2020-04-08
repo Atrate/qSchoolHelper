@@ -147,22 +147,6 @@ missing and you would like to install?</string>
  <connections>
   <connection>
    <sender>button_box</sender>
-   <signal>accepted()</signal>
-   <receiver>install_dialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>install_dialog</receiver>
    <slot>reject()</slot>
@@ -174,22 +158,6 @@ missing and you would like to install?</string>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>install_button</sender>
-   <signal>clicked()</signal>
-   <receiver>install_dialog</receiver>
-   <slot>install()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>144</x>
-     <y>294</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>195</x>
-     <y>327</y>
     </hint>
    </hints>
   </connection>

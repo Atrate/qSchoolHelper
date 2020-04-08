@@ -37,7 +37,7 @@ initial_setup_dialog::~initial_setup_dialog()
 {
     delete ui;
 }
-bool g_is_running {};
+bool g_setup_running {};
 void run_install_bb(const char* bb_exe)
 {
     system(bb_exe);
@@ -46,7 +46,7 @@ void initial_setup_dialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states
     // ----------------------------------------------
-    g_is_running = true;
+    g_setup_running = true;
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
 
@@ -119,7 +119,7 @@ void initial_setup_dialog::initial_setup()
     isdf << std::endl;
     isdf.close();
 
-    g_is_running = false;
+    g_setup_running = false;
     ui->progress_bar->setValue(100);
     ui->setup_log->append("All done!");
     ui->start_button->setEnabled(true);
@@ -127,7 +127,7 @@ void initial_setup_dialog::initial_setup()
 }
 void initial_setup_dialog::closeEvent(QCloseEvent *event)
 {
-    if (g_is_running)
+    if (g_setup_running)
     {
         //ask_confirmation(); // TODO
         event->ignore();

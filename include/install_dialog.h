@@ -38,6 +38,9 @@ class install_dialog : public QDialog
 
     public slots:
         void install();
+
+    private slots:
+        void on_install_button_clicked();
 };
 
 #endif // INSTALL_DIALOG_H
