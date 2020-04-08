@@ -66,39 +66,21 @@ bool install_dialog::check_shortcut(std::string exe_path)
         return false;
     }
 }
-void run_install(const char* cmd, const char* filename)
+int run_install(const char* cmd)
 {
-    if (system(cmd))
-    {
-        fs::remove(filename); // Remove installation files after successful installation
-    }
-    else
-    {
-        // TODO: Handle installation errors properly
-        QMessageBox failure_box;
-        failure_box.setText("The installation failed!");
-        failure_box.setModal(true);
-        failure_box.exec();
-    }
-    // Reference commands
-    ///system("installers\\vlc-3.0.8-win64.exe /L=1033 /S");
-    ///system("installers\\\"Firefox Installer.exe\" /S");
-    // TODO: SILENT INSTALL
-    ///system("installers\\PowerPointViewer.exe /S");
-    ///system("installers\\LibreOffice_6.3.4_Win_x64.msi");
-    ///system("installers\\readerdc_uk_xa_install.exe");
+    return(system(cmd));
 }
 void install_dialog::install()
 {
     // Initialize temp folder, set UI elements' states
     // -----------------------------------------------
     g_install_running = true;
-    const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
     {
         fs::create_directory(temp_folder);
     }
-    chdir(temp_folder);
+    chdir(temp_folder.c_str());
     ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
     ui->progress_bar->setValue(0);
@@ -150,7 +132,7 @@ void install_dialog::install()
     if (ui->viewer_check_box->isChecked())
     {
         download_array[4][0]=std::string("");
-        download_array[4][1]=std::string("");
+        download_array[4][1]=std::string("PowerPointViewer.exe");
         download_array[4][2]=std::string("");
     }
     else
@@ -171,7 +153,11 @@ void install_dialog::install()
             {
                 QCoreApplication::processEvents();
             }
-            if(!dl)
+            if (dl)
+            {
+                dl.~QFuture();
+            }
+            else
             {
                 dl.~QFuture();
                 g_install_running = false;
@@ -183,6 +169,7 @@ void install_dialog::install()
                 ui->install_button->setEnabled(true);
                 return;
             }
+
             ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -211,10 +198,24 @@ void install_dialog::install()
                 case 4:
                     break;
             }
-            QFuture<void> install = QtConcurrent::run(run_install, cmd.c_str(), download_array[i][1].c_str());
+            QFuture<int> install = QtConcurrent::run(run_install, cmd.c_str());
             while(install.isRunning())
             {
                 QCoreApplication::processEvents();
+            }
+            if(install)
+            {
+                install.~QFuture();
+                fs::remove(download_array[i][1]);
+            }
+            else
+            {
+                install.~QFuture();
+                QMessageBox install_failure_box;
+                install_failure_box.setText("The installation failed! Please try installing the program manually!");
+                install_failure_box.setModal(true);
+                install_failure_box.exec();
+                return;
             }
         }
         ui->progress_bar->setValue((i+6)*10);
@@ -251,7 +252,6 @@ void install_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_install_running)
     {
-        //ask_confirmation(); // TODO
         event->ignore();
     }
     else

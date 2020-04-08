@@ -49,6 +49,7 @@ void cleaning_dialog::clean()
     ui->progress_bar->setEnabled(true);
     ui->progress_bar->setValue(0);
     ui->cleaning_log->setEnabled(true);
+    ui->cleaning_log->clear();
     ui->cleaning_log->append("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
 
@@ -95,6 +96,7 @@ void cleaning_dialog::clean()
     {
         QCoreApplication::processEvents();
     }
+    bb_clean.~QFuture();
 
 
     // Extended cleaning
@@ -128,12 +130,12 @@ void cleaning_dialog::clean_extended()
     {
         QCoreApplication::processEvents();
     }
+    bb_clean.~QFuture();
 }
 void cleaning_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_cleaning_running)
     {
-        //ask_confirmation(); // TODO
         event->ignore();
     }
     else

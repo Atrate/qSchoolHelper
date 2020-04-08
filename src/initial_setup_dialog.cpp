@@ -102,6 +102,7 @@ void initial_setup_dialog::initial_setup()
     {
         QCoreApplication::processEvents();
     }
+    bb_install.~QFuture();
 
     // Run install (all software)
     // --------------------------
@@ -129,7 +130,6 @@ void initial_setup_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_setup_running)
     {
-        //ask_confirmation(); // TODO
         event->ignore();
     }
     else
