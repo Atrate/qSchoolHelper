@@ -21,8 +21,6 @@ namespace Ui
 {
     class initial_setup_dialog;
 }
-void run_install_bb(const char* bb_exe);
-
 class initial_setup_dialog : public QDialog
 {
         Q_OBJECT
