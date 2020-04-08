@@ -20,6 +20,7 @@ about_dialog::about_dialog(QWidget *parent) :
     ui(new Ui::about_dialog)
 {
     ui->setupUi(this);
+    ui->title_label->setText(QString::fromStdString(qAppName().toStdString() + " version v" + APP_VERSION));
 }
 
 about_dialog::~about_dialog()

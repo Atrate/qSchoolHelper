@@ -154,7 +154,7 @@
        </font>
       </property>
       <property name="text">
-       <string>qSchoolHelper version v0.0.1</string>
+       <string>qSchoolHelper</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
