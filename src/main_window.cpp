@@ -91,21 +91,21 @@ void main_window::on_clean_button_clicked()
     cleaning = new cleaning_dialog(this);
     cleaning->show();
 }
-void main_window::on_actionOpen_help_triggered()
+void main_window::on_action_open_help_triggered()
 {
     help = new help_dialog(this);
     help->show();
 }
-void main_window::on_actionAbout_triggered()
+void main_window::on_action_about_triggered()
 {
     about = new about_dialog(this);
     about->show();
 }
-void main_window::on_actionInitial_setup_triggered()
+void main_window::on_action_initial_setup_triggered()
 {
     on_initial_setup_button_clicked();
 }
 void main_window::on_help_button_clicked()
 {
-    on_actionOpen_help_triggered();
+    on_action_open_help_triggered();
 }

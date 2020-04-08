@@ -214,36 +214,36 @@ What would you like to do today?</string>
     <property name="title">
      <string>Fi&amp;le</string>
     </property>
-    <addaction name="actionInitial_setup"/>
+    <addaction name="action_initial_setup"/>
     <addaction name="separator"/>
-    <addaction name="actionQuit"/>
+    <addaction name="action_quit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionOpen_help"/>
+    <addaction name="action_about"/>
+    <addaction name="action_open_help"/>
    </widget>
    <addaction name="menuas"/>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="actionQuit">
+  <action name="action_quit">
    <property name="text">
     <string>&amp;Exit</string>
    </property>
   </action>
-  <action name="actionInitial_setup">
+  <action name="action_initial_setup">
    <property name="text">
     <string>&amp;Initial Setup</string>
    </property>
   </action>
-  <action name="actionOpen_help">
+  <action name="action_open_help">
    <property name="text">
     <string>&amp;Open help</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="action_about">
    <property name="text">
     <string>&amp;About</string>
    </property>
@@ -260,7 +260,7 @@ What would you like to do today?</string>
  </resources>
  <connections>
   <connection>
-   <sender>actionQuit</sender>
+   <sender>action_quit</sender>
    <signal>triggered()</signal>
    <receiver>main_window</receiver>
    <slot>close()</slot>

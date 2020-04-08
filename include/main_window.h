@@ -51,11 +51,11 @@ class main_window : public QMainWindow
     private slots:
         void on_problem_button_clicked();
         void on_initial_setup_button_clicked();
-        void on_actionAbout_triggered();
+        void on_action_about_triggered();
         void on_software_button_clicked();
         void on_clean_button_clicked();
-        void on_actionOpen_help_triggered();
-        void on_actionInitial_setup_triggered();
+        void on_action_open_help_triggered();
+        void on_action_initial_setup_triggered();
         void on_help_button_clicked();
 };
 #endif // MAIN_WINDOW_H
