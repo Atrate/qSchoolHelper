@@ -29,6 +29,8 @@ class install_dialog : public QDialog
         explicit install_dialog(QWidget *parent = nullptr);
         ~install_dialog();
 
+    protected:
+        void closeEvent(QCloseEvent *event);
 
     private:
         Ui::install_dialog *ui;

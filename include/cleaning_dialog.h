@@ -30,6 +30,9 @@ class cleaning_dialog : public QDialog
         explicit cleaning_dialog(QWidget *parent = nullptr);
         ~cleaning_dialog();
 
+    protected:
+        void closeEvent(QCloseEvent *event);
+
     private:
         Ui::cleaning_dialog *ui;
 

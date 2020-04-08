@@ -17,6 +17,7 @@
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
+#include <QCloseEvent>
 #include "cleaning_dialog.h"
 #include "ui_cleaning_dialog.h"
 
@@ -28,17 +29,20 @@ cleaning_dialog::cleaning_dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 }
-
 cleaning_dialog::~cleaning_dialog()
 {
     delete ui;
 }
+bool g_is_running {};
 void run_clean(const char* cmd)
 {
     system(cmd);
 }
 void cleaning_dialog::clean()
 {
+    // Begin — set UI element states
+    // -----------------------------
+    g_is_running = true;
     ui->clean_button->setEnabled(false);
     ui->button_box->setEnabled(false);
     ui->cleaning_progress_label->setEnabled(true);
@@ -102,6 +106,7 @@ void cleaning_dialog::clean()
 
     // Finalize — set UI element states
     // --------------------------------
+    g_is_running = false;
     ui->progress_bar->setValue(100);
     ui->cleaning_log->append("All done!");
     QMessageBox success_box;
@@ -122,5 +127,17 @@ void cleaning_dialog::clean_extended()
     while(bb_clean.isRunning())
     {
         QCoreApplication::processEvents();
+    }
+}
+void cleaning_dialog::closeEvent(QCloseEvent *event)
+{
+    if (g_is_running)
+    {
+        //ask_confirmation(); // TODO
+        event->ignore();
+    }
+    else
+    {
+        event->accept();
     }
 }

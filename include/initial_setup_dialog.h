@@ -30,6 +30,9 @@ class initial_setup_dialog : public QDialog
         explicit initial_setup_dialog(QWidget *parent = nullptr);
         ~initial_setup_dialog();
 
+    protected:
+        void closeEvent(QCloseEvent *event);
+
     private:
         Ui::initial_setup_dialog *ui;
 
