@@ -73,7 +73,9 @@
       </property>
       <property name="text">
        <string>Hello! Which of these programs are
-missing and you would like to install?</string>
+missing and you would like to install?
+
+</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

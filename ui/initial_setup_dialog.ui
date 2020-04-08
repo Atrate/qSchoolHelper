@@ -34,74 +34,31 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="button_box">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>450</y>
-     <width>91</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Close</set>
-   </property>
-  </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>191</y>
-     <width>631</width>
-     <height>241</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="setup_label">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Setup progress:    </string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QTextBrowser" name="setup_log">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QProgressBar" name="progress_bar">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>9</y>
-     <width>631</width>
-     <height>162</height>
+     <x>0</x>
+     <y>0</y>
+     <width>701</width>
+     <height>501</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
+    <property name="leftMargin">
+     <number>30</number>
+    </property>
+    <property name="topMargin">
+     <number>30</number>
+    </property>
+    <property name="rightMargin">
+     <number>30</number>
+    </property>
+    <property name="bottomMargin">
+     <number>30</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>30</number>
+    </property>
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="title_label">
       <property name="font">
@@ -112,43 +69,38 @@
        </font>
       </property>
       <property name="text">
-       <string>Initial Setup</string>
+       <string>Initial Setup
+</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
+    <item row="4" column="0" colspan="2">
+     <widget class="QTextBrowser" name="setup_log">
+      <property name="enabled">
+       <bool>false</bool>
       </property>
-      <property name="leftMargin">
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QProgressBar" name="progress_bar">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="value">
        <number>0</number>
       </property>
-      <item>
-       <widget class="QToolButton" name="start_button">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QCheckBox" name="install_check_box">
-      <property name="text">
-       <string>Install all needed software</string>
+    <item row="3" column="0">
+     <widget class="QLabel" name="setup_label">
+      <property name="enabled">
+       <bool>false</bool>
       </property>
-      <property name="checked">
-       <bool>true</bool>
+      <property name="text">
+       <string>Setup progress:    </string>
       </property>
      </widget>
     </item>
@@ -180,6 +132,42 @@
       </property>
       <property name="wordWrap">
        <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QDialogButtonBox" name="button_box">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QCheckBox" name="install_check_box">
+      <property name="text">
+       <string>Install all needed software</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QToolButton" name="start_button">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Start</string>
       </property>
      </widget>
     </item>
