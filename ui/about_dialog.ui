@@ -99,6 +99,9 @@
       <property name="text">
        <string>Source code: https://www.gitlab.com/Atrate/qSchoolHelper</string>
       </property>
+      <property name="textFormat">
+       <enum>Qt::MarkdownText</enum>
+      </property>
       <property name="openExternalLinks">
        <bool>true</bool>
       </property>
@@ -120,7 +123,10 @@
     <item row="4" column="1">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>Icon adapted from https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon</string>
+       <string>Application icon adapted from https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::MarkdownText</enum>
       </property>
       <property name="wordWrap">
        <bool>true</bool>

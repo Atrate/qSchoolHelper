@@ -64,6 +64,9 @@
     </property>
     <item row="3" column="0">
      <widget class="QCheckBox" name="libreoffice_check_box">
+      <property name="toolTip">
+       <string>LibreOffice is a FOSS (Free and Open Source) and cross-platform office suite for editing Open Document and Microsoft Office files</string>
+      </property>
       <property name="text">
        <string>LibreOffice
 (Document Manager)</string>
@@ -91,6 +94,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QCheckBox" name="vlc_check_box">
+      <property name="toolTip">
+       <string>VLC Media Player is a simple, fast and FOSS (Free and Open Source) audio and video player</string>
+      </property>
       <property name="text">
        <string>VLC Media Player
 (Video and Audio Player)</string>
@@ -114,6 +120,9 @@
         <kerning>false</kerning>
        </font>
       </property>
+      <property name="toolTip">
+       <string>PowerPoint Viewer is a stand-alone application used to display Microsoft Office PowerPoint presentations (.pptx)</string>
+      </property>
       <property name="text">
        <string>PowerPoint Viewer
 (Viewer for .pptx Presentations)</string>
@@ -135,6 +144,9 @@
     </item>
     <item row="1" column="0">
      <widget class="QCheckBox" name="firefox_check_box">
+      <property name="toolTip">
+       <string>Mozilla Firefox is a secure, fast and FOSS (Free and Open Source) web browser developed by Mozilla</string>
+      </property>
       <property name="text">
        <string>Firefox
 (Web browser)</string>
@@ -146,6 +158,9 @@
     </item>
     <item row="2" column="1">
      <widget class="QCheckBox" name="reader_check_box">
+      <property name="toolTip">
+       <string>Adobe Reader is a popular PDF viewer and editor made by Adobe</string>
+      </property>
       <property name="text">
        <string>Adobe Reader
 (PDF Viewer)</string>

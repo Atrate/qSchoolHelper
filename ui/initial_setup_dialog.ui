@@ -150,6 +150,9 @@
     </item>
     <item row="2" column="1">
      <widget class="QCheckBox" name="install_check_box">
+      <property name="toolTip">
+       <string>Installs all software specified in the &quot;Software Installer&quot; section</string>
+      </property>
       <property name="text">
        <string>Install all needed software</string>
       </property>

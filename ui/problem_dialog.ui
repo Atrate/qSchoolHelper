@@ -65,6 +65,9 @@
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>For problems relating to Internet connectivity or web browser issues</string>
+        </property>
         <property name="text">
          <string>  Web Browser/Internet</string>
         </property>
@@ -87,6 +90,9 @@
           <horstretch>0</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>For problems relating to sound output</string>
         </property>
         <property name="text">
          <string>  Speakers</string>
@@ -118,6 +124,9 @@
           <bold>false</bold>
          </font>
         </property>
+        <property name="toolTip">
+         <string>For problems relating to connectivity with the projector/TV</string>
+        </property>
         <property name="text">
          <string>  Projector/TV</string>
         </property>
@@ -140,6 +149,9 @@
           <horstretch>0</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>For problems relating to the display of presentations</string>
         </property>
         <property name="text">
          <string>  Presentations</string>

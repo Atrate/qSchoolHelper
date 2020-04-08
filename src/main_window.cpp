@@ -53,7 +53,7 @@ void main_window::window_setup()
         ui->software_button->setToolTip("Install missing software");
         ui->problem_button->setToolTip("Help with common problems");
         ui->clean_button->setToolTip("Clean junk and temporary files");
-        ui->help_button->setToolTip("");
+        ui->help_button->setToolTip("Open the application usage guide");
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip("Initial Setup has already been run on this computer. "
                                              "If you with to run it again, please select it from File -> Initial Setup.");
