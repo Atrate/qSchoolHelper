@@ -42,6 +42,33 @@ void run_install_bb(const char* bb_exe)
 {
     system(bb_exe);
 }
+void initial_setup_dialog::install_bb()
+{
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
+    {
+        fs::create_directory(temp_folder);
+    }
+    chdir(temp_folder.c_str());
+    std::string bb_exe = "BleachBit-3.2.0-setup.exe";
+    std::string bb_url = "https://www.bleachbit.org/download/file/t?file=BleachBit-3.2.0-setup.exe";
+    QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
+    while(bb_dl.isRunning())
+    {
+        QCoreApplication::processEvents();
+    }
+    if (bb_dl)
+    {
+        bb_exe.append("/S /allusers");
+        QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
+        while(bb_install.isRunning())
+        {
+            QCoreApplication::processEvents();
+        }
+        bb_install.~QFuture();
+    }
+    bb_dl.~QFuture();
+}
 void initial_setup_dialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states
@@ -80,38 +107,24 @@ void initial_setup_dialog::initial_setup()
     // More code here soon
     // -------------------
 
+    // Run install (all software)
+    // --------------------------
+    if(ui->install_check_box->isChecked())
+    {
+        install_dialog *id = new install_dialog();
+        id->install();
+        delete id;
+    }
+
+    // Download and install BleachBit
+    // ------------------------------
+    install_bb();
+
     // Run extended cleaner
     // --------------------
     cleaning_dialog *cl = new cleaning_dialog();
     cl->clean_extended();
     delete cl;
-
-    // Download and install BleachBit
-    // ------------------------------
-    std::string bb_exe = "BleachBit-3.2.0-setup.exe";
-    const char *temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
-    {
-        fs::create_directory(temp_folder);
-    }
-    chdir(temp_folder);
-    curl_dl("https://www.bleachbit.org/download/file/t?file=BleachBit-3.2.0-setup.exe", bb_exe.c_str());
-    bb_exe.append("/S /allusers");
-    QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
-    while(bb_install.isRunning())
-    {
-        QCoreApplication::processEvents();
-    }
-    bb_install.~QFuture();
-
-    // Run install (all software)
-    // --------------------------
-    if(ui->install_check_box->isChecked())
-    {
-      install_dialog *id = new install_dialog();
-      id->install();
-      delete id;
-    }
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------

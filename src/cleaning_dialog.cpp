@@ -18,6 +18,7 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
 #include "ui_cleaning_dialog.h"
 
@@ -55,12 +56,13 @@ void cleaning_dialog::clean()
 
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
-    for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
+    try
     {
-        if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
+        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
         {
-            try
+            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
             {
+
                 for (const auto &file : fs::directory_iterator(entry.path()/"Desktop"))
                 {
                     if (file.path().extension() == ".cmd" || file.path().extension() == ".bat")
@@ -69,14 +71,14 @@ void cleaning_dialog::clean()
                     }
                 }
             }
-            catch (const std::exception &e)
-            {
-                // Catch permission denied errors. We can't really do much about them, though,
-                // since the application is supposed to run as administrator anyways.
-            }
-
         }
     }
+    catch (const std::exception &e)
+    {
+        // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
+        // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
+    }
+
     // Uninstall unnecessary software (McAffee etc.)
     // ---------------------------------------------
 
@@ -91,13 +93,18 @@ void cleaning_dialog::clean()
                                 "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
                                 "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
                                 "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+    if (!fs::exists(bb_path))
+    {
+        initial_setup_dialog *is = new initial_setup_dialog();
+        is->install_bb();
+        delete is;
+    }
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
     {
         QCoreApplication::processEvents();
     }
     bb_clean.~QFuture();
-
 
     // Extended cleaning
     // -----------------
@@ -124,7 +131,7 @@ void cleaning_dialog::clean_extended()
     std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
     ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
     std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
-                    "system.memory_dump system.muicache system.prefetch system.updates";
+                                "system.memory_dump system.muicache system.prefetch system.updates";
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
     {

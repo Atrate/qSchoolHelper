@@ -148,7 +148,7 @@ void install_dialog::install()
         shortcut_array[i] = check_shortcut(download_array[i][2]);
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
-            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(),download_array[i][1].c_str());
+            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
             while(dl.isRunning())
             {
                 QCoreApplication::processEvents();
@@ -203,7 +203,7 @@ void install_dialog::install()
             {
                 QCoreApplication::processEvents();
             }
-            if(install)
+            if (install)
             {
                 install.~QFuture();
                 fs::remove(download_array[i][1]);

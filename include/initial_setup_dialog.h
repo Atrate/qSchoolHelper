@@ -21,6 +21,7 @@ namespace Ui
 {
     class initial_setup_dialog;
 }
+void run_install_bb(const char* bb_exe);
 
 class initial_setup_dialog : public QDialog
 {
@@ -29,6 +30,7 @@ class initial_setup_dialog : public QDialog
     public:
         explicit initial_setup_dialog(QWidget *parent = nullptr);
         ~initial_setup_dialog();
+        void install_bb();
 
     protected:
         void closeEvent(QCloseEvent *event);
