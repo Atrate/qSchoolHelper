@@ -6,9 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>605</width>
-    <height>485</height>
+    <width>600</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Cleaning</string>
@@ -20,7 +38,7 @@
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>430</y>
+     <y>450</y>
      <width>101</width>
      <height>32</height>
     </rect>
@@ -135,7 +153,7 @@
      <x>20</x>
      <y>100</y>
      <width>391</width>
-     <height>331</height>
+     <height>341</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
