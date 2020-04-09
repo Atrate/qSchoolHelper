@@ -83,6 +83,7 @@ void initial_setup_dialog::initial_setup()
     ui->progress_bar->setEnabled(true);
     ui->button_box->setEnabled(false);
     ui->progress_bar->setValue(0);
+    ui->setup_log->clear();
     ui->setup_log->append("Starting initial setup…\n——————————");
 
     // Disable ads

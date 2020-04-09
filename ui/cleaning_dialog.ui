@@ -184,7 +184,7 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/clean.png</normaloff>:/clean.png</iconset>
+          <normaloff>:/data/icons/clean.png</normaloff>:/data/icons/clean.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -210,8 +210,8 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>556</x>
-     <y>430</y>
+     <x>570</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -226,8 +226,8 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>488</x>
-     <y>430</y>
+     <x>518</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>

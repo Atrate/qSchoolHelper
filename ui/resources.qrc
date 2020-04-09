@@ -1,14 +1,19 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="icon.png">../data/icons/icon.png</file>
-        <file alias="clean.png">../data/icons/clean.png</file>
-        <file alias="install.png">../data/icons/install.png</file>
-        <file alias="error.png">../data/icons/error.png</file>
-        <file alias="go.png">../data/icons/go.png</file>
-        <file alias="firefox.png">../data/icons/firefox.png</file>
-        <file alias="speaker.png">../data/icons/speaker.png</file>
-        <file alias="projector.png">../data/icons/projector.png</file>
-        <file alias="presentation.png">../data/icons/presentation.png</file>
-        <file alias="info.png">../data/icons/info.png</file>
+        <file>../data/images/problem_screenshots/bad_url.png</file>
+        <file>../data/images/problem_screenshots/display.png</file>
+        <file>../data/images/problem_screenshots/presentations.png</file>
+        <file>../data/images/problem_screenshots/speakers.png</file>
+        <file>../data/images/problem_screenshots/volume.png</file>
+        <file>../data/icons/error.png</file>
+        <file>../data/icons/clean.png</file>
+        <file>../data/icons/firefox.png</file>
+        <file>../data/icons/go.png</file>
+        <file>../data/icons/icon.png</file>
+        <file>../data/icons/info.png</file>
+        <file>../data/icons/install.png</file>
+        <file>../data/icons/presentation.png</file>
+        <file>../data/icons/projector.png</file>
+        <file>../data/icons/speaker.png</file>
     </qresource>
 </RCC>

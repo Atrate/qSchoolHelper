@@ -69,9 +69,8 @@
         <string>Install software</string>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>:/install.png</normalon>
-        </iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/data/icons/install.png</normaloff>:/data/icons/install.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -122,7 +121,7 @@ What would you like to do today?</string>
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/info.png</normaloff>:/info.png</iconset>
+         <normaloff>:/data/icons/info.png</normaloff>:/data/icons/info.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -150,9 +149,8 @@ What would you like to do today?</string>
         <string>Initial Setup</string>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>:/go.png</normalon>
-        </iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/data/icons/go.png</normaloff>:/data/icons/go.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -177,9 +175,8 @@ What would you like to do today?</string>
         <string>Clean-up</string>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>:/clean.png</normalon>
-        </iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/data/icons/clean.png</normaloff>:/data/icons/clean.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -201,9 +198,8 @@ What would you like to do today?</string>
         <string>I have a problem</string>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>:/error.png</normalon>
-        </iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/data/icons/error.png</normaloff>:/data/icons/error.png</iconset>
        </property>
        <property name="iconSize">
         <size>

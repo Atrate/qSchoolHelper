@@ -73,7 +73,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/firefox.png</normaloff>:/firefox.png</iconset>
+          <normaloff>:/data/icons/firefox.png</normaloff>:/data/icons/firefox.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -99,7 +99,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/speaker.png</normaloff>:/speaker.png</iconset>
+          <normaloff>:/data/icons/speaker.png</normaloff>:/data/icons/speaker.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -132,7 +132,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/projector.png</normaloff>:/projector.png</iconset>
+          <normaloff>:/data/icons/projector.png</normaloff>:/data/icons/projector.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -158,7 +158,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/presentation.png</normaloff>:/presentation.png</iconset>
+          <normaloff>:/data/icons/presentation.png</normaloff>:/data/icons/presentation.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -316,32 +316,6 @@ b) The computer is connected to the appropriate WiFi network.</string>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_10">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>1</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Image 1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_12">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>1</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Image 2</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1" rowspan="2">
             <widget class="QLabel" name="label_11">
              <property name="sizePolicy">
@@ -354,6 +328,9 @@ b) The computer is connected to the appropriate WiFi network.</string>
               <font>
                <pointsize>14</pointsize>
               </font>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="text">
               <string>Please also make sure that:
@@ -370,6 +347,56 @@ b) The computer is connected to the appropriate WiFi network.</string>
              </property>
              <property name="margin">
               <number>5</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_12">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>1</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Image 2</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>1</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>350</width>
+               <height>210</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/bad_url.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -523,8 +550,20 @@ b) The computer is connected to the appropriate WiFi network.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
-              <string>Image 2</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/display.png</pixmap>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -546,7 +585,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
 
 1) The &quot;source&quot; on the projector/TV is set to VGA or HDMI;
 
-2) The screen mirroring mode is either set to &quot;mirror&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</string>
+2) The screen mirroring mode is either set to &quot;duplicate&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -699,7 +738,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
             <x>0</x>
             <y>0</y>
             <width>691</width>
-            <height>371</height>
+            <height>406</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_11">
@@ -711,8 +750,29 @@ b) The computer is connected to the appropriate WiFi network.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
-              <string>Image 1</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/volume.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -724,8 +784,20 @@ b) The computer is connected to the appropriate WiFi network.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
-              <string>Image 2</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/speakers.png</pixmap>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -880,7 +952,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_13">
-           <item row="0" column="0">
+           <item row="1" column="0">
             <widget class="QLabel" name="label_23">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -888,25 +960,27 @@ b) The computer is connected to the appropriate WiFi network.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
              <property name="text">
-              <string>Image 1</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/presentations.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_24">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>1</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Image 1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1" rowspan="2">
+           <item row="0" column="0">
             <widget class="QLabel" name="label_22">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
