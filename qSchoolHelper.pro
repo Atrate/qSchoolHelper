@@ -56,7 +56,7 @@ FORMS += \
 TRANSLATIONS += \
     data/translations/qSchoolHelper_pl_PL.ts
 
-RC_FILE = data/icons/icon.ico
+RC_ICONS = data/icons/icon.ico
 RESOURCES = ui/resources.qrc
 
 QMAKE_LFLAGS += -lcurl
