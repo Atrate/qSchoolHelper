@@ -14,8 +14,8 @@ This project has been designed and configured for use on Windows 10 computers in
 ## Dependencies
 
 - Qt 5.2 or higher
-- OpenSSL (libcrypto)
-- Curl (libcurl) (included in ./lib/)
+- OpenSSL (libcrypto) (included in ./lib/dll/)
+- cURL (libcurl) (included in ./lib/)
 - MinGW or other >= C++17 compiler
 
 ## Third-party components used
