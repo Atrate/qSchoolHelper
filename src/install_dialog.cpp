@@ -148,28 +148,25 @@ void install_dialog::install()
         shortcut_array[i] = check_shortcut(download_array[i][2]);
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
+            fs::remove(download_array[i][1]);
             QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
             while(dl.isRunning())
             {
                 QCoreApplication::processEvents();
             }
-            if (dl)
+            dl.~QFuture();
+            if (!(fs::file_size(download_array[i][1]) > 1024))
             {
-                dl.~QFuture();
-            }
-            else
-            {
-                dl.~QFuture();
                 g_install_running = false;
                 QMessageBox dl_failure_box;
                 dl_failure_box.setText("The download failed! Please check your Internet connectivity!");
                 dl_failure_box.setModal(true);
                 dl_failure_box.exec();
+                ui->progress_bar->setValue(0);
                 ui->button_box->setEnabled(true);
                 ui->install_button->setEnabled(true);
                 return;
             }
-
             ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -203,20 +200,22 @@ void install_dialog::install()
             {
                 QCoreApplication::processEvents();
             }
-            if (install)
+            fs::remove(download_array[i][1]);
+            if (!install)
             {
                 install.~QFuture();
-                fs::remove(download_array[i][1]);
-            }
-            else
-            {
-                install.~QFuture();
+                g_install_running = false;
                 QMessageBox install_failure_box;
                 install_failure_box.setText("The installation failed! Please try installing the program manually!");
                 install_failure_box.setModal(true);
                 install_failure_box.exec();
+                ui->progress_bar->setValue(0);
+                ui->button_box->setEnabled(true);
+                ui->install_button->setEnabled(true);
                 return;
             }
+            install.~QFuture();
+
         }
         ui->progress_bar->setValue((i+6)*10);
     }

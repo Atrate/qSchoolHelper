@@ -57,7 +57,8 @@ void initial_setup_dialog::install_bb()
     {
         QCoreApplication::processEvents();
     }
-    if (bb_dl)
+    bb_dl.~QFuture();
+    if (fs::file_size(bb_exe) > 1024)
     {
         bb_exe.append("/S /allusers");
         QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
@@ -67,7 +68,6 @@ void initial_setup_dialog::install_bb()
         }
         bb_install.~QFuture();
     }
-    bb_dl.~QFuture();
 }
 void initial_setup_dialog::initial_setup()
 {

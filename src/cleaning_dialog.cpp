@@ -86,19 +86,21 @@ void cleaning_dialog::clean()
     // --------------------------------------
     ui->progress_bar->setValue(10);
     ui->cleaning_log->append("Cleaning temporary files and caches…");
-    std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
-    std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
-                                "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
-                                "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
-                                "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
-                                "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
-                                "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
         initial_setup_dialog *is = new initial_setup_dialog();
         is->install_bb();
         delete is;
     }
+    bb_path = "\"" + bb_path + "\"";
+    std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+                                "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
+                                "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
+                                "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
+                                "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
+                                "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
     {

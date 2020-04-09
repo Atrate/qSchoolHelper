@@ -12,6 +12,7 @@
  *
  */
 
+#include <QApplication>
 #include "download.h"
 
 // Parts of the following two functions have been taken from https://curl.haxx.se/libcurl/c/url2file.html, in accordance with the license.
@@ -46,6 +47,13 @@ int curl_dl(const char *url, const char *pagefilename)
 
     /* send all data to this function  */
     curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
+
+    /* set certificate bundle path */
+    std::string bin_path = qApp->applicationDirPath().toStdString();
+    bin_path.append("/data/curl-ca-bundle.crt");
+
+    curl_easy_setopt(curl_handle, CURLOPT_CAINFO, bin_path.c_str());
+
 
     /* open the file */
     pagefile = fopen(pagefilename, "wb");

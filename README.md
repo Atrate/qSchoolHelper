@@ -23,6 +23,17 @@ This project has been designed and configured for use on Windows 10 computers in
 - cURL
 - BleachBit
 
+## Building from source
+
+- Install Qt 5 with a compatible >= C++ 17 compiler (tested on MinGW)
+- Clone the repository
+- Open the .pro file in Qt Creator and configure the project
+- Compile the application
+- Use windeployqt to copy the required Qt libraries
+- Copy the OpenSSL and cURL libraries to the executable's directory
+- Copy the translation files into exe_dir/data/translations/
+- Copy the certificate bundle into exe_dir/data/
+
 ## License
 This project is licensed under the [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html).
 
