@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>qSchoolCleaner</string>
+   <string>qSchoolHelper</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -218,7 +218,7 @@ What would you like to do today?</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuas">
