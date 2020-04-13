@@ -78,7 +78,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>qSchoolHelper is a Qt project designed to help non-tech-inclined peopledeal with simple problems on a Windows computer without the need to call support.</string>
+       <string>qSchoolHelper is a Qt project designed to help non-tech-inclined people deal with simple problems on a Windows computer without the need to call support.</string>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
