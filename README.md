@@ -29,9 +29,10 @@ This project has been designed and configured for use on Windows 10 computers in
 - Clone the repository
 - Open the .pro file in Qt Creator and configure the project
 - Compile the application
+- Generate the translation files using `lrelease-pro qSchoolHelper.pro`
+- Copy the translation files into exe_dir/data/translations/
 - Use windeployqt to copy the required Qt libraries
 - Copy the OpenSSL and cURL libraries to the executable's directory
-- Copy the translation files into exe_dir/data/translations/
 - Copy the certificate bundle into exe_dir/data/
 
 ## License
