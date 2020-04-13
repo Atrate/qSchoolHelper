@@ -84,15 +84,17 @@ void cleaning_dialog::clean()
 
     // Run BleachBit to clean temporary files
     // --------------------------------------
-    ui->progress_bar->setValue(10);
-    ui->cleaning_log->append("Cleaning temporary files and caches…");
+    ui->progress_bar->setValue(30);
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
+        ui->cleaning_log->append("Downloading BleachBit (cleaning engine)…");
         initial_setup_dialog *is = new initial_setup_dialog();
         is->install_bb();
         delete is;
     }
+    ui->progress_bar->setValue(40);
+    ui->cleaning_log->append("Cleaning temporary files and caches…");
     bb_path = "\"" + bb_path + "\"";
     std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                                 "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
@@ -115,6 +117,14 @@ void cleaning_dialog::clean()
         clean_extended();
     }
 
+    // Clan qSH tmp folder
+    // -------------------
+    ui->progress_bar->setValue(80);
+    ui->cleaning_log->append("Cleaning qSchoolHelper's temporary folder");
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    fs::remove_all(temp_folder);
+
+
     // Finalize — set UI element states
     // --------------------------------
     g_cleaning_running = false;
@@ -131,6 +141,7 @@ void cleaning_dialog::clean()
 void cleaning_dialog::clean_extended()
 {
     std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
+    ui->progress_bar->setValue(60);
     ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
     std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
                                 "system.memory_dump system.muicache system.prefetch system.updates";

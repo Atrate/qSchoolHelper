@@ -51,7 +51,8 @@ void initial_setup_dialog::install_bb()
     }
     chdir(temp_folder.c_str());
     std::string bb_exe = "BleachBit-3.2.0-setup.exe";
-    std::string bb_url = "https://www.bleachbit.org/download/file/t?file=BleachBit-3.2.0-setup.exe";
+    std::string bb_url = "https://download.bleachbit.org/BleachBit-3.2.0-setup.exe";
+    fs::remove(bb_exe);
     QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
     while(bb_dl.isRunning())
     {
@@ -67,6 +68,7 @@ void initial_setup_dialog::install_bb()
             QCoreApplication::processEvents();
         }
         bb_install.~QFuture();
+        fs::remove(bb_exe);
     }
 }
 void initial_setup_dialog::initial_setup()
@@ -119,8 +121,11 @@ void initial_setup_dialog::initial_setup()
 
     // Download and install BleachBit
     // ------------------------------
-    install_bb();
-
+    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    if (!fs::exists(bb_path))
+    {
+        install_bb();
+    }
     // Run extended cleaner
     // --------------------
     cleaning_dialog *cl = new cleaning_dialog();
