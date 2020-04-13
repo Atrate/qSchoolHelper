@@ -117,8 +117,8 @@ void cleaning_dialog::clean()
         clean_extended();
     }
 
-    // Clan qSH tmp folder
-    // -------------------
+    // Clean qSH tmp folder
+    // --------------------
     ui->progress_bar->setValue(80);
     ui->cleaning_log->append("Cleaning qSchoolHelper's temporary folder");
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
