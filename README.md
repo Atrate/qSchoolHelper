@@ -32,7 +32,7 @@ This project has been designed and configured for use on Windows 10 computers in
 - Generate the translation files using `lrelease-pro qSchoolHelper.pro`
 - Copy the translation files into exe_dir/data/translations/
 - Use windeployqt to copy the required Qt libraries
-- Copy the OpenSSL and cURL libraries to the executable's directory
+- Copy all the libraries from lib/dll to the executable's directory
 - Copy the certificate bundle into exe_dir/data/
 
 ## License
