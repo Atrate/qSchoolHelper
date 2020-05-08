@@ -131,9 +131,9 @@ void install_dialog::install()
     }
     if (ui->viewer_check_box->isChecked())
     {
-        download_array[4][0]=std::string("");
+        download_array[4][0]=std::string("https://gitlab.com/Atrate/powerpoint-viewer/-/blob/803209ecc2e0f773f6fe15410ad7e1bc1a51c0c7/PowerPointViewer.exe");
         download_array[4][1]=std::string("PowerPointViewer.exe");
-        download_array[4][2]=std::string("");
+        download_array[4][2]=std::string("C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe");
     }
     else
     {
@@ -155,7 +155,7 @@ void install_dialog::install()
                 QCoreApplication::processEvents();
             }
             dl.~QFuture();
-            if (!(fs::file_size(download_array[i][1]) > 1024))
+            if (!(fs::file_size(download_array[i][1]) > 2048))
             {
                 g_install_running = false;
                 QMessageBox dl_failure_box;
