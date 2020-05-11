@@ -20,9 +20,9 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include "download.h"
 #include "install_dialog.h"
 #include "ui_install_dialog.h"
-#include "download.h"
 
 namespace fs = std::filesystem;
 

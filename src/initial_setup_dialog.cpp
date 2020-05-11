@@ -12,17 +12,17 @@
  *
  */
 
-#include <fstream>
 #include <filesystem>
+#include <fstream>
 #include <unistd.h>
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QCloseEvent>
-#include "initial_setup_dialog.h"
-#include "ui_initial_setup_dialog.h"
-#include "download.h"
-#include "install_dialog.h"
 #include "cleaning_dialog.h"
+#include "download.h"
+#include "initial_setup_dialog.h"
+#include "install_dialog.h"
+#include "ui_initial_setup_dialog.h"
 
 namespace fs = std::filesystem;
 

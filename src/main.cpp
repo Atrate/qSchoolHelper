@@ -13,8 +13,8 @@
  */
 
 #include <QApplication>
-#include <QTranslator>
 #include <QInputDialog>
+#include <QTranslator>
 #include "main_window.h"
 
 int main(int argc, char *argv[])

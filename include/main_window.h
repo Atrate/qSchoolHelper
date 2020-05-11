@@ -16,12 +16,12 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
-#include "problem_dialog.h"
 #include "about_dialog.h"
-#include "install_dialog.h"
-#include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
 #include "help_dialog.h"
+#include "initial_setup_dialog.h"
+#include "install_dialog.h"
+#include "problem_dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui

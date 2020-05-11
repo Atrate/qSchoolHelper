@@ -18,8 +18,8 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
+#include "initial_setup_dialog.h"
 #include "ui_cleaning_dialog.h"
 
 namespace fs = std::filesystem;

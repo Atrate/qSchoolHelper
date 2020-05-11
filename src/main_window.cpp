@@ -11,17 +11,17 @@
  * GNU General Public License for more details.
  *
  */
+
 #include <fstream>
 #include <filesystem>
-
-#include "main_window.h"
-#include "ui_main_window.h"
 #include "about_dialog.h"
-#include "problem_dialog.h"
-#include "install_dialog.h"
-#include "initial_setup_dialog.h"
 #include "cleaning_dialog.h"
 #include "help_dialog.h"
+#include "initial_setup_dialog.h"
+#include "install_dialog.h"
+#include "main_window.h"
+#include "problem_dialog.h"
+#include "ui_main_window.h"
 
 namespace fs = std::filesystem;
 
