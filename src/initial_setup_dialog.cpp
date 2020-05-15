@@ -90,7 +90,7 @@ void initial_setup_dialog::initial_setup()
 
     // Disable ads
     // -----------
-    system("RED ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
     ui->setup_log->append("Disabling Windows Explorer ads");
 
     // Disable telemetry
@@ -102,7 +102,7 @@ void initial_setup_dialog::initial_setup()
 
     // Disable search indexing
     // -----------------------
-    ui->setup_log->append("Disabling search indexing...\n");
+    ui->setup_log->append("Disabling search indexing…\n");
     system("net stop WSearch");
     system("sc config WSearch start= disabled");
 
@@ -114,6 +114,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------------
     if(ui->install_check_box->isChecked())
     {
+        ui->setup_log->append("Installing required software. This might (will) take a while…");
         install_dialog *id = new install_dialog();
         id->install();
         delete id;
@@ -124,13 +125,18 @@ void initial_setup_dialog::initial_setup()
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
+        ui->setup_log->append("Installing BleachBit (utility used for computer cleaning)…");
         install_bb();
     }
     // Run extended cleaner
     // --------------------
-    cleaning_dialog *cl = new cleaning_dialog();
-    cl->clean_extended();
-    delete cl;
+    if (fs::exists(bb_path))
+    {
+        ui->setup_log->append("Cleaning temporary files…");
+        cleaning_dialog *cl = new cleaning_dialog();
+        cl->clean_extended();
+        delete cl;
+    }
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
