@@ -86,23 +86,23 @@ void initial_setup_dialog::initial_setup()
     ui->button_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
-    ui->setup_log->append("Starting initial setup…\n——————————");
+    ui->setup_log->append(tr("Starting initial setup…\n——————————"));
 
     // Disable ads
     // -----------
     system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
-    ui->setup_log->append("Disabling Windows Explorer ads");
+    ui->setup_log->append(tr("Disabling Windows Explorer ads"));
 
     // Disable telemetry
     // -----------------
-    ui->setup_log->append("Disabling telemetry service…");
+    ui->setup_log->append(tr("Disabling telemetry service…"));
     system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
     system("net stop DiagTrack");
     system("sc config DiagTrack start= disabled");
 
     // Disable search indexing
     // -----------------------
-    ui->setup_log->append("Disabling search indexing…\n");
+    ui->setup_log->append(tr("Disabling search indexing…\n"));
     system("net stop WSearch");
     system("sc config WSearch start= disabled");
 
@@ -114,7 +114,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------------
     if(ui->install_check_box->isChecked())
     {
-        ui->setup_log->append("Installing required software. This might (will) take a while…");
+        ui->setup_log->append(tr("Installing required software. This might (will) take a while…"));
         install_dialog *id = new install_dialog();
         id->install();
         delete id;
@@ -125,14 +125,14 @@ void initial_setup_dialog::initial_setup()
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
-        ui->setup_log->append("Installing BleachBit (utility used for computer cleaning)…");
+        ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…"));
         install_bb();
     }
     // Run extended cleaner
     // --------------------
     if (fs::exists(bb_path))
     {
-        ui->setup_log->append("Cleaning temporary files…");
+        ui->setup_log->append(tr("Cleaning temporary files…"));
         cleaning_dialog *cl = new cleaning_dialog();
         cl->clean_extended();
         delete cl;
@@ -147,7 +147,7 @@ void initial_setup_dialog::initial_setup()
 
     g_setup_running = false;
     ui->progress_bar->setValue(100);
-    ui->setup_log->append("All done!");
+    ui->setup_log->append(tr("All done!"));
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 }

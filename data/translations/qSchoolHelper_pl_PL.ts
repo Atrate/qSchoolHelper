@@ -91,6 +91,47 @@ Czyszczenie &quot;proste&quot; jest szybsze, aczkolwiek mniej dokładnie niż &q
         <source>Cleaning progress:</source>
         <translation>Postęp czyszczenia:</translation>
     </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="54"/>
+        <source>Starting cleaner…
+—————————————————</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="55"/>
+        <source>Removing .bat and .cmd files from the desktop…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="91"/>
+        <source>Downloading BleachBit (cleaning engine)…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="97"/>
+        <source>Cleaning temporary files and caches…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="123"/>
+        <source>Cleaning qSchoolHelper&apos;s temporary folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="132"/>
+        <source>All done!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="134"/>
+        <source>The cleaning operation completed succesfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cleaning_dialog.cpp" line="145"/>
+        <source>Cleaning temporary files and caches (extended)…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>help_dialog</name>
@@ -188,6 +229,48 @@ p, li { white-space: pre-wrap; }
         <source>The &quot;initial setup&quot; function is used for automatically executing tasks such as installing software or cleaning and disabling unnecessary services on newly installed systems. This can also be used on very unclean systems to quickly clean them and install required software.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="89"/>
+        <source>Starting initial setup…
+——————————</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="94"/>
+        <source>Disabling Windows Explorer ads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="98"/>
+        <source>Disabling telemetry service…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="105"/>
+        <source>Disabling search indexing…
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="117"/>
+        <source>Installing required software. This might (will) take a while…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="128"/>
+        <source>Installing BleachBit (utility used for computer cleaning)…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="135"/>
+        <source>Cleaning temporary files…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/initial_setup_dialog.cpp" line="150"/>
+        <source>All done!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>install_dialog</name>
@@ -268,6 +351,26 @@ i mają zostać zainstalowane?</translation>
         <location filename="../../ui/install_dialog.ui" line="117"/>
         <source>Install</source>
         <translation>Instaluj</translation>
+    </message>
+    <message>
+        <location filename="../../src/install_dialog.cpp" line="162"/>
+        <source>The download failed! Please check your Internet connectivity!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/install_dialog.cpp" line="209"/>
+        <source>The installation failed! Please try installing the program manually!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/install_dialog.cpp" line="227"/>
+        <source>The installation completed succesfully!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/install_dialog.cpp" line="241"/>
+        <source>Please select at least one program to be installed!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

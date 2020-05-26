@@ -51,8 +51,8 @@ void cleaning_dialog::clean()
     ui->progress_bar->setValue(0);
     ui->cleaning_log->setEnabled(true);
     ui->cleaning_log->clear();
-    ui->cleaning_log->append("Starting cleaner…\n—————————————————");
-    ui->cleaning_log->append("Removing .bat and .cmd files from the desktop…");
+    ui->cleaning_log->append(tr("Starting cleaner…\n—————————————————"));
+    ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
 
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
@@ -88,13 +88,13 @@ void cleaning_dialog::clean()
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
-        ui->cleaning_log->append("Downloading BleachBit (cleaning engine)…");
+        ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
         initial_setup_dialog *is = new initial_setup_dialog();
         is->install_bb();
         delete is;
     }
     ui->progress_bar->setValue(40);
-    ui->cleaning_log->append("Cleaning temporary files and caches…");
+    ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
     bb_path = "\"" + bb_path + "\"";
     std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                                 "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
@@ -120,7 +120,7 @@ void cleaning_dialog::clean()
     // Clean qSH tmp folder
     // --------------------
     ui->progress_bar->setValue(80);
-    ui->cleaning_log->append("Cleaning qSchoolHelper's temporary folder");
+    ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     fs::remove_all(temp_folder);
 
@@ -129,9 +129,9 @@ void cleaning_dialog::clean()
     // --------------------------------
     g_cleaning_running = false;
     ui->progress_bar->setValue(100);
-    ui->cleaning_log->append("All done!");
+    ui->cleaning_log->append(tr("All done!"));
     QMessageBox success_box;
-    success_box.setText("The cleaning operation completed succesfully!");
+    success_box.setText(tr("The cleaning operation completed succesfully!"));
     success_box.setModal(true);
     success_box.exec();
     ui->clean_button->setEnabled(true);
@@ -142,7 +142,7 @@ void cleaning_dialog::clean_extended()
 {
     std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
     ui->progress_bar->setValue(60);
-    ui->cleaning_log->append("Cleaning temporary files and caches (extended)…");
+    ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
     std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
                                 "system.memory_dump system.muicache system.prefetch system.updates";
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());

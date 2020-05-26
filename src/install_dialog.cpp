@@ -159,7 +159,7 @@ void install_dialog::install()
             {
                 g_install_running = false;
                 QMessageBox dl_failure_box;
-                dl_failure_box.setText("The download failed! Please check your Internet connectivity!");
+                dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
                 dl_failure_box.setModal(true);
                 dl_failure_box.exec();
                 ui->progress_bar->setValue(0);
@@ -206,7 +206,7 @@ void install_dialog::install()
                 install.~QFuture();
                 g_install_running = false;
                 QMessageBox install_failure_box;
-                install_failure_box.setText("The installation failed! Please try installing the program manually!");
+                install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
                 install_failure_box.setModal(true);
                 install_failure_box.exec();
                 ui->progress_bar->setValue(0);
@@ -224,7 +224,7 @@ void install_dialog::install()
     // ---------------------------------------------
     g_install_running = false;
     QMessageBox success_box;
-    success_box.setText("The installation completed succesfully!");
+    success_box.setText(tr("The installation completed succesfully!"));
     success_box.setModal(true);
     success_box.exec();
     ui->button_box->setEnabled(true);
@@ -238,7 +238,7 @@ void install_dialog::on_install_button_clicked()
           || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
     {
         QMessageBox no_program_selected_box;
-        no_program_selected_box.setText("Please select at least one program to be installed!");
+        no_program_selected_box.setText(tr("Please select at least one program to be installed!"));
         no_program_selected_box.setModal(true);
         no_program_selected_box.exec();
     }
