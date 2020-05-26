@@ -37,6 +37,11 @@
         <source>Source code: https://www.gitlab.com/Atrate/qSchoolHelper</source>
         <translation>Kod źródłowy: https://www.gitlab.com/Atrate/qSchoolHelper</translation>
     </message>
+    <message>
+        <location filename="../../src/about_dialog.cpp" line="23"/>
+        <source> version v</source>
+        <translation> wersja v</translation>
+    </message>
 </context>
 <context>
     <name>cleaning_dialog</name>
@@ -51,7 +56,9 @@
 
 The &quot;simple&quot; cleaning type takes less time, but is less accurate than &quot;extended&quot;. 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>To narzędzie pomoże Ci wyczyścić Twój system operacyjny i rozwiąże wszelkie problemy, które mogą się pojawić z powodu braku regularnego czyszczenia.
+
+Czyszczenie &quot;proste&quot; jest szybsze, aczkolwiek mniej dokładnie niż &quot;rozszerzone&quot;.</translation>
     </message>
     <message>
         <location filename="../../ui/cleaning_dialog.ui" line="126"/>
@@ -140,7 +147,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../ui/help_dialog.ui" line="81"/>
         <source>Help and user guide</source>
-        <translation type="unfinished">Pomoc</translation>
+        <translation>Pomoc i instrukcja użytkownika</translation>
     </message>
 </context>
 <context>
@@ -148,13 +155,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="32"/>
         <source>Initial Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja wstępna</translation>
     </message>
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="72"/>
         <source>Initial Setup
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja wstępna</translation>
     </message>
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="103"/>
@@ -174,7 +181,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="157"/>
         <source>Install all needed software</source>
-        <translation type="unfinished"></translation>
+        <translation>Zainstaluj potrzebne programy</translation>
     </message>
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="128"/>
@@ -273,7 +280,7 @@ i mają zostać zainstalowane?</translation>
     <message>
         <location filename="../../ui/main_window.ui" line="149"/>
         <source>Initial Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja wstępna</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="198"/>
@@ -305,7 +312,7 @@ Z czym potrzebujesz pomocy?</translation>
     <message>
         <location filename="../../ui/main_window.ui" line="226"/>
         <source>Fi&amp;le</source>
-        <translation>Plik</translation>
+        <translation>&amp;Plik</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="234"/>
@@ -315,22 +322,52 @@ Z czym potrzebujesz pomocy?</translation>
     <message>
         <location filename="../../ui/main_window.ui" line="244"/>
         <source>&amp;Exit</source>
-        <translation>Wyjdź</translation>
+        <translation>&amp;Wyjdź</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="249"/>
         <source>&amp;Initial Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konfiguracja wstępna</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="254"/>
         <source>&amp;Open help</source>
-        <translation>Otwórz pomoc</translation>
+        <translation>&amp;Otwórz pomoc</translation>
     </message>
     <message>
         <location filename="../../ui/main_window.ui" line="259"/>
         <source>&amp;About</source>
-        <translation>O programie</translation>
+        <translation>O &amp;programie</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="53"/>
+        <source>Install missing software</source>
+        <translation>Zainstaluj brakujące programy</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="54"/>
+        <source>Help with common problems</source>
+        <translation>Pomóż z częstymi problemami</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="55"/>
+        <source>Clean junk and temporary files</source>
+        <translation>Wyczyść śmieci oraz pliki tymczasowe</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="56"/>
+        <source>Open the application usage guide</source>
+        <translation>Otwórz instrukcję użytkowania aplikacji</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="58"/>
+        <source>Initial Setup has already been run on this computer. If you with to run it again, please select it from File -&gt; Initial Setup.</source>
+        <translation>Konfiguracja wstępna została już uruchomiona na tym komputerze. Jeśli chcesz uruchomić ją ponownie, wybierz ją z Plik -&gt; Konfiguracja wstępna.</translation>
+    </message>
+    <message>
+        <location filename="../../src/main_window.cpp" line="63"/>
+        <source>Please run Initial Setup first!</source>
+        <translation>Proszę najpierw uruchomić Konfigurację wstępną</translation>
     </message>
 </context>
 <context>
@@ -343,7 +380,7 @@ Z czym potrzebujesz pomocy?</translation>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="69"/>
         <source>For problems relating to Internet connectivity or web browser issues</source>
-        <translation type="unfinished"></translation>
+        <translation>Dla problemów związanych z połączeniem z Internetem bądź przeglądarką</translation>
     </message>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="72"/>

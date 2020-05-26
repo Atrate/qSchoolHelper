@@ -50,17 +50,17 @@ void main_window::window_setup()
 
     if (fs::exists(initial_setup_done))
     {
-        ui->software_button->setToolTip("Install missing software");
-        ui->problem_button->setToolTip("Help with common problems");
-        ui->clean_button->setToolTip("Clean junk and temporary files");
-        ui->help_button->setToolTip("Open the application usage guide");
+        ui->software_button->setToolTip(tr("Install missing software"));
+        ui->problem_button->setToolTip(tr("Help with common problems"));
+        ui->clean_button->setToolTip(tr("Clean junk and temporary files"));
+        ui->help_button->setToolTip(tr("Open the application usage guide"));
         ui->initial_setup_button->setEnabled(false);
-        ui->initial_setup_button->setToolTip("Initial Setup has already been run on this computer. "
-                                             "If you with to run it again, please select it from File -> Initial Setup.");
+        ui->initial_setup_button->setToolTip(tr("Initial Setup has already been run on this computer. "
+                                             "If you with to run it again, please select it from File -> Initial Setup."));
     }
     else
     {
-        QString disabled_tooltip = "Please run Initial Setup first!";
+        QString disabled_tooltip = tr("Please run Initial Setup first!");
         ui->problem_button->setEnabled(false);
         ui->clean_button->setEnabled(false);
         ui->software_button->setEnabled(false);
