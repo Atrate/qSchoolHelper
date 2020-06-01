@@ -92,8 +92,8 @@ void install_dialog::install()
     std::string download_array[DL_ARRAY_SIZE][4];
     if (ui->firefox_check_box->isChecked())
     {
-        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/74.0/win64/en-US/Firefox%20Setup%2074.0.msi");
-        download_array[0][1]=std::string("Firefox_Setup_74.0.msi");
+        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/77.0/win64/en-US/Firefox%20Setup%2077.0.msi");
+        download_array[0][1]=std::string("Firefox_Setup_77.0.msi");
         download_array[0][2]=std::string("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
     }
     else
@@ -112,8 +112,8 @@ void install_dialog::install()
     }
     if (ui->libreoffice_check_box->isChecked())
     {
-        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/6.4.2/win/x86_64/LibreOffice_6.4.2_Win_x64.msi");
-        download_array[2][1]=std::string("LibreOffice_6.4.2_Win_x64.msi");
+        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/6.4.4/win/x86_64/LibreOffice_6.4.4_Win_x64.msi");
+        download_array[2][1]=std::string("LibreOffice_6.4.4_Win_x64.msi");
         download_array[2][2]=std::string("");
     }
     else
@@ -132,7 +132,7 @@ void install_dialog::install()
     }
     if (ui->viewer_check_box->isChecked())
     {
-        download_array[4][0]=std::string("https://gitlab.com/Atrate/powerpoint-viewer/-/blob/803209ecc2e0f773f6fe15410ad7e1bc1a51c0c7/PowerPointViewer.exe");
+        download_array[4][0]=std::string("https://gitlab.com/Atrate/powerpoint-viewer/-/raw/803209ecc2e0f773f6fe15410ad7e1bc1a51c0c7/PowerPointViewer.exe?inline=false");
         download_array[4][1]=std::string("PowerPointViewer.exe");
         download_array[4][2]=std::string("C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe");
     }
