@@ -28,7 +28,7 @@ class initial_setup_dialog : public QDialog
     public:
         explicit initial_setup_dialog(QWidget *parent = nullptr);
         ~initial_setup_dialog();
-        void install_bb();
+        static void install_bb();
 
     protected:
         void closeEvent(QCloseEvent *event);

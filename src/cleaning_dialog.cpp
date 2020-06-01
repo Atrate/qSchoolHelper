@@ -89,9 +89,7 @@ void cleaning_dialog::clean()
     if (!fs::exists(bb_path))
     {
         ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
-        initial_setup_dialog *is = new initial_setup_dialog();
-        is->install_bb();
-        delete is;
+        initial_setup_dialog::install_bb();
     }
     ui->progress_bar->setValue(40);
     ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
