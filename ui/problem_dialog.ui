@@ -499,7 +499,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
 
 1) The projector/TV is plugged into a socket/extension cord and turned on;
 
-2) The projector/TV is connected to the computer via a VGA/HDMI cable.</string>
+2) The projector/TV is connected to the computer via a VGA/HDMI/DP cable.</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -583,7 +583,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
              <property name="text">
               <string>Please also make sure that:
 
-1) The &quot;source&quot; on the projector/TV is set to VGA or HDMI;
+1) The &quot;source&quot; on the projector/TV is set to &quot;Computer&quot;, VGA, HDMI or DP;
 
 2) The screen mirroring mode is either set to &quot;duplicate&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</string>
              </property>
@@ -819,7 +819,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
 
 1) The computer volume is set to a non-zero value;
 
-2) The correct output device is selected in Windows audio device settings.</string>
+2) The correct output device is selected in the operating system's audio device settings.</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -884,7 +884,10 @@ b) The computer is connected to the appropriate WiFi network.</string>
               </font>
              </property>
              <property name="text">
-              <string>Image 1</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/data/images/problem_screenshots/display.png</pixmap>
              </property>
             </widget>
            </item>

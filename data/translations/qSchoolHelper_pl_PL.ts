@@ -95,42 +95,43 @@ Czyszczenie &quot;proste&quot; jest szybsze, aczkolwiek mniej dokładnie niż &q
         <location filename="../../src/cleaning_dialog.cpp" line="54"/>
         <source>Starting cleaner…
 —————————————————</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoczynanie czyszczenia…
+—————————————————</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="55"/>
         <source>Removing .bat and .cmd files from the desktop…</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuwanie plików .bat i .cmd z pulpitu…</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="91"/>
         <source>Downloading BleachBit (cleaning engine)…</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobieranie BleachBit (narzędzie używane do czyszczenia)…</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="97"/>
         <source>Cleaning temporary files and caches…</source>
-        <translation type="unfinished"></translation>
+        <translation>Czyszczenie plików tymczasowych i cache…</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="123"/>
         <source>Cleaning qSchoolHelper&apos;s temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Czyszczenie katalogu tymczasowego qSchoolHelper</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="132"/>
         <source>All done!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystko gotowe!</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="134"/>
         <source>The cleaning operation completed succesfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>Czyszczenie zakończyło się sukcesem!</translation>
     </message>
     <message>
         <location filename="../../src/cleaning_dialog.cpp" line="145"/>
         <source>Cleaning temporary files and caches (extended)…</source>
-        <translation type="unfinished"></translation>
+        <translation>Czyszczenie plików tymczasowych i cache (rozszerzone)…</translation>
     </message>
 </context>
 <context>
@@ -212,7 +213,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="154"/>
         <source>Installs all software specified in the &quot;Software Installer&quot; section</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaluje wszystkie programy z sekcji &quot;Instaluj programy&quot;</translation>
     </message>
     <message>
         <location filename="../../ui/initial_setup_dialog.ui" line="173"/>
@@ -233,43 +234,44 @@ p, li { white-space: pre-wrap; }
         <location filename="../../src/initial_setup_dialog.cpp" line="89"/>
         <source>Starting initial setup…
 ——————————</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoczynanie konfiguracji wstępnej…
+——————————</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="94"/>
         <source>Disabling Windows Explorer ads</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie reklam w Eksploratorze plików</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="98"/>
         <source>Disabling telemetry service…</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie zbierania danych…</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="105"/>
         <source>Disabling search indexing…
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie indeksowania plików…</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="117"/>
         <source>Installing required software. This might (will) take a while…</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalowanie programów. To zajmie (dłuższą) chwilę…</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="128"/>
         <source>Installing BleachBit (utility used for computer cleaning)…</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalowanie BleachBit (narzędzie używane do czyszczenia komputera)…</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="135"/>
         <source>Cleaning temporary files…</source>
-        <translation type="unfinished"></translation>
+        <translation>Czyszczenie plików tymczasowych…</translation>
     </message>
     <message>
         <location filename="../../src/initial_setup_dialog.cpp" line="150"/>
         <source>All done!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystko gotowe!</translation>
     </message>
 </context>
 <context>
@@ -355,22 +357,22 @@ i mają zostać zainstalowane?</translation>
     <message>
         <location filename="../../src/install_dialog.cpp" line="162"/>
         <source>The download failed! Please check your Internet connectivity!</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobieranie nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
     </message>
     <message>
         <location filename="../../src/install_dialog.cpp" line="209"/>
         <source>The installation failed! Please try installing the program manually!</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacja nie powiodła się! Proszę spróbować zainstalować progamy manualnie!</translation>
     </message>
     <message>
         <location filename="../../src/install_dialog.cpp" line="227"/>
         <source>The installation completed succesfully!</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacja zakończyła się sukcesem!</translation>
     </message>
     <message>
         <location filename="../../src/install_dialog.cpp" line="241"/>
         <source>Please select at least one program to be installed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać co najmniej jeden program do zainstalowania!</translation>
     </message>
 </context>
 <context>
@@ -544,7 +546,6 @@ Z czym potrzebujesz pomocy?</translation>
         <location filename="../../ui/problem_dialog.ui" line="467"/>
         <location filename="../../ui/problem_dialog.ui" line="541"/>
         <location filename="../../ui/problem_dialog.ui" line="677"/>
-        <location filename="../../ui/problem_dialog.ui" line="887"/>
         <source>Image 1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -553,7 +554,7 @@ Z czym potrzebujesz pomocy?</translation>
         <location filename="../../ui/problem_dialog.ui" line="362"/>
         <location filename="../../ui/problem_dialog.ui" line="480"/>
         <location filename="../../ui/problem_dialog.ui" line="690"/>
-        <location filename="../../ui/problem_dialog.ui" line="905"/>
+        <location filename="../../ui/problem_dialog.ui" line="908"/>
         <source>Image 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -564,13 +565,17 @@ Z czym potrzebujesz pomocy?</translation>
 a) The Ethernet cable is plugged into the Ethernet port firmly (until it clicks);
 or:
 b) The computer is connected to the appropriate WiFi network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę upewnić się, że:
+
+a) Kabel internetowy (Ethernet) jest dobrze podpięty do portu Ethernet (wpiąć, aż kliknie).
+bądź:
+b) Komputer jest podłączony do odpowiedniej sieci WiFi.</translation>
     </message>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="307"/>
         <location filename="../../ui/problem_dialog.ui" line="520"/>
         <location filename="../../ui/problem_dialog.ui" line="733"/>
-        <location filename="../../ui/problem_dialog.ui" line="943"/>
+        <location filename="../../ui/problem_dialog.ui" line="946"/>
         <source>Step 2</source>
         <translation>Krok 2</translation>
     </message>
@@ -581,7 +586,11 @@ b) The computer is connected to the appropriate WiFi network.</source>
 1) The URL you are typing in is correct;
 
 2) The site isn&apos;t experiencing other problems (check whether it&apos;s accessible using another device).</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę także upewnić się, że:
+
+1) Adres URL jest wpisywany poprawnie;
+
+2) Strona działa z innych urządzeń.</translation>
     </message>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="432"/>
@@ -594,17 +603,50 @@ b) The computer is connected to the appropriate WiFi network.</source>
 
 1) The projector/TV is plugged into a socket/extension cord and turned on;
 
-2) The projector/TV is connected to the computer via a VGA/HDMI cable.</source>
+2) The projector/TV is connected to the computer via a VGA/HDMI/DP cable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="584"/>
         <source>Please also make sure that:
 
-1) The &quot;source&quot; on the projector/TV is set to VGA or HDMI;
+1) The &quot;source&quot; on the projector/TV is set to &quot;Computer&quot;, VGA, HDMI or DP;
 
 2) The screen mirroring mode is either set to &quot;duplicate&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/problem_dialog.ui" line="818"/>
+        <source>Please also make sure that:
+
+1) The computer volume is set to a non-zero value;
+
+2) The correct output device is selected in the operating system&apos;s audio device settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please make sure that:
+
+1) The projector/TV is plugged into a socket/extension cord and turned on;
+
+2) The projector/TV is connected to the computer via a VGA/HDMI cable.</source>
+        <translation type="vanished">Proszę upewnić się, że:
+
+1) Projektor/TV jest podłączony do prądu i włączony;
+
+2) Projektor/TV jest podłączony do komputera z użyciem kabla VGA/HDMI/DP.</translation>
+    </message>
+    <message>
+        <source>Please also make sure that:
+
+1) The &quot;source&quot; on the projector/TV is set to VGA or HDMI;
+
+2) The screen mirroring mode is either set to &quot;duplicate&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</source>
+        <translation type="vanished">Proszę także upewnić się, że:
+
+1) Źródło (source) obrazu na projektorze/TV ustawione jest na &quot;Komputer&quot; bądź VGA/HDMI/DP;
+
+2) Tryb wyświetlania na drugim ekranie jest ustawiony na &quot;duplikuj&quot; bądź &quot;rozszerz&quot; (można to zmienić naciskając jednocześnie klawisze Windows oraz P).</translation>
     </message>
     <message>
         <location filename="../../ui/problem_dialog.ui" line="636"/>
@@ -618,48 +660,59 @@ b) The computer is connected to the appropriate WiFi network.</source>
 1) The speakers are plugged into the wall socket/extension cord;
 
 2) The speaker cable is plugged into the computer&apos;s headphone/speaker port (green or colourless).</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę upewnić się, że:
+
+1) Głośniki są podłączone do prądu;
+
+2) Głośniki są podłączone do portu słuchawkowego/głośnikowego w komputerze (zielony bądź bez koloru).</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="818"/>
         <source>Please also make sure that:
 
 1) The computer volume is set to a non-zero value;
 
 2) The correct output device is selected in Windows audio device settings.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Proszę także upewnić się, że:
+
+1) Głośność komputera jest ustawiona na wartość większą, niż zero;
+
+2) Poprawne urządzenie odtwarzające jest wybrane w ustawieniach audio systemu operacyjnego.</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="923"/>
+        <location filename="../../ui/problem_dialog.ui" line="926"/>
         <source>Please make sure that:
 
  The correct screen mirroring option is set (&quot;mirror&quot; will display the same thing on the projector/TV as on the computer&apos;s display, &quot;extend&quot; will display a control interface on one of the screens). Refer to the &quot;Projector/TV&quot; problem helper secrtion for more information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę upewnić się, że:
+
+ Odpowiedni tryb wyświetlania na dodatkowym ekranie jest wybrany (&quot;duplikuj&quot; spowoduje wyświetlanie tego samego obrazu na ekranie komputera oraz projektora/TV podczas gdy&quot;rozszerz&quot; spowoduje, że na jednym z ekranów będzie wyświetlany interfejs prezentera). Więcej informacji można znaleźć w sekcji pomocy technicznej &quot;Projektor/TV&quot;.</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="997"/>
+        <location filename="../../ui/problem_dialog.ui" line="1000"/>
         <source>Please also make sure that:
 
 You are using the correct software to open presentations. Use PowerPoint Viewer for .pptx files and LibreOffice Impress for .odp files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę także upewnić się, że:
+
+Do otwierania prezentacji używane jest odpowiednie oprogramowanie. Użyj programu PowerPoint Viewer dla plików .pptx i LibreOffice Impress dla plików .odp.</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="1027"/>
+        <location filename="../../ui/problem_dialog.ui" line="1030"/>
         <source>Presentations</source>
         <translation>Prezentacje</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="1060"/>
+        <location filename="../../ui/problem_dialog.ui" line="1063"/>
         <source>Back</source>
         <translation>Wstecz</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="1076"/>
+        <location filename="../../ui/problem_dialog.ui" line="1079"/>
         <source>Next</source>
         <translation>Następny</translation>
     </message>
     <message>
-        <location filename="../../ui/problem_dialog.ui" line="1089"/>
+        <location filename="../../ui/problem_dialog.ui" line="1092"/>
         <source>Close</source>
         <translation>Zamknij</translation>
     </message>
