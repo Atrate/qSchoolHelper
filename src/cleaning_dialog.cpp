@@ -53,6 +53,7 @@ void cleaning_dialog::clean()
     ui->cleaning_log->clear();
     ui->cleaning_log->append(tr("Starting cleaner…\n—————————————————"));
     ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
+    QApplication::processEvents();
 
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
@@ -89,10 +90,12 @@ void cleaning_dialog::clean()
     if (!fs::exists(bb_path))
     {
         ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
+        QApplication::processEvents();
         initial_setup_dialog::install_bb();
     }
     ui->progress_bar->setValue(40);
     ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
+    QApplication::processEvents();
     bb_path = "\"" + bb_path + "\"";
     std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                                 "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
@@ -104,7 +107,7 @@ void cleaning_dialog::clean()
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
     {
-        QCoreApplication::processEvents();
+        QApplication::processEvents();
     }
     bb_clean.~QFuture();
 
@@ -119,6 +122,7 @@ void cleaning_dialog::clean()
     // --------------------
     ui->progress_bar->setValue(80);
     ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
+    QApplication::processEvents();
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     fs::remove_all(temp_folder);
 
@@ -141,12 +145,13 @@ void cleaning_dialog::clean_extended()
     std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
     ui->progress_bar->setValue(60);
     ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
+    QApplication::processEvents();
     std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
                                 "system.memory_dump system.muicache system.prefetch system.updates";
     QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
     while(bb_clean.isRunning())
     {
-        QCoreApplication::processEvents();
+        QApplication::processEvents();
     }
     bb_clean.~QFuture();
 }

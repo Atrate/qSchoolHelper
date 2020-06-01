@@ -84,6 +84,7 @@ void install_dialog::install()
     ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
     ui->progress_bar->setValue(0);
+    QApplication::processEvents();
 
     // Declare download links and file names
     // -------------------------------------
@@ -152,7 +153,7 @@ void install_dialog::install()
             QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
             while(dl.isRunning())
             {
-                QCoreApplication::processEvents();
+                QApplication::processEvents();
             }
             dl.~QFuture();
             if (!(fs::file_size(download_array[i][1]) > 2048))
@@ -168,6 +169,7 @@ void install_dialog::install()
                 return;
             }
             ui->progress_bar->setValue((i+1)*10);
+            QApplication::processEvents();
         }
     }
 
@@ -198,7 +200,7 @@ void install_dialog::install()
             QFuture<int> install = QtConcurrent::run(run_install, cmd.c_str());
             while(install.isRunning())
             {
-                QCoreApplication::processEvents();
+                QApplication::processEvents();
             }
             fs::remove(download_array[i][1]);
             if (!install)

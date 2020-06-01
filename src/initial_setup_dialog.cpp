@@ -56,7 +56,7 @@ void initial_setup_dialog::install_bb()
     QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
     while(bb_dl.isRunning())
     {
-        QCoreApplication::processEvents();
+        QApplication::processEvents();
     }
     bb_dl.~QFuture();
     if (fs::file_size(bb_exe) > 1024)
@@ -65,7 +65,7 @@ void initial_setup_dialog::install_bb()
         QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
         while(bb_install.isRunning())
         {
-            QCoreApplication::processEvents();
+            QApplication::processEvents();
         }
         bb_install.~QFuture();
         fs::remove(bb_exe);
@@ -87,15 +87,18 @@ void initial_setup_dialog::initial_setup()
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
     ui->setup_log->append(tr("Starting initial setup…\n——————————"));
+    QApplication::processEvents();
 
     // Disable ads
     // -----------
-    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
     ui->setup_log->append(tr("Disabling Windows Explorer ads"));
+    QApplication::processEvents();
+    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
 
     // Disable telemetry
     // -----------------
     ui->setup_log->append(tr("Disabling telemetry service…"));
+    QApplication::processEvents();
     system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
     system("net stop DiagTrack");
     system("sc config DiagTrack start= disabled");
@@ -103,6 +106,7 @@ void initial_setup_dialog::initial_setup()
     // Disable search indexing
     // -----------------------
     ui->setup_log->append(tr("Disabling search indexing…\n"));
+    QApplication::processEvents();
     system("net stop WSearch");
     system("sc config WSearch start= disabled");
 
@@ -115,6 +119,7 @@ void initial_setup_dialog::initial_setup()
     if(ui->install_check_box->isChecked())
     {
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…"));
+        QApplication::processEvents();
         install_dialog *id = new install_dialog();
         id->install();
         delete id;
@@ -126,6 +131,7 @@ void initial_setup_dialog::initial_setup()
     if (!fs::exists(bb_path))
     {
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…"));
+        QApplication::processEvents();
         install_bb();
     }
     // Run extended cleaner
@@ -133,6 +139,7 @@ void initial_setup_dialog::initial_setup()
     if (fs::exists(bb_path))
     {
         ui->setup_log->append(tr("Cleaning temporary files…"));
+        QApplication::processEvents();
         cleaning_dialog *cl = new cleaning_dialog();
         cl->clean_extended();
         delete cl;
