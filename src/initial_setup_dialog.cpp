@@ -101,18 +101,27 @@ void initial_setup_dialog::initial_setup()
     QApplication::processEvents();
     system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
     system("net stop DiagTrack");
-    system("sc config DiagTrack start= disabled");
+    system("sc config DiagTrack start= disabled");    
 
     // Disable search indexing
     // -----------------------
     ui->setup_log->append(tr("Disabling search indexing…\n"));
     QApplication::processEvents();
     system("net stop WSearch");
-    system("sc config WSearch start= disabled");
+    system("sc config WSearch start= disabled");    
 
-    // -------------------
-    // More code here soon
-    // -------------------
+    // Disable Windows Visual FX
+    // -------------------------
+    ui->setup_log->append(tr("Disabling visual effects…\n"));
+    QApplication::processEvents();
+    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
+
+    // Restart explorer.exe to apply changes
+    // -------------------------------------
+    system("taskkill /F /IM explorer.exe & start explorer");
+    ui->progress_bar->setValue(10);
+    QApplication::processEvents();
+
 
     // Run install (all software)
     // --------------------------
