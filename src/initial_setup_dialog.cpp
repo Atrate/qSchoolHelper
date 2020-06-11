@@ -91,13 +91,13 @@ void initial_setup_dialog::initial_setup()
 
     // Disable ads
     // -----------
-    ui->setup_log->append(tr("Disabling Windows Explorer ads"));
+    ui->setup_log->append(tr("Disabling Windows Explorer ads…\n"));
     QApplication::processEvents();
     system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
 
     // Disable telemetry
     // -----------------
-    ui->setup_log->append(tr("Disabling telemetry service…"));
+    ui->setup_log->append(tr("Disabling telemetry service…\n"));
     QApplication::processEvents();
     system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
     system("net stop DiagTrack");
@@ -127,7 +127,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------------
     if(ui->install_check_box->isChecked())
     {
-        ui->setup_log->append(tr("Installing required software. This might (will) take a while…"));
+        ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
         install_dialog *id = new install_dialog();
         id->install();
@@ -139,7 +139,7 @@ void initial_setup_dialog::initial_setup()
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
-        ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…"));
+        ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
         install_bb();
     }
@@ -147,7 +147,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------
     if (fs::exists(bb_path))
     {
-        ui->setup_log->append(tr("Cleaning temporary files…"));
+        ui->setup_log->append(tr("Cleaning temporary files…\n"));
         QApplication::processEvents();
         cleaning_dialog *cl = new cleaning_dialog();
         cl->clean_extended();

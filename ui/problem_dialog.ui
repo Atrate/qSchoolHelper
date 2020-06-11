@@ -184,8 +184,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Hello! What do you require help with?
-</string>
+         <string>Hello! What do you require help with?</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

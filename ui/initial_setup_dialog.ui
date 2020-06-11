@@ -61,6 +61,12 @@
     </property>
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="title_label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>16</pointsize>
@@ -69,8 +75,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Initial Setup
-</string>
+       <string>Initial Setup</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -100,7 +105,7 @@
        <bool>false</bool>
       </property>
       <property name="text">
-       <string>Setup progress:    </string>
+       <string>Setup progress:</string>
       </property>
      </widget>
     </item>
@@ -109,7 +114,7 @@
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
         <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
+        <verstretch>1</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
