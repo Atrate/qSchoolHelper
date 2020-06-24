@@ -11,7 +11,7 @@ VERSION_MINOR = 1
 VERSION_BUILD = 0
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 
-CONFIG += c++17
+CONFIG += c++17 lrelease embed_translations
 
 DEFINES += \
     QT_DEPRECATED_WARNINGS \
@@ -54,7 +54,7 @@ FORMS += \
 
 
 TRANSLATIONS += \
-    data/translations/qSchoolHelper_pl_PL.ts
+    i18n/qSchoolHelper_pl_PL.ts
 
 RC_ICONS = data/icons/icon.ico
 RESOURCES = ui/resources.qrc
