@@ -22,15 +22,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QTranslator qsh_translator;
-    QString bin_path = qApp->applicationDirPath();
     QStringList languages;
     languages << "English" << "Polish";
-
     QString lang = QInputDialog::getItem(NULL, "Select Language", "Language", languages);
     if (lang == "Polish")
     {
-        QString trans_path = ":/i18n/qSchoolHelper_pl_PL.qm";
-        qsh_translator.load(trans_path);
+        QString trans_file = ":/i18n/qSchoolHelper_pl_PL.qm";
+        qsh_translator.load(trans_file);
         qApp->installTranslator(&qsh_translator);
     }
 
