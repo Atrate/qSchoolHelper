@@ -97,10 +97,13 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Source code: https://www.gitlab.com/Atrate/qSchoolHelper</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Source code available on &lt;a href=&quot; https://www.gitlab.com/Atrate/qSchoolHelper&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;GitLab&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
-       <enum>Qt::MarkdownText</enum>
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
       <property name="openExternalLinks">
        <bool>true</bool>
@@ -115,6 +118,9 @@
       <property name="text">
        <string>This project is licensed under the GNU General Public License Version 3</string>
       </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
       <property name="textInteractionFlags">
        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
       </property>
@@ -123,10 +129,10 @@
     <item row="4" column="1">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>Application icon adapted from https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Application icon adapted from &lt;a href=&quot;https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;IconFinder&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
-       <enum>Qt::MarkdownText</enum>
+       <enum>Qt::AutoText</enum>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
