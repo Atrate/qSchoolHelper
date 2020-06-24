@@ -60,6 +60,7 @@ RC_ICONS = data/icons/icon.ico
 RESOURCES = ui/resources.qrc
 
 QMAKE_LFLAGS += -lcurl
+LIBS += -lcurl
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
