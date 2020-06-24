@@ -47,7 +47,7 @@ void main_window::window_setup()
     {
         fs::create_directory(config_folder);
     }
-
+#ifdef QT_NO_DEBUG
     if (fs::exists(initial_setup_done))
     {
         ui->software_button->setToolTip(tr("Install missing software"));
@@ -56,7 +56,7 @@ void main_window::window_setup()
         ui->help_button->setToolTip(tr("Open the application usage guide"));
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip(tr("Initial Setup has already been run on this computer. "
-                                             "If you with to run it again, please select it from File -> Initial Setup."));
+                                                "If you with to run it again, please select it from File -> Initial Setup."));
     }
     else
     {
@@ -70,6 +70,14 @@ void main_window::window_setup()
         ui->clean_button->setToolTip(disabled_tooltip);
         ui->help_button->setToolTip(disabled_tooltip);
     }
+#else
+    QString debug_tooltip = "Button enabled due to running a debug build";
+    ui->software_button->setToolTip(debug_tooltip);
+    ui->problem_button->setToolTip(debug_tooltip);
+    ui->clean_button->setToolTip(debug_tooltip);
+    ui->help_button->setToolTip(debug_tooltip);
+    ui->initial_setup_button->setToolTip(debug_tooltip);
+#endif
 }
 void main_window::on_problem_button_clicked()
 {

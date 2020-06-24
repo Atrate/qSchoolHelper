@@ -15,5 +15,6 @@
         <file>../data/icons/presentation.png</file>
         <file>../data/icons/projector.png</file>
         <file>../data/icons/speaker.png</file>
+        <file>../data/curl-ca-bundle.crt</file>
     </qresource>
 </RCC>
