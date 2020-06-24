@@ -40,7 +40,7 @@ initial_setup_dialog::~initial_setup_dialog()
 bool g_setup_running {};
 void run_install_bb(const char* bb_exe)
 {
-    system(bb_exe);
+    (void) system(bb_exe);
 }
 void initial_setup_dialog::install_bb()
 {
@@ -93,32 +93,32 @@ void initial_setup_dialog::initial_setup()
     // -----------
     ui->setup_log->append(tr("Disabling Windows Explorer ads…\n"));
     QApplication::processEvents();
-    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
 
     // Disable telemetry
     // -----------------
     ui->setup_log->append(tr("Disabling telemetry service…\n"));
     QApplication::processEvents();
-    system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
-    system("net stop DiagTrack");
-    system("sc config DiagTrack start= disabled");    
+    (void) system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
+    (void) system("net stop DiagTrack");
+    (void) system("sc config DiagTrack start= disabled");
 
     // Disable search indexing
     // -----------------------
     ui->setup_log->append(tr("Disabling search indexing…\n"));
     QApplication::processEvents();
-    system("net stop WSearch");
-    system("sc config WSearch start= disabled");    
+    (void) system("net stop WSearch");
+    (void) system("sc config WSearch start= disabled");
 
     // Disable Windows Visual FX
     // -------------------------
     ui->setup_log->append(tr("Disabling visual effects…\n"));
     QApplication::processEvents();
-    system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
+    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
 
     // Restart explorer.exe to apply changes
     // -------------------------------------
-    system("taskkill /F /IM explorer.exe & start explorer");
+    (void) system("taskkill /F /IM explorer.exe & start explorer");
     ui->progress_bar->setValue(10);
     QApplication::processEvents();
 

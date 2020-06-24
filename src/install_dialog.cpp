@@ -50,7 +50,7 @@ bool install_dialog::check_shortcut(std::string exe_path)
                 {
                     std::string link_cmd = "mklink ";
                     link_cmd.append("\"" + entry.path().string() + "\\Desktop\\" + exe_name + "\" \"" + exe_path + "\"");
-                    system(link_cmd.c_str());
+                    (void) system(link_cmd.c_str());
                 }
                 catch (const std::exception &e)
                 {

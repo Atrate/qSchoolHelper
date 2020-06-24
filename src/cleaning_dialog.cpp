@@ -37,7 +37,7 @@ cleaning_dialog::~cleaning_dialog()
 bool g_cleaning_running {};
 void run_clean(const char* cmd)
 {
-    system(cmd);
+    (void) system(cmd);
 }
 void cleaning_dialog::clean()
 {
@@ -125,7 +125,6 @@ void cleaning_dialog::clean()
     QApplication::processEvents();
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     fs::remove_all(temp_folder);
-
 
     // Finalize — set UI element states
     // --------------------------------
