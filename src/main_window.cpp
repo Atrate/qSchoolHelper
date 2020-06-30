@@ -42,12 +42,12 @@ void main_window::window_setup()
     // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
     // -------------------------------------------------------------------------------------
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
-    std::string initial_setup_done = config_folder + "initial_setup_done.txt";
     if (!fs::exists(config_folder))
     {
         fs::create_directory(config_folder);
     }
 #ifdef QT_NO_DEBUG
+    std::string initial_setup_done = config_folder + "initial_setup_done.txt";
     if (fs::exists(initial_setup_done))
     {
         ui->software_button->setToolTip(tr("Install missing software"));
