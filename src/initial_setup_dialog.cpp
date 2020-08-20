@@ -19,9 +19,9 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QCloseEvent>
 #include "cleaning_dialog.h"
-#include "download.h"
 #include "initial_setup_dialog.h"
 #include "install_dialog.h"
+#include "procedures.h"
 #include "ui_initial_setup_dialog.h"
 
 namespace fs = std::filesystem;
@@ -38,39 +38,8 @@ initial_setup_dialog::~initial_setup_dialog()
     delete ui;
 }
 bool g_setup_running {};
-void run_install_bb(const char* bb_exe)
-{
-    (void) system(bb_exe);
-}
-void initial_setup_dialog::install_bb()
-{
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
-    {
-        fs::create_directory(temp_folder);
-    }
-    chdir(temp_folder.c_str());
-    std::string bb_exe = "BleachBit-3.2.0-setup.exe";
-    std::string bb_url = "https://download.bleachbit.org/BleachBit-3.2.0-setup.exe";
-    fs::remove(bb_exe);
-    QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
-    while(bb_dl.isRunning())
-    {
-        QApplication::processEvents();
-    }
-    bb_dl.~QFuture();
-    if (fs::file_size(bb_exe) > 1024)
-    {
-        bb_exe.append("/S /allusers");
-        QFuture<void> bb_install = QtConcurrent::run(run_install_bb, bb_exe.c_str());
-        while(bb_install.isRunning())
-        {
-            QApplication::processEvents();
-        }
-        bb_install.~QFuture();
-        fs::remove(bb_exe);
-    }
-}
+
+
 void initial_setup_dialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states
@@ -129,9 +98,7 @@ void initial_setup_dialog::initial_setup()
     {
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        install_dialog *id = new install_dialog();
-        id->install();
-        delete id;
+        install_software(true,true,true,true,true);
     }
 
     // Download and install BleachBit
@@ -148,10 +115,8 @@ void initial_setup_dialog::initial_setup()
     if (fs::exists(bb_path))
     {
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
+        clean(true);
         QApplication::processEvents();
-        cleaning_dialog *cl = new cleaning_dialog();
-        cl->clean_extended();
-        delete cl;
     }
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states

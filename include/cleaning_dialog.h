@@ -36,11 +36,8 @@ class cleaning_dialog : public QDialog
     private:
         Ui::cleaning_dialog *ui;
 
-    public slots:
-        void clean_extended();
-
     private slots:
-        void clean();
+        void on_clean_button_clicked();
 };
 
 #endif // CLEANING_DIALOG_H

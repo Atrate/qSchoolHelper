@@ -25,23 +25,23 @@ DEFINES += \
 SOURCES += \
     src/about_dialog.cpp \
     src/cleaning_dialog.cpp \
-    src/download.cpp \
     src/help_dialog.cpp \
     src/initial_setup_dialog.cpp \
     src/install_dialog.cpp \
     src/main.cpp \
     src/main_window.cpp \
-    src/problem_dialog.cpp
+    src/problem_dialog.cpp \
+    src/procedures.cpp
 
 HEADERS += \
     include/about_dialog.h \
     include/cleaning_dialog.h \
-    include/download.h \
     include/help_dialog.h \
     include/initial_setup_dialog.h \
     include/install_dialog.h \
     include/main_window.h \
-    include/problem_dialog.h
+    include/problem_dialog.h \
+    include/procedures.h
 
 FORMS += \
     ui/about_dialog.ui \

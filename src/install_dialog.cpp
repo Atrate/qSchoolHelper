@@ -20,8 +20,8 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "download.h"
 #include "install_dialog.h"
+#include "procedures.h"
 #include "ui_install_dialog.h"
 
 namespace fs = std::filesystem;
@@ -66,10 +66,6 @@ bool install_dialog::check_shortcut(std::string exe_path)
         return false;
     }
 }
-int run_install(const char* cmd)
-{
-    return(system(cmd));
-}
 void install_dialog::install()
 {
     // Initialize temp folder, set UI elements' states
@@ -83,154 +79,70 @@ void install_dialog::install()
     chdir(temp_folder.c_str());
     ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
+    ui->firefox_check_box->setEnabled(false);
+    ui->reader_check_box->setEnabled(false);
+    ui->libreoffice_check_box->setEnabled(false);
+    ui->vlc_check_box->setEnabled(false);
+    ui->viewer_check_box->setEnabled(false);
+
     ui->progress_bar->setValue(0);
     QApplication::processEvents();
 
-    // Declare download links and file names
-    // -------------------------------------
-    const int DL_ARRAY_SIZE=5;
-    std::string download_array[DL_ARRAY_SIZE][4];
-    if (ui->firefox_check_box->isChecked())
-    {
-        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/77.0/win64/en-US/Firefox%20Setup%2077.0.msi");
-        download_array[0][1]=std::string("Firefox_Setup_77.0.msi");
-        download_array[0][2]=std::string("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-    }
-    else
-    {
-        download_array[0][0]=std::string("");
-    }
-    if (ui->reader_check_box->isChecked())
-    {
-        download_array[1][0]=std::string("https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe");
-        download_array[1][1]=std::string("readerdc_en_a_install.exe");
-        download_array[1][2]=std::string("C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe");
-    }
-    else
-    {
-        download_array[1][0]=std::string("");
-    }
-    if (ui->libreoffice_check_box->isChecked())
-    {
-        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/6.4.4/win/x86_64/LibreOffice_6.4.4_Win_x64.msi");
-        download_array[2][1]=std::string("LibreOffice_6.4.4_Win_x64.msi");
-        download_array[2][2]=std::string("");
-    }
-    else
-    {
-        download_array[2][0]=std::string("");
-    }
-    if (ui->vlc_check_box->isChecked())
-    {
-        download_array[3][0]=std::string("https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe");
-        download_array[3][1]=std::string("vlc-3.0.8-win64.exe");
-        download_array[3][2]=std::string("C:\\Program Files\\VideoLAN\\VLC\\vlc.exe");
-    }
-    else
-    {
-        download_array[3][0]=std::string("");
-    }
-    if (ui->viewer_check_box->isChecked())
-    {
-        download_array[4][0]=std::string("https://gitlab.com/Atrate/powerpoint-viewer/-/raw/803209ecc2e0f773f6fe15410ad7e1bc1a51c0c7/PowerPointViewer.exe?inline=false");
-        download_array[4][1]=std::string("PowerPointViewer.exe");
-        download_array[4][2]=std::string("C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe");
-    }
-    else
-    {
-        download_array[4][0]=std::string("");
-    }
+    // Actually run the installation
+    // -----------------------------
+    int install_result = install_software(
+                             ui->firefox_check_box->checkState(),
+                             ui->reader_check_box->checkState(),
+                             ui->libreoffice_check_box->checkState(),
+                             ui->vlc_check_box->checkState(),
+                             ui->viewer_check_box->checkState()
+                             );
 
-    // Download the files
-    // ------------------
-    bool shortcut_array[DL_ARRAY_SIZE];
-    for (int i = 0; i < DL_ARRAY_SIZE; i++)
+    if(install_result == 0)
     {
-        shortcut_array[i] = check_shortcut(download_array[i][2]);
-        if (!(download_array[i][0] == "" || shortcut_array[i]))
-        {
-            fs::remove(download_array[i][1]);
-            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
-            while(dl.isRunning())
-            {
-                QApplication::processEvents();
-            }
-            dl.~QFuture();
-            if (!(fs::file_size(download_array[i][1]) > 2048))
-            {
-                g_install_running = false;
-                QMessageBox dl_failure_box;
-                dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
-                dl_failure_box.setModal(true);
-                dl_failure_box.exec();
-                ui->progress_bar->setValue(0);
-                ui->button_box->setEnabled(true);
-                ui->install_button->setEnabled(true);
-                return;
-            }
-            ui->progress_bar->setValue((i+1)*10);
-            QApplication::processEvents();
-        }
+        QMessageBox success_box;
+        success_box.setText(tr("The installation completed succesfully!"));
+        success_box.setModal(true);
+        success_box.exec();
+        ui->progress_bar->setValue(100);
     }
-
-    // Install the applications
-    // ------------------------
-    for (int i = 0; i < DL_ARRAY_SIZE; i++)
+    else if(install_result == 1)
     {
-        if (!(download_array[i][0] == "" || shortcut_array[i]))
-        {
-            // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
-            // --------------------------------------------------------------------------------------------------------
-            std::string cmd = download_array[i][1];
-            switch (i)
-            {
-                case 0:
-                    cmd.append("/S");
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    cmd.append("/S","/L=1033");
-                    break;
-                case 4:
-                    break;
-            }
-            QFuture<int> install = QtConcurrent::run(run_install, cmd.c_str());
-            while(install.isRunning())
-            {
-                QApplication::processEvents();
-            }
-            fs::remove(download_array[i][1]);
-            if (!install)
-            {
-                install.~QFuture();
-                g_install_running = false;
-                QMessageBox install_failure_box;
-                install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
-                install_failure_box.setModal(true);
-                install_failure_box.exec();
-                ui->progress_bar->setValue(0);
-                ui->button_box->setEnabled(true);
-                ui->install_button->setEnabled(true);
-                return;
-            }
-            install.~QFuture();
-
-        }
-        ui->progress_bar->setValue((i+6)*10);
+        QMessageBox dl_failure_box;
+        dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
+        dl_failure_box.setModal(true);
+        dl_failure_box.exec();
+        ui->progress_bar->setValue(0);
     }
-
-    // Show success message, set UI elements' states
-    // ---------------------------------------------
+    else if(install_result == 2)
+    {
+        QMessageBox install_failure_box;
+        install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
+        install_failure_box.setModal(true);
+        install_failure_box.exec();
+        ui->progress_bar->setValue(0);
+    }
+    else
+    {
+        QMessageBox unknown_failure_box;
+        unknown_failure_box.setText(tr("The installation failed!"));
+        unknown_failure_box.setModal(true);
+        unknown_failure_box.exec();
+        ui->progress_bar->setValue(0);
+    }
     g_install_running = false;
-    QMessageBox success_box;
-    success_box.setText(tr("The installation completed succesfully!"));
-    success_box.setModal(true);
-    success_box.exec();
+    
+
+    // Set UI elements' states
+    // -----------------------
+
     ui->button_box->setEnabled(true);
     ui->install_button->setEnabled(true);
+    ui->firefox_check_box->setEnabled(true);
+    ui->reader_check_box->setEnabled(true);
+    ui->libreoffice_check_box->setEnabled(true);
+    ui->vlc_check_box->setEnabled(true);
+    ui->viewer_check_box->setEnabled(true);
 }
 void install_dialog::on_install_button_clicked()
 {

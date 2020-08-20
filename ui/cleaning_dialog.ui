@@ -239,22 +239,6 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>clean_button</sender>
-   <signal>clicked()</signal>
-   <receiver>cleaning_dialog</receiver>
-   <slot>clean()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>544</x>
-     <y>243</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>523</x>
-     <y>347</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>clean()</slot>

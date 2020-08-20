@@ -12,12 +12,14 @@
  *
  */
 
-#ifndef DOWNLOAD_H
-#define DOWNLOAD_H
+#ifndef PROCEDURES_H
+#define PROCEDURES_H
 
 #include <curl.h>
 
 int curl_dl(const char *url, const char *pagefilename);
+int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
+int clean(const bool EXT);
+void install_bb();
 
-#endif // DOWNLOAD_H
-
+#endif // PROCEDURES_H

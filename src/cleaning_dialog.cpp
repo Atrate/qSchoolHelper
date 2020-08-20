@@ -20,6 +20,7 @@
 #include <QCloseEvent>
 #include "cleaning_dialog.h"
 #include "initial_setup_dialog.h"
+#include "procedures.h"
 #include "ui_cleaning_dialog.h"
 
 namespace fs = std::filesystem;
@@ -35,11 +36,8 @@ cleaning_dialog::~cleaning_dialog()
     delete ui;
 }
 bool g_cleaning_running {};
-void run_clean(const char* cmd)
-{
-    (void) system(cmd);
-}
-void cleaning_dialog::clean()
+
+void cleaning_dialog::on_clean_button_clicked()
 {
     // Begin — set UI element states
     // -----------------------------
@@ -55,76 +53,9 @@ void cleaning_dialog::clean()
     ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
     QApplication::processEvents();
 
-    // Find and remove all .bat and .cmd files from all users' desktops
-    // ----------------------------------------------------------------
-    try
-    {
-        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
-        {
-            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop"))
-            {
-
-                for (const auto &file : fs::directory_iterator(entry.path()/"Desktop"))
-                {
-                    if (file.path().extension() == ".cmd" || file.path().extension() == ".bat")
-                    {
-                        fs::remove(file.path());
-                    }
-                }
-            }
-        }
-    }
-    catch (const std::exception &e)
-    {
-        // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
-        // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
-    }
-
-    // Uninstall unnecessary software (McAffee etc.)
-    // ---------------------------------------------
-
-    // Run BleachBit to clean temporary files
-    // --------------------------------------
-    ui->progress_bar->setValue(30);
-    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
-    if (!fs::exists(bb_path))
-    {
-        ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
-        QApplication::processEvents();
-        initial_setup_dialog::install_bb();
-    }
-    ui->progress_bar->setValue(40);
-    ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
-    QApplication::processEvents();
-    bb_path = "\"" + bb_path + "\"";
-    std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
-                                "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
-                                "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
-                                "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
-                                "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
-                                "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
-
-    QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
-    while(bb_clean.isRunning())
-    {
-        QApplication::processEvents();
-    }
-    bb_clean.~QFuture();
-
-    // Extended cleaning
-    // -----------------
-    if (ui->radio_extended->isChecked())
-    {
-        clean_extended();
-    }
-
-    // Clean qSH tmp folder
-    // --------------------
-    ui->progress_bar->setValue(80);
-    ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
-    QApplication::processEvents();
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    fs::remove_all(temp_folder);
+    // Actually run the cleaning process
+    // ---------------------------------
+    clean(ui->radio_extended->isChecked());
 
     // Finalize — set UI element states
     // --------------------------------
@@ -138,21 +69,6 @@ void cleaning_dialog::clean()
     ui->clean_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 
-}
-void cleaning_dialog::clean_extended()
-{
-    std::string bb_path = "\"C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe\"";
-    ui->progress_bar->setValue(60);
-    ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
-    QApplication::processEvents();
-    std::string cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
-                                "system.memory_dump system.muicache system.prefetch system.updates";
-    QFuture<void> bb_clean = QtConcurrent::run(run_clean, cmd.c_str());
-    while(bb_clean.isRunning())
-    {
-        QApplication::processEvents();
-    }
-    bb_clean.~QFuture();
 }
 void cleaning_dialog::closeEvent(QCloseEvent *event)
 {
