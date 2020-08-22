@@ -121,8 +121,8 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     std::string download_array[DL_ARRAY_SIZE][4];
     if (INS_FF)
     {
-        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/77.0/win64/en-US/Firefox%20Setup%2077.0.msi");
-        download_array[0][1]=std::string("Firefox_Setup_77.0.msi");
+        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi");
+        download_array[0][1]=std::string("\"Firefox Setup 79.0.msi\"");
         download_array[0][2]=std::string("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
     }
     else
@@ -141,8 +141,8 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     }
     if (INS_LOF)
     {
-        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/6.4.4/win/x86_64/LibreOffice_6.4.4_Win_x64.msi");
-        download_array[2][1]=std::string("LibreOffice_6.4.4_Win_x64.msi");
+        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi");
+        download_array[2][1]=std::string("LibreOffice_7.0.0_Win_x64.msi");
         download_array[2][2]=std::string("");
     }
     else
