@@ -323,8 +323,8 @@ void install_bb()
         fs::create_directory(temp_folder);
     }
     chdir(temp_folder.c_str());
-    std::string bb_exe = "BleachBit-3.2.0-setup.exe";
-    std::string bb_url = "https://download.bleachbit.org/BleachBit-3.2.0-setup.exe";
+    std::string bb_exe = "BleachBit-4.0.0-setup.exe";
+    std::string bb_url = "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
     fs::remove(bb_exe);
     QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
     while(bb_dl.isRunning())
