@@ -82,7 +82,79 @@ int curl_dl(const char *url, const char *pagefilename)
 
     return 0;
 }
-
+std::string get_file_info(const int LINE)
+{
+    //  TODO: MAGIC installist.txt updater
+    switch (LINE)
+    {
+        // Firefox
+        // -------
+        case 0:
+            return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi";
+            break;
+        case 1:
+            return "\"Firefox Setup 79.0.msi\"";
+            break;
+        case 2:
+            return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+            break;
+        // Reader
+        // ------
+        case 3:
+            return "https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+            break;
+        case 4:
+            return "readerdc_en_a_install.exe";
+            break;
+        case 5:
+            return "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
+            break;
+        // LOffice
+        // -------
+        case 6:
+            return "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi";
+            break;
+        case 7:
+            return "LibreOffice_7.0.0_Win_x64.msi";
+            break;
+        case 8:
+            return ""; // TODO: FIX THIS PATH
+            break;
+        // VLC
+        // ---
+        case 9:
+            return "https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+            break;
+        case 10:
+            return "vlc-3.0.8-win64.exe";
+            break;
+        case 11:
+            return "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
+            break;
+        // PPViewer
+        // --------
+        case 12:
+            return "https://gitlab.com/Atrate/qsh-resources/-/raw/master/PowerPointViewer.exe";
+            break;
+        case 13:
+            return "PowerPointViewer.exe";
+            break;
+        case 14:
+            return "C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe";
+            break;
+        // BleachBit
+        // ---------
+        case 15:
+            return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
+            break;
+        case 16:
+            return "BleachBit-4.0.0-setup.exe";
+            break;
+        default:
+            return "";
+            break;
+    }
+}
 bool check_shortcut(std::string exe_path)
 {
     if (fs::exists(exe_path))
@@ -121,9 +193,9 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     std::string download_array[DL_ARRAY_SIZE][4];
     if (INS_FF)
     {
-        download_array[0][0]=std::string("https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi");
-        download_array[0][1]=std::string("\"Firefox Setup 79.0.msi\"");
-        download_array[0][2]=std::string("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+        download_array[0][0]=get_file_info(0);
+        download_array[0][1]=get_file_info(1);
+        download_array[0][2]=get_file_info(2);
     }
     else
     {
@@ -131,9 +203,9 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     }
     if (INS_RDC)
     {
-        download_array[1][0]=std::string("https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe");
-        download_array[1][1]=std::string("readerdc_en_a_install.exe");
-        download_array[1][2]=std::string("C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe");
+        download_array[1][0]=get_file_info(3);
+        download_array[1][1]=get_file_info(4);
+        download_array[1][2]=get_file_info(5);
     }
     else
     {
@@ -141,9 +213,9 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     }
     if (INS_LOF)
     {
-        download_array[2][0]=std::string("https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi");
-        download_array[2][1]=std::string("LibreOffice_7.0.0_Win_x64.msi");
-        download_array[2][2]=std::string("");
+        download_array[2][0]=get_file_info(6);
+        download_array[2][1]=get_file_info(7);
+        download_array[2][2]=get_file_info(8);
     }
     else
     {
@@ -151,9 +223,9 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     }
     if (INS_VLC)
     {
-        download_array[3][0]=std::string("https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe");
-        download_array[3][1]=std::string("vlc-3.0.8-win64.exe");
-        download_array[3][2]=std::string("C:\\Program Files\\VideoLAN\\VLC\\vlc.exe");
+        download_array[3][0]=get_file_info(9);
+        download_array[3][1]=get_file_info(10);
+        download_array[3][2]=get_file_info(11);
     }
     else
     {
@@ -161,9 +233,9 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     }
     if (INS_PPV)
     {
-        download_array[4][0]=std::string("https://gitlab.com/Atrate/powerpoint-viewer/-/raw/803209ecc2e0f773f6fe15410ad7e1bc1a51c0c7/PowerPointViewer.exe?inline=false");
-        download_array[4][1]=std::string("PowerPointViewer.exe");
-        download_array[4][2]=std::string("C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe");
+        download_array[4][0]=get_file_info(12);
+        download_array[4][1]=get_file_info(13);
+        download_array[4][2]=get_file_info(14);
     }
     else
     {
@@ -295,7 +367,7 @@ int clean(const bool EXT)
     if (EXT)
     {
         cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
-                                    "system.memory_dump system.muicache system.prefetch system.updates";
+                        "system.memory_dump system.muicache system.prefetch system.updates";
         //ui->progress_bar->setValue(60);
         //ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
         QFuture<void> bb_clean = QtConcurrent::run(system, cmd.c_str());
@@ -323,8 +395,8 @@ void install_bb()
         fs::create_directory(temp_folder);
     }
     chdir(temp_folder.c_str());
-    std::string bb_exe = "BleachBit-4.0.0-setup.exe";
-    std::string bb_url = "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
+    std::string bb_url = get_file_info(15);
+    std::string bb_exe = get_file_info(16);
     fs::remove(bb_exe);
     QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
     while(bb_dl.isRunning())
