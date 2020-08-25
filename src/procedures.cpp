@@ -74,6 +74,10 @@ int curl_dl(const char *url, const char *pagefilename)
         /* close the header file */
         fclose(pagefile);
     }
+    else
+    {
+        return 1;
+    }
 
     /* cleanup curl stuff */
     curl_easy_cleanup(curl_handle);
@@ -82,77 +86,101 @@ int curl_dl(const char *url, const char *pagefilename)
 
     return 0;
 }
-std::string get_file_info(const int LINE)
+std::string get_file_info(const int LINE, bool fallback = false)
 {
-    //  TODO: MAGIC installist.txt updater
-    switch (LINE)
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
     {
-        // Firefox
-        // -------
-        case 0:
-            return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi";
-            break;
-        case 1:
-            return "\"Firefox Setup 79.0.msi\"";
-            break;
-        case 2:
-            return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-            break;
-        // Reader
-        // ------
-        case 3:
-            return "https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-            break;
-        case 4:
-            return "readerdc_en_a_install.exe";
-            break;
-        case 5:
-            return "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
-            break;
-        // LOffice
-        // -------
-        case 6:
-            return "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi";
-            break;
-        case 7:
-            return "LibreOffice_7.0.0_Win_x64.msi";
-            break;
-        case 8:
-            return ""; // TODO: FIX THIS PATH
-            break;
-        // VLC
-        // ---
-        case 9:
-            return "https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-            break;
-        case 10:
-            return "vlc-3.0.8-win64.exe";
-            break;
-        case 11:
-            return "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
-            break;
-        // PPViewer
-        // --------
-        case 12:
-            return "https://gitlab.com/Atrate/qsh-resources/-/raw/master/PowerPointViewer.exe";
-            break;
-        case 13:
-            return "PowerPointViewer.exe";
-            break;
-        case 14:
-            return "C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe";
-            break;
-        // BleachBit
-        // ---------
-        case 15:
-            return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
-            break;
-        case 16:
-            return "BleachBit-4.0.0-setup.exe";
-            break;
-        default:
-            return "";
-            break;
+        fs::create_directory(temp_folder);
+    }
+    chdir(temp_folder.c_str());
+    if (!fs::exists("programlist.txt") && !fallback)
+    {
+        if(!curl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", "programlist.txt"))
+        {
+            fs::remove("programlist.txt");
+            if(!curl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt","programlist.txt"))
+            {
+                fallback = true;
+            }
+        }
+    }
+    if (fs::exists("programlist.txt") && !fallback)
+    {
+        // DO MAGIC
+        return "";
+    }
+    else
+    {
+        switch (LINE)
+        {
+            // Firefox
+            // -------
+            case 0:
+                return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi";
+                break;
+            case 1:
+                return "\"Firefox Setup 79.0.msi\"";
+                break;
+            case 2:
+                return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+                break;
+                // Reader
+                // ------
+            case 3:
+                return "https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
+                break;
+            case 4:
+                return "readerdc_en_a_install.exe";
+                break;
+            case 5:
+                return "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
+                break;
+                // LOffice
+                // -------
+            case 6:
+                return "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi";
+                break;
+            case 7:
+                return "LibreOffice_7.0.0_Win_x64.msi";
+                break;
+            case 8:
+                return ""; // TODO: FIX THIS PATH
+                break;
+                // VLC
+                // ---
+            case 9:
+                return "https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+                break;
+            case 10:
+                return "vlc-3.0.8-win64.exe";
+                break;
+            case 11:
+                return "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
+                break;
+                // PPViewer
+                // --------
+            case 12:
+                return "https://gitlab.com/Atrate/qsh-resources/-/raw/master/PowerPointViewer.exe";
+                break;
+            case 13:
+                return "PowerPointViewer.exe";
+                break;
+            case 14:
+                return "C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe";
+                break;
+                // BleachBit
+                // ---------
+            case 15:
+                return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
+                break;
+            case 16:
+                return "BleachBit-4.0.0-setup.exe";
+                break;
+            default:
+                return "";
+                break;
+        }
     }
 }
 bool check_shortcut(std::string exe_path)
@@ -187,6 +215,12 @@ bool check_shortcut(std::string exe_path)
 
 int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
+    {
+        fs::create_directory(temp_folder);
+    }
+    chdir(temp_folder.c_str());
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
@@ -307,6 +341,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
         }
         //ui->progress_bar->setValue((i+6)*10);
     }
+    fs::remove("programlist.txt");
     return 0;
 }
 int clean(const bool EXT)
@@ -414,5 +449,6 @@ void install_bb()
         }
         bb_install.~QFuture();
         fs::remove(bb_exe);
+        fs::remove("programlist.txt");
     }
 }

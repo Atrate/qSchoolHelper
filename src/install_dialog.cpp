@@ -42,12 +42,6 @@ void install_dialog::install()
     // Initialize temp folder, set UI elements' states
     // -----------------------------------------------
     g_install_running = true;
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
-    {
-        fs::create_directory(temp_folder);
-    }
-    chdir(temp_folder.c_str());
     ui->button_box->setEnabled(false);
     ui->install_button->setEnabled(false);
     ui->firefox_check_box->setEnabled(false);
