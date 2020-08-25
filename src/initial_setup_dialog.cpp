@@ -55,17 +55,20 @@ void initial_setup_dialog::initial_setup()
     ui->button_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
+    qInfo() << tr("Starting initial setup…\n——————————");
     ui->setup_log->append(tr("Starting initial setup…\n——————————"));
     QApplication::processEvents();
 
     // Disable ads
     // -----------
+    qInfo() << tr("Disabling Windows Explorer ads…\n");
     ui->setup_log->append(tr("Disabling Windows Explorer ads…\n"));
     QApplication::processEvents();
     (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
 
     // Disable telemetry
     // -----------------
+    qInfo() << tr("Disabling telemetry service…\n");
     ui->setup_log->append(tr("Disabling telemetry service…\n"));
     QApplication::processEvents();
     (void) system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
@@ -74,6 +77,7 @@ void initial_setup_dialog::initial_setup()
 
     // Disable search indexing
     // -----------------------
+    qInfo() << tr("Disabling search indexing…\n");
     ui->setup_log->append(tr("Disabling search indexing…\n"));
     QApplication::processEvents();
     (void) system("net stop WSearch");
@@ -81,6 +85,7 @@ void initial_setup_dialog::initial_setup()
 
     // Disable Windows Visual FX
     // -------------------------
+    qInfo() << tr("Disabling visual effects…\n");
     ui->setup_log->append(tr("Disabling visual effects…\n"));
     QApplication::processEvents();
     (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
@@ -96,6 +101,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------------
     if(ui->install_check_box->isChecked())
     {
+        qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
         install_software(true,true,true,true,true);
@@ -106,6 +112,7 @@ void initial_setup_dialog::initial_setup()
     std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
     if (!fs::exists(bb_path))
     {
+        qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
         install_bb();
@@ -114,6 +121,7 @@ void initial_setup_dialog::initial_setup()
     // --------------------
     if (fs::exists(bb_path))
     {
+        qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
         clean(true);
         QApplication::processEvents();
@@ -128,10 +136,13 @@ void initial_setup_dialog::initial_setup()
 
     g_setup_running = false;
     ui->progress_bar->setValue(100);
+    qInfo() << tr("All done!");
     ui->setup_log->append(tr("All done!"));
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 }
+// Ignore close events if a process is running
+// -------------------------------------------
 void initial_setup_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_setup_running)

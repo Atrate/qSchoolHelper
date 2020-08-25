@@ -18,6 +18,7 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QDebug>
 #include "cleaning_dialog.h"
 #include "initial_setup_dialog.h"
 #include "procedures.h"
@@ -49,7 +50,9 @@ void cleaning_dialog::on_clean_button_clicked()
     ui->progress_bar->setValue(0);
     ui->cleaning_log->setEnabled(true);
     ui->cleaning_log->clear();
+    qInfo() << tr("Starting cleaner…\n—————————————————");
     ui->cleaning_log->append(tr("Starting cleaner…\n—————————————————"));
+    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
     ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
     QApplication::processEvents();
 
@@ -61,6 +64,7 @@ void cleaning_dialog::on_clean_button_clicked()
     // --------------------------------
     g_cleaning_running = false;
     ui->progress_bar->setValue(100);
+    qInfo() << tr("All done!");
     ui->cleaning_log->append(tr("All done!"));
     QMessageBox success_box;
     success_box.setText(tr("The cleaning operation completed succesfully!"));
@@ -70,6 +74,8 @@ void cleaning_dialog::on_clean_button_clicked()
     ui->button_box->setEnabled(true);
 
 }
+// Ignore close events if a process is running
+// -------------------------------------------
 void cleaning_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_cleaning_running)

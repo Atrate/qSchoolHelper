@@ -14,6 +14,7 @@
 
 #include <fstream>
 #include <filesystem>
+#include <QDebug>
 #include "about_dialog.h"
 #include "cleaning_dialog.h"
 #include "help_dialog.h"
@@ -71,7 +72,8 @@ void main_window::window_setup()
         ui->help_button->setToolTip(disabled_tooltip);
     }
 #else
-    QString debug_tooltip = "Button enabled due to running a debug build";
+    QString debug_tooltip = "All buttons enabled due to running a debug build";
+    qDebug() << debug_tooltip;
     ui->software_button->setToolTip(debug_tooltip);
     ui->problem_button->setToolTip(debug_tooltip);
     ui->clean_button->setToolTip(debug_tooltip);

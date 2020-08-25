@@ -37,35 +37,6 @@ install_dialog::~install_dialog()
     delete ui;
 }
 bool g_install_running {};
-bool install_dialog::check_shortcut(std::string exe_path)
-{
-    if (fs::exists(exe_path))
-    {
-        std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1),exe_path.length()); // TODO: Convert to title case
-        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
-        {
-            if (fs::is_directory(entry.path()) && fs::exists(entry.path()/"Desktop") && !fs::exists(entry.path()/"Desktop"/exe_name))
-            {
-                try
-                {
-                    std::string link_cmd = "mklink ";
-                    link_cmd.append("\"" + entry.path().string() + "\\Desktop\\" + exe_name + "\" \"" + exe_path + "\"");
-                    (void) system(link_cmd.c_str());
-                }
-                catch (const std::exception &e)
-                {
-                    // Catch permission denied errors. We can't really do much about them, though,
-                    // since the application is supposed to run as administrator anyways.
-                }
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 void install_dialog::install()
 {
     // Initialize temp folder, set UI elements' states
@@ -100,6 +71,7 @@ void install_dialog::install()
 
     if(install_result == 0)
     {
+        qInfo() << tr("The installation completed succesfully!");
         QMessageBox success_box;
         success_box.setText(tr("The installation completed succesfully!"));
         success_box.setModal(true);
@@ -108,6 +80,7 @@ void install_dialog::install()
     }
     else if(install_result == 1)
     {
+        qCritical() << tr("The download failed! Please check your Internet connectivity!");
         QMessageBox dl_failure_box;
         dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
         dl_failure_box.setModal(true);
@@ -116,6 +89,7 @@ void install_dialog::install()
     }
     else if(install_result == 2)
     {
+        qCritical() << tr("The installation failed! Please try installing the program manually!");
         QMessageBox install_failure_box;
         install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
         install_failure_box.setModal(true);
@@ -124,6 +98,7 @@ void install_dialog::install()
     }
     else
     {
+        qCritical() << tr("The installation failed!");
         QMessageBox unknown_failure_box;
         unknown_failure_box.setText(tr("The installation failed!"));
         unknown_failure_box.setModal(true);
@@ -152,6 +127,7 @@ void install_dialog::on_install_button_clicked()
           || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
     {
         QMessageBox no_program_selected_box;
+        qWarning() << tr("Please select at least one program to be installed!");
         no_program_selected_box.setText(tr("Please select at least one program to be installed!"));
         no_program_selected_box.setModal(true);
         no_program_selected_box.exec();
@@ -161,6 +137,8 @@ void install_dialog::on_install_button_clicked()
         install();
     }
 }
+// Ignore close events if a process is running
+// -------------------------------------------
 void install_dialog::closeEvent(QCloseEvent *event)
 {
     if (g_install_running)
