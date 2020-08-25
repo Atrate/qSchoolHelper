@@ -20,6 +20,6 @@
 int curl_dl(const char *url, const char *pagefilename);
 int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
 int clean(const bool EXT);
-void install_bb();
+int install_bb();
 
 #endif // PROCEDURES_H

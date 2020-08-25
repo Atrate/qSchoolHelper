@@ -13,6 +13,7 @@
  */
 
 #include <filesystem>
+#include <fstream>
 #include <stdlib.h>
 #include <unistd.h>
 #include <QApplication>
@@ -88,27 +89,32 @@ int curl_dl(const char *url, const char *pagefilename)
 }
 std::string get_file_info(const int LINE, bool fallback = false)
 {
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
+    std::string filename = "programlist.txt";
+    if (!fs::exists(filename) && !fallback)
     {
-        fs::create_directory(temp_folder);
-    }
-    chdir(temp_folder.c_str());
-    if (!fs::exists("programlist.txt") && !fallback)
-    {
-        if(!curl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", "programlist.txt"))
+        if(!curl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
         {
-            fs::remove("programlist.txt");
-            if(!curl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt","programlist.txt"))
+            fs::remove(filename);
+            if(!curl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
             {
                 fallback = true;
+                fs::remove(filename);
             }
         }
     }
-    if (fs::exists("programlist.txt") && !fallback)
+    if (fs::exists(filename) && !fallback)
     {
-        // DO MAGIC
-        return "";
+        std::ifstream in(filename.c_str());
+        std::string return_string;
+        return_string.reserve(160);
+        // Ignore LINE-1 lines
+        // -------------------
+        for(int i = 0; i < LINE; ++i)
+        {
+            std::getline(in, return_string);
+        }
+        std::getline(in,return_string);
+        return return_string;
     }
     else
     {
@@ -290,12 +296,23 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
             {
                 QApplication::processEvents();
             }
-
             if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
             {
                 dl.~QFuture();
-                return 1;
+                fs::remove(download_array[i][1]);
+                download_array[i][0] = get_file_info(i*3,true);
+                QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
+                while(dl.isRunning())
+                {
+                    QApplication::processEvents();
+                }
+                if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
+                {
+                    dl.~QFuture();
+                    return 1;
+                }
             }
+
             dl.~QFuture();
             //ui->progress_bar->setValue((i+1)*10);
         }
@@ -422,7 +439,7 @@ int clean(const bool EXT)
 
     return 0;
 }
-void install_bb()
+int install_bb()
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
@@ -438,17 +455,39 @@ void install_bb()
     {
         QApplication::processEvents();
     }
-    bb_dl.~QFuture();
-    if (fs::file_size(bb_exe) > 1024)
+    if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
     {
-        bb_exe.append("/S /allusers");
-        QFuture<void> bb_install = QtConcurrent::run(system, bb_exe.c_str());
-        while(bb_install.isRunning())
+        bb_dl.~QFuture();
+        std::string bb_url = get_file_info(15,true);
+        std::string bb_exe = get_file_info(16,true);
+        fs::remove(bb_exe);
+        QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
+        while(bb_dl.isRunning())
         {
             QApplication::processEvents();
         }
+        if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
+        {
+            bb_dl.~QFuture();
+            fs::remove(bb_exe);
+            return 1;
+        }
+    }
+    bb_dl.~QFuture();
+    bb_exe.append("/S /allusers");
+    QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.c_str());
+    while(bb_install.isRunning())
+    {
+        QApplication::processEvents();
+    }
+    if (!bb_install)
+    {
         bb_install.~QFuture();
         fs::remove(bb_exe);
-        fs::remove("programlist.txt");
+        return 2;
     }
+    bb_install.~QFuture();
+    fs::remove(bb_exe);
+    fs::remove("programlist.txt");
+    return 0;
 }

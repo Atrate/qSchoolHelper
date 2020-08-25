@@ -16,6 +16,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <QThread>
+#include <QMessageBox>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QCloseEvent>
 #include "cleaning_dialog.h"
@@ -104,7 +105,30 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        install_software(true,true,true,true,true);
+        int install_result = install_software(true,true,true,true,true);
+        if(install_result == 1)
+        {
+            qCritical() << tr("The download failed! Please check your Internet connectivity!");
+            QMessageBox dl_failure_box;
+            dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
+            dl_failure_box.setModal(true);
+            dl_failure_box.exec();
+        }
+        else if(install_result == 2)
+        {
+            qCritical() << tr("The installation failed! Please try installing the program manually!");
+            QMessageBox install_failure_box;
+            install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
+            install_failure_box.setModal(true);
+            install_failure_box.exec();        }
+        else
+        {
+            qCritical() << tr("The installation failed!");
+            QMessageBox unknown_failure_box;
+            unknown_failure_box.setText(tr("The installation failed!"));
+            unknown_failure_box.setModal(true);
+            unknown_failure_box.exec();
+        }
     }
 
     // Download and install BleachBit
@@ -115,7 +139,31 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
-        install_bb();
+        int bb_install_result = install_bb();
+        if(bb_install_result == 1)
+        {
+            qCritical() << tr("The download failed! Please check your Internet connectivity!");
+            QMessageBox dl_failure_box;
+            dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
+            dl_failure_box.setModal(true);
+            dl_failure_box.exec();
+        }
+        else if(bb_install_result == 2)
+        {
+            qCritical() << tr("The installation failed! Please try installing the program manually!");
+            QMessageBox install_failure_box;
+            install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
+            install_failure_box.setModal(true);
+            install_failure_box.exec();
+        }
+        else
+        {
+            qCritical() << tr("The installation failed!");
+            QMessageBox unknown_failure_box;
+            unknown_failure_box.setText(tr("The installation failed!"));
+            unknown_failure_box.setModal(true);
+            unknown_failure_box.exec();
+        }
     }
     // Run extended cleaner
     // --------------------
