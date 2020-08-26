@@ -125,9 +125,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
             case 0:
                 return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi";
                 break;
-            case 1:
-                return "\"Firefox Setup 79.0.msi\"";
-                break;
             case 2:
                 return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
                 break;
@@ -135,9 +132,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
                 // ------
             case 3:
                 return "https://admdownload.adobe.com/bin/live/readerdc_en_a_install.exe";
-                break;
-            case 4:
-                return "readerdc_en_a_install.exe";
                 break;
             case 5:
                 return "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
@@ -147,9 +141,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
             case 6:
                 return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0.3_Win_x64.msi";
                 break;
-            case 7:
-                return "LibreOffice_7.0.0.3_Win_x64.msi";
-                break;
             case 8:
                 return ""; // TODO: FIX THIS PATH
                 break;
@@ -157,9 +148,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
                 // ---
             case 9:
                 return "https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
-                break;
-            case 10:
-                return "vlc-3.0.8-win64.exe";
                 break;
             case 11:
                 return "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
@@ -169,9 +157,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
             case 12:
                 return "https://gitlab.com/Atrate/qsh-resources/-/raw/master/PowerPointViewer.exe";
                 break;
-            case 13:
-                return "PowerPointViewer.exe";
-                break;
             case 14:
                 return "C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe";
                 break;
@@ -179,9 +164,6 @@ std::string get_file_info(const int LINE, bool fallback = false)
                 // ---------
             case 15:
                 return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
-                break;
-            case 16:
-                return "BleachBit-4.0.0-setup.exe";
                 break;
             default:
                 return "";
@@ -191,7 +173,7 @@ std::string get_file_info(const int LINE, bool fallback = false)
 }
 bool check_shortcut(std::string exe_path)
 {
-    if (fs::exists(exe_path))
+    if (exe_path != "" && fs::exists(exe_path))
     {
         std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1),exe_path.length()); // TODO: Convert to title case
         for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
@@ -234,7 +216,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     if (INS_FF)
     {
         download_array[0][0]=get_file_info(0);
-        download_array[0][1]=get_file_info(1);
+        download_array[0][1]="Firefox_Setup.msi";
         download_array[0][2]=get_file_info(2);
     }
     else
@@ -244,7 +226,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     if (INS_RDC)
     {
         download_array[1][0]=get_file_info(3);
-        download_array[1][1]=get_file_info(4);
+        download_array[1][1]="readerdc_en_a_install.exe";
         download_array[1][2]=get_file_info(5);
     }
     else
@@ -254,7 +236,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     if (INS_LOF)
     {
         download_array[2][0]=get_file_info(6);
-        download_array[2][1]=get_file_info(7);
+        download_array[2][1]="LibreOffice_Win_x64.msi";
         download_array[2][2]=get_file_info(8);
     }
     else
@@ -264,7 +246,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     if (INS_VLC)
     {
         download_array[3][0]=get_file_info(9);
-        download_array[3][1]=get_file_info(10);
+        download_array[3][1]="vlc-win64.exe";
         download_array[3][2]=get_file_info(11);
     }
     else
@@ -274,7 +256,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     if (INS_PPV)
     {
         download_array[4][0]=get_file_info(12);
-        download_array[4][1]=get_file_info(13);
+        download_array[4][1]="PowerPointViewer.exe";
         download_array[4][2]=get_file_info(14);
     }
     else
@@ -448,7 +430,7 @@ int install_bb()
     }
     chdir(temp_folder.c_str());
     std::string bb_url = get_file_info(15);
-    std::string bb_exe = get_file_info(16);
+    std::string bb_exe = "BleachBit-setup.exe";
     fs::remove(bb_exe);
     QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
     while(bb_dl.isRunning())
@@ -459,7 +441,6 @@ int install_bb()
     {
         bb_dl.~QFuture();
         std::string bb_url = get_file_info(15,true);
-        std::string bb_exe = get_file_info(16,true);
         fs::remove(bb_exe);
         QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
         while(bb_dl.isRunning())
