@@ -145,10 +145,10 @@ std::string get_file_info(const int LINE, bool fallback = false)
                 // LOffice
                 // -------
             case 6:
-                return "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi";
+                return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0.3_Win_x64.msi";
                 break;
             case 7:
-                return "LibreOffice_7.0.0_Win_x64.msi";
+                return "LibreOffice_7.0.0.3_Win_x64.msi";
                 break;
             case 8:
                 return ""; // TODO: FIX THIS PATH
