@@ -1,0 +1,3 @@
+[submodule "include/qtcurl"]
+	path = include/qtcurl
+	url = https://github.com/tarasvb/qtcurl.git

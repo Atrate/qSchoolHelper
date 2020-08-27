@@ -26,12 +26,12 @@ namespace fs = std::filesystem;
 // Parts of the following two functions have been taken from https://curl.haxx.se/libcurl/c/url2file.html, in accordance with the license.
 // ---------------------------------------------------------------------------------------------------------------------------------------
 
-static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
     return written;
 }
-int curl_dl(const char *url, const char *pagefilename)
+int procedures::curl_dl(const char *url, const char *pagefilename)
 {
     CURL *curl_handle;
 
@@ -87,7 +87,7 @@ int curl_dl(const char *url, const char *pagefilename)
 
     return 0;
 }
-std::string get_file_info(const int LINE, bool fallback = false)
+std::string procedures::get_file_info(const int LINE, bool fallback)
 {
     std::string filename = "programlist.txt";
     if (!fs::exists(filename) && !fallback)
@@ -171,7 +171,7 @@ std::string get_file_info(const int LINE, bool fallback = false)
         }
     }
 }
-bool check_shortcut(std::string exe_path)
+bool procedures::check_shortcut(std::string exe_path)
 {
     if (exe_path != "" && fs::exists(exe_path))
     {
@@ -201,7 +201,7 @@ bool check_shortcut(std::string exe_path)
     }
 }
 
-int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
@@ -343,7 +343,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     fs::remove("programlist.txt");
     return 0;
 }
-int clean(const bool EXT)
+int procedures::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
@@ -421,7 +421,7 @@ int clean(const bool EXT)
 
     return 0;
 }
-int install_bb()
+int procedures::install_bb()
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))

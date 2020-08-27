@@ -58,7 +58,9 @@ void cleaning_dialog::on_clean_button_clicked()
 
     // Actually run the cleaning process
     // ---------------------------------
-    clean(ui->radio_extended->isChecked());
+    procedures* cleaning = new procedures;
+    cleaning->run_clean(ui->radio_extended->isChecked());
+    delete cleaning;
 
     // Finalize — set UI element states
     // --------------------------------
