@@ -23,79 +23,46 @@
 
 namespace fs = std::filesystem;
 // TODO: MAKE UI RESPONSIVE
-// Parts of the following two functions have been taken from https://curl.haxx.se/libcurl/c/url2file.html, in accordance with the license.
-// ---------------------------------------------------------------------------------------------------------------------------------------
 
-size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+int procedures::qtcurl_dl(const char *url, const char *filename)
 {
-    size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
-    return written;
-}
-int procedures::curl_dl(const char *url, const char *pagefilename)
-{
-    CURL *curl_handle;
-
-    FILE *pagefile = nullptr;
-    curl_global_init(CURL_GLOBAL_ALL);
-
-    /* init the curl session */
-    curl_handle = curl_easy_init();
-
-    /* set URL to get here */
-    curl_easy_setopt(curl_handle, CURLOPT_URL, url);
-
-    /* Switch on full protocol/debug output while testing */
-    curl_easy_setopt(curl_handle, CURLOPT_VERBOSE, 1L);
-
-    /* disable progress meter, set to 0L to enable it */
-    curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 0L);
-
-    /* follow redirects, to select best mirror */
-    curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
-
-    /* send all data to this function  */
-    curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
-
-    /* set certificate bundle path */
-
-    curl_easy_setopt(curl_handle, CURLOPT_CAINFO, "qrc:/../data/curl-ca-bundle.crt");
-
-
-    /* open the file */
-    pagefile = fopen(pagefilename, "wb");
-    if (pagefile)
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
     {
-
-        /* write the page body to this file handle */
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, pagefile);
-
-        /* get it! */
-        curl_easy_perform(curl_handle);
-
-        /* close the header file */
-        fclose(pagefile);
+        fs::create_directory(temp_folder);
     }
-    else
+    chdir(temp_folder.c_str());
+    CurlEasy *curl = new CurlEasy;
+    curl->set(CURLOPT_URL, url);
+    curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
+    curl->set(CURLOPT_WRITEDATA, filename);
+    std::string bin_path = qApp->applicationDirPath().toStdString();
+    bin_path.append("/data/curl-ca-bundle.crt");
+    curl->set( CURLOPT_CAINFO, bin_path.c_str());
+    curl->setHttpHeader("User-Agent", "qSchoolHelper" APP_VERSION);
+    curl->setWriteFunction([](char *data, size_t size)->size_t {
+        qDebug() << "Data: " << QByteArray(data, static_cast<int>(size));
+        return size;
+    });
+    curl->perform();
+    while(curl->isRunning())
     {
-        return 1;
+        QApplication::processEvents();
     }
+    return curl->result();
 
-    /* cleanup curl stuff */
-    curl_easy_cleanup(curl_handle);
-
-    curl_global_cleanup();
-
-    return 0;
 }
 std::string procedures::get_file_info(const int LINE, bool fallback)
 {
     std::string filename = "programlist.txt";
     if (!fs::exists(filename) && !fallback)
     {
-        if(!curl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
+
+
+        if(!qtcurl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
         {
             fs::remove(filename);
-            if(!curl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
+            if(!qtcurl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
             {
                 fallback = true;
                 fs::remove(filename);
@@ -273,29 +240,7 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             fs::remove(download_array[i][1]);
-            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
-            while(dl.isRunning())
-            {
-                QApplication::processEvents();
-            }
-            if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
-            {
-                dl.~QFuture();
-                fs::remove(download_array[i][1]);
-                download_array[i][0] = get_file_info(i*3,true);
-                QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
-                while(dl.isRunning())
-                {
-                    QApplication::processEvents();
-                }
-                if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
-                {
-                    dl.~QFuture();
-                    return 1;
-                }
-            }
-
-            dl.~QFuture();
+            qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str());
             //ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -432,29 +377,13 @@ int procedures::install_bb()
     std::string bb_url = get_file_info(10);
     std::string bb_exe = "BleachBit-setup.exe";
     fs::remove(bb_exe);
-    QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
-    while(bb_dl.isRunning())
+    if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
     {
-        QApplication::processEvents();
-    }
-    if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
-    {
-        bb_dl.~QFuture();
-        std::string bb_url = get_file_info(10,true);
+
         fs::remove(bb_exe);
-        QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
-        while(bb_dl.isRunning())
-        {
-            QApplication::processEvents();
-        }
-        if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
-        {
-            bb_dl.~QFuture();
-            fs::remove(bb_exe);
-            return 1;
-        }
+        return 1;
     }
-    bb_dl.~QFuture();
+
     bb_exe.append("/S /allusers");
     QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.c_str());
     while(bb_install.isRunning())
@@ -471,4 +400,22 @@ int procedures::install_bb()
     fs::remove(bb_exe);
     fs::remove("programlist.txt");
     return 0;
+}
+
+int procedures::run_install_bb()
+{
+    return install_bb();
+}
+int procedures::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+{
+    return install_software(INS_FF,INS_RDC,INS_LOF,INS_VLC,INS_PPV);
+
+}
+int procedures::run_clean(const bool EXT)
+{
+    return clean(EXT);
+}
+int procedures::run_qtcurl_dl(const char *url, const char *filename)
+{
+    return qtcurl_dl(url, filename);
 }
