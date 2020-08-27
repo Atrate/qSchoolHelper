@@ -17,17 +17,16 @@
 
 #include <CurlEasy.h>
 #include <string>
-#include <QObject>
 
 class procedures
 {
     private:
+        int qtcurl_dl(const char *url, const char *filename);
         int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
         int clean(const bool EXT);
         int install_bb();
         static bool check_shortcut(std::string exe_path);
         std::string get_file_info(const int LINE, bool fallback = false);
-        int qtcurl_dl(const char *url, const char *filename);
 
     public:
         int run_install_bb();

@@ -184,6 +184,7 @@ void initial_setup_dialog::initial_setup()
     isdf << std::endl;
     isdf.close();
 
+    delete initial_procedures;
     g_setup_running = false;
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");

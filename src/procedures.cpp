@@ -32,36 +32,39 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
         fs::create_directory(temp_folder);
     }
     chdir(temp_folder.c_str());
+    if (fs::exists(filename))
+    {
+        fs::remove(filename);
+    }
+    std::string bin_path = qApp->applicationDirPath().toStdString();
+    bin_path.append("/data/curl-ca-bundle.crt");
+
     CurlEasy *curl = new CurlEasy;
     curl->set(CURLOPT_URL, url);
     curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
     curl->set(CURLOPT_WRITEDATA, filename);
-    std::string bin_path = qApp->applicationDirPath().toStdString();
-    bin_path.append("/data/curl-ca-bundle.crt");
-    curl->set( CURLOPT_CAINFO, bin_path.c_str());
-    curl->setHttpHeader("User-Agent", "qSchoolHelper" APP_VERSION);
-    curl->setWriteFunction([](char *data, size_t size)->size_t {
+    curl->set(CURLOPT_CAINFO, bin_path.c_str());
+    curl->setHttpHeader("User-Agent", "qSchoolHelper " APP_VERSION);
+    curl->setWriteFunction([](char *data, size_t size)->size_t
+    {
         qDebug() << "Data: " << QByteArray(data, static_cast<int>(size));
         return size;
     });
+
     curl->perform();
     while(curl->isRunning())
     {
         QApplication::processEvents();
     }
-    return curl->result();
-
+    return (curl->result() == 0 ? true : false);
 }
 std::string procedures::get_file_info(const int LINE, bool fallback)
 {
     std::string filename = "programlist.txt";
     if (!fs::exists(filename) && !fallback)
     {
-
-
         if(!qtcurl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
         {
-            fs::remove(filename);
             if(!qtcurl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
             {
                 fallback = true;
@@ -240,7 +243,16 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             fs::remove(download_array[i][1]);
-            qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str());
+            if(!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
+            {
+                fs::remove(download_array[i][1]);
+                download_array[i][0] = get_file_info(i*2,true);
+                if(!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
+                {
+                    fs::remove(download_array[i][1]);
+                    return 1;
+                }
+            }
             //ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -363,7 +375,6 @@ int procedures::clean(const bool EXT)
     //ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     fs::remove_all(temp_folder);
-
     return 0;
 }
 int procedures::install_bb()
@@ -376,12 +387,14 @@ int procedures::install_bb()
     chdir(temp_folder.c_str());
     std::string bb_url = get_file_info(10);
     std::string bb_exe = "BleachBit-setup.exe";
-    fs::remove(bb_exe);
     if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
     {
-
-        fs::remove(bb_exe);
-        return 1;
+        bb_url = get_file_info(10,true);
+        if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
+        {
+            fs::remove(bb_exe);
+            return 1;
+        }
     }
 
     bb_exe.append("/S /allusers");
@@ -409,7 +422,6 @@ int procedures::run_install_bb()
 int procedures::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
     return install_software(INS_FF,INS_RDC,INS_LOF,INS_VLC,INS_PPV);
-
 }
 int procedures::run_clean(const bool EXT)
 {
