@@ -55,13 +55,15 @@ void install_dialog::install()
 
     // Actually run the installation
     // -----------------------------
-    int install_result = install_software(
+    procedures* installer = new procedures();
+    int install_result = installer->run_install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
                              ui->libreoffice_check_box->checkState(),
                              ui->vlc_check_box->checkState(),
                              ui->viewer_check_box->checkState()
                              );
+    delete installer;
 
     if(install_result == 0)
     {

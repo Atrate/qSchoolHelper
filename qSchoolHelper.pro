@@ -59,6 +59,8 @@ TRANSLATIONS += \
 RC_ICONS = data/icons/icon.ico
 RESOURCES = ui/resources.qrc
 
+include (include/qtcurl/src/qtcurl.pri)
+
 QMAKE_LFLAGS += -lcurl
 LIBS += -lcurl
 

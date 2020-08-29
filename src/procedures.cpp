@@ -16,6 +16,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <unistd.h>
+#include <QFile>
 #include <QApplication>
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
@@ -23,79 +24,60 @@
 
 namespace fs = std::filesystem;
 // TODO: MAKE UI RESPONSIVE
-// Parts of the following two functions have been taken from https://curl.haxx.se/libcurl/c/url2file.html, in accordance with the license.
-// ---------------------------------------------------------------------------------------------------------------------------------------
-
-static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
     return written;
 }
-int curl_dl(const char *url, const char *pagefilename)
+int procedures::qtcurl_dl(const char *url, const char *filename)
 {
-    CURL *curl_handle;
-
-    FILE *pagefile = nullptr;
-    curl_global_init(CURL_GLOBAL_ALL);
-
-    /* init the curl session */
-    curl_handle = curl_easy_init();
-
-    /* set URL to get here */
-    curl_easy_setopt(curl_handle, CURLOPT_URL, url);
-
-    /* Switch on full protocol/debug output while testing */
-    curl_easy_setopt(curl_handle, CURLOPT_VERBOSE, 1L);
-
-    /* disable progress meter, set to 0L to enable it */
-    curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 0L);
-
-    /* follow redirects, to select best mirror */
-    curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
-
-    /* send all data to this function  */
-    curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
-
-    /* set certificate bundle path */
-
-    curl_easy_setopt(curl_handle, CURLOPT_CAINFO, "qrc:/../data/curl-ca-bundle.crt");
-
-
-    /* open the file */
-    pagefile = fopen(pagefilename, "wb");
-    if (pagefile)
+    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
+    if (!fs::exists(temp_folder))
     {
-
-        /* write the page body to this file handle */
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, pagefile);
-
-        /* get it! */
-        curl_easy_perform(curl_handle);
-
-        /* close the header file */
-        fclose(pagefile);
+        fs::create_directory(temp_folder);
     }
-    else
+    chdir(temp_folder.c_str());
+    if (fs::exists(filename))
     {
-        return 1;
+        fs::remove(filename);
     }
+    std::string bin_path = qApp->applicationDirPath().toStdString();
+    bin_path.append("/data/curl-ca-bundle.crt");
 
-    /* cleanup curl stuff */
-    curl_easy_cleanup(curl_handle);
+    CurlEasy *curl = new CurlEasy;
+    curl->set(CURLOPT_URL, QUrl(url));
+    curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
+    curl->set(CURLOPT_CAINFO, bin_path.c_str());
+    curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
+    curl->set(CURLOPT_WRITEFUNCTION, write_data);
+    curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
+#ifndef QT_NO_DEBUG
+    curl->set(CURLOPT_VERBOSE, long(1));
+    curl->set(CURLOPT_NOPROGRESS, long(0));
+#endif
 
-    curl_global_cleanup();
+    // Open file for writing and tell cURL to write to it
+    // --------------------------------------------------
+    FILE *dl_file = nullptr;
+    dl_file = fopen(filename, "wb");
+    curl->set(CURLOPT_WRITEDATA, dl_file);
 
-    return 0;
+    curl->perform();
+    while(curl->isRunning())
+    {
+        QApplication::processEvents();
+    }
+    fclose(dl_file);
+    return (curl->result() == 0 ? true : false);
 }
-std::string get_file_info(const int LINE, bool fallback = false)
+std::string procedures::get_file_info(const int LINE, bool fallback)
 {
     std::string filename = "programlist.txt";
     if (!fs::exists(filename) && !fallback)
     {
-        if(!curl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
+        if(!qtcurl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
         {
-            fs::remove(filename);
-            if(!curl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
+            if(!qtcurl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt",filename.c_str()))
             {
                 fallback = true;
                 fs::remove(filename);
@@ -142,7 +124,7 @@ std::string get_file_info(const int LINE, bool fallback = false)
                 return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0.3_Win_x64.msi";
                 break;
             case 5:
-                return ""; // TODO: FIX THIS PATH
+                return "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
                 break;
                 // VLC
                 // ---
@@ -171,7 +153,7 @@ std::string get_file_info(const int LINE, bool fallback = false)
         }
     }
 }
-bool check_shortcut(std::string exe_path)
+bool procedures::check_shortcut(std::string exe_path)
 {
     if (exe_path != "" && fs::exists(exe_path))
     {
@@ -201,7 +183,7 @@ bool check_shortcut(std::string exe_path)
     }
 }
 
-int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
@@ -273,29 +255,16 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             fs::remove(download_array[i][1]);
-            QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
-            while(dl.isRunning())
+            if(!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
             {
-                QApplication::processEvents();
-            }
-            if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
-            {
-                dl.~QFuture();
                 fs::remove(download_array[i][1]);
-                download_array[i][0] = get_file_info(i*3,true);
-                QFuture<int> dl = QtConcurrent::run(curl_dl, download_array[i][0].c_str(), download_array[i][1].c_str());
-                while(dl.isRunning())
+                download_array[i][0] = get_file_info(i*2,true);
+                if(!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
                 {
-                    QApplication::processEvents();
-                }
-                if (!(fs::file_size(download_array[i][1]) > 2048) || !(dl == 0))
-                {
-                    dl.~QFuture();
+                    fs::remove(download_array[i][1]);
                     return 1;
                 }
             }
-
-            dl.~QFuture();
             //ui->progress_bar->setValue((i+1)*10);
         }
     }
@@ -343,7 +312,7 @@ int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, 
     fs::remove("programlist.txt");
     return 0;
 }
-int clean(const bool EXT)
+int procedures::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
@@ -418,10 +387,9 @@ int clean(const bool EXT)
     //ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     fs::remove_all(temp_folder);
-
     return 0;
 }
-int install_bb()
+int procedures::install_bb()
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
     if (!fs::exists(temp_folder))
@@ -431,30 +399,16 @@ int install_bb()
     chdir(temp_folder.c_str());
     std::string bb_url = get_file_info(10);
     std::string bb_exe = "BleachBit-setup.exe";
-    fs::remove(bb_exe);
-    QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
-    while(bb_dl.isRunning())
+    if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
     {
-        QApplication::processEvents();
-    }
-    if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
-    {
-        bb_dl.~QFuture();
-        std::string bb_url = get_file_info(10,true);
-        fs::remove(bb_exe);
-        QFuture<int> bb_dl = QtConcurrent::run(curl_dl, bb_url.c_str(), bb_exe.c_str());
-        while(bb_dl.isRunning())
+        bb_url = get_file_info(10,true);
+        if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
         {
-            QApplication::processEvents();
-        }
-        if (!(fs::file_size(bb_exe) > 1024) || !(bb_dl == 0))
-        {
-            bb_dl.~QFuture();
             fs::remove(bb_exe);
             return 1;
         }
     }
-    bb_dl.~QFuture();
+
     bb_exe.append("/S /allusers");
     QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.c_str());
     while(bb_install.isRunning())
@@ -471,4 +425,21 @@ int install_bb()
     fs::remove(bb_exe);
     fs::remove("programlist.txt");
     return 0;
+}
+
+int procedures::run_install_bb()
+{
+    return install_bb();
+}
+int procedures::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+{
+    return install_software(INS_FF,INS_RDC,INS_LOF,INS_VLC,INS_PPV);
+}
+int procedures::run_clean(const bool EXT)
+{
+    return clean(EXT);
+}
+int procedures::run_qtcurl_dl(const char *url, const char *filename)
+{
+    return qtcurl_dl(url, filename);
 }

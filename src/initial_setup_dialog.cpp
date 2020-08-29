@@ -49,6 +49,8 @@ void initial_setup_dialog::initial_setup()
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
 
+    procedures* initial_procedures = new procedures();
+
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
@@ -105,7 +107,7 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        int install_result = install_software(true,true,true,true,true);
+        int install_result = initial_procedures->run_install_software(true,true,true,true,true);
         if(install_result == 1)
         {
             qCritical() << tr("The download failed! Please check your Internet connectivity!");
@@ -139,7 +141,7 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
-        int bb_install_result = install_bb();
+        int bb_install_result = initial_procedures->run_install_bb();
         if(bb_install_result == 1)
         {
             qCritical() << tr("The download failed! Please check your Internet connectivity!");
@@ -171,7 +173,7 @@ void initial_setup_dialog::initial_setup()
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
-        clean(true);
+        initial_procedures->run_clean(true);
         QApplication::processEvents();
     }
 
@@ -182,6 +184,7 @@ void initial_setup_dialog::initial_setup()
     isdf << std::endl;
     isdf.close();
 
+    delete initial_procedures;
     g_setup_running = false;
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
