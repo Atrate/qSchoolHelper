@@ -122,7 +122,7 @@ std::string procedures::get_file_info(const int LINE, bool fallback)
                 return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0.3_Win_x64.msi";
                 break;
             case 5:
-                return ""; // TODO: FIX THIS PATH
+                return "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
                 break;
                 // VLC
                 // ---
