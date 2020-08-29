@@ -47,12 +47,14 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
     CurlEasy *curl = new CurlEasy;
     curl->set(CURLOPT_URL, QUrl(url));
     curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl->set(CURLOPT_VERBOSE, long(1));
     curl->set(CURLOPT_CAINFO, bin_path.c_str());
     curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
     curl->set(CURLOPT_WRITEFUNCTION, write_data);
     curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
-
+#ifndef QT_NO_DEBUG
+    curl->set(CURLOPT_VERBOSE, long(1));
+    curl->set(CURLOPT_NOPROGRESS, long(0));
+#endif
 
     // Open file for writing and tell cURL to write to it
     // --------------------------------------------------
