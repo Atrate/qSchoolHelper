@@ -27,6 +27,7 @@ class procedures
         int install_bb();
         static bool check_shortcut(std::string exe_path);
         std::string get_file_info(const int LINE, bool fallback = false);
+        static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream);
 
     public:
         int run_install_bb();

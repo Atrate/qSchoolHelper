@@ -16,6 +16,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <unistd.h>
+#include <QFile>
 #include <QApplication>
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
@@ -23,7 +24,11 @@
 
 namespace fs = std::filesystem;
 // TODO: MAKE UI RESPONSIVE
-
+size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+{
+    size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
+    return written;
+}
 int procedures::qtcurl_dl(const char *url, const char *filename)
 {
     std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
@@ -40,22 +45,27 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
     bin_path.append("/data/curl-ca-bundle.crt");
 
     CurlEasy *curl = new CurlEasy;
-    curl->set(CURLOPT_URL, url);
+    curl->set(CURLOPT_URL, QUrl(url));
     curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl->set(CURLOPT_WRITEDATA, filename);
+    curl->set(CURLOPT_VERBOSE, long(1));
     curl->set(CURLOPT_CAINFO, bin_path.c_str());
-    curl->setHttpHeader("User-Agent", "qSchoolHelper " APP_VERSION);
-    curl->setWriteFunction([](char *data, size_t size)->size_t
-    {
-        qDebug() << "Data: " << QByteArray(data, static_cast<int>(size));
-        return size;
-    });
+    curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
+    curl->set(CURLOPT_WRITEFUNCTION, write_data);
+    curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
+
+
+    // Open file for writing and tell cURL to write to it
+    // --------------------------------------------------
+    FILE *dl_file = nullptr;
+    dl_file = fopen(filename, "wb");
+    curl->set(CURLOPT_WRITEDATA, dl_file);
 
     curl->perform();
     while(curl->isRunning())
     {
         QApplication::processEvents();
     }
+    fclose(dl_file);
     return (curl->result() == 0 ? true : false);
 }
 std::string procedures::get_file_info(const int LINE, bool fallback)
