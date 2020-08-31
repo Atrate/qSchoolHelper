@@ -54,6 +54,7 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
 #ifndef QT_NO_DEBUG
     curl->set(CURLOPT_VERBOSE, long(1));
     curl->set(CURLOPT_NOPROGRESS, long(0));
+    curl->set(CURLOPT_HEADER, long(1));
 #endif
 
     // Open file for writing and tell cURL to write to it
