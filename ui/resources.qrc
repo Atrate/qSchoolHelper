@@ -16,5 +16,8 @@
         <file>../data/icons/projector.png</file>
         <file>../data/icons/speaker.png</file>
         <file>../data/curl-ca-bundle.crt</file>
+        <file>../data/images/problem_screenshots/dp_cable.jpg</file>
+        <file>../data/images/problem_screenshots/aux_cable.jpg</file>
+        <file>../data/images/problem_screenshots/ethernet_cable.jpg</file>
     </qresource>
 </RCC>
