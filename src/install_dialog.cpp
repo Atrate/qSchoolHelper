@@ -12,19 +12,12 @@
  *
  */
 
-#include <filesystem>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <QThread>
-#include <QtConcurrent/QtConcurrentRun>
+#include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include "install_dialog.h"
 #include "procedures.h"
 #include "ui_install_dialog.h"
-
-namespace fs = std::filesystem;
 
 install_dialog::install_dialog(QWidget *parent) :
     QDialog(parent),

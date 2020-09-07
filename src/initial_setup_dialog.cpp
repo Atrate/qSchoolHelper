@@ -14,10 +14,8 @@
 
 #include <filesystem>
 #include <fstream>
-#include <unistd.h>
-#include <QThread>
+#include <QDebug>
 #include <QMessageBox>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QCloseEvent>
 #include "cleaning_dialog.h"
 #include "initial_setup_dialog.h"

@@ -12,10 +12,6 @@
  *
  */
 
-#include <filesystem>
-#include <unistd.h>
-#include <QThread>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QDebug>
