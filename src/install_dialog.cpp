@@ -92,6 +92,15 @@ void install_dialog::install()
         install_failure_box.exec();
         ui->progress_bar->setValue(0);
     }
+    else if (install_result == 3)
+    {
+        qCritical() << tr("The installation failed! The temporary folder could not be created!");
+        QMessageBox tmp_failure_box;
+        tmp_failure_box.setText(tr("The installation failed! The temporary folder could not be created!"));
+        tmp_failure_box.setModal(true);
+        tmp_failure_box.exec();
+        ui->progress_bar->setValue(0);
+    }
     else
     {
         qCritical() << tr("The installation failed!");

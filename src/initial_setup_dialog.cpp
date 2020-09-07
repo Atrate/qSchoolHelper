@@ -40,7 +40,6 @@ initial_setup_dialog::~initial_setup_dialog()
 }
 bool g_setup_running {};
 
-
 void initial_setup_dialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states

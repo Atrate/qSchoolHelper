@@ -19,6 +19,7 @@
 #include <QFile>
 #include <QApplication>
 #include <QThread>
+#include <QTemporaryDir>
 #include <QtConcurrent/QtConcurrentRun>
 #include "procedures.h"
 
@@ -31,12 +32,6 @@ size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream
 }
 int procedures::qtcurl_dl(const char *url, const char *filename)
 {
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
-    {
-        fs::create_directory(temp_folder);
-    }
-    chdir(temp_folder.c_str());
     if (fs::exists(filename))
     {
         fs::remove(filename);
@@ -191,12 +186,19 @@ bool procedures::check_shortcut(std::string exe_path)
 
 int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
+    QTemporaryDir temp_folder;
+    if (temp_folder.isValid())
     {
-        fs::create_directory(temp_folder);
+        if(!chdir(temp_folder.path().toUtf8()))
+        {
+            return 3;
+        }
     }
-    chdir(temp_folder.c_str());
+    else
+    {
+        temp_folder.~QTemporaryDir();
+        return 3;
+    }
     // Declare download links and file names
     // -------------------------------------
     const int DL_ARRAY_SIZE=5;
@@ -267,7 +269,7 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
                 download_array[i][0] = get_file_info(i*2,true);
                 if(!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
                 {
-                    fs::remove(download_array[i][1]);
+                    temp_folder.~QTemporaryDir();
                     return 1;
                 }
             }
@@ -307,6 +309,7 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
             fs::remove(download_array[i][1]);
             if (!install)
             {
+                temp_folder.~QTemporaryDir();
                 install.~QFuture();
                 return 2;
             }
@@ -315,7 +318,7 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
         }
         //ui->progress_bar->setValue((i+6)*10);
     }
-    fs::remove("programlist.txt");
+    temp_folder.~QTemporaryDir();
     return 0;
 }
 int procedures::clean(const bool EXT)
@@ -387,30 +390,33 @@ int procedures::clean(const bool EXT)
         bb_clean.~QFuture();
     }
 
-    // Clean qSH tmp folder
-    // --------------------
-    //ui->progress_bar->setValue(80);
-    //ui->cleaning_log->append(tr("Cleaning qSchoolHelper's temporary folder"));
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    fs::remove_all(temp_folder);
     return 0;
 }
 int procedures::install_bb()
 {
-    std::string temp_folder = "C:\\ProgramData\\qSchoolHelper\\tmp";
-    if (!fs::exists(temp_folder))
+    QTemporaryDir temp_folder;
+    if (temp_folder.isValid())
     {
-        fs::create_directory(temp_folder);
+        if(!chdir(temp_folder.path().toUtf8()))
+        {
+            temp_folder.~QTemporaryDir();
+            return 3;
+        }
     }
-    chdir(temp_folder.c_str());
+    else
+    {
+        temp_folder.~QTemporaryDir();
+        return 3;
+    }
     std::string bb_url = get_file_info(10);
     std::string bb_exe = "BleachBit-setup.exe";
     if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
     {
+        fs::remove(bb_exe);
         bb_url = get_file_info(10,true);
         if(!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
         {
-            fs::remove(bb_exe);
+            temp_folder.~QTemporaryDir();
             return 1;
         }
     }
@@ -423,13 +429,13 @@ int procedures::install_bb()
     }
     if (!bb_install)
     {
+        temp_folder.~QTemporaryDir();
         bb_install.~QFuture();
         fs::remove(bb_exe);
         return 2;
     }
     bb_install.~QFuture();
-    fs::remove(bb_exe);
-    fs::remove("programlist.txt");
+    temp_folder.~QTemporaryDir();
     return 0;
 }
 
