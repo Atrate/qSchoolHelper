@@ -31,7 +31,7 @@ SOURCES += \
     src/main.cpp \
     src/main_window.cpp \
     src/problem_dialog.cpp \
-    src/procedures.cpp
+    src/procedure.cpp
 
 HEADERS += \
     include/about_dialog.h \
@@ -41,7 +41,7 @@ HEADERS += \
     include/install_dialog.h \
     include/main_window.h \
     include/problem_dialog.h \
-    include/procedures.h
+    include/procedure.h
 
 FORMS += \
     ui/about_dialog.ui \

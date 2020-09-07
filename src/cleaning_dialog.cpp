@@ -17,7 +17,7 @@
 #include <QDebug>
 #include "cleaning_dialog.h"
 #include "initial_setup_dialog.h"
-#include "procedures.h"
+#include "procedure.h"
 #include "ui_cleaning_dialog.h"
 
 namespace fs = std::filesystem;
@@ -54,7 +54,7 @@ void cleaning_dialog::on_clean_button_clicked()
 
     // Actually run the cleaning process
     // ---------------------------------
-    procedures* cleaning = new procedures;
+    procedure* cleaning = new procedure;
     cleaning->run_clean(ui->radio_extended->isChecked());
     delete cleaning;
 

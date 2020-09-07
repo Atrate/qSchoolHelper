@@ -20,7 +20,7 @@
 #include "cleaning_dialog.h"
 #include "initial_setup_dialog.h"
 #include "install_dialog.h"
-#include "procedures.h"
+#include "procedure.h"
 #include "ui_initial_setup_dialog.h"
 
 namespace fs = std::filesystem;
@@ -50,7 +50,7 @@ void initial_setup_dialog::initial_setup()
         fs::create_directory(config_folder);
     }
 
-    procedures* initial_procedures = new procedures();
+    procedure* initial_procedures = new procedure();
 
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);

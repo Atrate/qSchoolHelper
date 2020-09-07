@@ -12,13 +12,13 @@
  *
  */
 
-#ifndef PROCEDURES_H
-#define PROCEDURES_H
+#ifndef PROCEDURE_H
+#define PROCEDURE_H
 
 #include <CurlEasy.h>
 #include <string>
 
-class procedures
+class procedure
 {
     private:
         int qtcurl_dl(const char *url, const char *filename);
@@ -37,4 +37,4 @@ class procedures
 };
 
 
-#endif // PROCEDURES_H
+#endif // PROCEDURE_H

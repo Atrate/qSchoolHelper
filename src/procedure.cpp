@@ -21,16 +21,16 @@
 #include <QThread>
 #include <QTemporaryDir>
 #include <QtConcurrent/QtConcurrentRun>
-#include "procedures.h"
+#include "procedure.h"
 
 namespace fs = std::filesystem;
 // TODO: MAKE UI RESPONSIVE
-size_t procedures::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+size_t procedure::write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
     size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
     return written;
 }
-int procedures::qtcurl_dl(const char *url, const char *filename)
+int procedure::qtcurl_dl(const char *url, const char *filename)
 {
     if (fs::exists(filename))
     {
@@ -71,7 +71,7 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
     fclose(dl_file);
     return (curl->result() == 0 ? true : false);
 }
-std::string procedures::get_file_info(const int LINE, bool fallback)
+std::string procedure::get_file_info(const int LINE, bool fallback)
 {
     std::string filename = "programlist.txt";
     if (!fs::exists(filename) && !fallback)
@@ -154,7 +154,7 @@ std::string procedures::get_file_info(const int LINE, bool fallback)
         }
     }
 }
-bool procedures::check_shortcut(std::string exe_path)
+bool procedure::check_shortcut(std::string exe_path)
 {
     if (exe_path != "" && fs::exists(exe_path))
     {
@@ -184,7 +184,7 @@ bool procedures::check_shortcut(std::string exe_path)
     }
 }
 
-int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+int procedure::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
     QTemporaryDir temp_folder;
     if (temp_folder.isValid())
@@ -321,7 +321,7 @@ int procedures::install_software(const bool INS_FF, const bool INS_RDC, const bo
     temp_folder.~QTemporaryDir();
     return 0;
 }
-int procedures::clean(const bool EXT)
+int procedure::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
@@ -392,7 +392,7 @@ int procedures::clean(const bool EXT)
 
     return 0;
 }
-int procedures::install_bb()
+int procedure::install_bb()
 {
     QTemporaryDir temp_folder;
     if (temp_folder.isValid())
@@ -439,19 +439,19 @@ int procedures::install_bb()
     return 0;
 }
 
-int procedures::run_install_bb()
+int procedure::run_install_bb()
 {
     return install_bb();
 }
-int procedures::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+int procedure::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
 {
     return install_software(INS_FF,INS_RDC,INS_LOF,INS_VLC,INS_PPV);
 }
-int procedures::run_clean(const bool EXT)
+int procedure::run_clean(const bool EXT)
 {
     return clean(EXT);
 }
-int procedures::run_qtcurl_dl(const char *url, const char *filename)
+int procedure::run_qtcurl_dl(const char *url, const char *filename)
 {
     return qtcurl_dl(url, filename);
 }

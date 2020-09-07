@@ -16,7 +16,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include "install_dialog.h"
-#include "procedures.h"
+#include "procedure.h"
 #include "ui_install_dialog.h"
 
 install_dialog::install_dialog(QWidget *parent) :
@@ -48,7 +48,7 @@ void install_dialog::install()
 
     // Actually run the installation
     // -----------------------------
-    procedures* installer = new procedures();
+    procedure* installer = new procedure();
     int install_result = installer->run_install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
