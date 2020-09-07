@@ -20,8 +20,6 @@
 #include "procedure.h"
 #include "ui_cleaning_dialog.h"
 
-namespace fs = std::filesystem;
-
 cleaning_dialog::cleaning_dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::cleaning_dialog)
