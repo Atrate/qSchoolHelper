@@ -41,13 +41,18 @@ int procedures::qtcurl_dl(const char *url, const char *filename)
     {
         fs::remove(filename);
     }
-    std::string bin_path = qApp->applicationDirPath().toStdString();
-    bin_path.append("/data/curl-ca-bundle.crt");
+    std::string config_folder = "C:\\ProgramData\\qSchoolHelper";
+    if (!fs::exists(config_folder))
+    {
+        fs::create_directory(config_folder);
+    }
+    QFile::copy(":/../data/curl-ca-bundle.crt", config_folder.c_str());
+    config_folder.append("\\curl-ca-bundle.crt");
 
     CurlEasy *curl = new CurlEasy;
     curl->set(CURLOPT_URL, QUrl(url));
     curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl->set(CURLOPT_CAINFO, bin_path.c_str());
+    curl->set(CURLOPT_CAINFO, config_folder.c_str());
     curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
     curl->set(CURLOPT_WRITEFUNCTION, write_data);
     curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);

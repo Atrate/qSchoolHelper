@@ -48,6 +48,10 @@ void initial_setup_dialog::initial_setup()
     g_setup_running = true;
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
+    if (!fs::exists(config_folder))
+    {
+        fs::create_directory(config_folder);
+    }
 
     procedures* initial_procedures = new procedures();
 
