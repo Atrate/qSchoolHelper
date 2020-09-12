@@ -41,7 +41,10 @@ int procedure::qtcurl_dl(const char *url, const char *filename)
     {
         fs::create_directory(config_folder);
     }
-    QFile::copy(":/../data/curl-ca-bundle.crt", config_folder.c_str());
+    if (!fs::exists(std::string(config_folder + "\\curl-ca-bundle.crt")))
+    {
+        QFile::copy(":/../data/curl-ca-bundle.crt", config_folder.c_str());
+    }
     config_folder.append("\\curl-ca-bundle.crt");
 
     CurlEasy *curl = new CurlEasy;
