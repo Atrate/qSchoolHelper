@@ -385,12 +385,12 @@ int procedure::clean(const bool EXT)
                         "system.memory_dump system.muicache system.prefetch system.updates";
         //ui->progress_bar->setValue(60);
         //ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
-        QFuture<void> bb_clean = QtConcurrent::run(system, cmd.c_str());
-        while(bb_clean.isRunning())
+        QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.c_str());
+        while(bb_ext_clean.isRunning())
         {
             QApplication::processEvents();
         }
-        bb_clean.~QFuture();
+        bb_ext_clean.~QFuture();
     }
 
     return 0;
