@@ -26,7 +26,7 @@
 
 namespace fs = std::filesystem;
 
-main_window::main_window(QWidget *parent)
+main_window::main_window(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::main_window)
 {
@@ -43,12 +43,15 @@ void main_window::window_setup()
     // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
     // -------------------------------------------------------------------------------------
     std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
+
     if (!fs::exists(config_folder))
     {
         fs::create_directory(config_folder);
     }
+
 #ifdef QT_NO_DEBUG
     std::string initial_setup_done = config_folder + "initial_setup_done.txt";
+
     if (fs::exists(initial_setup_done))
     {
         ui->software_button->setToolTip(tr("Install missing software"));
@@ -71,6 +74,7 @@ void main_window::window_setup()
         ui->clean_button->setToolTip(disabled_tooltip);
         ui->help_button->setToolTip(disabled_tooltip);
     }
+
 #else
     QString debug_tooltip = "All buttons enabled due to running a debug build";
     qDebug() << debug_tooltip;

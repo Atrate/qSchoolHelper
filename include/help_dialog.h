@@ -27,11 +27,11 @@ class help_dialog : public QDialog
         Q_OBJECT
 
     public:
-        explicit help_dialog(QWidget *parent = nullptr);
+        explicit help_dialog(QWidget* parent = nullptr);
         ~help_dialog();
 
     private:
-        Ui::help_dialog *ui;
+        Ui::help_dialog* ui;
 };
 
 #endif // HELP_DIALOG_H

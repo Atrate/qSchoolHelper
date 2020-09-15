@@ -26,14 +26,14 @@ class initial_setup_dialog : public QDialog
         Q_OBJECT
 
     public:
-        explicit initial_setup_dialog(QWidget *parent = nullptr);
+        explicit initial_setup_dialog(QWidget* parent = nullptr);
         ~initial_setup_dialog();
 
     protected:
-        void closeEvent(QCloseEvent *event);
+        void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::initial_setup_dialog *ui;
+        Ui::initial_setup_dialog* ui;
 
     private slots:
         void initial_setup();

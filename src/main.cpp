@@ -17,14 +17,14 @@
 #include <QTranslator>
 #include "main_window.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-
     QTranslator qsh_translator;
     QStringList languages;
     languages << "English" << "Polish";
     QString lang = QInputDialog::getItem(NULL, "Select Language", "Language", languages);
+
     if (lang == "Polish")
     {
         QString trans_file = ":/i18n/qSchoolHelper_pl_PL.qm";

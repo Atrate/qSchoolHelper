@@ -15,7 +15,7 @@
 #include "problem_dialog.h"
 #include "ui_problem_dialog.h"
 
-problem_dialog::problem_dialog(QWidget *parent) :
+problem_dialog::problem_dialog(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::problem_dialog)
 {
@@ -39,8 +39,8 @@ void problem_dialog::set_tabs(int i)
 }
 void problem_dialog::on_back_button_clicked()
 {
-    if(ui->browser_tabs->currentIndex() == 1 || ui->presentation_tabs->currentIndex() == 1
-      || ui->speakers_tabs->currentIndex() == 1 || ui->projector_tabs->currentIndex() == 1)
+    if (ui->browser_tabs->currentIndex() == 1 || ui->presentation_tabs->currentIndex() == 1
+            || ui->speakers_tabs->currentIndex() == 1 || ui->projector_tabs->currentIndex() == 1)
     {
         set_tabs(0);
     }

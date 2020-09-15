@@ -20,7 +20,7 @@
 #include "procedure.h"
 #include "ui_cleaning_dialog.h"
 
-cleaning_dialog::cleaning_dialog(QWidget *parent) :
+cleaning_dialog::cleaning_dialog(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::cleaning_dialog)
 {
@@ -49,13 +49,11 @@ void cleaning_dialog::on_clean_button_clicked()
     qInfo() << tr("Removing .bat and .cmd files from the desktop…");
     ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
     QApplication::processEvents();
-
     // Actually run the cleaning process
     // ---------------------------------
     procedure* cleaning = new procedure;
     cleaning->run_clean(ui->radio_extended->isChecked());
     delete cleaning;
-
     // Finalize — set UI element states
     // --------------------------------
     g_cleaning_running = false;
@@ -68,11 +66,10 @@ void cleaning_dialog::on_clean_button_clicked()
     success_box.exec();
     ui->clean_button->setEnabled(true);
     ui->button_box->setEnabled(true);
-
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void cleaning_dialog::closeEvent(QCloseEvent *event)
+void cleaning_dialog::closeEvent(QCloseEvent* event)
 {
     if (g_cleaning_running)
     {

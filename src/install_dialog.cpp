@@ -19,7 +19,7 @@
 #include "procedure.h"
 #include "ui_install_dialog.h"
 
-install_dialog::install_dialog(QWidget *parent) :
+install_dialog::install_dialog(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::install_dialog)
 {
@@ -42,10 +42,8 @@ void install_dialog::install()
     ui->libreoffice_check_box->setEnabled(false);
     ui->vlc_check_box->setEnabled(false);
     ui->viewer_check_box->setEnabled(false);
-
     ui->progress_bar->setValue(0);
     QApplication::processEvents();
-
     // Actually run the installation
     // -----------------------------
     procedure* installer = new procedure();
@@ -55,10 +53,10 @@ void install_dialog::install()
                              ui->libreoffice_check_box->checkState(),
                              ui->vlc_check_box->checkState(),
                              ui->viewer_check_box->checkState()
-                             );
+                         );
     delete installer;
 
-    if(install_result == 0)
+    if (install_result == 0)
     {
         qInfo() << tr("The installation completed succesfully!");
         QMessageBox success_box;
@@ -67,7 +65,7 @@ void install_dialog::install()
         success_box.exec();
         ui->progress_bar->setValue(100);
     }
-    else if(install_result == 1)
+    else if (install_result == 1)
     {
         qCritical() << tr("The download failed! Please check your Internet connectivity!");
         QMessageBox dl_failure_box;
@@ -76,7 +74,7 @@ void install_dialog::install()
         dl_failure_box.exec();
         ui->progress_bar->setValue(0);
     }
-    else if(install_result == 2)
+    else if (install_result == 2)
     {
         qCritical() << tr("The installation failed! Please try installing the program manually!");
         QMessageBox install_failure_box;
@@ -103,12 +101,10 @@ void install_dialog::install()
         unknown_failure_box.exec();
         ui->progress_bar->setValue(0);
     }
-    g_install_running = false;
-    
 
+    g_install_running = false;
     // Set UI elements' states
     // -----------------------
-
     ui->button_box->setEnabled(true);
     ui->install_button->setEnabled(true);
     ui->firefox_check_box->setEnabled(true);
@@ -122,7 +118,7 @@ void install_dialog::on_install_button_clicked()
     // If no program has been selected, display message box
     // ----------------------------------------------------
     if (!(ui->firefox_check_box->isChecked() || ui->reader_check_box->isChecked() || ui->vlc_check_box->isChecked()
-          || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
+            || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
     {
         QMessageBox no_program_selected_box;
         qWarning() << tr("Please select at least one program to be installed!");
@@ -137,7 +133,7 @@ void install_dialog::on_install_button_clicked()
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void install_dialog::closeEvent(QCloseEvent *event)
+void install_dialog::closeEvent(QCloseEvent* event)
 {
     if (g_install_running)
     {

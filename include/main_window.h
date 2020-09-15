@@ -35,17 +35,17 @@ class main_window : public QMainWindow
         Q_OBJECT
 
     public:
-        main_window(QWidget *parent = nullptr);
+        main_window(QWidget* parent = nullptr);
         ~main_window();
 
     private:
-        Ui::main_window *ui;
-        problem_dialog *problem;
-        initial_setup_dialog *initial_setup;
-        about_dialog *about;
-        install_dialog *install;
-        cleaning_dialog *cleaning;
-        help_dialog *help;
+        Ui::main_window* ui;
+        problem_dialog* problem;
+        initial_setup_dialog* initial_setup;
+        about_dialog* about;
+        install_dialog* install;
+        cleaning_dialog* cleaning;
+        help_dialog* help;
         void window_setup();
 
     private slots:

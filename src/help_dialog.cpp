@@ -15,7 +15,7 @@
 #include "help_dialog.h"
 #include "ui_help_dialog.h"
 
-help_dialog::help_dialog(QWidget *parent) :
+help_dialog::help_dialog(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::help_dialog)
 {

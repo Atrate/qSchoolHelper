@@ -27,14 +27,14 @@ class cleaning_dialog : public QDialog
         Q_OBJECT
 
     public:
-        explicit cleaning_dialog(QWidget *parent = nullptr);
+        explicit cleaning_dialog(QWidget* parent = nullptr);
         ~cleaning_dialog();
 
     protected:
-        void closeEvent(QCloseEvent *event);
+        void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::cleaning_dialog *ui;
+        Ui::cleaning_dialog* ui;
 
     private slots:
         void on_clean_button_clicked();
