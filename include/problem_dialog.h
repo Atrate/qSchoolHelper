@@ -32,7 +32,7 @@ class problem_dialog : public QDialog
 
     private:
         Ui::problem_dialog* ui;
-        void set_tabs(int i);
+        void set_tabs(unsigned int i);
 
     private slots:
         void on_back_button_clicked();

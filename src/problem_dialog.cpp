@@ -30,7 +30,7 @@ problem_dialog::~problem_dialog()
 {
     delete ui;
 }
-void problem_dialog::set_tabs(int i)
+void problem_dialog::set_tabs(unsigned int i)
 {
     ui->browser_tabs->setCurrentIndex(i);
     ui->presentation_tabs->setCurrentIndex(i);

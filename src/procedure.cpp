@@ -226,7 +226,7 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     // Declare download links and file names
     // -------------------------------------
-    const int DL_ARRAY_SIZE = 5;
+    const unsigned int DL_ARRAY_SIZE = 5;
     std::string download_array[DL_ARRAY_SIZE][4];
 
     if (INS_FF)
@@ -288,7 +288,7 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     // ------------------
     bool shortcut_array[DL_ARRAY_SIZE];
 
-    for (int i = 0; i < DL_ARRAY_SIZE; i++)
+    for (unsigned int i = 0; i < DL_ARRAY_SIZE; i++)
     {
         shortcut_array[i] = check_shortcut(download_array[i][2]);
 
@@ -314,7 +314,7 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     // Install the applications
     // ------------------------
-    for (int i = 0; i < DL_ARRAY_SIZE; i++)
+    for (unsigned int i = 0; i < DL_ARRAY_SIZE; i++)
     {
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
