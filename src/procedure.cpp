@@ -39,7 +39,7 @@ int procedure::qtcurl_dl(const char* url, const char* filename)
 
     if (url[0] == '\0' || filename[0] == '\0')
     {
-        return false
+        return false;
     }
 
 #endif
