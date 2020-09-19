@@ -32,6 +32,18 @@ size_t procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
 }
 int procedure::qtcurl_dl(const char* url, const char* filename)
 {
+#ifndef QT_NO_DEBUG
+    assert(url[0] != '\0');
+    assert(filename[0] != '\0');
+#else
+
+    if (url[0] == '\0' || filename[0] == '\0')
+    {
+        return false
+    }
+
+#endif
+
     if (fs::exists(filename))
     {
         fs::remove(filename);
@@ -79,6 +91,9 @@ int procedure::qtcurl_dl(const char* url, const char* filename)
 }
 std::string procedure::get_file_info(const int LINE, bool fallback)
 {
+#ifndef QT_NO_DEBUG
+    assert(LINE < 11 && LINE > -1);
+#endif
     std::string filename = "programlist.txt";
 
     if (!fs::exists(filename) && !fallback)
@@ -177,6 +192,10 @@ std::string procedure::get_file_info(const int LINE, bool fallback)
 }
 bool procedure::check_shortcut(std::string exe_path)
 {
+#ifndef QT_NO_DEBUG
+    assert(exe_path != "");
+#endif
+
     if (exe_path != "" && fs::exists(exe_path))
     {
         std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1), exe_path.length()); // TODO: Convert to title case
