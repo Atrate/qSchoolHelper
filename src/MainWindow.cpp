@@ -22,7 +22,7 @@
 #include "InstallDialog.h"
 #include "MainWindow.h"
 #include "ProblemDialog.h"
-#include "ui_main_window.h"
+#include "ui_MainWindow.h"
 
 namespace fs = std::filesystem;
 

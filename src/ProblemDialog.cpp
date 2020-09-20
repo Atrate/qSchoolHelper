@@ -13,7 +13,7 @@
  */
 
 #include "ProblemDialog.h"
-#include "ui_problem_dialog.h"
+#include "ui_ProblemDialog.h"
 
 ProblemDialog::ProblemDialog(QWidget* parent) :
     QDialog(parent),

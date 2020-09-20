@@ -13,7 +13,7 @@
  */
 
 #include "HelpDialog.h"
-#include "ui_help_dialog.h"
+#include "ui_HelpDialog.h"
 
 HelpDialog::HelpDialog(QWidget* parent) :
     QDialog(parent),

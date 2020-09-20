@@ -18,7 +18,7 @@
 #include "CleaningDialog.h"
 #include "InitialSetupDialog.h"
 #include "Procedure.h"
-#include "ui_cleaning_dialog.h"
+#include "ui_CleaningDialog.h"
 
 CleaningDialog::CleaningDialog(QWidget* parent) :
     QDialog(parent),

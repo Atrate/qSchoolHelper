@@ -21,7 +21,7 @@
 #include "InitialSetupDialog.h"
 #include "InstallDialog.h"
 #include "Procedure.h"
-#include "ui_initial_setup_dialog.h"
+#include "ui_InitialSetupDialog.h"
 
 namespace fs = std::filesystem;
 

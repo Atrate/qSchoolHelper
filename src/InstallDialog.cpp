@@ -17,7 +17,7 @@
 #include <QCloseEvent>
 #include "InstallDialog.h"
 #include "Procedure.h"
-#include "ui_install_dialog.h"
+#include "ui_InstallDialog.h"
 
 InstallDialog::InstallDialog(QWidget* parent) :
     QDialog(parent),
