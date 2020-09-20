@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>problem_dialog</class>
- <widget class="QDialog" name="problem_dialog">
+ <class>ProblemDialog</class>
+ <widget class="QDialog" name="ProblemDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -1107,7 +1107,7 @@ You are using the correct software to open presentations. Use PowerPoint Viewer 
   <connection>
    <sender>close_button</sender>
    <signal>clicked()</signal>
-   <receiver>problem_dialog</receiver>
+   <receiver>ProblemDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -12,40 +12,40 @@
  *
  */
 
-#ifndef MAIN_WINDOW_H
-#define MAIN_WINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "about_dialog.h"
-#include "cleaning_dialog.h"
-#include "help_dialog.h"
-#include "initial_setup_dialog.h"
-#include "install_dialog.h"
-#include "problem_dialog.h"
+#include "AboutDialog.h"
+#include "CleaningDialog.h"
+#include "HelpDialog.h"
+#include "InitialSetupDialog.h"
+#include "InstallDialog.h"
+#include "ProblemDialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
-    class main_window;
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
-class main_window : public QMainWindow
+class MainWindow : public QMainWindow
 {
         Q_OBJECT
 
     public:
-        main_window(QWidget* parent = nullptr);
-        ~main_window();
+        MainWindow(QWidget* parent = nullptr);
+        ~MainWindow();
 
     private:
-        Ui::main_window* ui;
-        problem_dialog* problem;
-        initial_setup_dialog* initial_setup;
-        about_dialog* about;
-        install_dialog* install;
-        cleaning_dialog* cleaning;
-        help_dialog* help;
+        Ui::MainWindow* ui;
+        ProblemDialog* problem;
+        InitialSetupDialog* initial_setup;
+        AboutDialog* about;
+        InstallDialog* install;
+        CleaningDialog* cleaning;
+        HelpDialog* help;
         void window_setup();
 
     private slots:
@@ -58,4 +58,4 @@ class main_window : public QMainWindow
         void on_action_initial_setup_triggered();
         void on_help_button_clicked();
 };
-#endif // MAIN_WINDOW_H
+#endif // MAINWINDOW_H

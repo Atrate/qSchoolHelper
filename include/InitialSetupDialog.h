@@ -12,32 +12,31 @@
  *
  */
 
-#ifndef CLEANING_DIALOG_H
-#define CLEANING_DIALOG_H
+#ifndef INITIALSETUPDIALOG_H
+#define INITIALSETUPDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class cleaning_dialog;
+    class InitialSetupDialog;
 }
-
-class cleaning_dialog : public QDialog
+class InitialSetupDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit cleaning_dialog(QWidget* parent = nullptr);
-        ~cleaning_dialog();
+        explicit InitialSetupDialog(QWidget* parent = nullptr);
+        ~InitialSetupDialog();
 
     protected:
         void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::cleaning_dialog* ui;
+        Ui::InitialSetupDialog* ui;
 
     private slots:
-        void on_clean_button_clicked();
+        void initial_setup();
 };
 
-#endif // CLEANING_DIALOG_H
+#endif // INITIALSETUPDIALOG_H

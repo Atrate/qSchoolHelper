@@ -17,28 +17,28 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "cleaning_dialog.h"
-#include "initial_setup_dialog.h"
-#include "install_dialog.h"
-#include "procedure.h"
-#include "ui_initial_setup_dialog.h"
+#include "CleaningDialog.h"
+#include "InitialSetupDialog.h"
+#include "InstallDialog.h"
+#include "Procedure.h"
+#include "ui_InitialSetupDialog.h"
 
 namespace fs = std::filesystem;
 
-initial_setup_dialog::initial_setup_dialog(QWidget* parent) :
+InitialSetupDialog::InitialSetupDialog(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::initial_setup_dialog)
+    ui(new Ui::InitialSetupDialog)
 {
     ui->setupUi(this);
 }
 
-initial_setup_dialog::~initial_setup_dialog()
+InitialSetupDialog::~InitialSetupDialog()
 {
     delete ui;
 }
 bool g_setup_running {};
 
-void initial_setup_dialog::initial_setup()
+void InitialSetupDialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states
     // ----------------------------------------------
@@ -51,7 +51,7 @@ void initial_setup_dialog::initial_setup()
         fs::create_directory(config_folder);
     }
 
-    procedure* initial_procedures = new procedure();
+    Procedure initial_procedures;
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
@@ -102,7 +102,7 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        int install_result = initial_procedures->run_install_software(true, true, true, true, true);
+        int install_result = initial_procedures.run_install_software(true, true, true, true, true);
 
         if (install_result == 1)
         {
@@ -139,7 +139,7 @@ void initial_setup_dialog::initial_setup()
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
-        int bb_install_result = initial_procedures->run_install_bb();
+        int bb_install_result = initial_procedures.run_install_bb();
 
         if (bb_install_result == 1)
         {
@@ -173,7 +173,7 @@ void initial_setup_dialog::initial_setup()
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
-        initial_procedures->run_clean(true);
+        initial_procedures.run_clean(true);
         QApplication::processEvents();
     }
 
@@ -183,7 +183,6 @@ void initial_setup_dialog::initial_setup()
     isdf.open(initial_setup_done);
     isdf << std::endl;
     isdf.close();
-    delete initial_procedures;
     g_setup_running = false;
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
@@ -193,7 +192,7 @@ void initial_setup_dialog::initial_setup()
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void initial_setup_dialog::closeEvent(QCloseEvent* event)
+void InitialSetupDialog::closeEvent(QCloseEvent* event)
 {
     if (g_setup_running)
     {

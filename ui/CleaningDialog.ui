@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>cleaning_dialog</class>
- <widget class="QDialog" name="cleaning_dialog">
+ <class>CleaningDialog</class>
+ <widget class="QDialog" name="CleaningDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -210,7 +210,7 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>cleaning_dialog</receiver>
+   <receiver>CleaningDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -226,7 +226,7 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
   <connection>
    <sender>button_box</sender>
    <signal>accepted()</signal>
-   <receiver>cleaning_dialog</receiver>
+   <receiver>CleaningDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">

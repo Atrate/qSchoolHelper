@@ -12,26 +12,18 @@
  *
  */
 
-#ifndef HELP_DIALOG_H
-#define HELP_DIALOG_H
+#include "AboutDialog.h"
+#include "ui_AboutDialog.h"
 
-#include <QDialog>
-
-namespace Ui
+AboutDialog::AboutDialog(QWidget* parent) :
+    QDialog(parent),
+    ui(new Ui::AboutDialog)
 {
-    class help_dialog;
+    ui->setupUi(this);
+    ui->title_label->setText(qAppName() + (tr(" version v")) + APP_VERSION);
 }
 
-class help_dialog : public QDialog
+AboutDialog::~AboutDialog()
 {
-        Q_OBJECT
-
-    public:
-        explicit help_dialog(QWidget* parent = nullptr);
-        ~help_dialog();
-
-    private:
-        Ui::help_dialog* ui;
-};
-
-#endif // HELP_DIALOG_H
+    delete ui;
+}

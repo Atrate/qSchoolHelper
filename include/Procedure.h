@@ -18,7 +18,7 @@
 #include <CurlEasy.h>
 #include <string>
 
-class procedure
+class Procedure
 {
     private:
         int qtcurl_dl(const char* url, const char* filename);

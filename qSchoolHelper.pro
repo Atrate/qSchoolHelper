@@ -23,34 +23,34 @@ DEFINES += \
 
 
 SOURCES += \
-    src/about_dialog.cpp \
-    src/cleaning_dialog.cpp \
-    src/help_dialog.cpp \
-    src/initial_setup_dialog.cpp \
-    src/install_dialog.cpp \
-    src/main.cpp \
-    src/main_window.cpp \
-    src/problem_dialog.cpp \
-    src/procedure.cpp
+    src/AboutDialog.cpp \
+    src/CleaningDialog.cpp \
+    src/HelpDialog.cpp \
+    src/InitialSetupDialog.cpp \
+    src/InstallDialog.cpp \
+    src/MainWindow.cpp \
+    src/ProblemDialog.cpp \
+    src/Procedure.cpp \
+    src/main.cpp
 
 HEADERS += \
-    include/about_dialog.h \
-    include/cleaning_dialog.h \
-    include/help_dialog.h \
-    include/initial_setup_dialog.h \
-    include/install_dialog.h \
-    include/main_window.h \
-    include/problem_dialog.h \
-    include/procedure.h
+    include/AboutDialog.h \
+    include/CleaningDialog.h \
+    include/HelpDialog.h \
+    include/InitialSetupDialog.h \
+    include/InstallDialog.h \
+    include/MainWindow.h \
+    include/ProblemDialog.h \
+    include/Procedure.h
 
 FORMS += \
-    ui/about_dialog.ui \
-    ui/cleaning_dialog.ui \
-    ui/help_dialog.ui \
-    ui/initial_setup_dialog.ui \
-    ui/install_dialog.ui \
-    ui/main_window.ui \
-    ui/problem_dialog.ui
+    ui/AboutDialog.ui \
+    ui/CleaningDialog.ui \
+    ui/HelpDialog.ui \
+    ui/InitialSetupDialog.ui \
+    ui/InstallDialog.ui \
+    ui/MainWindow.ui \
+    ui/ProblemDialog.ui
 
 
 TRANSLATIONS += \

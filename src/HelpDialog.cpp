@@ -12,34 +12,17 @@
  *
  */
 
-#ifndef INSTALL_DIALOG_H
-#define INSTALL_DIALOG_H
+#include "HelpDialog.h"
+#include "ui_HelpDialog.h"
 
-#include <QDialog>
-
-namespace Ui
+HelpDialog::HelpDialog(QWidget* parent) :
+    QDialog(parent),
+    ui(new Ui::HelpDialog)
 {
-    class install_dialog;
+    ui->setupUi(this);
 }
-class install_dialog : public QDialog
+
+HelpDialog::~HelpDialog()
 {
-        Q_OBJECT
-
-    public:
-        explicit install_dialog(QWidget* parent = nullptr);
-        ~install_dialog();
-
-    protected:
-        void closeEvent(QCloseEvent* event);
-
-    private:
-        Ui::install_dialog* ui;
-
-    public slots:
-        void install();
-
-    private slots:
-        void on_install_button_clicked();
-};
-
-#endif // INSTALL_DIALOG_H
+    delete ui;
+}

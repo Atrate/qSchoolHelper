@@ -12,18 +12,32 @@
  *
  */
 
-#include "about_dialog.h"
-#include "ui_about_dialog.h"
+#ifndef CLEANINGDIALOG_H
+#define CLEANINGDIALOG_H
 
-about_dialog::about_dialog(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::about_dialog)
+#include <QDialog>
+
+namespace Ui
 {
-    ui->setupUi(this);
-    ui->title_label->setText(qAppName() + (tr(" version v")) + APP_VERSION);
+    class CleaningDialog;
 }
 
-about_dialog::~about_dialog()
+class CleaningDialog : public QDialog
 {
-    delete ui;
-}
+        Q_OBJECT
+
+    public:
+        explicit CleaningDialog(QWidget* parent = nullptr);
+        ~CleaningDialog();
+
+    protected:
+        void closeEvent(QCloseEvent* event);
+
+    private:
+        Ui::CleaningDialog* ui;
+
+    private slots:
+        void on_clean_button_clicked();
+};
+
+#endif // CLEANINGDIALOG_H

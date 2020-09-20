@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>initial_setup_dialog</class>
- <widget class="QDialog" name="initial_setup_dialog">
+ <class>InitialSetupDialog</class>
+ <widget class="QDialog" name="InitialSetupDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -193,7 +193,7 @@
   <connection>
    <sender>button_box</sender>
    <signal>accepted()</signal>
-   <receiver>initial_setup_dialog</receiver>
+   <receiver>InitialSetupDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -209,7 +209,7 @@
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>initial_setup_dialog</receiver>
+   <receiver>InitialSetupDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -225,7 +225,7 @@
   <connection>
    <sender>start_button</sender>
    <signal>clicked()</signal>
-   <receiver>initial_setup_dialog</receiver>
+   <receiver>InitialSetupDialog</receiver>
    <slot>initial_setup()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -12,31 +12,34 @@
  *
  */
 
-#ifndef INITIAL_SETUP_DIALOG_H
-#define INITIAL_SETUP_DIALOG_H
+#ifndef INSTALLDIALOG_H
+#define INSTALLDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class initial_setup_dialog;
+    class InstallDialog;
 }
-class initial_setup_dialog : public QDialog
+class InstallDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit initial_setup_dialog(QWidget* parent = nullptr);
-        ~initial_setup_dialog();
+        explicit InstallDialog(QWidget* parent = nullptr);
+        ~InstallDialog();
 
     protected:
         void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::initial_setup_dialog* ui;
+        Ui::InstallDialog* ui;
+
+    public slots:
+        void install();
 
     private slots:
-        void initial_setup();
+        void on_install_button_clicked();
 };
 
-#endif // INITIAL_SETUP_DIALOG_H
+#endif // INSTALLDIALOG_H

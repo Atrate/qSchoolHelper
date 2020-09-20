@@ -12,26 +12,35 @@
  *
  */
 
-#ifndef ABOUT_DIALOG_H
-#define ABOUT_DIALOG_H
+#ifndef PROBLEMDIALOG_H
+#define PROBLEMDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class about_dialog;
+    class ProblemDialog;
 }
 
-class about_dialog : public QDialog
+class ProblemDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit about_dialog(QWidget* parent = nullptr);
-        ~about_dialog();
+        explicit ProblemDialog(QWidget* parent = nullptr);
+        ~ProblemDialog();
 
     private:
-        Ui::about_dialog* ui;
+        Ui::ProblemDialog* ui;
+        void set_tabs(unsigned int i);
+
+    private slots:
+        void on_back_button_clicked();
+        void on_browser_button_clicked();
+        void on_projector_button_clicked();
+        void on_speakers_button_clicked();
+        void on_presentation_button_clicked();
+        void on_next_button_clicked();
 };
 
-#endif // ABOUT_DIALOG_H
+#endif // PROBLEMDIALOG_H

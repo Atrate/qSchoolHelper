@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>help_dialog</class>
- <widget class="QDialog" name="help_dialog">
+ <class>HelpDialog</class>
+ <widget class="QDialog" name="HelpDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -170,7 +170,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>button_box</sender>
    <signal>accepted()</signal>
-   <receiver>help_dialog</receiver>
+   <receiver>HelpDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -186,7 +186,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>help_dialog</receiver>
+   <receiver>HelpDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
