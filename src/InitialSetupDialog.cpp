@@ -17,28 +17,28 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "cleaning_dialog.h"
-#include "initial_setup_dialog.h"
-#include "install_dialog.h"
-#include "procedure.h"
+#include "CleaningDialog.h"
+#include "InitialSetupDialog.h"
+#include "InstallDialog.h"
+#include "Procedure.h"
 #include "ui_initial_setup_dialog.h"
 
 namespace fs = std::filesystem;
 
-initial_setup_dialog::initial_setup_dialog(QWidget* parent) :
+InitialSetupDialog::InitialSetupDialog(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::initial_setup_dialog)
+    ui(new Ui::InitialSetupDialog)
 {
     ui->setupUi(this);
 }
 
-initial_setup_dialog::~initial_setup_dialog()
+InitialSetupDialog::~InitialSetupDialog()
 {
     delete ui;
 }
 bool g_setup_running {};
 
-void initial_setup_dialog::initial_setup()
+void InitialSetupDialog::initial_setup()
 {
     // Begin — Declare vars and set UI element states
     // ----------------------------------------------
@@ -51,7 +51,7 @@ void initial_setup_dialog::initial_setup()
         fs::create_directory(config_folder);
     }
 
-    procedure initial_procedures;
+    Procedure initial_procedures;
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
@@ -192,7 +192,7 @@ void initial_setup_dialog::initial_setup()
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void initial_setup_dialog::closeEvent(QCloseEvent* event)
+void InitialSetupDialog::closeEvent(QCloseEvent* event)
 {
     if (g_setup_running)
     {

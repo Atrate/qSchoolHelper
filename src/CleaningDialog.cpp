@@ -15,24 +15,24 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QDebug>
-#include "cleaning_dialog.h"
-#include "initial_setup_dialog.h"
-#include "procedure.h"
+#include "CleaningDialog.h"
+#include "InitialSetupDialog.h"
+#include "Procedure.h"
 #include "ui_cleaning_dialog.h"
 
-cleaning_dialog::cleaning_dialog(QWidget* parent) :
+CleaningDialog::CleaningDialog(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::cleaning_dialog)
+    ui(new Ui::CleaningDialog)
 {
     ui->setupUi(this);
 }
-cleaning_dialog::~cleaning_dialog()
+CleaningDialog::~CleaningDialog()
 {
     delete ui;
 }
 bool g_cleaning_running {};
 
-void cleaning_dialog::on_clean_button_clicked()
+void CleaningDialog::on_clean_button_clicked()
 {
     // Begin — set UI element states
     // -----------------------------
@@ -51,7 +51,7 @@ void cleaning_dialog::on_clean_button_clicked()
     QApplication::processEvents();
     // Actually run the cleaning process
     // ---------------------------------
-    procedure cleaning;
+    Procedure cleaning;
     cleaning.run_clean(ui->radio_extended->isChecked());
     // Finalize — set UI element states
     // --------------------------------
@@ -68,7 +68,7 @@ void cleaning_dialog::on_clean_button_clicked()
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void cleaning_dialog::closeEvent(QCloseEvent* event)
+void CleaningDialog::closeEvent(QCloseEvent* event)
 {
     if (g_cleaning_running)
     {

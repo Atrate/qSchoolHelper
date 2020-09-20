@@ -12,31 +12,35 @@
  *
  */
 
-#ifndef INITIAL_SETUP_DIALOG_H
-#define INITIAL_SETUP_DIALOG_H
+#ifndef PROBLEMDIALOG_H
+#define PROBLEMDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class initial_setup_dialog;
+    class ProblemDialog;
 }
-class initial_setup_dialog : public QDialog
+
+class ProblemDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit initial_setup_dialog(QWidget* parent = nullptr);
-        ~initial_setup_dialog();
-
-    protected:
-        void closeEvent(QCloseEvent* event);
+        explicit ProblemDialog(QWidget* parent = nullptr);
+        ~ProblemDialog();
 
     private:
-        Ui::initial_setup_dialog* ui;
+        Ui::ProblemDialog* ui;
+        void set_tabs(unsigned int i);
 
     private slots:
-        void initial_setup();
+        void on_back_button_clicked();
+        void on_browser_button_clicked();
+        void on_projector_button_clicked();
+        void on_speakers_button_clicked();
+        void on_presentation_button_clicked();
+        void on_next_button_clicked();
 };
 
-#endif // INITIAL_SETUP_DIALOG_H
+#endif // PROBLEMDIALOG_H

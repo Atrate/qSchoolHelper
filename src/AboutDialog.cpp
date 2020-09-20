@@ -12,34 +12,18 @@
  *
  */
 
-#ifndef INSTALL_DIALOG_H
-#define INSTALL_DIALOG_H
+#include "AboutDialog.h"
+#include "ui_about_dialog.h"
 
-#include <QDialog>
-
-namespace Ui
+AboutDialog::AboutDialog(QWidget* parent) :
+    QDialog(parent),
+    ui(new Ui::AboutDialog)
 {
-    class install_dialog;
+    ui->setupUi(this);
+    ui->title_label->setText(qAppName() + (tr(" version v")) + APP_VERSION);
 }
-class install_dialog : public QDialog
+
+AboutDialog::~AboutDialog()
 {
-        Q_OBJECT
-
-    public:
-        explicit install_dialog(QWidget* parent = nullptr);
-        ~install_dialog();
-
-    protected:
-        void closeEvent(QCloseEvent* event);
-
-    private:
-        Ui::install_dialog* ui;
-
-    public slots:
-        void install();
-
-    private slots:
-        void on_install_button_clicked();
-};
-
-#endif // INSTALL_DIALOG_H
+    delete ui;
+}

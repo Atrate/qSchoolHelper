@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>install_dialog</class>
- <widget class="QDialog" name="install_dialog">
+ <class>InstallDialog</class>
+ <widget class="QDialog" name="InstallDialog">
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -202,7 +202,7 @@ missing and you would like to install?</string>
   <connection>
    <sender>button_box</sender>
    <signal>rejected()</signal>
-   <receiver>install_dialog</receiver>
+   <receiver>InstallDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

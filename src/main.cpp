@@ -15,7 +15,7 @@
 #include <QApplication>
 #include <QInputDialog>
 #include <QTranslator>
-#include "main_window.h"
+#include "MainWindow.h"
 
 int main(int argc, char* argv[])
 {
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qsh_translator);
     }
 
-    main_window w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

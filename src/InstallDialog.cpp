@@ -15,22 +15,22 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "install_dialog.h"
-#include "procedure.h"
+#include "InstallDialog.h"
+#include "Procedure.h"
 #include "ui_install_dialog.h"
 
-install_dialog::install_dialog(QWidget* parent) :
+InstallDialog::InstallDialog(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::install_dialog)
+    ui(new Ui::InstallDialog)
 {
     ui->setupUi(this);
 }
-install_dialog::~install_dialog()
+InstallDialog::~InstallDialog()
 {
     delete ui;
 }
 bool g_install_running {};
-void install_dialog::install()
+void InstallDialog::install()
 {
     // Initialize temp folder, set UI elements' states
     // -----------------------------------------------
@@ -46,7 +46,7 @@ void install_dialog::install()
     QApplication::processEvents();
     // Actually run the installation
     // -----------------------------
-    procedure installer;
+    Procedure installer;
     int install_result = installer.run_install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
@@ -112,7 +112,7 @@ void install_dialog::install()
     ui->vlc_check_box->setEnabled(true);
     ui->viewer_check_box->setEnabled(true);
 }
-void install_dialog::on_install_button_clicked()
+void InstallDialog::on_install_button_clicked()
 {
     // If no program has been selected, display message box
     // ----------------------------------------------------
@@ -132,7 +132,7 @@ void install_dialog::on_install_button_clicked()
 }
 // Ignore close events if a process is running
 // -------------------------------------------
-void install_dialog::closeEvent(QCloseEvent* event)
+void InstallDialog::closeEvent(QCloseEvent* event)
 {
     if (g_install_running)
     {

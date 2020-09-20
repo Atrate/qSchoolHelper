@@ -12,26 +12,26 @@
  *
  */
 
-#ifndef HELP_DIALOG_H
-#define HELP_DIALOG_H
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class help_dialog;
+    class AboutDialog;
 }
 
-class help_dialog : public QDialog
+class AboutDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit help_dialog(QWidget* parent = nullptr);
-        ~help_dialog();
+        explicit AboutDialog(QWidget* parent = nullptr);
+        ~AboutDialog();
 
     private:
-        Ui::help_dialog* ui;
+        Ui::AboutDialog* ui;
 };
 
-#endif // HELP_DIALOG_H
+#endif // ABOUTDIALOG_H

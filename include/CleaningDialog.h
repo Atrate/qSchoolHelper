@@ -12,17 +12,32 @@
  *
  */
 
-#include "help_dialog.h"
-#include "ui_help_dialog.h"
+#ifndef CLEANINGDIALOG_H
+#define CLEANINGDIALOG_H
 
-help_dialog::help_dialog(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::help_dialog)
+#include <QDialog>
+
+namespace Ui
 {
-    ui->setupUi(this);
+    class CleaningDialog;
 }
 
-help_dialog::~help_dialog()
+class CleaningDialog : public QDialog
 {
-    delete ui;
-}
+        Q_OBJECT
+
+    public:
+        explicit CleaningDialog(QWidget* parent = nullptr);
+        ~CleaningDialog();
+
+    protected:
+        void closeEvent(QCloseEvent* event);
+
+    private:
+        Ui::CleaningDialog* ui;
+
+    private slots:
+        void on_clean_button_clicked();
+};
+
+#endif // CLEANINGDIALOG_H

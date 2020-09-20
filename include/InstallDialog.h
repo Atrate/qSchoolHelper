@@ -12,35 +12,34 @@
  *
  */
 
-#ifndef PROBLEM_DIALOG_H
-#define PROBLEM_DIALOG_H
+#ifndef INSTALLDIALOG_H
+#define INSTALLDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class problem_dialog;
+    class InstallDialog;
 }
-
-class problem_dialog : public QDialog
+class InstallDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit problem_dialog(QWidget* parent = nullptr);
-        ~problem_dialog();
+        explicit InstallDialog(QWidget* parent = nullptr);
+        ~InstallDialog();
+
+    protected:
+        void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::problem_dialog* ui;
-        void set_tabs(unsigned int i);
+        Ui::InstallDialog* ui;
+
+    public slots:
+        void install();
 
     private slots:
-        void on_back_button_clicked();
-        void on_browser_button_clicked();
-        void on_projector_button_clicked();
-        void on_speakers_button_clicked();
-        void on_presentation_button_clicked();
-        void on_next_button_clicked();
+        void on_install_button_clicked();
 };
 
-#endif // PROBLEM_DIALOG_H
+#endif // INSTALLDIALOG_H

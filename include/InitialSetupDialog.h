@@ -12,26 +12,31 @@
  *
  */
 
-#ifndef ABOUT_DIALOG_H
-#define ABOUT_DIALOG_H
+#ifndef INITIALSETUPDIALOG_H
+#define INITIALSETUPDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-    class about_dialog;
+    class InitialSetupDialog;
 }
-
-class about_dialog : public QDialog
+class InitialSetupDialog : public QDialog
 {
         Q_OBJECT
 
     public:
-        explicit about_dialog(QWidget* parent = nullptr);
-        ~about_dialog();
+        explicit InitialSetupDialog(QWidget* parent = nullptr);
+        ~InitialSetupDialog();
+
+    protected:
+        void closeEvent(QCloseEvent* event);
 
     private:
-        Ui::about_dialog* ui;
+        Ui::InitialSetupDialog* ui;
+
+    private slots:
+        void initial_setup();
 };
 
-#endif // ABOUT_DIALOG_H
+#endif // INITIALSETUPDIALOG_H

@@ -15,30 +15,30 @@
 #include <fstream>
 #include <filesystem>
 #include <QDebug>
-#include "about_dialog.h"
-#include "cleaning_dialog.h"
-#include "help_dialog.h"
-#include "initial_setup_dialog.h"
-#include "install_dialog.h"
-#include "main_window.h"
-#include "problem_dialog.h"
+#include "AboutDialog.h"
+#include "CleaningDialog.h"
+#include "HelpDialog.h"
+#include "InitialSetupDialog.h"
+#include "InstallDialog.h"
+#include "MainWindow.h"
+#include "ProblemDialog.h"
 #include "ui_main_window.h"
 
 namespace fs = std::filesystem;
 
-main_window::main_window(QWidget* parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
-    , ui(new Ui::main_window)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     window_setup();
 }
 
-main_window::~main_window()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
-void main_window::window_setup()
+void MainWindow::window_setup()
 {
     // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
     // -------------------------------------------------------------------------------------
@@ -85,41 +85,41 @@ void main_window::window_setup()
     ui->initial_setup_button->setToolTip(debug_tooltip);
 #endif
 }
-void main_window::on_problem_button_clicked()
+void MainWindow::on_problem_button_clicked()
 {
-    problem = new problem_dialog(this);
+    problem = new ProblemDialog(this);
     problem->show();
 }
-void main_window::on_initial_setup_button_clicked()
+void MainWindow::on_initial_setup_button_clicked()
 {
-    initial_setup = new initial_setup_dialog(this);
+    initial_setup = new InitialSetupDialog(this);
     initial_setup->show();
 }
-void main_window::on_software_button_clicked()
+void MainWindow::on_software_button_clicked()
 {
-    install = new install_dialog(this);
+    install = new InstallDialog(this);
     install->show();
 }
-void main_window::on_clean_button_clicked()
+void MainWindow::on_clean_button_clicked()
 {
-    cleaning = new cleaning_dialog(this);
+    cleaning = new CleaningDialog(this);
     cleaning->show();
 }
-void main_window::on_action_open_help_triggered()
+void MainWindow::on_action_open_help_triggered()
 {
-    help = new help_dialog(this);
+    help = new HelpDialog(this);
     help->show();
 }
-void main_window::on_action_about_triggered()
+void MainWindow::on_action_about_triggered()
 {
-    about = new about_dialog(this);
+    about = new AboutDialog(this);
     about->show();
 }
-void main_window::on_action_initial_setup_triggered()
+void MainWindow::on_action_initial_setup_triggered()
 {
     on_initial_setup_button_clicked();
 }
-void main_window::on_help_button_clicked()
+void MainWindow::on_help_button_clicked()
 {
     on_action_open_help_triggered();
 }
