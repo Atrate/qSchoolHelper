@@ -46,15 +46,14 @@ void install_dialog::install()
     QApplication::processEvents();
     // Actually run the installation
     // -----------------------------
-    procedure* installer = new procedure();
-    int install_result = installer->run_install_software(
+    procedure installer;
+    int install_result = installer.run_install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
                              ui->libreoffice_check_box->checkState(),
                              ui->vlc_check_box->checkState(),
                              ui->viewer_check_box->checkState()
                          );
-    delete installer;
 
     if (install_result == 0)
     {

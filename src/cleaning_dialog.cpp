@@ -51,9 +51,8 @@ void cleaning_dialog::on_clean_button_clicked()
     QApplication::processEvents();
     // Actually run the cleaning process
     // ---------------------------------
-    procedure* cleaning = new procedure;
-    cleaning->run_clean(ui->radio_extended->isChecked());
-    delete cleaning;
+    procedure cleaning;
+    cleaning.run_clean(ui->radio_extended->isChecked());
     // Finalize — set UI element states
     // --------------------------------
     g_cleaning_running = false;
