@@ -239,7 +239,6 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        temp_folder.~QTemporaryDir();
         return 3;
     }
 
@@ -322,7 +321,6 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
                 if (!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
                 {
-                    temp_folder.~QTemporaryDir();
                     return 1;
                 }
             }
@@ -372,18 +370,14 @@ int procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
             if (!install)
             {
-                temp_folder.~QTemporaryDir();
-                install.~QFuture();
                 return 2;
             }
 
-            install.~QFuture();
         }
 
         //ui->progress_bar->setValue((i+6)*10);
     }
 
-    temp_folder.~QTemporaryDir();
     return 0;
 }
 int procedure::clean(const bool EXT)
@@ -439,8 +433,6 @@ int procedure::clean(const bool EXT)
         QApplication::processEvents();
     }
 
-    bb_clean.~QFuture();
-
     // Extended cleaning
     // -----------------
     if (EXT)
@@ -456,7 +448,6 @@ int procedure::clean(const bool EXT)
             QApplication::processEvents();
         }
 
-        bb_ext_clean.~QFuture();
     }
 
     return 0;
@@ -469,13 +460,11 @@ int procedure::install_bb()
     {
         if (!chdir(temp_folder.path().toUtf8()))
         {
-            temp_folder.~QTemporaryDir();
             return 3;
         }
     }
     else
     {
-        temp_folder.~QTemporaryDir();
         return 3;
     }
 
@@ -489,7 +478,6 @@ int procedure::install_bb()
 
         if (!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
         {
-            temp_folder.~QTemporaryDir();
             return 1;
         }
     }
@@ -504,14 +492,9 @@ int procedure::install_bb()
 
     if (!bb_install)
     {
-        temp_folder.~QTemporaryDir();
-        bb_install.~QFuture();
-        fs::remove(bb_exe);
         return 2;
     }
 
-    bb_install.~QFuture();
-    temp_folder.~QTemporaryDir();
     return 0;
 }
 
