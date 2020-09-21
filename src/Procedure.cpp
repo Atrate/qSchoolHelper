@@ -58,7 +58,7 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
 
     if (!QFile().exists(ca_path))
     {
-        QFile::copy("qrc:/../data/curl-ca-bundle.crt", ca_path);
+        QFile::copy(":/data/curl-ca-bundle.crt", ca_path);
     }
 
     qDebug() << "Downloading: " << url << " to: " << filename << "\n";
