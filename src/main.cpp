@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 
     if (lang == "Polish")
     {
-        QString trans_file = ":/i18n/qSchoolHelper_pl_PL.qm";
+        const QString trans_file = ":/i18n/qSchoolHelper_pl_PL.qm";
         qsh_translator.load(trans_file);
         qApp->installTranslator(&qsh_translator);
     }
