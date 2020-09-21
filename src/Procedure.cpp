@@ -87,7 +87,7 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
     fclose(dl_file);
     return (curl->result() == 0 ? true : false);
 }
-std::string Procedure::get_file_info(const int LINE, bool fallback)
+QString Procedure::get_file_info(const int LINE, bool fallback)
 {
 #ifndef QT_NO_DEBUG
     assert(LINE < 11 && LINE > -1);
@@ -122,7 +122,7 @@ std::string Procedure::get_file_info(const int LINE, bool fallback)
 
         std::getline(in, return_string);
         in.close();
-        return return_string;
+        return QString::fromStdString(return_string);
     }
     else
     {
@@ -248,7 +248,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     // -------------------------------------
     //TODO: Use QString
     const unsigned int DL_ARRAY_SIZE = 5;
-    std::string download_array[DL_ARRAY_SIZE][4];
+    QString download_array[DL_ARRAY_SIZE][4];
 
     if (INS_FF)
     {
@@ -258,7 +258,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        download_array[0][0] = std::string("");
+        download_array[0][0] = QString("");
     }
 
     if (INS_RDC)
@@ -269,7 +269,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        download_array[1][0] = std::string("");
+        download_array[1][0] = QString("");
     }
 
     if (INS_LOF)
@@ -280,7 +280,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        download_array[2][0] = std::string("");
+        download_array[2][0] = QString("");
     }
 
     if (INS_VLC)
@@ -291,7 +291,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        download_array[3][0] = std::string("");
+        download_array[3][0] = QString("");
     }
 
     if (INS_PPV)
@@ -302,7 +302,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     }
     else
     {
-        download_array[4][0] = std::string("");
+        download_array[4][0] = QString("");
     }
 
     // Download the files
@@ -313,19 +313,19 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     {
         if (download_array[i][2] != "")
         {
-            shortcut_array[i] = check_shortcut(download_array[i][2]);
+            shortcut_array[i] = check_shortcut(download_array[i][2].toStdString());
         }
 
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
-            fs::remove(download_array[i][1]);
+            QFile().remove(download_array[i][1]);
 
-            if (!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
+            if (!qtcurl_dl(download_array[i][0].toUtf8(), download_array[i][1].toUtf8()))
             {
-                fs::remove(download_array[i][1]);
+                QFile().remove(download_array[i][1]);
                 download_array[i][0] = get_file_info(i * 2, true);
 
-                if (!qtcurl_dl(download_array[i][0].c_str(), download_array[i][1].c_str()))
+                if (!qtcurl_dl(download_array[i][0].toUtf8(), download_array[i][1].toUtf8()))
                 {
                     return 1;
                 }
@@ -343,7 +343,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
         {
             // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
             // --------------------------------------------------------------------------------------------------------
-            std::string cmd = download_array[i][1];
+            QString cmd = download_array[i][1];
 
             switch (i)
             {
@@ -358,21 +358,21 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
                     break;
 
                 case 3:
-                    cmd.append("/S", "/L=1033");
+                    cmd.append("/S /L=1033");
                     break;
 
                 case 4:
                     break;
             }
 
-            QFuture<int> install = QtConcurrent::run(system, cmd.c_str());
+            QFuture<int> install = QtConcurrent::run(system, cmd.toUtf8());
 
             while (install.isRunning())
             {
                 QApplication::processEvents();
             }
 
-            fs::remove(download_array[i][1]);
+            QFile().remove(download_array[i][1]);
 
             if (!install)
             {
@@ -414,9 +414,9 @@ int Procedure::clean(const bool EXT)
     // Run BleachBit to clean temporary files
     // --------------------------------------
     //ui->progress_bar->setValue(30);
-    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    QString bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
 
-    if (!fs::exists(bb_path))
+    if (!QFile().exists(bb_path))
     {
         //ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
         install_bb();
@@ -425,13 +425,13 @@ int Procedure::clean(const bool EXT)
     //ui->progress_bar->setValue(40);
     //ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
     bb_path = "\"" + bb_path + "\"";
-    std::string cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
-                      "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
-                      "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
-                      "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
-                      "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
-                      "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
-    QFuture<void> bb_clean = QtConcurrent::run(system, cmd.c_str());
+    QString cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+                  "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
+                  "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
+                  "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
+                  "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
+                  "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+    QFuture<void> bb_clean = QtConcurrent::run(system, cmd.toUtf8());
 
     while (bb_clean.isRunning())
     {
@@ -446,7 +446,7 @@ int Procedure::clean(const bool EXT)
               "system.memory_dump system.muicache system.prefetch system.updates";
         //ui->progress_bar->setValue(60);
         //ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
-        QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.c_str());
+        QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.toUtf8());
 
         while (bb_ext_clean.isRunning())
         {
@@ -472,22 +472,22 @@ int Procedure::install_bb()
         return 3;
     }
 
-    std::string bb_url = get_file_info(10);
-    std::string bb_exe = "BleachBit-setup.exe";
+    QString bb_url = get_file_info(10);
+    QString bb_exe = "BleachBit-setup.exe";
 
-    if (!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
+    if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
     {
-        fs::remove(bb_exe);
+        QFile().remove(bb_exe);
         bb_url = get_file_info(10, true);
 
-        if (!qtcurl_dl(bb_url.c_str(), bb_exe.c_str()))
+        if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
         {
             return 1;
         }
     }
 
     bb_exe.append("/S /allusers");
-    QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.c_str());
+    QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.toUtf8());
 
     while (bb_install.isRunning())
     {

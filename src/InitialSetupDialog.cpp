@@ -12,7 +12,6 @@
  *
  */
 
-#include <filesystem>
 #include <fstream>
 #include <QDebug>
 #include <QMessageBox>
@@ -22,8 +21,6 @@
 #include "InstallDialog.h"
 #include "Procedure.h"
 #include "ui_InitialSetupDialog.h"
-
-namespace fs = std::filesystem;
 
 InitialSetupDialog::InitialSetupDialog(QWidget* parent) :
     QDialog(parent),
@@ -126,7 +123,7 @@ void InitialSetupDialog::initial_setup()
     // ------------------------------
     QString bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
 
-    if (!fs::exists(bb_path.toStdString()))
+    if (!QDir().exists(bb_path))
     {
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
@@ -161,7 +158,7 @@ void InitialSetupDialog::initial_setup()
 
     // Run extended cleaner
     // --------------------
-    if (fs::exists(bb_path.toStdString()))
+    if (QDir().exists(bb_path))
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
