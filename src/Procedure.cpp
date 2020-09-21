@@ -232,7 +232,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     if (temp_folder.isValid())
     {
-        if (!chdir(temp_folder.path().toUtf8()))
+        if (chdir(temp_folder.path().toUtf8()) != 0)
         {
             return 3;
         }
@@ -372,7 +372,6 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
             {
                 return 2;
             }
-
         }
 
         //ui->progress_bar->setValue((i+6)*10);
@@ -447,7 +446,6 @@ int Procedure::clean(const bool EXT)
         {
             QApplication::processEvents();
         }
-
     }
 
     return 0;
@@ -458,7 +456,7 @@ int Procedure::install_bb()
 
     if (temp_folder.isValid())
     {
-        if (!chdir(temp_folder.path().toUtf8()))
+        if (chdir(temp_folder.path().toUtf8()) != 0)
         {
             return 3;
         }
