@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <QDebug>
 #include <QFile>
+#include <QDirIterator>
 #include <QApplication>
 #include <QThread>
 #include <QTemporaryDir>
@@ -52,11 +53,12 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
         QFile().remove(filename);
     }
 
-    QString ca_path = config_folder + "curl-ca-bundle.crt";
+    QString ca_path = config_folder + "/curl-ca-bundle.crt";
+    qDebug() << "CA Path: " << ca_path << "\n";
 
     if (!QFile().exists(ca_path))
     {
-        QFile::copy(QString(":/../data/curl-ca-bundle.crt"), ca_path);
+        QFile::copy("qrc:/../data/curl-ca-bundle.crt", ca_path);
     }
 
     qDebug() << "Downloading: " << url << " to: " << filename << "\n";
@@ -192,25 +194,33 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
         }
     }
 }
-bool Procedure::check_shortcut(std::string exe_path)
+bool Procedure::check_shortcut(QString exe_path)
 {
 #ifndef QT_NO_DEBUG
     assert(exe_path != "");
 #endif
+    qDebug() << "Checking shortcut for: " << exe_path << "\n";
 
-    if (exe_path != "" && fs::exists(exe_path))
+    if (exe_path != "" && QFile().exists(exe_path))
     {
-        std::string exe_name = exe_path.substr((exe_path.find_last_of("\\") + 1), exe_path.length()); // TODO: Convert to title case
+        QString exe_name = exe_path.mid(exe_path.lastIndexOf("\\") + 1);
+        QDirIterator it("C:\\Users\\");
+        qDebug() << "exe_name: " << exe_name << "\n";
 
-        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
+        while (it.hasNext())
         {
-            if (fs::is_directory(entry.path()) && fs::exists(entry.path() / "Desktop") && !fs::exists(entry.path() / "Desktop" / exe_name))
+            it.next();
+            qDebug() << "Iterator path: " << it.filePath() << "\n";
+
+            if (QFile().exists(exe_path) && QDir().exists(it.filePath()) && QDir().exists(it.filePath() + "/Desktop") &&
+                    !QFile().exists(it.filePath() + "/Desktop" + exe_name))
             {
                 try
                 {
-                    std::string link_cmd = "mklink ";
-                    link_cmd.append("\"" + entry.path().string() + "\\Desktop\\" + exe_name + "\" \"" + exe_path + "\"");
-                    (void) system(link_cmd.c_str());
+                    QString link_cmd = "mklink ";
+                    link_cmd.append("\"" + QDir::toNativeSeparators(it.filePath()) + "\\Desktop\\" + exe_name + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
+                    qDebug() << "Link CMD: " << link_cmd << "\n";
+                    (void) system(link_cmd.toUtf8());
                 }
                 catch (const std::exception &e)
                 {
@@ -246,7 +256,6 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     // Declare download links and file names
     // -------------------------------------
-    //TODO: Use QString
     const unsigned int DL_ARRAY_SIZE = 5;
     QString download_array[DL_ARRAY_SIZE][4];
 
@@ -313,7 +322,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     {
         if (download_array[i][2] != "")
         {
-            shortcut_array[i] = check_shortcut(download_array[i][2].toStdString());
+            shortcut_array[i] = check_shortcut(download_array[i][2]);
         }
 
         if (!(download_array[i][0] == "" || shortcut_array[i]))
@@ -501,7 +510,6 @@ int Procedure::install_bb()
 
     return 0;
 }
-
 int Procedure::run_install_bb()
 {
     return install_bb();

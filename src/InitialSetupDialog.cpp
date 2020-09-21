@@ -12,7 +12,6 @@
  *
  */
 
-#include <fstream>
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -171,6 +170,7 @@ void InitialSetupDialog::initial_setup()
     QString initial_setup_done = config_folder + "initial_setup_done.txt";
     QFile isdf(initial_setup_done);
     isdf.open(QIODevice::WriteOnly);
+    isdf.write("");
     isdf.close();
     g_setup_running = false;
     ui->progress_bar->setValue(100);
