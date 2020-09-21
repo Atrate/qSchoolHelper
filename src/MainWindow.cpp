@@ -94,6 +94,13 @@ void MainWindow::on_initial_setup_button_clicked()
 {
     initial_setup = new InitialSetupDialog(this);
     initial_setup->show();
+
+    while (initial_setup->isVisible())
+    {
+        QApplication::processEvents();
+    }
+
+    window_setup();
 }
 void MainWindow::on_software_button_clicked()
 {
