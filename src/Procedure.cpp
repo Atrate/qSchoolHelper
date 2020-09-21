@@ -70,9 +70,7 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
     curl->set(CURLOPT_WRITEFUNCTION, write_data);
     curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
 #ifndef QT_NO_DEBUG
-    curl->set(CURLOPT_VERBOSE, long(1));
     curl->set(CURLOPT_NOPROGRESS, long(0));
-    curl->set(CURLOPT_HEADER, long(1));
 #endif
     // Open file for writing and tell cURL to write to it
     // --------------------------------------------------
@@ -110,21 +108,44 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
 
     if (QFile().exists(filename) && !fallback)
     {
+        qDebug() << "Reading LINE: " << LINE << " from: " << filename << "\n";
         // TODO: Convert to QFile
-        std::ifstream in(filename.toUtf8());
-        std::string return_string;
-        return_string.reserve(160);
+        QFile in(filename);
+        QString return_string;
+        return_string.reserve(180);
 
-        // Ignore LINE-1 lines
-        // -------------------
-        for (int i = 0; i < LINE; ++i)
+        if (in.open(QIODevice::ReadOnly))
         {
-            std::getline(in, return_string);
+            QTextStream str_in(&filename);
+
+            for (int i = 0; i < LINE; ++i)
+            {
+                qDebug() << "Skipping line: " << in.readLine() << "\n";
+            }
+
+            return_string = in.readLine();
+            qDebug() << "Grabbed line: " << return_string << "\n";
+            in.close();
+        }
+        else
+        {
+            qDebug() << "Failed to open file!\n";
         }
 
-        std::getline(in, return_string);
-        in.close();
-        return QString::fromStdString(return_string);
+        //std::ifstream in(filename.toUtf8());
+        //std::string return_string;
+        //return_string.reserve(160);
+        //
+        //// Ignore LINE-1 lines
+        //// -------------------
+        //for (int i = 0; i < LINE; ++i)
+        //{
+        //    std::getline(in, return_string);
+        //}
+        //
+        //std::getline(in, return_string);
+        //in.close();
+        return return_string;
     }
     else
     {
@@ -398,6 +419,7 @@ int Procedure::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
+    // TODO: Use QDir, QFile
     try
     {
         for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
