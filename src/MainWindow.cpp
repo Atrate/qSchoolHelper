@@ -49,7 +49,7 @@ void MainWindow::window_setup()
 #ifdef QT_NO_DEBUG
     QString initial_setup_done = config_folder + "initial_setup_done.txt";
 
-    if (fs::exists(initial_setup_done.toStdString()))
+    if (QFile().exists(initial_setup_done))
     {
         ui->software_button->setToolTip(tr("Install missing software"));
         ui->problem_button->setToolTip(tr("Help with common problems"));
