@@ -16,11 +16,13 @@
 #include <fstream>
 #include <stdlib.h>
 #include <unistd.h>
+#include <QDebug>
 #include <QFile>
 #include <QApplication>
 #include <QThread>
 #include <QTemporaryDir>
 #include <QtConcurrent/QtConcurrentRun>
+#include <QStandardPaths>
 #include "Procedure.h"
 
 namespace fs = std::filesystem;
@@ -40,6 +42,7 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
     if (url[0] == '\0' || filename[0] == '\0')
     {
         return false;
+        qDebug() << "Invalid file name or download link!\n";
     }
 
 #endif
@@ -49,23 +52,18 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
         fs::remove(filename);
     }
 
-    std::string config_folder = "C:\\ProgramData\\qSchoolHelper";
+    QString ca_path = config_folder + "curl-ca-bundle.crt";
 
-    if (!fs::exists(config_folder))
+    if (!QFile().exists(ca_path))
     {
-        fs::create_directory(config_folder);
+        QFile::copy(QString(":/../data/curl-ca-bundle.crt"), ca_path);
     }
 
-    if (!fs::exists(std::string(config_folder + "\\curl-ca-bundle.crt")))
-    {
-        QFile::copy(":/../data/curl-ca-bundle.crt", config_folder.c_str());
-    }
-
-    config_folder.append("\\curl-ca-bundle.crt");
+    qDebug() << "Downloading: " << url << " to: " << filename << "\n";
     CurlEasy* curl = new CurlEasy;
     curl->set(CURLOPT_URL, QUrl(url));
     curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl->set(CURLOPT_CAINFO, config_folder.c_str());
+    curl->set(CURLOPT_CAINFO, ca_path);
     curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
     curl->set(CURLOPT_WRITEFUNCTION, write_data);
     curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
@@ -126,6 +124,8 @@ std::string Procedure::get_file_info(const int LINE, bool fallback)
     }
     else
     {
+        qDebug() << "Using fallback link for: " << LINE << "\n";
+
         switch (LINE)
         {
             // Firefox
@@ -308,7 +308,10 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     for (unsigned int i = 0; i < DL_ARRAY_SIZE; i++)
     {
-        shortcut_array[i] = check_shortcut(download_array[i][2]);
+        if (download_array[i][2] != "")
+        {
+            shortcut_array[i] = check_shortcut(download_array[i][2]);
+        }
 
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {

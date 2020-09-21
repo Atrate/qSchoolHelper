@@ -15,6 +15,7 @@
 #include <fstream>
 #include <filesystem>
 #include <QDebug>
+#include <QDir>
 #include "AboutDialog.h"
 #include "CleaningDialog.h"
 #include "HelpDialog.h"
@@ -31,6 +32,12 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    if (!QDir().exists(config_folder))
+    {
+        QDir().mkpath(config_folder);
+    }
+
     window_setup();
 }
 
@@ -40,19 +47,12 @@ MainWindow::~MainWindow()
 }
 void MainWindow::window_setup()
 {
-    // Set-up the config folder. Disable initial_setup_button if initial setup has been run.
-    // -------------------------------------------------------------------------------------
-    std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
-
-    if (!fs::exists(config_folder))
-    {
-        fs::create_directory(config_folder);
-    }
-
+    // Disable initial_setup_button if initial setup has been run.
+    // -----------------------------------------------------------
 #ifdef QT_NO_DEBUG
-    std::string initial_setup_done = config_folder + "initial_setup_done.txt";
+    QString initial_setup_done = config_folder + "initial_setup_done.txt";
 
-    if (fs::exists(initial_setup_done))
+    if (fs::exists(initial_setup_done.toStdString()))
     {
         ui->software_button->setToolTip(tr("Install missing software"));
         ui->problem_button->setToolTip(tr("Help with common problems"));

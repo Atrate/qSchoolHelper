@@ -16,11 +16,15 @@
 #define PROCEDURE_H
 
 #include <CurlEasy.h>
+#include <QStandardPaths>
+#include <QDir>
 #include <string>
+#include "MainWindow.h"
 
 class Procedure
 {
     private:
+        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         int qtcurl_dl(const char* url, const char* filename);
         int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
         int clean(const bool EXT);
