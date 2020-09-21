@@ -13,7 +13,6 @@
  */
 
 #include <fstream>
-#include <filesystem>
 #include <QDebug>
 #include <QDir>
 #include "AboutDialog.h"
@@ -24,8 +23,6 @@
 #include "MainWindow.h"
 #include "ProblemDialog.h"
 #include "ui_MainWindow.h"
-
-namespace fs = std::filesystem;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)

@@ -47,9 +47,9 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
 
 #endif
 
-    if (fs::exists(filename))
+    if (QFile().exists(filename))
     {
-        fs::remove(filename);
+        QFile().remove(filename);
     }
 
     QString ca_path = config_folder + "curl-ca-bundle.crt";
@@ -92,23 +92,24 @@ std::string Procedure::get_file_info(const int LINE, bool fallback)
 #ifndef QT_NO_DEBUG
     assert(LINE < 11 && LINE > -1);
 #endif
-    std::string filename = "programlist.txt";
+    QString filename = "programlist.txt";
 
-    if (!fs::exists(filename) && !fallback)
+    if (!QFile().exists(filename) && !fallback)
     {
-        if (!qtcurl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.c_str()))
+        if (!qtcurl_dl("https://gitlab.com/Atrate/qsh-resources/-/raw/master/programlist.txt", filename.toUtf8()))
         {
-            if (!qtcurl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt", filename.c_str()))
+            if (!qtcurl_dl("https://raw.githubusercontent.com/Atrate/qsh-resources/master/programlist.txt", filename.toUtf8()))
             {
                 fallback = true;
-                fs::remove(filename);
+                QFile().remove(filename);
             }
         }
     }
 
-    if (fs::exists(filename) && !fallback)
+    if (QFile().exists(filename) && !fallback)
     {
-        std::ifstream in(filename.c_str());
+        // TODO: Convert to QFile
+        std::ifstream in(filename.toUtf8());
         std::string return_string;
         return_string.reserve(160);
 
@@ -120,6 +121,7 @@ std::string Procedure::get_file_info(const int LINE, bool fallback)
         }
 
         std::getline(in, return_string);
+        in.close();
         return return_string;
     }
     else
@@ -244,6 +246,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     // Declare download links and file names
     // -------------------------------------
+    //TODO: Use QString
     const unsigned int DL_ARRAY_SIZE = 5;
     std::string download_array[DL_ARRAY_SIZE][4];
 
