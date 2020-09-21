@@ -218,7 +218,7 @@ What would you like to do today?</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuas">
@@ -242,6 +242,9 @@ What would you like to do today?</string>
   <action name="action_quit">
    <property name="text">
     <string>&amp;Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="action_initial_setup">
