@@ -62,30 +62,30 @@ int Procedure::qtcurl_dl(const char* url, const char* filename)
     }
 
     qDebug() << "Downloading: " << url << " to: " << filename << "\n";
-    CurlEasy* curl = new CurlEasy;
-    curl->set(CURLOPT_URL, QUrl(url));
-    curl->set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl->set(CURLOPT_CAINFO, ca_path);
-    curl->set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
-    curl->set(CURLOPT_WRITEFUNCTION, write_data);
-    curl->setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
+    CurlEasy curl;
+    curl.set(CURLOPT_URL, QUrl(url));
+    curl.set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
+    curl.set(CURLOPT_CAINFO, ca_path);
+    curl.set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
+    curl.set(CURLOPT_WRITEFUNCTION, write_data);
+    curl.setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
 #ifndef QT_NO_DEBUG
-    curl->set(CURLOPT_NOPROGRESS, long(0));
+    curl.set(CURLOPT_NOPROGRESS, long(0));
 #endif
     // Open file for writing and tell cURL to write to it
     // --------------------------------------------------
     FILE* dl_file = nullptr;
     dl_file = fopen(filename, "wb");
-    curl->set(CURLOPT_WRITEDATA, dl_file);
-    curl->perform();
+    curl.set(CURLOPT_WRITEDATA, dl_file);
+    curl.perform();
 
-    while (curl->isRunning())
+    while (curl.isRunning())
     {
         QApplication::processEvents();
     }
 
     fclose(dl_file);
-    return (curl->result() == 0 ? true : false);
+    return (curl.result() == 0 ? true : false);
 }
 QString Procedure::get_file_info(const int LINE, bool fallback)
 {
@@ -109,7 +109,6 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
     if (QFile().exists(filename) && !fallback)
     {
         qDebug() << "Reading LINE: " << LINE << " from: " << filename << "\n";
-        // TODO: Convert to QFile
         QFile in(filename);
         QString return_string;
         return_string.reserve(180);
@@ -123,7 +122,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 qDebug() << "Skipping line: " << in.readLine() << "\n";
             }
 
-            return_string = in.readLine();
+            return_string = in.readLine().replace("\n", "");
             qDebug() << "Grabbed line: " << return_string << "\n";
             in.close();
         }
@@ -132,19 +131,6 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
             qDebug() << "Failed to open file!\n";
         }
 
-        //std::ifstream in(filename.toUtf8());
-        //std::string return_string;
-        //return_string.reserve(160);
-        //
-        //// Ignore LINE-1 lines
-        //// -------------------
-        //for (int i = 0; i < LINE; ++i)
-        //{
-        //    std::getline(in, return_string);
-        //}
-        //
-        //std::getline(in, return_string);
-        //in.close();
         return return_string;
     }
     else
@@ -228,6 +214,8 @@ bool Procedure::check_shortcut(QString exe_path)
         QDirIterator it("C:\\Users\\");
         qDebug() << "exe_name: " << exe_name << "\n";
 
+        // Iterate through Users' Desktop folders to find whether shortcuts (symlinks) exist, if not, create them
+        // ------------------------------------------------------------------------------------------------------
         while (it.hasNext())
         {
             it.next();
