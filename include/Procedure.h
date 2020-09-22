@@ -18,7 +18,6 @@
 #include <CurlEasy.h>
 #include <QStandardPaths>
 #include <QDir>
-#include "MainWindow.h"
 
 class Procedure
 {

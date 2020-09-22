@@ -39,8 +39,11 @@ void ProblemDialog::set_tabs(unsigned int i)
 }
 void ProblemDialog::on_back_button_clicked()
 {
-    if (ui->browser_tabs->currentIndex() == 1 || ui->presentation_tabs->currentIndex() == 1
-            || ui->speakers_tabs->currentIndex() == 1 || ui->projector_tabs->currentIndex() == 1)
+    if (ui->browser_tabs->currentIndex() == 1
+            || ui->presentation_tabs->currentIndex() == 1
+            || ui->speakers_tabs->currentIndex() == 1
+            || ui->projector_tabs->currentIndex() == 1
+       )
     {
         set_tabs(0);
     }

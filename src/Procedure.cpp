@@ -12,8 +12,6 @@
  *
  */
 
-#include <filesystem>
-#include <fstream>
 #include <stdlib.h>
 #include <unistd.h>
 #include <QDebug>
@@ -26,7 +24,6 @@
 #include <QStandardPaths>
 #include "Procedure.h"
 
-namespace fs = std::filesystem;
 // TODO: MAKE UI RESPONSIVE
 size_t Procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
 {
