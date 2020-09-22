@@ -212,7 +212,7 @@ bool Procedure::check_shortcut(QString exe_path)
     {
         QString exe_name = QFileInfo(exe_path).baseName();
         exe_name =  exe_name.replace(0, 1, exe_name[0].toUpper());
-        QDirIterator it("C:\\Users\\");
+        QDirIterator it("C:/Users/");
         qDebug() << "exe_name: " << exe_name << "\n";
 
         // Iterate through Users' Desktop folders to find whether shortcuts (symlinks) exist, if not, create them
@@ -415,16 +415,25 @@ int Procedure::clean(const bool EXT)
     // TODO: Use QDir, QFile
     try
     {
-        for (const auto &entry : fs::directory_iterator("C:\\Users\\"))
+        QDirIterator it("C:/Users/");
+
+        while (it.hasNext())
         {
-            if (fs::is_directory(entry.path()) && fs::exists(entry.path() / "Desktop"))
+            it.next();
+            qDebug() << "Iterator path: " << it.filePath() << "\n";
+
+            if (QDir().exists(it.filePath())
+                    && QDir().exists(it.filePath() + "/Desktop/"))
             {
-                for (const auto &file : fs::directory_iterator(entry.path() / "Desktop"))
+                QStringList filters;
+                filters << "*.bat" << "*.cmd";
+                QDir desktop(it.filePath() + "/Desktop/");
+                desktop.setNameFilters(filters);
+
+                for (QFile file : desktop.entryList())
                 {
-                    if (file.path().extension() == ".cmd" || file.path().extension() == ".bat")
-                    {
-                        fs::remove(file.path());
-                    }
+                    qDebug() << "Removing: " << file.fileName() << "\n";
+                    file.remove();
                 }
             }
         }
