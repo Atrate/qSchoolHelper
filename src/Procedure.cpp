@@ -351,7 +351,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
                 }
             }
 
-            //ui->progress_bar->setValue((i+1)*10);
+            emit progress_changed((i + 1) * 10);
         }
     }
 
@@ -400,7 +400,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
             }
         }
 
-        //ui->progress_bar->setValue((i+6)*10);
+        emit progress_changed((i + 6) * 10);
     }
 
     return 0;
@@ -409,7 +409,6 @@ int Procedure::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
-    // TODO: Use QDir, QFile
     try
     {
         QDirIterator it("C:/Users/");
@@ -443,7 +442,7 @@ int Procedure::clean(const bool EXT)
 
     // Run BleachBit to clean temporary files
     // --------------------------------------
-    //ui->progress_bar->setValue(30);
+    emit progress_changed(30);
     QString bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
 
     if (!QFile().exists(bb_path))
@@ -452,7 +451,7 @@ int Procedure::clean(const bool EXT)
         install_bb();
     }
 
-    //ui->progress_bar->setValue(40);
+    emit progress_changed(40);
     //ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
     bb_path = "\"" + bb_path + "\"";
     QString cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
@@ -474,7 +473,7 @@ int Procedure::clean(const bool EXT)
     {
         cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
               "system.memory_dump system.muicache system.prefetch system.updates";
-        //ui->progress_bar->setValue(60);
+        emit progress_changed(60);
         //ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
         QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.toUtf8());
 

@@ -47,6 +47,7 @@ void InstallDialog::install()
     // Actually run the installation
     // -----------------------------
     Procedure installer;
+    QObject::connect(&installer, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
     int install_result = installer.run_install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),

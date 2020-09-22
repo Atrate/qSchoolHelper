@@ -52,6 +52,7 @@ void CleaningDialog::on_clean_button_clicked()
     // Actually run the cleaning process
     // ---------------------------------
     Procedure cleaning;
+    QObject::connect(&cleaning, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
     cleaning.run_clean(ui->radio_extended->isChecked());
     // Finalize — set UI element states
     // --------------------------------

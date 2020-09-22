@@ -18,9 +18,12 @@
 #include <CurlEasy.h>
 #include <QStandardPaths>
 #include <QDir>
+#include <QObject>
 
-class Procedure
+class Procedure : public QObject
 {
+        Q_OBJECT
+
     private:
         const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         int qtcurl_dl(const char* url, const char* filename);
@@ -36,6 +39,9 @@ class Procedure
         int run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
         int run_clean(const bool EXT);
         int run_qtcurl_dl(const char* url, const char* filename);
+
+    signals:
+        void progress_changed(int progress);
 };
 
 
