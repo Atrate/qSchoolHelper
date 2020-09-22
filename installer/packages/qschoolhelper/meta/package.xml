@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>qSchoolHelper</DisplayName>
+    <Description>The qSchoolHelper application.</Description>
+    <Version>0.1.0</Version>
+    <ReleaseDate>2020-09-01</ReleaseDate>
+    <Licenses>
+        <License name="GNU General Public License v3" file="../LICENSE" />
+    </Licenses>
+    <Default>true</Default>
+    <ForcedInstallation>true</ForcedInstallation>
+</Package>

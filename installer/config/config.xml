@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>qSchoolHelper</Name>
+    <Version>0.1.0</Version>
+    <Title>qSchoolHelper installer</Title>
+    <Publisher>Atrate</Publisher>
+    <StartMenuDir>qSchoolHelper</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/qSchoolHelper</TargetDir>
+    <ProductUrl>https://gitlab.com/Atrate/qschoolhelper</ProductUrl>
+    <InstallerWindowIcon>../data/icons/icon.ico</InstallerWindowIcon>
+    <InstallerApplicationIcon>../data/icons/icon.ico</InstallerApplicationIcon>
+    <Logo>../data/icons/icon.png</Logo>
+    <RunProgram>@TargetDir@/qSchoolHelper.exe</RunProgram>
+</Installer>
