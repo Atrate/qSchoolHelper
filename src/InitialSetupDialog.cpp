@@ -46,6 +46,7 @@ void InitialSetupDialog::initial_setup()
     ui->setup_log->setEnabled(true);
     ui->progress_bar->setEnabled(true);
     ui->button_box->setEnabled(false);
+    ui->install_check_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
     qInfo() << tr("Starting initial setup…\n——————————");
@@ -177,6 +178,7 @@ void InitialSetupDialog::initial_setup()
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
     ui->setup_log->append(tr("All done!"));
+    ui->install_check_box->setEnabled(true);
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 }
