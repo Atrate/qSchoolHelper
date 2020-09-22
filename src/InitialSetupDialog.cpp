@@ -110,14 +110,6 @@ void InitialSetupDialog::initial_setup()
             install_failure_box.setModal(true);
             install_failure_box.exec();
         }
-        else
-        {
-            qCritical() << tr("The installation failed!");
-            QMessageBox unknown_failure_box;
-            unknown_failure_box.setText(tr("The installation failed!"));
-            unknown_failure_box.setModal(true);
-            unknown_failure_box.exec();
-        }
     }
 
     // Download and install BleachBit
@@ -146,14 +138,6 @@ void InitialSetupDialog::initial_setup()
             install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
             install_failure_box.setModal(true);
             install_failure_box.exec();
-        }
-        else
-        {
-            qCritical() << tr("The installation failed!");
-            QMessageBox unknown_failure_box;
-            unknown_failure_box.setText(tr("The installation failed!"));
-            unknown_failure_box.setModal(true);
-            unknown_failure_box.exec();
         }
     }
 
