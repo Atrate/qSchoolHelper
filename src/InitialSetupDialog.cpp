@@ -40,11 +40,13 @@ void InitialSetupDialog::initial_setup()
     // ----------------------------------------------
     g_setup_running = true;
     Procedure initial_procedures;
+    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log, SLOT(append(QString)));
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
     ui->progress_bar->setEnabled(true);
     ui->button_box->setEnabled(false);
+    ui->install_check_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
     qInfo() << tr("Starting initial setup…\n——————————");
@@ -108,14 +110,6 @@ void InitialSetupDialog::initial_setup()
             install_failure_box.setModal(true);
             install_failure_box.exec();
         }
-        else
-        {
-            qCritical() << tr("The installation failed!");
-            QMessageBox unknown_failure_box;
-            unknown_failure_box.setText(tr("The installation failed!"));
-            unknown_failure_box.setModal(true);
-            unknown_failure_box.exec();
-        }
     }
 
     // Download and install BleachBit
@@ -145,14 +139,6 @@ void InitialSetupDialog::initial_setup()
             install_failure_box.setModal(true);
             install_failure_box.exec();
         }
-        else
-        {
-            qCritical() << tr("The installation failed!");
-            QMessageBox unknown_failure_box;
-            unknown_failure_box.setText(tr("The installation failed!"));
-            unknown_failure_box.setModal(true);
-            unknown_failure_box.exec();
-        }
     }
 
     // Run extended cleaner
@@ -176,6 +162,7 @@ void InitialSetupDialog::initial_setup()
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
     ui->setup_log->append(tr("All done!"));
+    ui->install_check_box->setEnabled(true);
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 }

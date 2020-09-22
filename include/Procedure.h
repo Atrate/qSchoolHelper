@@ -18,16 +18,20 @@
 #include <CurlEasy.h>
 #include <QStandardPaths>
 #include <QDir>
+#include <QObject>
 
-class Procedure
+class Procedure : public QObject
 {
+        Q_OBJECT
+
     private:
         const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
         int qtcurl_dl(const char* url, const char* filename);
         int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
         int clean(const bool EXT);
         int install_bb();
-        static bool check_shortcut(QString exe_path);
+        bool check_shortcut(QString exe_path);
         QString get_file_info(const int LINE, bool fallback = false);
         static size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
 
@@ -36,6 +40,10 @@ class Procedure
         int run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
         int run_clean(const bool EXT);
         int run_qtcurl_dl(const char* url, const char* filename);
+
+    signals:
+        void progress_changed(int progress);
+        void progress_description(QString desc);
 };
 
 

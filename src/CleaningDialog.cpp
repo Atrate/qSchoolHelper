@@ -44,14 +44,14 @@ void CleaningDialog::on_clean_button_clicked()
     ui->progress_bar->setValue(0);
     ui->cleaning_log->setEnabled(true);
     ui->cleaning_log->clear();
-    qInfo() << tr("Starting cleaner…\n—————————————————");
-    ui->cleaning_log->append(tr("Starting cleaner…\n—————————————————"));
-    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
-    ui->cleaning_log->append(tr("Removing .bat and .cmd files from the desktop…"));
+    ui->radio_simple->setEnabled(false);
+    ui->radio_extended->setEnabled(false);
     QApplication::processEvents();
     // Actually run the cleaning process
     // ---------------------------------
     Procedure cleaning;
+    QObject::connect(&cleaning, SIGNAL(progress_description(QString)), this->ui->cleaning_log, SLOT(append(QString)));
+    QObject::connect(&cleaning, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
     cleaning.run_clean(ui->radio_extended->isChecked());
     // Finalize — set UI element states
     // --------------------------------
@@ -63,6 +63,8 @@ void CleaningDialog::on_clean_button_clicked()
     success_box.setText(tr("The cleaning operation completed succesfully!"));
     success_box.setModal(true);
     success_box.exec();
+    ui->radio_simple->setEnabled(true);
+    ui->radio_extended->setEnabled(true);
     ui->clean_button->setEnabled(true);
     ui->button_box->setEnabled(true);
 }
