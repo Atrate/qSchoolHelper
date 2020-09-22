@@ -40,6 +40,7 @@ void InitialSetupDialog::initial_setup()
     // ----------------------------------------------
     g_setup_running = true;
     Procedure initial_procedures;
+    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log, SLOT(append(QString)));
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);

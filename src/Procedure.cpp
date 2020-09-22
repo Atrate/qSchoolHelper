@@ -228,6 +228,7 @@ bool Procedure::check_shortcut(QString exe_path)
             {
                 try
                 {
+                    emit progress_description(tr("Creating shortcut to: ") + exe_name);
                     QString link_cmd = "mklink ";
                     link_cmd.append("\"" + QDir::toNativeSeparators(it.filePath()) + "\\Desktop\\" + exe_name + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
                     qDebug() << "Link CMD: " << link_cmd << "\n";
@@ -339,6 +340,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             QFile().remove(download_array[i][1]);
+            emit progress_description(tr("Downloading ") + download_array[i][1]);
 
             if (!qtcurl_dl(download_array[i][0].toUtf8(), download_array[i][1].toUtf8()))
             {
@@ -364,6 +366,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
             // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
             // --------------------------------------------------------------------------------------------------------
             QString cmd = download_array[i][1];
+            emit progress_description(tr("Installing: ") + download_array[i][1]);
 
             switch (i)
             {
@@ -409,6 +412,11 @@ int Procedure::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
+    qInfo() << tr("Starting cleaner…\n—————————————————");
+    emit progress_description(tr("Starting cleaner…\n—————————————————"));
+    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
+    emit progress_description(tr("Removing .bat and .cmd files from the desktop…"));
+
     try
     {
         QDirIterator it("C:/Users/");
@@ -447,12 +455,12 @@ int Procedure::clean(const bool EXT)
 
     if (!QFile().exists(bb_path))
     {
-        //ui->cleaning_log->append(tr("Downloading BleachBit (cleaning engine)…"));
+        emit progress_description(tr("Downloading BleachBit (cleaning engine)…"));
         install_bb();
     }
 
     emit progress_changed(40);
-    //ui->cleaning_log->append(tr("Cleaning temporary files and caches…"));
+    emit progress_description(tr("Cleaning temporary files and caches…"));
     bb_path = "\"" + bb_path + "\"";
     QString cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                   "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
@@ -474,7 +482,7 @@ int Procedure::clean(const bool EXT)
         cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
               "system.memory_dump system.muicache system.prefetch system.updates";
         emit progress_changed(60);
-        //ui->cleaning_log->append(tr("Cleaning temporary files and caches (extended)…"));
+        emit progress_description(tr("Cleaning temporary files and caches (extended)…"));
         QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.toUtf8());
 
         while (bb_ext_clean.isRunning())
