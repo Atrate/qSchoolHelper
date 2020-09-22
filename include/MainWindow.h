@@ -47,6 +47,7 @@ class MainWindow : public QMainWindow
         CleaningDialog* cleaning;
         HelpDialog* help;
         void window_setup();
+        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
     private slots:
         void on_problem_button_clicked();

@@ -116,8 +116,12 @@ void InstallDialog::on_install_button_clicked()
 {
     // If no program has been selected, display message box
     // ----------------------------------------------------
-    if (!(ui->firefox_check_box->isChecked() || ui->reader_check_box->isChecked() || ui->vlc_check_box->isChecked()
-            || ui->viewer_check_box->isChecked() || ui->libreoffice_check_box->isChecked()))
+    if (!(ui->firefox_check_box->isChecked()
+            || ui->reader_check_box->isChecked()
+            || ui->vlc_check_box->isChecked()
+            || ui->viewer_check_box->isChecked()
+            || ui->libreoffice_check_box->isChecked())
+       )
     {
         QMessageBox no_program_selected_box;
         qWarning() << tr("Please select at least one program to be installed!");

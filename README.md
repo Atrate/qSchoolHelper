@@ -17,6 +17,7 @@ This project has been designed and configured for use on Windows 10 computers in
 - Qt 5.2 or higher
 - OpenSSL (libcrypto) (included in ./lib/dll/)
 - cURL (libcurl) (included in ./lib/)
+- Visual C++ Redistributable Runtime 2015 DLLs (included in ./lib/dll/)
 - MinGW or other >= C++17 compiler
 
 ## Third-party components used

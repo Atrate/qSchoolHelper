@@ -12,8 +12,6 @@
  *
  */
 
-#include <filesystem>
-#include <fstream>
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -22,8 +20,6 @@
 #include "InstallDialog.h"
 #include "Procedure.h"
 #include "ui_InitialSetupDialog.h"
-
-namespace fs = std::filesystem;
 
 InitialSetupDialog::InitialSetupDialog(QWidget* parent) :
     QDialog(parent),
@@ -43,14 +39,6 @@ void InitialSetupDialog::initial_setup()
     // Begin — Declare vars and set UI element states
     // ----------------------------------------------
     g_setup_running = true;
-    std::string config_folder = "C:\\ProgramData\\qSchoolHelper\\";
-    std::string initial_setup_done = config_folder + "initial_setup_done.txt";
-
-    if (!fs::exists(config_folder))
-    {
-        fs::create_directory(config_folder);
-    }
-
     Procedure initial_procedures;
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
@@ -132,9 +120,9 @@ void InitialSetupDialog::initial_setup()
 
     // Download and install BleachBit
     // ------------------------------
-    std::string bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    QString bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
 
-    if (!fs::exists(bb_path))
+    if (!QDir().exists(bb_path))
     {
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
@@ -169,7 +157,7 @@ void InitialSetupDialog::initial_setup()
 
     // Run extended cleaner
     // --------------------
-    if (fs::exists(bb_path))
+    if (QDir().exists(bb_path))
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
@@ -179,9 +167,10 @@ void InitialSetupDialog::initial_setup()
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
-    std::ofstream isdf;
-    isdf.open(initial_setup_done);
-    isdf << std::endl;
+    QString initial_setup_done = config_folder + "initial_setup_done.txt";
+    QFile isdf(initial_setup_done);
+    isdf.open(QIODevice::WriteOnly);
+    isdf.write("");
     isdf.close();
     g_setup_running = false;
     ui->progress_bar->setValue(100);
