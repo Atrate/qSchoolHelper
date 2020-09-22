@@ -210,7 +210,8 @@ bool Procedure::check_shortcut(QString exe_path)
 
     if (exe_path != "" && QFile().exists(exe_path))
     {
-        QString exe_name = exe_path.mid(exe_path.lastIndexOf("\\") + 1);
+        QString exe_name = QFileInfo(exe_path).baseName();
+        exe_name =  exe_name.replace(0, 1, exe_name[0].toUpper());
         QDirIterator it("C:\\Users\\");
         qDebug() << "exe_name: " << exe_name << "\n";
 
@@ -221,8 +222,12 @@ bool Procedure::check_shortcut(QString exe_path)
             it.next();
             qDebug() << "Iterator path: " << it.filePath() << "\n";
 
-            if (QFile().exists(exe_path) && QDir().exists(it.filePath()) && QDir().exists(it.filePath() + "/Desktop") &&
-                    !QFile().exists(it.filePath() + "/Desktop" + exe_name))
+            if (QFile().exists(exe_path)
+                    && QDir().exists(it.filePath() + "/Desktop")
+                    && !((QFile().exists(it.filePath() + "/Desktop/" + exe_name))
+                         || (QFile().exists(it.filePath() + "/Desktop/" + exe_name + ".exe"))
+                         || (QFile().exists(it.filePath() + "/Desktop/" + exe_name + ".lnk")))
+               )
             {
                 try
                 {
