@@ -280,7 +280,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     if (temp_folder.isValid())
     {
-        if (chdir(temp_folder.path().toUtf8()) != 0)
+        if (!QDir::setCurrent(temp_folder.path()))
         {
             return 3;
         }
@@ -475,7 +475,7 @@ int Procedure::clean(const bool EXT)
     bb_path = '\"' + bb_path + '\"';
     emit progress_changed(40);
     emit progress_description(tr("Cleaning temporary files and caches…"));
-    QString cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+    QString cmd = QDir::toNativeSeparators(bb_path) + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                   "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
                   "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
                   "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
@@ -492,7 +492,7 @@ int Procedure::clean(const bool EXT)
     // -----------------
     if (EXT)
     {
-        cmd = bb_path + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
+        cmd = QDir::toNativeSeparators(bb_path) + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
               "system.memory_dump system.muicache system.prefetch system.updates";
         emit progress_changed(60);
         emit progress_description(tr("Cleaning temporary files and caches (extended)…"));
@@ -512,7 +512,7 @@ int Procedure::install_bb()
 
     if (temp_folder.isValid())
     {
-        if (chdir(temp_folder.path().toUtf8()) != 0)
+        if (QDir::setCurrent(temp_folder.path()))
         {
             return 3;
         }
