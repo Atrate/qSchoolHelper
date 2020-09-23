@@ -143,7 +143,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 break;
 
             case 1:
-                return "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+                return "C:/Program Files/Mozilla Firefox/firefox.exe";
                 break;
 
             // Reader
@@ -153,7 +153,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 break;
 
             case 3:
-                return "C:\\Program Files (x86)\\Adobe\\Acrobat Reader DC\\Reader\\AcroRd32.exe";
+                return "C:/Program Files (x86)/Adobe/Acrobat Reader DC/Reader/AcroRd32.exe";
                 break;
 
             // LOffice
@@ -163,7 +163,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 break;
 
             case 5:
-                return "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
+                return "C:/Program Files/LibreOffice/program/soffice.exe";
                 break;
 
             // VLC
@@ -173,7 +173,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 break;
 
             case 7:
-                return "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe";
+                return "C:/Program Files/VideoLAN/VLC/vlc.exe";
                 break;
 
             // PPViewer
@@ -183,7 +183,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
                 break;
 
             case 9:
-                return "C:\\Program Files (x86)\\Microsoft Office\\Office14\\PPTVIEW.exe";
+                return "C:/Program Files (x86)/Microsoft Office/Office14/PPTVIEW.exe";
                 break;
 
             // BleachBit
@@ -464,7 +464,7 @@ int Procedure::clean(const bool EXT)
     // Run BleachBit to clean temporary files
     // --------------------------------------
     emit progress_changed(30);
-    QString bb_path = "C:\\Program Files (x86)\\BleachBit\\bleachbit_console.exe";
+    QString bb_path = "C:/Program Files (x86)/BleachBit/bleachbit_console.exe";
 
     if (!QFile().exists(bb_path))
     {
