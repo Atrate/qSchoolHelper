@@ -47,7 +47,7 @@ void MainWindow::window_setup()
     // Disable initial_setup_button if initial setup has been run.
     // -----------------------------------------------------------
 #ifdef QT_NO_DEBUG
-    QString initial_setup_done = config_folder + "initial_setup_done.txt";
+    QString initial_setup_done = config_folder + "/initial_setup_done.txt";
 
     if (QFile().exists(initial_setup_done))
     {
