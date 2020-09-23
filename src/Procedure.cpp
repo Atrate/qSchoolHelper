@@ -25,7 +25,6 @@
 #include <QProcess>
 #include "Procedure.h"
 
-// TODO: MAKE UI RESPONSIVE
 size_t Procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
 {
     size_t written = fwrite(ptr, size, nmemb, (FILE*)stream);
@@ -210,27 +209,27 @@ bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
     switch (NAME_NUM)
     {
         case 0:
-            exe_name = "Firefox";
+            exe_name = "/Firefox";
             break;
 
         case 1:
-            exe_name = "Acrobat Reader DC";
+            exe_name = "/Acrobat Reader DC";
             break;
 
         case 2:
-            exe_name = "LibreOffice";
+            exe_name = "/LibreOffice";
             break;
 
         case 3:
-            exe_name = "VLC Media Player";
+            exe_name = "/VLC Media Player";
             break;
 
         case 4:
-            exe_name = "PowerPoint Viewer";
+            exe_name = "/PowerPoint Viewer";
             break;
 
         default:
-            exe_name = QFileInfo(exe_path).baseName();
+            exe_name = "/" + QFileInfo(exe_path).baseName();
             break;
     }
 
@@ -255,10 +254,10 @@ bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
             try
             {
                 emit progress_description(tr("Creating shortcut to: ") + exe_name);
-                QString link_cmd = "\"mklink ";
-                link_cmd.append("\"" + QDir::toNativeSeparators(QDir::toNativeSeparators(desktop.path()) + exe_name + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"\""));
+                QString link_cmd = "mklink ";
+                link_cmd.append("\"" + QDir::toNativeSeparators(desktop.path() + exe_name) + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
                 qDebug() << "Link CMD: " << link_cmd << "\n";
-                (void) QProcess::execute("cmd", QStringList() << "/c" << link_cmd);
+                (void) QProcess::execute("cmd /c " + link_cmd);
             }
             catch (const std::exception &e)
             {
@@ -413,7 +412,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
                     break;
             }
 
-            QFuture<int> install = QtConcurrent::run(system, cmd.toUtf8());
+            QFuture<int> install = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
 
             while (install.isRunning())
             {
@@ -433,6 +432,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     return 0;
 }
+
 int Procedure::clean(const bool EXT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
@@ -472,16 +472,16 @@ int Procedure::clean(const bool EXT)
         install_bb();
     }
 
+    bb_path = '\"' + bb_path + '\"';
     emit progress_changed(40);
     emit progress_description(tr("Cleaning temporary files and caches…"));
-    bb_path = "\"" + bb_path + "\"";
     QString cmd = bb_path + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                   "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
                   "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
                   "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
                   "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
                   "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
-    QFuture<void> bb_clean = QtConcurrent::run(system, cmd.toUtf8());
+    QFuture<void> bb_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
 
     while (bb_clean.isRunning())
     {
@@ -496,7 +496,7 @@ int Procedure::clean(const bool EXT)
               "system.memory_dump system.muicache system.prefetch system.updates";
         emit progress_changed(60);
         emit progress_description(tr("Cleaning temporary files and caches (extended)…"));
-        QFuture<void> bb_ext_clean = QtConcurrent::run(system, cmd.toUtf8());
+        QFuture<void> bb_ext_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
 
         while (bb_ext_clean.isRunning())
         {
@@ -537,7 +537,7 @@ int Procedure::install_bb()
     }
 
     bb_exe.append("/S /allusers");
-    QFuture<int> bb_install = QtConcurrent::run(system, bb_exe.toUtf8());
+    QFuture<int> bb_install = QtConcurrent::run(QProcess::execute, "cmd /c " + bb_exe);
 
     while (bb_install.isRunning())
     {
