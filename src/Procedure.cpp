@@ -22,6 +22,7 @@
 #include <QTemporaryDir>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QStandardPaths>
+#include <QProcess>
 #include "Procedure.h"
 
 // TODO: MAKE UI RESPONSIVE
@@ -254,10 +255,10 @@ bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
             try
             {
                 emit progress_description(tr("Creating shortcut to: ") + exe_name);
-                QString link_cmd = "mklink ";
-                link_cmd.append("\"" + QDir::toNativeSeparators(QDir::toNativeSeparators(desktop.path()) + exe_name + "\" \"" + QDir::toNativeSeparators(exe_path) + "\""));
+                QString link_cmd = "\"mklink ";
+                link_cmd.append("\"" + QDir::toNativeSeparators(QDir::toNativeSeparators(desktop.path()) + exe_name + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"\""));
                 qDebug() << "Link CMD: " << link_cmd << "\n";
-                (void) system(link_cmd.toUtf8());
+                (void) QProcess::execute("cmd", QStringList() << "/c" << link_cmd);
             }
             catch (const std::exception &e)
             {

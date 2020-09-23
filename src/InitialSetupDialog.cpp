@@ -15,6 +15,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QProcess>
 #include "CleaningDialog.h"
 #include "InitialSetupDialog.h"
 #include "InstallDialog.h"
@@ -40,7 +41,8 @@ void InitialSetupDialog::initial_setup()
     // ----------------------------------------------
     g_setup_running = true;
     Procedure initial_procedures;
-    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log, SLOT(append(QString)));
+    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log,
+                     SLOT(append(QString)));
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
@@ -57,37 +59,41 @@ void InitialSetupDialog::initial_setup()
     qInfo() << tr("Disabling Windows Explorer ads…\n");
     ui->setup_log->append(tr("Disabling Windows Explorer ads…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
     // Disable telemetry
     // -----------------
     qInfo() << tr("Disabling telemetry service…\n");
     ui->setup_log->append(tr("Disabling telemetry service…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
-    (void) system("net stop DiagTrack");
-    (void) system("sc config DiagTrack start= disabled");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "net stop DiagTrack");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "sc config DiagTrack start= disabled");
     // Disable search indexing
     // -----------------------
     qInfo() << tr("Disabling search indexing…\n");
     ui->setup_log->append(tr("Disabling search indexing…\n"));
     QApplication::processEvents();
-    (void) system("net stop WSearch");
-    (void) system("sc config WSearch start= disabled");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "net stop WSearch");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "sc config WSearch start= disabled");
     // Snap desktop icons to grid and enable auto-arrange
     // --------------------------------------------------
     qInfo() << tr("Enabling icon auto-arrange and snap to grid");
     ui->setup_log->append(tr("Enabling icon auto-arrange and snap to grid"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop\" /v \"AllowTelemetry\" /t REG_DWORD /d 1075839525 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop\" /v \"AllowTelemetry\" /t REG_DWORD /d 1075839525 /f");
     // Disable Windows Visual FX
     // -------------------------
     qInfo() << tr("Disabling visual effects…\n");
     ui->setup_log->append(tr("Disabling visual effects…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
     // Restart explorer.exe to apply changes
     // -------------------------------------
-    (void) system("taskkill /F /IM explorer.exe & start explorer");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "taskkill /F /IM explorer.exe & start explorer");
     ui->progress_bar->setValue(10);
     QApplication::processEvents();
 
