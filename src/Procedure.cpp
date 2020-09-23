@@ -30,7 +30,7 @@ size_t Procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
     size_t written = fwrite(ptr, size, nmemb, (FILE*)stream);
     return written;
 }
-int Procedure::qtcurl_dl(const char* url, const char* filename)
+bool Procedure::qtcurl_dl(const char* url, const char* filename)
 {
 #ifndef QT_NO_DEBUG
     assert(url[0] != '\0');
@@ -427,7 +427,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
             QFile().remove(download_array[i][1]);
 
-            if (!install)
+            if (install != 0)
             {
                 return 2;
             }
