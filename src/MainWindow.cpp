@@ -55,6 +55,10 @@ void MainWindow::window_setup()
         ui->problem_button->setToolTip(tr("Help with common problems"));
         ui->clean_button->setToolTip(tr("Clean junk and temporary files"));
         ui->help_button->setToolTip(tr("Open the application usage guide"));
+        ui->problem_button->setEnabled(true);
+        ui->clean_button->setEnabled(true);
+        ui->software_button->setEnabled(true);
+        ui->help_button->setEnabled(true);
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip(tr("Initial Setup has already been run on this computer. "
                                                 "If you with to run it again, please select it from File -> Initial Setup."));
@@ -66,6 +70,7 @@ void MainWindow::window_setup()
         ui->clean_button->setEnabled(false);
         ui->software_button->setEnabled(false);
         ui->help_button->setEnabled(false);
+        ui->initial_setup_button->setEnabled(true);
         ui->software_button->setToolTip(disabled_tooltip);
         ui->problem_button->setToolTip(disabled_tooltip);
         ui->clean_button->setToolTip(disabled_tooltip);
