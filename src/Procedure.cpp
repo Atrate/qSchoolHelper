@@ -198,16 +198,43 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
         }
     }
 }
-bool Procedure::check_shortcut(QString exe_path)
+bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
 {
 #ifndef QT_NO_DEBUG
     assert(exe_path != "");
 #endif
     qDebug() << "Checking shortcut for: " << exe_path << "\n";
+    QString exe_name;
+
+    switch (NAME_NUM)
+    {
+        case 0:
+            exe_name = "Firefox";
+            break;
+
+        case 1:
+            exe_name = "Adobe Reader";
+            break;
+
+        case 2:
+            exe_name = "LibreOffice";
+            break;
+
+        case 3:
+            exe_name = "VLC Media Player";
+            break;
+
+        case 4:
+            exe_name = "PowerPoint Viewer";
+            break;
+
+        default:
+            exe_name = QFileInfo(exe_path).baseName();
+            break;
+    }
 
     if (exe_path != "" && QFile().exists(exe_path))
     {
-        QString exe_name = QFileInfo(exe_path).baseName();
         exe_name =  exe_name.replace(0, 1, exe_name[0].toUpper());
         QDirIterator it("C:/Users/");
         qDebug() << "exe_name: " << exe_name << "\n";
@@ -218,6 +245,9 @@ bool Procedure::check_shortcut(QString exe_path)
         {
             it.next();
             qDebug() << "Iterator path: " << it.filePath() << "\n";
+            qDebug() << "Checking for the existence of: " << (it.filePath() + "/Desktop/" + exe_name + ".exe") << "\n";
+            qDebug() << "Checking for the existence of: " << (it.filePath() + "/Desktop/" + exe_name + ".lnk") << "\n";
+            qDebug() << "Checking for the existence of: " << (it.filePath() + "/Desktop/" + exe_name) << "\n";
 
             if (QFile().exists(exe_path)
                     && QDir().exists(it.filePath() + "/Desktop")
@@ -334,7 +364,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     {
         if (download_array[i][2] != "")
         {
-            shortcut_array[i] = check_shortcut(download_array[i][2]);
+            shortcut_array[i] = check_shortcut(download_array[i][2], i);
         }
 
         if (!(download_array[i][0] == "" || shortcut_array[i]))
