@@ -449,27 +449,15 @@ int Procedure::clean(const bool EXT)
 
     try
     {
-        QDirIterator it("C:/Users/");
+        QStringList filters;
+        filters << "*.bat" << "*.cmd";
+        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+        desktop.setNameFilters(filters);
 
-        while (it.hasNext())
+        for (QFile file : desktop.entryList())
         {
-            it.next();
-            qDebug() << "Iterator path: " << it.filePath() << "\n";
-
-            if (QDir().exists(it.filePath())
-                    && QDir().exists(it.filePath() + "/Desktop/"))
-            {
-                QStringList filters;
-                filters << "*.bat" << "*.cmd";
-                QDir desktop(it.filePath() + "/Desktop/");
-                desktop.setNameFilters(filters);
-
-                for (QFile file : desktop.entryList())
-                {
-                    qDebug() << "Removing: " << file.fileName() << "\n";
-                    file.remove();
-                }
-            }
+            qDebug() << "Removing: " << file.fileName() << "\n";
+            file.remove();
         }
     }
     catch (const std::exception &e)
