@@ -213,7 +213,7 @@ bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
             break;
 
         case 1:
-            exe_name = "Adobe Reader";
+            exe_name = "Acrobat Reader DC";
             break;
 
         case 2:
