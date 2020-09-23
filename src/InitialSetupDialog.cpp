@@ -165,7 +165,7 @@ void InitialSetupDialog::initial_setup()
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
-    QString initial_setup_done = config_folder + "initial_setup_done.txt";
+    QString initial_setup_done = config_folder + "/initial_setup_done.txt";
     QFile isdf(initial_setup_done);
     isdf.open(QIODevice::WriteOnly);
     isdf.write("");
