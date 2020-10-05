@@ -198,7 +198,7 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
         }
     }
 }
-bool Procedure::check_shortcut(QString &exe_path, const int &NAME_NUM = -1)
+bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1)
 {
 #ifndef QT_NO_DEBUG
     assert(exe_path != "");
