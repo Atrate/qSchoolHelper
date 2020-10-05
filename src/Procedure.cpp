@@ -84,7 +84,7 @@ bool Procedure::qtcurl_dl(const char* url, const char* filename)
     fclose(dl_file);
     return (curl.result() == 0 ? true : false);
 }
-QString Procedure::get_file_info(const int LINE, bool fallback)
+QString Procedure::get_file_info(const int &LINE, bool fallback)
 {
 #ifndef QT_NO_DEBUG
     assert(LINE < 11 && LINE > -1);
@@ -198,7 +198,7 @@ QString Procedure::get_file_info(const int LINE, bool fallback)
         }
     }
 }
-bool Procedure::check_shortcut(QString exe_path, const int NAME_NUM = -1)
+bool Procedure::check_shortcut(QString &exe_path, const int &NAME_NUM = -1)
 {
 #ifndef QT_NO_DEBUG
     assert(exe_path != "");
