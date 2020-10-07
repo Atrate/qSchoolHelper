@@ -42,6 +42,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::window_setup()
 {
     // Disable initial_setup_button if initial setup has been run.
@@ -87,11 +88,35 @@ void MainWindow::window_setup()
     ui->initial_setup_button->setToolTip(debug_tooltip);
 #endif
 }
-void MainWindow::on_problem_button_clicked()
+
+void MainWindow::on_action_open_help_triggered()
 {
-    problem = new ProblemDialog(this);
-    problem->show();
+    help = new HelpDialog(this);
+    help->show();
 }
+
+void MainWindow::on_action_about_triggered()
+{
+    about = new AboutDialog(this);
+    about->show();
+}
+
+void MainWindow::on_action_initial_setup_triggered()
+{
+    on_initial_setup_button_clicked();
+}
+
+void MainWindow::on_clean_button_clicked()
+{
+    cleaning = new CleaningDialog(this);
+    cleaning->show();
+}
+
+void MainWindow::on_help_button_clicked()
+{
+    on_action_open_help_triggered();
+}
+
 void MainWindow::on_initial_setup_button_clicked()
 {
     initial_setup = new InitialSetupDialog(this);
@@ -104,31 +129,15 @@ void MainWindow::on_initial_setup_button_clicked()
 
     window_setup();
 }
+
+void MainWindow::on_problem_button_clicked()
+{
+    problem = new ProblemDialog(this);
+    problem->show();
+}
+
 void MainWindow::on_software_button_clicked()
 {
     install = new InstallDialog(this);
     install->show();
-}
-void MainWindow::on_clean_button_clicked()
-{
-    cleaning = new CleaningDialog(this);
-    cleaning->show();
-}
-void MainWindow::on_action_open_help_triggered()
-{
-    help = new HelpDialog(this);
-    help->show();
-}
-void MainWindow::on_action_about_triggered()
-{
-    about = new AboutDialog(this);
-    about->show();
-}
-void MainWindow::on_action_initial_setup_triggered()
-{
-    on_initial_setup_button_clicked();
-}
-void MainWindow::on_help_button_clicked()
-{
-    on_action_open_help_triggered();
 }

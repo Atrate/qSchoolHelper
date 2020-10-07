@@ -25,65 +25,162 @@
 #include <QProcess>
 #include "Procedure.h"
 
-size_t Procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
+bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1)
 {
-    size_t written = fwrite(ptr, size, nmemb, (FILE*)stream);
-    return written;
-}
-bool Procedure::qtcurl_dl(const char* url, const char* filename)
-{
+    // check_shortcut returns true the program is installed when and false when it is not
+    // ----------------------------------------------------------------------------------
 #ifndef QT_NO_DEBUG
-    assert(url[0] != '\0');
-    assert(filename[0] != '\0');
-#else
+    assert(exe_path != "");
+#endif
+    qDebug() << "Checking shortcut for: " << exe_path << "\n";
+    QString exe_name;
 
-    if (url[0] == '\0' || filename[0] == '\0')
+    switch (NAME_NUM)
+    {
+        case 0:
+            exe_name = "/Firefox";
+            break;
+
+        case 1:
+            exe_name = "/Acrobat Reader DC";
+            break;
+
+        case 2:
+            exe_name = "/LibreOffice";
+            break;
+
+        case 3:
+            exe_name = "/VLC Media Player";
+            break;
+
+        case 4:
+            exe_name = "/PowerPoint Viewer";
+            break;
+
+            // No need to create shortcut to 7-Zip, it is most useful from the context menu
+            // ----------------------------------------------------------------------------
+        case 5:
+            return QFile().exists(exe_path);
+
+        default:
+            exe_name = "/" + QFileInfo(exe_path).baseName();
+            break;
+    }
+
+    if (exe_path != "" && QFile().exists(exe_path))
+    {
+        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+        qDebug() << "exe_name: " << exe_name << "\n";
+        // Iterate through Users' Desktop folders to find whether shortcuts (symlinks) exist, if not, create them
+        // ------------------------------------------------------------------------------------------------------
+        qDebug() << "Desktop path: " << desktop.path() << "\n";
+        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".exe") << "\n";
+        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".lnk") << "\n";
+        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name) << "\n";
+
+        if (QDir().exists(desktop.path())
+                && !((QFile().exists(desktop.path() + exe_name))
+                     || (QFile().exists(desktop.path() + exe_name + ".exe"))
+                     || (QFile().exists(desktop.path() + exe_name + ".lnk")))
+           )
+        {
+            try
+            {
+                emit progress_description(tr("Creating shortcut to: ") + exe_name);
+                QString link_cmd = "mklink ";
+                link_cmd.append("\"" + QDir::toNativeSeparators(desktop.path() + exe_name) + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
+                qDebug() << "Link CMD: " << link_cmd << "\n";
+                (void) QProcess::execute("cmd /c " + link_cmd);
+            }
+            catch (const std::exception &e)
+            {
+                // Catch permission denied errors. We can't really do much about them, though,
+                // since the application is supposed to run as administrator anyways.
+            }
+        }
+
+        return true;
+    }
+    else
     {
         return false;
-        qDebug() << "Invalid file name or download link!\n";
     }
+}
 
-#endif
+int Procedure::clean(const bool EXT)
+{
+    // Find and remove all .bat and .cmd files from all users' desktops
+    // ----------------------------------------------------------------
+    qInfo() << tr("Starting cleaner…\n—————————————————");
+    emit progress_description(tr("Starting cleaner…\n—————————————————"));
+    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
+    emit progress_description(tr("Removing .bat and .cmd files from the desktop…"));
 
-    if (QFile().exists(filename))
+    try
     {
-        QFile().remove(filename);
+        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+        QStringList filters;
+        filters << "*.bat" << "*.cmd";
+        desktop.setNameFilters(filters);
+
+        for (QFile file : desktop.entryList())
+        {
+            qDebug() << "Removing: " << file.fileName() << "\n";
+            file.remove();
+        }
     }
-
-    QString ca_path = config_folder + "/curl-ca-bundle.crt";
-    qDebug() << "CA Path: " << ca_path << "\n";
-
-    if (!QFile().exists(ca_path))
+    catch (const std::exception &e)
     {
-        QFile::copy(":/data/curl-ca-bundle.crt", ca_path);
+        // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
+        // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
     }
 
-    qDebug() << "Downloading: " << url << " to: " << filename << "\n";
-    CurlEasy curl;
-    curl.set(CURLOPT_URL, QUrl(url));
-    curl.set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
-    curl.set(CURLOPT_CAINFO, ca_path);
-    curl.set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
-    curl.set(CURLOPT_WRITEFUNCTION, write_data);
-    curl.setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
-#ifndef QT_NO_DEBUG
-    curl.set(CURLOPT_NOPROGRESS, long(0));
-#endif
-    // Open file for writing and tell cURL to write to it
-    // --------------------------------------------------
-    FILE* dl_file = nullptr;
-    dl_file = fopen(filename, "wb");
-    curl.set(CURLOPT_WRITEDATA, dl_file);
-    curl.perform();
+    // Run BleachBit to clean temporary files
+    // --------------------------------------
+    emit progress_changed(30);
+    QString bb_path = "C:/Program Files (x86)/BleachBit/bleachbit_console.exe";
 
-    while (curl.isRunning())
+    if (!QFile().exists(bb_path))
+    {
+        emit progress_description(tr("Downloading BleachBit (cleaning engine)…"));
+        install_bb();
+    }
+
+    bb_path = '\"' + bb_path + '\"';
+    emit progress_changed(40);
+    emit progress_description(tr("Cleaning temporary files and caches…"));
+    QString cmd = QDir::toNativeSeparators(bb_path) + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
+                  "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
+                  "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
+                  "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
+                  "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
+                  "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
+    QFuture<void> bb_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
+
+    while (bb_clean.isRunning())
     {
         QApplication::processEvents();
     }
 
-    fclose(dl_file);
-    return (curl.result() == 0 ? true : false);
+    // Extended cleaning
+    // -----------------
+    if (EXT)
+    {
+        cmd = QDir::toNativeSeparators(bb_path) + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
+              "system.memory_dump system.muicache system.prefetch system.updates";
+        emit progress_changed(60);
+        emit progress_description(tr("Cleaning temporary files and caches (extended)…"));
+        QFuture<void> bb_ext_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
+
+        while (bb_ext_clean.isRunning())
+        {
+            QApplication::processEvents();
+        }
+    }
+
+    return 0;
 }
+
 QString Procedure::get_file_info(const int &LINE, bool fallback)
 {
 #ifndef QT_NO_DEBUG
@@ -208,86 +305,51 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
         }
     }
 }
-bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1)
+
+int Procedure::install_bb()
 {
-    // check_shortcut returns true the program is installed when and false when it is not
-    // ----------------------------------------------------------------------------------
-#ifndef QT_NO_DEBUG
-    assert(exe_path != "");
-#endif
-    qDebug() << "Checking shortcut for: " << exe_path << "\n";
-    QString exe_name;
+    QTemporaryDir temp_folder;
 
-    switch (NAME_NUM)
+    if (temp_folder.isValid())
     {
-        case 0:
-            exe_name = "/Firefox";
-            break;
-
-        case 1:
-            exe_name = "/Acrobat Reader DC";
-            break;
-
-        case 2:
-            exe_name = "/LibreOffice";
-            break;
-
-        case 3:
-            exe_name = "/VLC Media Player";
-            break;
-
-        case 4:
-            exe_name = "/PowerPoint Viewer";
-            break;
-
-            // No need to create shortcut to 7-Zip, it is most useful from the context menu
-            // ----------------------------------------------------------------------------
-        case 5:
-            return QFile().exists(exe_path);
-
-        default:
-            exe_name = "/" + QFileInfo(exe_path).baseName();
-            break;
-    }
-
-    if (exe_path != "" && QFile().exists(exe_path))
-    {
-        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
-        qDebug() << "exe_name: " << exe_name << "\n";
-        // Iterate through Users' Desktop folders to find whether shortcuts (symlinks) exist, if not, create them
-        // ------------------------------------------------------------------------------------------------------
-        qDebug() << "Desktop path: " << desktop.path() << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".exe") << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".lnk") << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name) << "\n";
-
-        if (QDir().exists(desktop.path())
-                && !((QFile().exists(desktop.path() + exe_name))
-                     || (QFile().exists(desktop.path() + exe_name + ".exe"))
-                     || (QFile().exists(desktop.path() + exe_name + ".lnk")))
-           )
+        if (QDir::setCurrent(temp_folder.path()))
         {
-            try
-            {
-                emit progress_description(tr("Creating shortcut to: ") + exe_name);
-                QString link_cmd = "mklink ";
-                link_cmd.append("\"" + QDir::toNativeSeparators(desktop.path() + exe_name) + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
-                qDebug() << "Link CMD: " << link_cmd << "\n";
-                (void) QProcess::execute("cmd /c " + link_cmd);
-            }
-            catch (const std::exception &e)
-            {
-                // Catch permission denied errors. We can't really do much about them, though,
-                // since the application is supposed to run as administrator anyways.
-            }
+            return 3;
         }
-
-        return true;
     }
     else
     {
-        return false;
+        return 3;
     }
+
+    QString bb_url = get_file_info(12);
+    QString bb_exe = "BleachBit-setup.exe";
+
+    if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
+    {
+        QFile().remove(bb_exe);
+        bb_url = get_file_info(12, true);
+
+        if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
+        {
+            return 1;
+        }
+    }
+
+    bb_exe.append("/S /allusers");
+    QFuture<int> bb_install = QtConcurrent::run(QProcess::execute, "cmd /c " + bb_exe);
+
+    while (bb_install.isRunning())
+    {
+        QApplication::processEvents();
+    }
+
+    if (!bb_install)
+    {
+        return 2;
+    }
+
+    return 0;
 }
 
 int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV, const bool INS_7Z)
@@ -406,7 +468,7 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
                 }
             }
 
-            emit progress_changed((i + 1) * 10);
+            emit progress_changed((i) * 10);
         }
     }
 
@@ -464,127 +526,69 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
             }
         }
 
-        emit progress_changed((i + 6) * 10);
+        emit progress_changed((i + 5) * 10);
     }
 
     return 0;
 }
 
-int Procedure::clean(const bool EXT)
+bool Procedure::qtcurl_dl(const char* url, const char* filename)
 {
-    // Find and remove all .bat and .cmd files from all users' desktops
-    // ----------------------------------------------------------------
-    qInfo() << tr("Starting cleaner…\n—————————————————");
-    emit progress_description(tr("Starting cleaner…\n—————————————————"));
-    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
-    emit progress_description(tr("Removing .bat and .cmd files from the desktop…"));
+#ifndef QT_NO_DEBUG
+    assert(url[0] != '\0');
+    assert(filename[0] != '\0');
+#else
 
-    try
+    if (url[0] == '\0' || filename[0] == '\0')
     {
-        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
-        QStringList filters;
-        filters << "*.bat" << "*.cmd";
-        desktop.setNameFilters(filters);
-
-        for (QFile file : desktop.entryList())
-        {
-            qDebug() << "Removing: " << file.fileName() << "\n";
-            file.remove();
-        }
-    }
-    catch (const std::exception &e)
-    {
-        // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
-        // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
+        return false;
+        qDebug() << "Invalid file name or download link!\n";
     }
 
-    // Run BleachBit to clean temporary files
-    // --------------------------------------
-    emit progress_changed(30);
-    QString bb_path = "C:/Program Files (x86)/BleachBit/bleachbit_console.exe";
+#endif
 
-    if (!QFile().exists(bb_path))
+    if (QFile().exists(filename))
     {
-        emit progress_description(tr("Downloading BleachBit (cleaning engine)…"));
-        install_bb();
+        QFile().remove(filename);
     }
 
-    bb_path = '\"' + bb_path + '\"';
-    emit progress_changed(40);
-    emit progress_description(tr("Cleaning temporary files and caches…"));
-    QString cmd = QDir::toNativeSeparators(bb_path) + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
-                  "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
-                  "internet_explorer.* java.cache libreoffice.* microsoft_office.* openofficeorg.* opera.* "
-                  "paint.mru realplayer.* safari.* silverlight.* skype.* smartftp.* system.clipboard "
-                  "system.prefetch system.recycle_bin system.tmp vim.* waterfox.* winamp.mru windows_explorer.* "
-                  "windows_media_player.* winrar.history winrar.temp winzip.mru wordpad.mru yahoo_messenger.*";
-    QFuture<void> bb_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
+    QString ca_path = config_folder + "/curl-ca-bundle.crt";
+    qDebug() << "CA Path: " << ca_path << "\n";
 
-    while (bb_clean.isRunning())
+    if (!QFile().exists(ca_path))
+    {
+        QFile::copy(":/data/curl-ca-bundle.crt", ca_path);
+    }
+
+    qDebug() << "Downloading: " << url << " to: " << filename << "\n";
+    CurlEasy curl;
+    curl.set(CURLOPT_URL, QUrl(url));
+    curl.set(CURLOPT_FOLLOWLOCATION, long(1)); // Tells libcurl to follow HTTP 3xx redirects
+    curl.set(CURLOPT_CAINFO, ca_path);
+    curl.set(CURLOPT_FAILONERROR, long(1)); // Do not return CURL_OK in case valid server responses reporting errors.
+    curl.set(CURLOPT_WRITEFUNCTION, write_data);
+    curl.setHttpHeader("User-Agent", "qSchoolHelper_v" APP_VERSION);
+#ifndef QT_NO_DEBUG
+    curl.set(CURLOPT_NOPROGRESS, long(0));
+#endif
+    // Open file for writing and tell cURL to write to it
+    // --------------------------------------------------
+    FILE* dl_file = nullptr;
+    dl_file = fopen(filename, "wb");
+    curl.set(CURLOPT_WRITEDATA, dl_file);
+    curl.perform();
+
+    while (curl.isRunning())
     {
         QApplication::processEvents();
     }
 
-    // Extended cleaning
-    // -----------------
-    if (EXT)
-    {
-        cmd = QDir::toNativeSeparators(bb_path) + " --clean deepscan.ds_store deepscan.thumbs_db system.logs "
-              "system.memory_dump system.muicache system.prefetch system.updates";
-        emit progress_changed(60);
-        emit progress_description(tr("Cleaning temporary files and caches (extended)…"));
-        QFuture<void> bb_ext_clean = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
-
-        while (bb_ext_clean.isRunning())
-        {
-            QApplication::processEvents();
-        }
-    }
-
-    return 0;
+    fclose(dl_file);
+    return (curl.result() == 0 ? true : false);
 }
-int Procedure::install_bb()
+
+size_t Procedure::write_data(void* ptr, size_t size, size_t nmemb, void* stream)
 {
-    QTemporaryDir temp_folder;
-
-    if (temp_folder.isValid())
-    {
-        if (QDir::setCurrent(temp_folder.path()))
-        {
-            return 3;
-        }
-    }
-    else
-    {
-        return 3;
-    }
-
-    QString bb_url = get_file_info(12);
-    QString bb_exe = "BleachBit-setup.exe";
-
-    if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
-    {
-        QFile().remove(bb_exe);
-        bb_url = get_file_info(12, true);
-
-        if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
-        {
-            return 1;
-        }
-    }
-
-    bb_exe.append("/S /allusers");
-    QFuture<int> bb_install = QtConcurrent::run(QProcess::execute, "cmd /c " + bb_exe);
-
-    while (bb_install.isRunning())
-    {
-        QApplication::processEvents();
-    }
-
-    if (!bb_install)
-    {
-        return 2;
-    }
-
-    return 0;
+    size_t written = fwrite(ptr, size, nmemb, (FILE*)stream);
+    return written;
 }
