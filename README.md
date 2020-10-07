@@ -15,15 +15,16 @@ This project has been designed and configured for use on Windows 10 computers in
 ## Dependencies
 
 - Qt 5.2 or higher
-- OpenSSL (libcrypto) (included in ./lib/dll/)
-- cURL (libcurl) (included in ./lib/)
-- Visual C++ Redistributable Runtime 2015 DLLs (included in ./lib/dll/)
+- OpenSSL (libcrypto) (included in `./lib/dll/`)
+- cURL (libcurl) (included in `./lib/`)
+- Visual C++ Redistributable Runtime 2015 DLLs (included in `./lib/dll/`)
 - MinGW or other >= C++17 compiler
 
 ## Third-party components used
 
-- cURL
-- BleachBit
+- [curl](https://github.com/curl/curl)
+- [qtcurl](https://github.com/tarasvb/qtcurl)
+- [BleachBit](https://www.bleachbit.org/)
 
 ## Building from source
 
@@ -32,10 +33,10 @@ This project has been designed and configured for use on Windows 10 computers in
 - Open the .pro file in Qt Creator and configure the project
 - Compile the application
 - Generate the translation files using `lrelease-pro qSchoolHelper.pro`
-- Copy the translation files into exe_dir/data/translations/
-- Use windeployqt to copy the required Qt libraries
-- Copy all the libraries from lib/dll to the executable's directory
-- Copy the certificate bundle into exe_dir/data/
+- Copy the translation files into `exe_dir/data/translations/`
+- Use `windeployqt` to copy the required Qt libraries
+- Copy all the libraries from `lib/dll` to the executable's directory
+- Copy the certificate bundle into `exe_dir/data/`
 
 ## License
 This project is licensed under the [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html).
