@@ -12,17 +12,15 @@
  *
  */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include <QApplication>
 #include <QDebug>
 #include <QFile>
-#include <QDirIterator>
-#include <QApplication>
+#include <QProcess>
+#include <QStandardPaths>
 #include <QThread>
 #include <QTemporaryDir>
 #include <QtConcurrent/QtConcurrentRun>
-#include <QStandardPaths>
-#include <QProcess>
+#include "CurlEasy.h"
 #include "Procedure.h"
 
 bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1)
@@ -336,7 +334,7 @@ int Procedure::install_bb()
         }
     }
 
-    bb_exe.append("/S /allusers");
+    bb_exe.append(" /S /allusers");
     QFuture<int> bb_install = QtConcurrent::run(QProcess::execute, "cmd /c " + bb_exe);
 
     while (bb_install.isRunning())

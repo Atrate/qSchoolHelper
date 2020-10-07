@@ -12,13 +12,12 @@
  *
  */
 
+#include <QDir>
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QProcess>
-#include "CleaningDialog.h"
 #include "InitialSetupDialog.h"
-#include "InstallDialog.h"
 #include "Procedure.h"
 #include "ui_InitialSetupDialog.h"
 

@@ -16,7 +16,6 @@
 #include <QCloseEvent>
 #include <QDebug>
 #include "CleaningDialog.h"
-#include "InitialSetupDialog.h"
 #include "Procedure.h"
 #include "ui_CleaningDialog.h"
 

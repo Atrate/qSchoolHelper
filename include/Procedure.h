@@ -15,9 +15,7 @@
 #ifndef PROCEDURE_H
 #define PROCEDURE_H
 
-#include <CurlEasy.h>
 #include <QStandardPaths>
-#include <QDir>
 #include <QObject>
 
 class Procedure : public QObject

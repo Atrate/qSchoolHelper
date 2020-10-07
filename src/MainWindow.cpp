@@ -12,7 +12,6 @@
  *
  */
 
-#include <fstream>
 #include <QDebug>
 #include <QDir>
 #include "AboutDialog.h"
