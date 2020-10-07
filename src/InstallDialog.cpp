@@ -48,12 +48,13 @@ void InstallDialog::install()
     // -----------------------------
     Procedure installer;
     QObject::connect(&installer, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
-    int install_result = installer.run_install_software(
+    int install_result = installer.install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
                              ui->libreoffice_check_box->checkState(),
                              ui->vlc_check_box->checkState(),
-                             ui->viewer_check_box->checkState()
+                             ui->viewer_check_box->checkState(),
+                             ui->sevenz_check_box->checkState()
                          );
 
     if (install_result == 0)

@@ -274,7 +274,7 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
     }
 }
 
-int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
+int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV, const bool INS_7Z)
 {
     QTemporaryDir temp_folder;
 
@@ -550,20 +550,4 @@ int Procedure::install_bb()
     }
 
     return 0;
-}
-int Procedure::run_install_bb()
-{
-    return install_bb();
-}
-int Procedure::run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV)
-{
-    return install_software(INS_FF, INS_RDC, INS_LOF, INS_VLC, INS_PPV);
-}
-int Procedure::run_clean(const bool EXT)
-{
-    return clean(EXT);
-}
-int Procedure::run_qtcurl_dl(const char* url, const char* filename)
-{
-    return qtcurl_dl(url, filename);
 }

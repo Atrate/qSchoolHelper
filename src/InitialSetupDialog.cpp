@@ -104,7 +104,7 @@ void InitialSetupDialog::initial_setup()
         qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        int install_result = initial_procedures.run_install_software(true, true, true, true, true);
+        int install_result = initial_procedures.install_software(true, true, true, true, true, true);
 
         if (install_result == 1)
         {
@@ -133,7 +133,7 @@ void InitialSetupDialog::initial_setup()
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
-        int bb_install_result = initial_procedures.run_install_bb();
+        int bb_install_result = initial_procedures.install_bb();
 
         if (bb_install_result == 1)
         {
@@ -159,7 +159,7 @@ void InitialSetupDialog::initial_setup()
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
-        initial_procedures.run_clean(true);
+        initial_procedures.clean(true);
         QApplication::processEvents();
     }
 

@@ -192,6 +192,25 @@ missing and you would like to install?</string>
       </property>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QCheckBox" name="sevenz_check_box">
+      <property name="font">
+       <font>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>7-Zip  is a FOSS (Free and Open Source) and cross-platform archive management utility</string>
+      </property>
+      <property name="text">
+       <string>7-Zip
+(Archive management utility)</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
