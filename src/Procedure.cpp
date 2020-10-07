@@ -186,9 +186,19 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
                 return "C:/Program Files (x86)/Microsoft Office/Office14/PPTVIEW.exe";
                 break;
 
+            // 7-Zip
+            // -----
+            case 10:
+                return "https://7-zip.org/a/7z1900-x64.exe";
+                break;
+            case 11:
+                return "C:/Program Files/7-Zip/7z.exe";
+                break;
+
+
             // BleachBit
             // ---------
-            case 10:
+            case 12:
                 return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
                 break;
 
@@ -200,6 +210,8 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
 }
 bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1)
 {
+    // check_shortcut returns true the program is installed when and false when it is not
+    // ----------------------------------------------------------------------------------
 #ifndef QT_NO_DEBUG
     assert(exe_path != "");
 #endif
@@ -228,6 +240,11 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
             exe_name = "/PowerPoint Viewer";
             break;
 
+            // No need to create shortcut to 7-Zip, it is most useful from the context menu
+            // ----------------------------------------------------------------------------
+        case 5:
+            return QFile().exists(exe_path);
+
         default:
             exe_name = "/" + QFileInfo(exe_path).baseName();
             break;
@@ -244,8 +261,7 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
         qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".lnk") << "\n";
         qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name) << "\n";
 
-        if (QFile().exists(exe_path)
-                && QDir().exists(desktop.path())
+        if (QDir().exists(desktop.path())
                 && !((QFile().exists(desktop.path() + exe_name))
                      || (QFile().exists(desktop.path() + exe_name + ".exe"))
                      || (QFile().exists(desktop.path() + exe_name + ".lnk")))
@@ -292,8 +308,8 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
 
     // Declare download links and file names
     // -------------------------------------
-    const unsigned int DL_ARRAY_SIZE = 5;
-    QString download_array[DL_ARRAY_SIZE][4];
+    const unsigned int DL_ARRAY_SIZE = 6;
+    QString download_array[DL_ARRAY_SIZE][3];
 
     if (INS_FF)
     {
@@ -350,6 +366,17 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
         download_array[4][0] = QString("");
     }
 
+    if (INS_7Z)
+    {
+        download_array[5][0] = get_file_info(10);
+        download_array[5][1] = "7-Zip.exe";
+        download_array[5][2] = get_file_info(11);
+    }
+    else
+    {
+        download_array[5][0] = QString("");
+    }
+
     // Download the files
     // ------------------
     bool shortcut_array[DL_ARRAY_SIZE];
@@ -358,6 +385,8 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     {
         if (download_array[i][2] != "")
         {
+            // Populate shortcut_array with information about which programs are already installed
+            // -----------------------------------------------------------------------------------
             shortcut_array[i] = check_shortcut(download_array[i][2], i);
         }
 
@@ -385,17 +414,18 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
     // ------------------------
     for (unsigned int i = 0; i < DL_ARRAY_SIZE; i++)
     {
+        // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
+        // --------------------------------------------------------------------------------------------------------
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
-            // Check if the same version of the app is already installed. If so, just create a shortcut on the desktop.
-            // --------------------------------------------------------------------------------------------------------
+
             QString cmd = download_array[i][1];
-            emit progress_description(tr("Installing: ") + download_array[i][1]);
+            emit progress_description(tr("Installing: ") + QFileInfo(download_array[i][1]).baseName());
 
             switch (i)
             {
                 case 0:
-                    cmd.append("/S");
+                    cmd.append(" /S");
                     break;
 
                 case 1:
@@ -405,14 +435,21 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
                     break;
 
                 case 3:
-                    cmd.append("/S /L=1033");
+                    cmd.append(" /S /L=1033");
                     break;
 
                 case 4:
                     break;
+
+                case 5:
+                    cmd.append(" /S /D=\"C:/Program Files/7-Zip\"");
+                    break;
+
+                default:
+                    break;
             }
 
-            QFuture<int> install = QtConcurrent::run(QProcess::execute, "cmd /c " + cmd);
+            QFuture<int> install = QtConcurrent::run(QProcess::execute, "cmd /c " + QDir::toNativeSeparators(cmd));
 
             while (install.isRunning())
             {
@@ -522,13 +559,13 @@ int Procedure::install_bb()
         return 3;
     }
 
-    QString bb_url = get_file_info(10);
+    QString bb_url = get_file_info(12);
     QString bb_exe = "BleachBit-setup.exe";
 
     if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
     {
         QFile().remove(bb_exe);
-        bb_url = get_file_info(10, true);
+        bb_url = get_file_info(12, true);
 
         if (!qtcurl_dl(bb_url.toUtf8(), bb_exe.toUtf8()))
         {
