@@ -133,8 +133,8 @@ int Procedure::clean(const bool EXT)
         // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
     }
 
-    // Run BleachBit to clean temporary files
-    // --------------------------------------
+    // Install BleachBit if not installed
+    // ----------------------------------
     emit progress_changed(30);
     QString bb_path = "C:/Program Files (x86)/BleachBit/bleachbit_console.exe";
 
@@ -144,6 +144,8 @@ int Procedure::clean(const bool EXT)
         install_bb();
     }
 
+    // Run BleachBit to clean temporary files
+    // --------------------------------------
     bb_path = '\"' + bb_path + '\"';
     emit progress_changed(40);
     emit progress_description(tr("Cleaning temporary files and caches…"));
