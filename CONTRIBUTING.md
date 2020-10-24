@@ -1,6 +1,10 @@
 # Contributing
 Contributions of all types are welcome, be it code, translations or anything else.
 
+## Important information
+
+When contributing **make sure to submit your contributions to the [GitLab repo](https://gitlab.com/Atrate/qschoolhelper)**. Other repos (such as on GitHub) are just read-only mirrors from GitLab.
+
 ## Code style
 
 Use `astyle` to format your source code with the following settings:
