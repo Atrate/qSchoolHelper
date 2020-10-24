@@ -21,6 +21,7 @@ Use `astyle` to format your source code with the following settings:
 --align-reference=name
 --break-closing-braces
 --attach-return-type
+--keep-one-line-blocks
 ```
 
 Use Unix-style paths (use `C:/Users` instead of `C:\\Users`). If you need to pass such a path to a Windows utility, please use `QDir::toNativeSeparators`.
