@@ -78,8 +78,8 @@ void InitialSetupDialog::initial_setup()
     (void) QProcess::execute("cmd", QStringList() << "/c" << "sc config WSearch start= disabled");
     // Snap desktop icons to grid and enable auto-arrange
     // --------------------------------------------------
-    qInfo() << tr("Enabling icon auto-arrange and snap to grid");
-    ui->setup_log->append(tr("Enabling icon auto-arrange and snap to grid"));
+    qInfo() << tr("Enabling icon auto-arrange and snap to grid…\n");
+    ui->setup_log->append(tr("Enabling icon auto-arrange and snap to gridə\n"));
     QApplication::processEvents();
     (void) QProcess::execute("cmd", QStringList() << "/c" <<
                              "REG ADD \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop\" /v \"AllowTelemetry\" /t REG_DWORD /d 1075839525 /f");

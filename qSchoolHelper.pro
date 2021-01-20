@@ -62,6 +62,9 @@ include (include/qtcurl/src/qtcurl.pri)
 QMAKE_LFLAGS += -lcurl
 LIBS += -lcurl
 
+# Include manifest
+win32:CONFIG(release, debug|release): QMAKE_MANIFEST = $$PWD/data/qSchoolHelper.manifest.xml
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
