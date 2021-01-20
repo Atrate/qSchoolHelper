@@ -79,7 +79,7 @@ void InitialSetupDialog::initial_setup()
     // Snap desktop icons to grid and enable auto-arrange
     // --------------------------------------------------
     qInfo() << tr("Enabling icon auto-arrange and snap to grid…\n");
-    ui->setup_log->append(tr("Enabling icon auto-arrange and snap to gridə\n"));
+    ui->setup_log->append(tr("Enabling icon auto-arrange and snap to grid…\n"));
     QApplication::processEvents();
     (void) QProcess::execute("cmd", QStringList() << "/c" <<
                              "REG ADD \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop\" /v \"AllowTelemetry\" /t REG_DWORD /d 1075839525 /f");
