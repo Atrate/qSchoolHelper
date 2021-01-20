@@ -140,6 +140,7 @@ int Procedure::clean(const bool EXT)
 
     if (!QFile().exists(bb_path))
     {
+        qInfo() << tr("Downloading BleachBit (cleaning engine)…");
         emit progress_description(tr("Downloading BleachBit (cleaning engine)…"));
         install_bb();
     }
@@ -148,6 +149,7 @@ int Procedure::clean(const bool EXT)
     // --------------------------------------
     bb_path = '\"' + bb_path + '\"';
     emit progress_changed(40);
+    qInfo() << tr("Cleaning temporary files and caches…");
     emit progress_description(tr("Cleaning temporary files and caches…"));
     QString cmd = QDir::toNativeSeparators(bb_path) + " --clean adobe_reader.* amule.* chromium.* deepscan.tmp "
                   "filezilla.mru firefox.* flash.* gimp.tmp google_chrome.* google_toolbar.search_history "
@@ -184,7 +186,7 @@ int Procedure::clean(const bool EXT)
 QString Procedure::get_file_info(const int &LINE, bool fallback)
 {
 #ifndef QT_NO_DEBUG
-    assert(LINE < 11 && LINE > -1);
+    assert(LINE < 13 && LINE > -1);
 #endif
     QString filename = "programlist.txt";
 
@@ -314,7 +316,7 @@ int Procedure::install_bb()
 
     if (temp_folder.isValid())
     {
-        if (QDir::setCurrent(temp_folder.path()))
+        if (!QDir::setCurrent(temp_folder.path()))
         {
             return 3;
         }
