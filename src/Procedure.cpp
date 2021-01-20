@@ -55,8 +55,8 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
             exe_name = "/PowerPoint Viewer";
             break;
 
-            // No need to create shortcut to 7-Zip, it is most useful from the context menu
-            // ----------------------------------------------------------------------------
+        // No need to create shortcut to 7-Zip, it is most useful from the context menu
+        // ----------------------------------------------------------------------------
         case 5:
             return QFile().exists(exe_path);
 
@@ -288,10 +288,10 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
             case 10:
                 return "https://7-zip.org/a/7z1900-x64.exe";
                 break;
+
             case 11:
                 return "C:/Program Files/7-Zip/7z.exe";
                 break;
-
 
             // BleachBit
             // ---------
@@ -452,6 +452,8 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
             shortcut_array[i] = check_shortcut(download_array[i][2], i);
         }
 
+        // Clang may warn about a garbage branch — this won't happen, as all INS_* bools cannot be set to "false" at the same time
+        // -----------------------------------------------------------------------------------------------------------------------
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
             QFile().remove(download_array[i][1]);
@@ -480,7 +482,6 @@ int Procedure::install_software(const bool INS_FF, const bool INS_RDC, const boo
         // --------------------------------------------------------------------------------------------------------
         if (!(download_array[i][0] == "" || shortcut_array[i]))
         {
-
             QString cmd = download_array[i][1];
             emit progress_description(tr("Installing: ") + QFileInfo(download_array[i][1]).baseName());
 
