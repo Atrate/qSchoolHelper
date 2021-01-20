@@ -231,12 +231,14 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
     {
         qDebug() << "Using fallback link for: " << LINE << "\n";
 
+        // The following valuses are hard-coded but will only be used in the case that programlist.txt is unavailable.
+        // -----------------------------------------------------------------------------------------------------------
         switch (LINE)
         {
             // Firefox
             // -------
             case 0:
-                return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/79.0/win64/en-US/Firefox%20Setup%2079.0.msi";
+                return "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0/win64/en-US/Firefox%20Setup%2084.0.msi";
                 break;
 
             case 1:
@@ -256,7 +258,7 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
             // LOffice
             // -------
             case 4:
-                return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0.3_Win_x64.msi";
+                return "http://ftp.rz.tu-bs.de/pub/mirror/tdf/tdf-pub/libreoffice/stable/7.0.4/win/x86_64/LibreOffice_7.0.4_Win_x64.msi";
                 break;
 
             case 5:
@@ -266,7 +268,7 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
             // VLC
             // ---
             case 6:
-                return "https://get.videolan.org/vlc/3.0.8/win64/vlc-3.0.8-win64.exe";
+                return "https://get.videolan.org/vlc/3.0.12/win64/vlc-3.0.12-win64.exe";
                 break;
 
             case 7:
@@ -296,7 +298,7 @@ QString Procedure::get_file_info(const int &LINE, bool fallback)
             // BleachBit
             // ---------
             case 12:
-                return "https://download.bleachbit.org/BleachBit-4.0.0-setup.exe";
+                return "https://download.bleachbit.org/BleachBit-4.2.0-setup.exe";
                 break;
 
             default:
