@@ -4,7 +4,7 @@
      processorArchitecture="X86"
      name="qSchoolHelper"
      type="win32"/> 
-  <description>Description of your application</description> 
+  <description>Easily perform various maintenance and set-up procedures</description> 
   <!-- Identify the application security requirements. -->
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
