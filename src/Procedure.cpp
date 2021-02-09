@@ -117,13 +117,16 @@ int Procedure::clean(const bool EXT)
     try
     {
         QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+        qDebug() << "Dekstop path: " << desktop.absolutePath();
         QStringList filters;
         filters << "*.bat" << "*.cmd";
         desktop.setNameFilters(filters);
 
-        for (QFile file : desktop.entryList())
+        for (QFileInfo file_info : desktop.entryInfoList())
         {
+            QFile file = file_info.absoluteFilePath();
             qDebug() << "Removing: " << file.fileName() << "\n";
+            file.setPermissions(QFile::WriteOther);
             file.remove();
         }
     }
