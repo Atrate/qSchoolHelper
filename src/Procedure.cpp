@@ -348,7 +348,7 @@ int Procedure::install_bb()
         QApplication::processEvents();
     }
 
-    if (!bb_install)
+    if (bb_install != 0)
     {
         return 2;
     }

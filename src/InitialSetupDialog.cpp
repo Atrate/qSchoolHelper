@@ -136,7 +136,7 @@ void InitialSetupDialog::initial_setup()
 
         if (bb_install_result == 1)
         {
-            qCritical() << tr("The download failed! Please check your Internet connectivity!");
+            qCritical() << tr("The download of BleachBit failed! Please check your Internet connectivity!");
             QMessageBox dl_failure_box;
             dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
             dl_failure_box.setModal(true);
@@ -144,7 +144,7 @@ void InitialSetupDialog::initial_setup()
         }
         else if (bb_install_result == 2)
         {
-            qCritical() << tr("The installation failed! Please try installing the program manually!");
+            qCritical() << tr("The installation of BleachBit failed! Please try installing the program manually!");
             QMessageBox install_failure_box;
             install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
             install_failure_box.setModal(true);
@@ -173,6 +173,10 @@ void InitialSetupDialog::initial_setup()
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
     ui->setup_log->append(tr("All done!"));
+    QMessageBox success_box;
+    success_box.setText(tr("The initial setup completed successfully!"));
+    success_box.setModal(true);
+    success_box.exec();
     ui->install_check_box->setEnabled(true);
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
