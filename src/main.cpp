@@ -52,6 +52,7 @@ void set_theme()
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
+    set_theme();
     QTranslator qsh_translator;
     QStringList languages;
     languages << "English" << "Polish";
@@ -64,7 +65,6 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qsh_translator);
     }
 
-    set_theme();
     MainWindow w;
     w.show();
     return a.exec();
