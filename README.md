@@ -29,6 +29,7 @@ For guidelines on how to contribute please refer to [CONTRIBUTING.md](./CONTRIBU
 - [curl](https://github.com/curl/curl)
 - [qtcurl](https://github.com/tarasvb/qtcurl)
 - [BleachBit](https://www.bleachbit.org/)
+- [Qt 5 Dark Fusion Palette](https://gist.github.com/QuantumCD/6245215)
 
 ## Building from source
 
