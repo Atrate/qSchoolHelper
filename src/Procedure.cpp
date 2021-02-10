@@ -122,7 +122,7 @@ int Procedure::clean(const bool EXT)
         filters << "*.bat" << "*.cmd";
         desktop.setNameFilters(filters);
 
-        for (QFileInfo file_info : desktop.entryInfoList())
+        for (QFileInfo &file_info : desktop.entryInfoList())
         {
             QFile file = file_info.absoluteFilePath();
             qDebug() << "Removing: " << file.fileName() << "\n";
