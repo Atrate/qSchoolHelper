@@ -3,7 +3,7 @@
 
 A Qt5 project designed to help non-tech-inclined people deal with simple problems on a Windows computer without the need to call support. 
 
-This project has been designed and configured for use on Windows 10 computers in the PACK school complex, but it can be used elsewhere without much problem.
+This project has been designed and configured for use on Windows 10 computers. 
 
 ## Usage
 
