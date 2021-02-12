@@ -12,7 +12,6 @@
  *
  */
 
-#include <fstream>
 #include <QDebug>
 #include <QDir>
 #include "AboutDialog.h"
@@ -42,12 +41,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::window_setup()
 {
     // Disable initial_setup_button if initial setup has been run.
     // -----------------------------------------------------------
 #ifdef QT_NO_DEBUG
-    QString initial_setup_done = config_folder + "initial_setup_done.txt";
+    QString initial_setup_done = config_folder + "/initial_setup_done.txt";
 
     if (QFile().exists(initial_setup_done))
     {
@@ -55,6 +55,10 @@ void MainWindow::window_setup()
         ui->problem_button->setToolTip(tr("Help with common problems"));
         ui->clean_button->setToolTip(tr("Clean junk and temporary files"));
         ui->help_button->setToolTip(tr("Open the application usage guide"));
+        ui->problem_button->setEnabled(true);
+        ui->clean_button->setEnabled(true);
+        ui->software_button->setEnabled(true);
+        ui->help_button->setEnabled(true);
         ui->initial_setup_button->setEnabled(false);
         ui->initial_setup_button->setToolTip(tr("Initial Setup has already been run on this computer. "
                                                 "If you with to run it again, please select it from File -> Initial Setup."));
@@ -66,6 +70,7 @@ void MainWindow::window_setup()
         ui->clean_button->setEnabled(false);
         ui->software_button->setEnabled(false);
         ui->help_button->setEnabled(false);
+        ui->initial_setup_button->setEnabled(true);
         ui->software_button->setToolTip(disabled_tooltip);
         ui->problem_button->setToolTip(disabled_tooltip);
         ui->clean_button->setToolTip(disabled_tooltip);
@@ -82,11 +87,35 @@ void MainWindow::window_setup()
     ui->initial_setup_button->setToolTip(debug_tooltip);
 #endif
 }
-void MainWindow::on_problem_button_clicked()
+
+void MainWindow::on_action_open_help_triggered()
 {
-    problem = new ProblemDialog(this);
-    problem->show();
+    help = new HelpDialog(this);
+    help->show();
 }
+
+void MainWindow::on_action_about_triggered()
+{
+    about = new AboutDialog(this);
+    about->show();
+}
+
+void MainWindow::on_action_initial_setup_triggered()
+{
+    on_initial_setup_button_clicked();
+}
+
+void MainWindow::on_clean_button_clicked()
+{
+    cleaning = new CleaningDialog(this);
+    cleaning->show();
+}
+
+void MainWindow::on_help_button_clicked()
+{
+    on_action_open_help_triggered();
+}
+
 void MainWindow::on_initial_setup_button_clicked()
 {
     initial_setup = new InitialSetupDialog(this);
@@ -99,31 +128,15 @@ void MainWindow::on_initial_setup_button_clicked()
 
     window_setup();
 }
+
+void MainWindow::on_problem_button_clicked()
+{
+    problem = new ProblemDialog(this);
+    problem->show();
+}
+
 void MainWindow::on_software_button_clicked()
 {
     install = new InstallDialog(this);
     install->show();
-}
-void MainWindow::on_clean_button_clicked()
-{
-    cleaning = new CleaningDialog(this);
-    cleaning->show();
-}
-void MainWindow::on_action_open_help_triggered()
-{
-    help = new HelpDialog(this);
-    help->show();
-}
-void MainWindow::on_action_about_triggered()
-{
-    about = new AboutDialog(this);
-    about->show();
-}
-void MainWindow::on_action_initial_setup_triggered()
-{
-    on_initial_setup_button_clicked();
-}
-void MainWindow::on_help_button_clicked()
-{
-    on_action_open_help_triggered();
 }

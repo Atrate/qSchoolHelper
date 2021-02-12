@@ -15,31 +15,24 @@
 #ifndef PROCEDURE_H
 #define PROCEDURE_H
 
-#include <CurlEasy.h>
 #include <QStandardPaths>
-#include <QDir>
 #include <QObject>
 
 class Procedure : public QObject
 {
         Q_OBJECT
 
-    private:
-        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-        int qtcurl_dl(const char* url, const char* filename);
-        int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
+    public:
+        bool check_shortcut(const QString &exe_path, const int &NAME_NUM);
         int clean(const bool EXT);
         int install_bb();
-        bool check_shortcut(QString exe_path);
-        QString get_file_info(const int LINE, bool fallback = false);
-        static size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
+        int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV, const bool INS_7Z);
+        bool qtcurl_dl(const char* url, const char* filename);
 
-    public:
-        int run_install_bb();
-        int run_install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV);
-        int run_clean(const bool EXT);
-        int run_qtcurl_dl(const char* url, const char* filename);
+    private:
+        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        QString get_file_info(const int &LINE, bool fallback = false);
+        static size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
 
     signals:
         void progress_changed(int progress);

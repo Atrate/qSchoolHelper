@@ -12,12 +12,12 @@
  *
  */
 
+#include <QDir>
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include "CleaningDialog.h"
+#include <QProcess>
 #include "InitialSetupDialog.h"
-#include "InstallDialog.h"
 #include "Procedure.h"
 #include "ui_InitialSetupDialog.h"
 
@@ -40,7 +40,8 @@ void InitialSetupDialog::initial_setup()
     // ----------------------------------------------
     g_setup_running = true;
     Procedure initial_procedures;
-    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log, SLOT(append(QString)));
+    QObject::connect(&initial_procedures, SIGNAL(progress_description(QString)), this->ui->setup_log,
+                     SLOT(append(QString)));
     ui->start_button->setEnabled(false);
     ui->setup_label->setEnabled(true);
     ui->setup_log->setEnabled(true);
@@ -57,31 +58,41 @@ void InitialSetupDialog::initial_setup()
     qInfo() << tr("Disabling Windows Explorer ads…\n");
     ui->setup_log->append(tr("Disabling Windows Explorer ads…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowSyncProviderNotifications\" /t REG_DWORD /d 0 /f");
     // Disable telemetry
     // -----------------
     qInfo() << tr("Disabling telemetry service…\n");
     ui->setup_log->append(tr("Disabling telemetry service…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
-    (void) system("net stop DiagTrack");
-    (void) system("sc config DiagTrack start= disabled");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "net stop DiagTrack");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "sc config DiagTrack start= disabled");
     // Disable search indexing
     // -----------------------
     qInfo() << tr("Disabling search indexing…\n");
     ui->setup_log->append(tr("Disabling search indexing…\n"));
     QApplication::processEvents();
-    (void) system("net stop WSearch");
-    (void) system("sc config WSearch start= disabled");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "net stop WSearch");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "sc config WSearch start= disabled");
+    // Snap desktop icons to grid and enable auto-arrange
+    // --------------------------------------------------
+    qInfo() << tr("Enabling icon auto-arrange and snap to grid…\n");
+    ui->setup_log->append(tr("Enabling icon auto-arrange and snap to grid…\n"));
+    QApplication::processEvents();
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop\" /v \"AllowTelemetry\" /t REG_DWORD /d 1075839525 /f");
     // Disable Windows Visual FX
     // -------------------------
     qInfo() << tr("Disabling visual effects…\n");
     ui->setup_log->append(tr("Disabling visual effects…\n"));
     QApplication::processEvents();
-    (void) system("REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
+    (void) QProcess::execute("cmd", QStringList() << "/c" <<
+                             "REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects\" /v \"VisualFXSetting\" /t REG_DWORD /d 2 /f");
     // Restart explorer.exe to apply changes
     // -------------------------------------
-    (void) system("taskkill /F /IM explorer.exe & start explorer");
+    (void) QProcess::execute("cmd", QStringList() << "/c" << "taskkill /F /IM explorer.exe & start explorer");
     ui->progress_bar->setValue(10);
     QApplication::processEvents();
 
@@ -92,7 +103,7 @@ void InitialSetupDialog::initial_setup()
         qInfo() << tr("Installing required software. This might (will) take a while…\n");
         ui->setup_log->append(tr("Installing required software. This might (will) take a while…\n"));
         QApplication::processEvents();
-        int install_result = initial_procedures.run_install_software(true, true, true, true, true);
+        int install_result = initial_procedures.install_software(true, true, true, true, true, true);
 
         if (install_result == 1)
         {
@@ -121,11 +132,11 @@ void InitialSetupDialog::initial_setup()
         qInfo() << tr("Installing BleachBit (utility used for computer cleaning)…\n");
         ui->setup_log->append(tr("Installing BleachBit (utility used for computer cleaning)…\n"));
         QApplication::processEvents();
-        int bb_install_result = initial_procedures.run_install_bb();
+        int bb_install_result = initial_procedures.install_bb();
 
         if (bb_install_result == 1)
         {
-            qCritical() << tr("The download failed! Please check your Internet connectivity!");
+            qCritical() << tr("The download of BleachBit failed! Please check your Internet connectivity!");
             QMessageBox dl_failure_box;
             dl_failure_box.setText(tr("The download failed! Please check your Internet connectivity!"));
             dl_failure_box.setModal(true);
@@ -133,7 +144,7 @@ void InitialSetupDialog::initial_setup()
         }
         else if (bb_install_result == 2)
         {
-            qCritical() << tr("The installation failed! Please try installing the program manually!");
+            qCritical() << tr("The installation of BleachBit failed! Please try installing the program manually!");
             QMessageBox install_failure_box;
             install_failure_box.setText(tr("The installation failed! Please try installing the program manually!"));
             install_failure_box.setModal(true);
@@ -147,13 +158,13 @@ void InitialSetupDialog::initial_setup()
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
-        initial_procedures.run_clean(true);
+        initial_procedures.clean(true);
         QApplication::processEvents();
     }
 
     // Finalize — Create the initial_setup_done.txt file and set UI element states
     // ---------------------------------------------------------------------------
-    QString initial_setup_done = config_folder + "initial_setup_done.txt";
+    QString initial_setup_done = config_folder + "/initial_setup_done.txt";
     QFile isdf(initial_setup_done);
     isdf.open(QIODevice::WriteOnly);
     isdf.write("");
@@ -162,6 +173,10 @@ void InitialSetupDialog::initial_setup()
     ui->progress_bar->setValue(100);
     qInfo() << tr("All done!");
     ui->setup_log->append(tr("All done!"));
+    QMessageBox success_box;
+    success_box.setText(tr("The initial setup completed successfully!"));
+    success_box.setModal(true);
+    success_box.exec();
     ui->install_check_box->setEnabled(true);
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);

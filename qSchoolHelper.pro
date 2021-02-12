@@ -14,8 +14,6 @@ VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 CONFIG += c++17 lrelease embed_translations
 
 DEFINES += \
-    QT_DEPRECATED_WARNINGS \
-    QT_DISABLE_DEPRECATED_BEFORE=0x060000 \
     "VERSION_MAJOR=$$VERSION_MAJOR" \
     "VERSION_MINOR=$$VERSION_MINOR" \
     "VERSION_BUILD=$$VERSION_BUILD" \
@@ -63,6 +61,9 @@ include (include/qtcurl/src/qtcurl.pri)
 
 QMAKE_LFLAGS += -lcurl
 LIBS += -lcurl
+
+# Include manifest
+win32:CONFIG(release, debug|release): QMAKE_MANIFEST = $$PWD/data/qSchoolHelper.manifest.xml
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

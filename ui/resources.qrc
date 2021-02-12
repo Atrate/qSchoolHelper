@@ -19,5 +19,6 @@
         <file>../data/images/problem_screenshots/dp_cable.jpg</file>
         <file>../data/images/problem_screenshots/aux_cable.jpg</file>
         <file>../data/images/problem_screenshots/ethernet_cable.jpg</file>
+        <file>../data/images/problem_screenshots/wlan.png</file>
     </qresource>
 </RCC>

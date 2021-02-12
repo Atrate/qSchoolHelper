@@ -42,18 +42,20 @@ void InstallDialog::install()
     ui->libreoffice_check_box->setEnabled(false);
     ui->vlc_check_box->setEnabled(false);
     ui->viewer_check_box->setEnabled(false);
+    ui->sevenz_check_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     QApplication::processEvents();
     // Actually run the installation
     // -----------------------------
     Procedure installer;
     QObject::connect(&installer, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
-    int install_result = installer.run_install_software(
+    int install_result = installer.install_software(
                              ui->firefox_check_box->checkState(),
                              ui->reader_check_box->checkState(),
                              ui->libreoffice_check_box->checkState(),
                              ui->vlc_check_box->checkState(),
-                             ui->viewer_check_box->checkState()
+                             ui->viewer_check_box->checkState(),
+                             ui->sevenz_check_box->checkState()
                          );
 
     if (install_result == 0)
@@ -112,6 +114,7 @@ void InstallDialog::install()
     ui->libreoffice_check_box->setEnabled(true);
     ui->vlc_check_box->setEnabled(true);
     ui->viewer_check_box->setEnabled(true);
+    ui->sevenz_check_box->setEnabled(true);
 }
 void InstallDialog::on_install_button_clicked()
 {
@@ -121,7 +124,8 @@ void InstallDialog::on_install_button_clicked()
             || ui->reader_check_box->isChecked()
             || ui->vlc_check_box->isChecked()
             || ui->viewer_check_box->isChecked()
-            || ui->libreoffice_check_box->isChecked())
+            || ui->libreoffice_check_box->isChecked()
+            || ui->sevenz_check_box->isChecked())
        )
     {
         QMessageBox no_program_selected_box;

@@ -37,10 +37,10 @@ class ProblemDialog : public QDialog
     private slots:
         void on_back_button_clicked();
         void on_browser_button_clicked();
+        void on_next_button_clicked();
+        void on_presentation_button_clicked();
         void on_projector_button_clicked();
         void on_speakers_button_clicked();
-        void on_presentation_button_clicked();
-        void on_next_button_clicked();
 };
 
 #endif // PROBLEMDIALOG_H

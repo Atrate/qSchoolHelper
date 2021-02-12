@@ -40,23 +40,23 @@ class MainWindow : public QMainWindow
 
     private:
         Ui::MainWindow* ui;
-        ProblemDialog* problem;
-        InitialSetupDialog* initial_setup;
         AboutDialog* about;
-        InstallDialog* install;
         CleaningDialog* cleaning;
         HelpDialog* help;
-        void window_setup();
+        InitialSetupDialog* initial_setup;
+        InstallDialog* install;
+        ProblemDialog* problem;
         const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        void window_setup();
 
     private slots:
-        void on_problem_button_clicked();
-        void on_initial_setup_button_clicked();
         void on_action_about_triggered();
-        void on_software_button_clicked();
-        void on_clean_button_clicked();
-        void on_action_open_help_triggered();
         void on_action_initial_setup_triggered();
+        void on_action_open_help_triggered();
+        void on_clean_button_clicked();
+        void on_initial_setup_button_clicked();
+        void on_problem_button_clicked();
+        void on_software_button_clicked();
         void on_help_button_clicked();
 };
 #endif // MAINWINDOW_H

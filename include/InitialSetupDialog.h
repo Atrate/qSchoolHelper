@@ -34,8 +34,8 @@ class InitialSetupDialog : public QDialog
         void closeEvent(QCloseEvent* event);
 
     private:
-        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         Ui::InitialSetupDialog* ui;
+        const QString config_folder = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
     private slots:
         void initial_setup();
