@@ -65,17 +65,19 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
             break;
     }
 
+    // Iterate through the current user's Desktop folder to find whether shortcuts (symlinks) exist, if not, create them
+    // -----------------------------------------------------------------------------------------------------------------
     if (exe_path != "" && QFile().exists(exe_path))
     {
         QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
         qDebug() << "exe_name: " << exe_name << "\n";
-        // Iterate through Users' Desktop folders to find whether shortcuts (symlinks) exist, if not, create them
-        // ------------------------------------------------------------------------------------------------------
         qDebug() << "Desktop path: " << desktop.path() << "\n";
         qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".exe") << "\n";
         qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".lnk") << "\n";
         qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name) << "\n";
 
+        // Non-lnk variants are checked in case of symlinks
+        // ------------------------------------------------
         if (QDir().exists(desktop.path())
                 && !((QFile().exists(desktop.path() + exe_name))
                      || (QFile().exists(desktop.path() + exe_name + ".exe"))
@@ -85,10 +87,7 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
             try
             {
                 emit progress_description(tr("Creating shortcut to: ") + exe_name);
-                QString link_cmd = "mklink ";
-                link_cmd.append("\"" + QDir::toNativeSeparators(desktop.path() + exe_name) + "\" \"" + QDir::toNativeSeparators(exe_path) + "\"");
-                qDebug() << "Link CMD: " << link_cmd << "\n";
-                (void) QProcess::execute("cmd /c " + link_cmd);
+                QFile::link(exe_path, desktop.path() + exe_name + ".lnk");
             }
             catch (const std::exception &e)
             {
