@@ -397,7 +397,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Box</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -776,7 +776,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
               <string notr="true"/>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Box</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -804,7 +804,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
               </sizepolicy>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Box</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -1010,7 +1010,7 @@ b) The computer is connected to the appropriate WiFi network.</string>
               </sizepolicy>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Box</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
