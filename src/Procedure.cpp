@@ -71,10 +71,10 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
     {
         QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
         qDebug() << "exe_name: " << exe_name << "\n";
-        qDebug() << "Desktop path: " << desktop.path() << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".exe") << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name + ".lnk") << "\n";
-        qDebug() << "Checking for the existence of: " << (desktop.path() + exe_name) << "\n";
+        qDebug() << tr("Desktop path: ") << desktop.path() << "\n";
+        qDebug() << tr("Checking for the existence of: ") << (desktop.path() + exe_name + ".exe") << "\n";
+        qDebug() << tr("Checking for the existence of: ") << (desktop.path() + exe_name + ".lnk") << "\n";
+        qDebug() << tr("Checking for the existence of: ") << (desktop.path() + exe_name) << "\n";
 
         // Non-lnk variants are checked in case of symlinks
         // ------------------------------------------------

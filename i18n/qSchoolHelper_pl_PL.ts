@@ -6,37 +6,58 @@
     <message>
         <location filename="../ui/AboutDialog.ui" line="32"/>
         <source>About</source>
-        <translation type="unfinished">O programie</translation>
-    </message>
-    <message>
-        <location filename="../ui/AboutDialog.ui" line="81"/>
-        <source>qSchoolHelper is a Qt project designed to help non-tech-inclined people deal with simple problems on a Windows computer without the need to call support.</source>
-        <translation type="unfinished">qSchoolHelper jest aplikacją napisaną z użyciem Qt zaprojektowaną, by pomagać osobom mniej zaawansowanym komputerowo z częstymi problemami bez potrzeby pomocy osoby z zewnątrz.</translation>
+        <translation>O programie</translation>
     </message>
     <message>
         <location filename="../ui/AboutDialog.ui" line="100"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Source code available on &lt;a href=&quot; https://www.gitlab.com/Atrate/qSchoolHelper&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;GitLab&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kod źródłowy dostępny na &lt;a href=&quot; https://www.gitlab.com/Atrate/qSchoolHelper&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;GitLab&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>qSchoolHelper is a Qt project designed to help non-tech-inclined people deal with simple problems on a Windows computer without the need to call support.</source>
+        <translation>qSchoolHelper jest aplikacją napisaną z użyciem Qt zaprojektowaną, by pomagać osobom mniej zaawansowanym komputerowo z częstymi problemami bez potrzeby pomocy osoby z zewnątrz.</translation>
     </message>
     <message>
         <location filename="../ui/AboutDialog.ui" line="119"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Source code available on &lt;a href=&quot; https://www.gitlab.com/Atrate/qSchoolHelper&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;GitLab&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kod źródłowy dostępny na &lt;a href=&quot; https://www.gitlab.com/Atrate/qSchoolHelper&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;GitLab&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ui/AboutDialog.ui" line="138"/>
         <source>This project is licensed under the GNU General Public License Version 3</source>
-        <translation type="unfinished">Licencja tego programu to GNU General Public License Wersja 3</translation>
+        <translation>Licencja tego programu to GNU General Public License Wersja 3</translation>
     </message>
     <message>
-        <location filename="../ui/AboutDialog.ui" line="132"/>
+        <location filename="../ui/AboutDialog.ui" line="151"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Application icon adapted from &lt;a href=&quot;https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;IconFinder&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ikona adaptowana z &lt;a href=&quot;https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;IconFinder&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ikona adaptowana z &lt;a href=&quot;https://www.iconfinder.com/icons/669949/buoy_help_life_lifebuoy_support_icon&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;IconFinder&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../ui/AboutDialog.ui" line="163"/>
+        <location filename="../ui/AboutDialog.ui" line="256"/>
+        <source>Third-party Licenses</source>
+        <translation>Licensje podmiotów trzecich</translation>
+    </message>
+    <message>
+        <location filename="../ui/AboutDialog.ui" line="275"/>
+        <source>Curl</source>
+        <translation>Curl</translation>
+    </message>
+    <message>
+        <location filename="../ui/AboutDialog.ui" line="321"/>
+        <source>QtCurl</source>
+        <translation>QtCurl</translation>
+    </message>
+    <message>
+        <location filename="../ui/AboutDialog.ui" line="369"/>
+        <source>BleachBit</source>
+        <translation>BleachBit</translation>
+    </message>
+    <message>
+        <location filename="../ui/AboutDialog.ui" line="54"/>
+        <location filename="../ui/AboutDialog.ui" line="182"/>
         <source>qSchoolHelper</source>
-        <translation type="unfinished">qSchoolHelper</translation>
+        <translation>qSchoolHelper</translation>
     </message>
     <message>
         <location filename="../src/AboutDialog.cpp" line="23"/>
         <source> version v</source>
-        <translation type="unfinished"> wersja v</translation>
+        <translation> wersja v</translation>
     </message>
 </context>
 <context>
@@ -44,69 +65,94 @@
     <message>
         <location filename="../ui/CleaningDialog.ui" line="32"/>
         <source>Cleaning</source>
-        <translation type="unfinished">Czyszczenie komputera</translation>
+        <translation>Czyszczenie komputera</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="85"/>
         <source>Cleaning progress:</source>
-        <translation type="unfinished">Postęp czyszczenia:</translation>
+        <translation>Postęp czyszczenia:</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="92"/>
         <source>This tool will help you clean the computer and resolve any issues that might arise due to not cleaning it regularily. 
 
 The &quot;simple&quot; cleaning type takes less time, but is less accurate than &quot;extended&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>To narzędzie pomoże Ci wyczyścić Twój komputer i rozwiąże wszelkie problemy, które mogą się pojawić z powodu braku regularnego czyszczenia.
+
+Czyszczenie &quot;proste&quot; jest szybsze, aczkolwiek mniej dokładnie niż &quot;rozszerzone&quot;.</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="131"/>
         <source>Hello! This utility will help you clean your OS</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj! To narzędzie pomoże Ci wyczyścić Twój system operacyjny</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="154"/>
         <source>Cleaning type:</source>
-        <translation type="unfinished">Tryb czyszczenia:</translation>
+        <translation>Tryb czyszczenia:</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="164"/>
-        <source>Simple</source>
-        <translation type="unfinished">Proste</translation>
+        <source>A shorter, less thorough cleaning</source>
+        <translation>Krótsze, mniej dokładne czyszczenie</translation>
     </message>
     <message>
-        <location filename="../ui/CleaningDialog.ui" line="174"/>
+        <location filename="../ui/CleaningDialog.ui" line="167"/>
+        <source>Simple</source>
+        <translation>Proste</translation>
+    </message>
+    <message>
+        <location filename="../ui/CleaningDialog.ui" line="177"/>
+        <source>A longer, more thorough cleaning</source>
+        <translation>Dłuższe, dokładniejsze czyszczenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/CleaningDialog.ui" line="180"/>
         <source>Extended</source>
-        <translation type="unfinished">Rozszerzone</translation>
+        <translation>Rozszerzone</translation>
     </message>
     <message>
         <location filename="../ui/CleaningDialog.ui" line="187"/>
-        <source>Clean!</source>
-        <translation type="unfinished">Czyść!</translation>
+        <source>Delete all .bat and .cmd scripts from the user&apos;s Desktop</source>
+        <translation>Usuń wszystkie pliki .bat oraz .cmd z pulpitu</translation>
     </message>
     <message>
-        <location filename="../src/CleaningDialog.cpp" line="47"/>
-        <location filename="../src/CleaningDialog.cpp" line="48"/>
+        <location filename="../ui/CleaningDialog.ui" line="190"/>
+        <source>Clean scripts
+from desktop</source>
+        <translation>Wyczyść skrypty
+z pulpitu</translation>
+    </message>
+    <message>
+        <location filename="../ui/CleaningDialog.ui" line="207"/>
+        <source>Start the cleaner</source>
+        <translation>Rozpocznij czyszczenie</translation>
+    </message>
+    <message>
+        <location filename="../ui/CleaningDialog.ui" line="210"/>
+        <source>Clean!</source>
+        <translation>Czyść!</translation>
+    </message>
+    <message>
         <source>Starting cleaner…
 —————————————————</source>
-        <translation type="unfinished">Rozpoczynanie czyszczenia…
+        <translation type="obsolete">Rozpoczynanie czyszczenia…
 —————————————————</translation>
     </message>
     <message>
-        <location filename="../src/CleaningDialog.cpp" line="49"/>
-        <location filename="../src/CleaningDialog.cpp" line="50"/>
         <source>Removing .bat and .cmd files from the desktop…</source>
-        <translation type="unfinished">Usuwanie plików .bat i .cmd z pulpitu…</translation>
+        <translation type="obsolete">Usuwanie plików .bat i .cmd z pulpitu…</translation>
     </message>
     <message>
         <location filename="../src/CleaningDialog.cpp" line="60"/>
         <location filename="../src/CleaningDialog.cpp" line="61"/>
         <source>All done!</source>
-        <translation type="unfinished">Wszystko gotowe!</translation>
+        <translation>Wszystko gotowe!</translation>
     </message>
     <message>
         <location filename="../src/CleaningDialog.cpp" line="63"/>
         <source>The cleaning operation completed succesfully!</source>
-        <translation type="unfinished">Czyszczenie zakończyło się sukcesem!</translation>
+        <translation>Czyszczenie zakończyło się sukcesem!</translation>
     </message>
 </context>
 <context>
@@ -114,12 +160,12 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
     <message>
         <location filename="../ui/HelpDialog.ui" line="32"/>
         <source>Help</source>
-        <translation type="unfinished">Pomoc</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../ui/HelpDialog.ui" line="81"/>
         <source>Help and user guide</source>
-        <translation type="unfinished">Pomoc i instrukcja użytkownika</translation>
+        <translation>Pomoc i instrukcja użytkownika</translation>
     </message>
     <message>
         <location filename="../ui/HelpDialog.ui" line="106"/>
@@ -161,7 +207,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  LibreOffice;&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  Mozilla Firefox;&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  PowerPoint Viewer;&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  VLC Media Player.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  VLC Media Player;&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;–  7-Zip.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;These applications will automatically be installed when &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;Initial Setup&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt; is run and can be reinstalled by using the &lt;/span&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;Software Installer&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt; when needed.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Cantarell&apos;; font-size:12pt; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -176,123 +223,156 @@ p, li { white-space: pre-wrap; }
     <name>InitialSetupDialog</name>
     <message>
         <location filename="../ui/InitialSetupDialog.ui" line="32"/>
-        <location filename="../ui/InitialSetupDialog.ui" line="78"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="148"/>
         <source>Initial Setup</source>
-        <translation type="unfinished">Konfiguracja wstępna</translation>
+        <translation>Konfiguracja wstępna</translation>
     </message>
     <message>
-        <location filename="../ui/InitialSetupDialog.ui" line="108"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="68"/>
         <source>Setup progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Postęp:</translation>
     </message>
     <message>
-        <location filename="../ui/InitialSetupDialog.ui" line="133"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="158"/>
+        <source>Delete all .bat and .cmd scripts from the user&apos;s Desktop</source>
+        <translation>Usuń wszystkie pliki .bat oraz .cmd z pulpitu</translation>
+    </message>
+    <message>
+        <location filename="../ui/InitialSetupDialog.ui" line="161"/>
+        <source>Clean scripts from Desktop</source>
+        <translation>Wyczyść skrypty
+z pulpitu</translation>
+    </message>
+    <message>
+        <location filename="../ui/InitialSetupDialog.ui" line="189"/>
         <source>The &quot;initial setup&quot; function is used for automatically executing tasks such as installing software or cleaning and disabling unnecessary services on newly installed systems. This can also be used on very unclean systems to quickly clean them and install required software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja wstępna ma za zadanie automatycznie wykonać działania takie jak instalowanie programów bądź czyszczenie komputera i wyłączanie niepotrzebnych usług. Może być także użyta na długo nie czyszczonych systemach dla szybkiej konfiguracji wstępnej i czyszczenia.</translation>
     </message>
     <message>
-        <location filename="../ui/InitialSetupDialog.ui" line="159"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="75"/>
         <source>Installs all software specified in the &quot;Software Installer&quot; section</source>
-        <translation type="unfinished">Instaluje wszystkie programy z sekcji &quot;Instaluj programy&quot;</translation>
+        <translation>Instaluje wszystkie programy z sekcji &quot;Instaluj programy&quot;</translation>
     </message>
     <message>
-        <location filename="../ui/InitialSetupDialog.ui" line="162"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="78"/>
         <source>Install all needed software</source>
-        <translation type="unfinished">Zainstaluj potrzebne programy</translation>
+        <translation>Zainstaluj potrzebne programy</translation>
     </message>
     <message>
-        <location filename="../ui/InitialSetupDialog.ui" line="178"/>
+        <location filename="../ui/InitialSetupDialog.ui" line="117"/>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="62"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="63"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="54"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="55"/>
         <source>Starting initial setup…
 ——————————</source>
-        <translation type="unfinished">Rozpoczynanie konfiguracji wstępnej…
+        <translation>Rozpoczynanie konfiguracji wstępnej…
 ——————————</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="67"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="68"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="59"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="60"/>
         <source>Disabling Windows Explorer ads…
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie reklam w Eksploratorze plików…
+</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="73"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="74"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="66"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="67"/>
         <source>Disabling telemetry service…
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie zbierania danych…
+</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="81"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="82"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="75"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="76"/>
         <source>Disabling search indexing…
 </source>
-        <translation type="unfinished">Wyłączanie indeksowania plików…</translation>
+        <translation>Wyłączanie indeksowania plików…
+</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="88"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="82"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="83"/>
+        <source>Enabling icon auto-arrange and snap to grid…
+</source>
+        <translation>Włączenie autorozmieszczania ikon i wyrównywania do siatki…
+</translation>
+    </message>
+    <message>
         <location filename="../src/InitialSetupDialog.cpp" line="89"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="90"/>
         <source>Disabling visual effects…
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłączanie efektów wizualnych…
+</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="102"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="103"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="104"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="105"/>
         <source>Installing required software. This might (will) take a while…
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Instalowanie programów. To zajmie (dłuższą) chwilę…
+</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="109"/>
         <location filename="../src/InitialSetupDialog.cpp" line="111"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="146"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="148"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="113"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="142"/>
         <source>The download failed! Please check your Internet connectivity!</source>
-        <translation type="unfinished">Pobieranie nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
+        <translation>Pobieranie nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="117"/>
         <location filename="../src/InitialSetupDialog.cpp" line="119"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="154"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="156"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="121"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="150"/>
         <source>The installation failed! Please try installing the program manually!</source>
-        <translation type="unfinished">Instalacja nie powiodła się! Proszę spróbować zainstalować progamy manualnie!</translation>
+        <translation>Instalacja nie powiodła się! Proszę spróbować zainstalować progamy manualnie!</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="125"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="127"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="162"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="164"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="178"/>
+        <source>The initial setup completed successfully!</source>
+        <translation>Konfiguracja wstępna zakończyła się sukcesem!</translation>
+    </message>
+    <message>
         <source>The installation failed!</source>
-        <translation type="unfinished">Instalacja nie powiodła się!</translation>
+        <translation type="obsolete">Instalacja nie powiodła się!</translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="139"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="140"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="133"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="134"/>
         <source>Installing BleachBit (utility used for computer cleaning)…
 </source>
-        <translation type="unfinished">Instalowanie BleachBit (narzędzie używane do czyszczenia komputera)…
+        <translation>Instalowanie BleachBit (narzędzie używane do czyszczenia komputera)…
 </translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="174"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="175"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="140"/>
+        <source>The download of BleachBit failed! Please check your Internet connectivity!</source>
+        <translation>Pobieranie BleachBit nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
+    </message>
+    <message>
+        <location filename="../src/InitialSetupDialog.cpp" line="148"/>
+        <source>The installation of BleachBit failed! Please try installing the program manually!</source>
+        <translation>Instalacja BleachBit nie powiodła się! Zainstaluj BleachBit manualnie!</translation>
+    </message>
+    <message>
+        <location filename="../src/InitialSetupDialog.cpp" line="160"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="161"/>
         <source>Cleaning temporary files…
 </source>
-        <translation type="unfinished">Czyszczenie plików tymczasowych…
+        <translation>Czyszczenie plików tymczasowych…
 </translation>
     </message>
     <message>
-        <location filename="../src/InitialSetupDialog.cpp" line="188"/>
-        <location filename="../src/InitialSetupDialog.cpp" line="189"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="175"/>
+        <location filename="../src/InitialSetupDialog.cpp" line="176"/>
         <source>All done!</source>
-        <translation type="unfinished">Wszystko gotowe!</translation>
+        <translation>Wszystko gotowe!</translation>
     </message>
 </context>
 <context>
@@ -300,115 +380,127 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/InstallDialog.ui" line="35"/>
         <source>Install Software</source>
-        <translation type="unfinished">Instalator programów</translation>
+        <translation>Instalator programów</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="68"/>
         <source>Mozilla Firefox is a secure, fast and FOSS (Free and Open Source) web browser developed by Mozilla</source>
-        <translation type="unfinished">Mozilla Firefox jest bezpieczną, szybką i FOSS (Free and Open Source) przeglądarką internetową stworzoną przez firmę Mozilla</translation>
+        <translation>Mozilla Firefox jest bezpieczną, szybką i FOSS (Free and Open Source) przeglądarką internetową stworzoną przez firmę Mozilla</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="71"/>
         <source>Firefox
 (Web browser)</source>
-        <translation type="unfinished">Firefox
+        <translation>Firefox
 (Przeglądarka internetowa)</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="82"/>
         <source>VLC Media Player is a simple, fast and FOSS (Free and Open Source) audio and video player</source>
-        <translation type="unfinished">VLC Media Player jest prostym, szybkim i FOSS (Free and Open Source) odtwarzaczem audio i wideo</translation>
+        <translation>VLC Media Player jest prostym, szybkim i FOSS (Free and Open Source) odtwarzaczem audio i wideo</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="85"/>
         <source>VLC Media Player
 (Video and Audio Player)</source>
-        <translation type="unfinished">VLC Media Player
+        <translation>VLC Media Player
 (Odtwarzacz wideo i audio)</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="103"/>
         <source>Adobe Reader is a popular PDF viewer and editor made by Adobe</source>
-        <translation type="unfinished">Adobe Reader jest popularnym programem do otwierania i edycji dokumentów PDF stworzonym przez firmę Adobe</translation>
+        <translation>Adobe Reader jest popularnym programem do przeglądania i edycji dokumentów PDF stworzonym przez firmę Adobe</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="106"/>
         <source>Adobe Reader
 (PDF Viewer)</source>
-        <translation type="unfinished">Adobe Reader
-(Program do otwierania dokumentów PDF)</translation>
+        <translation>Adobe Reader
+(Program do przeglądania dokumentów PDF)</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="117"/>
         <source>Install</source>
-        <translation type="unfinished">Instaluj</translation>
+        <translation>Instaluj</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="141"/>
         <source>Hello! Which of these programs are
 missing and you would like to install?</source>
-        <translation type="unfinished">Witaj! Których programów brakuje
+        <translation>Witaj! Których programów brakuje
 i mają zostać zainstalowane?</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="167"/>
         <source>PowerPoint Viewer is a stand-alone application used to display Microsoft Office PowerPoint presentations (.pptx)</source>
-        <translation type="unfinished">PowerPoint Viewer jest samodzielną aplikacją pozwalającą na otwieranie przezntacji Microsoft Office PowerPoint (.pptx)</translation>
+        <translation>PowerPoint Viewer jest samodzielną aplikacją pozwalającą na otwieranie przezentacji Microsoft Office PowerPoint (.pptx)</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="170"/>
         <source>PowerPoint Viewer
 (Viewer for .pptx Presentations)</source>
-        <translation type="unfinished">PowerPoint Viewer
-(Program do otwierania prezentacji .pptx)</translation>
+        <translation>PowerPoint Viewer
+(Program do przeglądania prezentacji .pptx)</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="184"/>
         <source>LibreOffice is a FOSS (Free and Open Source) and cross-platform office suite for editing Open Document and Microsoft Office files</source>
-        <translation type="unfinished">LibreOffice jest FOSS (Free and Open Source) i międzyplatformowym zestawem narzędzi office dla edycji i otwierania plików Open Document oraz Microsoft Office</translation>
+        <translation>LibreOffice jest FOSS (Free and Open Source) i międzyplatformowym zestawem narzędzi office dla edycji i otwierania plików Open Document oraz Microsoft Office</translation>
     </message>
     <message>
         <location filename="../ui/InstallDialog.ui" line="187"/>
         <source>LibreOffice
 (Document Manager)</source>
-        <translation type="unfinished">LibreOffice
+        <translation>LibreOffice
 (Zarządzanie dokumentami)</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="60"/>
-        <location filename="../src/InstallDialog.cpp" line="62"/>
+        <location filename="../ui/InstallDialog.ui" line="203"/>
+        <source>7-Zip  is a FOSS (Free and Open Source) and cross-platform archive management utility</source>
+        <translation>7-Zip jest FOSS (Free and Open Source) i międzyplatformowym zestawem narzędzi do zarządzania archiwami plików</translation>
+    </message>
+    <message>
+        <location filename="../ui/InstallDialog.ui" line="206"/>
+        <source>7-Zip
+(Archive management utility)</source>
+        <translation>7-Zip
+(Zarządzanie archiwami)</translation>
+    </message>
+    <message>
+        <location filename="../src/InstallDialog.cpp" line="63"/>
+        <location filename="../src/InstallDialog.cpp" line="65"/>
         <source>The installation completed succesfully!</source>
-        <translation type="unfinished">Instalacja zakończyła się sukcesem!</translation>
+        <translation>Instalacja zakończyła się sukcesem!</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="69"/>
-        <location filename="../src/InstallDialog.cpp" line="71"/>
+        <location filename="../src/InstallDialog.cpp" line="72"/>
+        <location filename="../src/InstallDialog.cpp" line="74"/>
         <source>The download failed! Please check your Internet connectivity!</source>
-        <translation type="unfinished">Pobieranie nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
+        <translation>Pobieranie nie powiodło się! Sprawdź, czy posiadasz połączenie z Internetem!</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="78"/>
-        <location filename="../src/InstallDialog.cpp" line="80"/>
+        <location filename="../src/InstallDialog.cpp" line="81"/>
+        <location filename="../src/InstallDialog.cpp" line="83"/>
         <source>The installation failed! Please try installing the program manually!</source>
-        <translation type="unfinished">Instalacja nie powiodła się! Proszę spróbować zainstalować progamy manualnie!</translation>
+        <translation>Instalacja nie powiodła się! Proszę spróbować zainstalować progamy manualnie!</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="87"/>
-        <location filename="../src/InstallDialog.cpp" line="89"/>
+        <location filename="../src/InstallDialog.cpp" line="90"/>
+        <location filename="../src/InstallDialog.cpp" line="92"/>
         <source>The installation failed! The temporary folder could not be created!</source>
-        <translation type="unfinished">Instalacja nie powiodła się! Nie udało się utworzyć folderu tymczasowego!</translation>
+        <translation>Instalacja nie powiodła się! Nie udało się utworzyć folderu tymczasowego!</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="96"/>
-        <location filename="../src/InstallDialog.cpp" line="98"/>
+        <location filename="../src/InstallDialog.cpp" line="99"/>
+        <location filename="../src/InstallDialog.cpp" line="101"/>
         <source>The installation failed!</source>
-        <translation type="unfinished">Instalacja nie powiodła się!</translation>
+        <translation>Instalacja nie powiodła się!</translation>
     </message>
     <message>
-        <location filename="../src/InstallDialog.cpp" line="123"/>
-        <location filename="../src/InstallDialog.cpp" line="124"/>
+        <location filename="../src/InstallDialog.cpp" line="132"/>
+        <location filename="../src/InstallDialog.cpp" line="133"/>
         <source>Please select at least one program to be installed!</source>
-        <translation type="unfinished">Proszę wybrać co najmniej jeden program do zainstalowania!</translation>
+        <translation>Proszę wybrać co najmniej jeden program do zainstalowania!</translation>
     </message>
 </context>
 <context>
@@ -416,99 +508,104 @@ i mają zostać zainstalowane?</translation>
     <message>
         <location filename="../ui/MainWindow.ui" line="32"/>
         <source>qSchoolHelper</source>
-        <translation type="unfinished">qSchoolHelper</translation>
+        <translation>qSchoolHelper</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="69"/>
         <source>Install software</source>
-        <translation type="unfinished">Instaluj programy</translation>
+        <translation>Instalowanie programów</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="103"/>
         <source>Welcome to qSchoolHelper!
 What would you like to do today?</source>
-        <translation type="unfinished">Witaj w qSchoolHelper!
+        <translation>Witaj w qSchoolHelper!
 Z czym potrzebujesz pomocy?</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="120"/>
         <source>Application guide</source>
-        <translation type="unfinished">Pomoc</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="149"/>
         <source>Initial Setup</source>
-        <translation type="unfinished">Konfiguracja wstępna</translation>
+        <translation>Konfiguracja wstępna</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="175"/>
         <source>Clean-up</source>
-        <translation type="unfinished">Czyszczenie systemu</translation>
+        <translation>Czyszczenie systemu</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="198"/>
         <source>I have a problem</source>
-        <translation type="unfinished">Rozwiązywanie problemów</translation>
+        <translation>Rozwiązywanie problemów</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="226"/>
         <source>Fi&amp;le</source>
-        <translation type="unfinished">&amp;Plik</translation>
+        <translation>&amp;Plik</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="234"/>
         <source>Help</source>
-        <translation type="unfinished">Pomoc</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../ui/MainWindow.ui" line="244"/>
         <source>&amp;Exit</source>
-        <translation type="unfinished">&amp;Wyjdź</translation>
+        <translation>&amp;Wyjdź</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="249"/>
+        <location filename="../ui/MainWindow.ui" line="247"/>
+        <source>Ctrl+Q</source>
+        <translation>Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="../ui/MainWindow.ui" line="252"/>
         <source>&amp;Initial Setup</source>
-        <translation type="unfinished">&amp;Konfiguracja wstępna</translation>
+        <translation>&amp;Konfiguracja wstępna</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="254"/>
+        <location filename="../ui/MainWindow.ui" line="257"/>
         <source>&amp;Open help</source>
-        <translation type="unfinished">&amp;Otwórz pomoc</translation>
+        <translation>&amp;Otwórz pomoc</translation>
     </message>
     <message>
-        <location filename="../ui/MainWindow.ui" line="259"/>
+        <location filename="../ui/MainWindow.ui" line="262"/>
         <source>&amp;About</source>
-        <translation type="unfinished">O &amp;programie</translation>
+        <translation>O &amp;programie</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="54"/>
+        <source>Install missing software</source>
+        <translation>Zainstaluj brakujące programy</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="55"/>
+        <source>Help with common problems</source>
+        <translation>Pomóż z częstymi problemami</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="56"/>
+        <source>Clean junk and temporary files</source>
+        <translation>Wyczyść śmieci oraz pliki tymczasowe</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="57"/>
-        <source>Install missing software</source>
-        <translation type="unfinished">Zainstaluj brakujące programy</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="58"/>
-        <source>Help with common problems</source>
-        <translation type="unfinished">Pomóż z częstymi problemami</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="59"/>
-        <source>Clean junk and temporary files</source>
-        <translation type="unfinished">Wyczyść śmieci oraz pliki tymczasowe</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="60"/>
         <source>Open the application usage guide</source>
-        <translation type="unfinished">Otwórz instrukcję użytkowania aplikacji</translation>
+        <translation>Otwórz instrukcję użytkowania aplikacji</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="62"/>
+        <location filename="../src/MainWindow.cpp" line="63"/>
         <source>Initial Setup has already been run on this computer. If you with to run it again, please select it from File -&gt; Initial Setup.</source>
-        <translation type="unfinished">Konfiguracja wstępna została już uruchomiona na tym komputerze. Jeśli chcesz uruchomić ją ponownie, wybierz ją z Plik -&gt; Konfiguracja wstępna.</translation>
+        <translation>Konfiguracja wstępna została już uruchomiona na tym komputerze. Jeśli chcesz uruchomić ją ponownie, wybierz ją z Plik -&gt; Konfiguracja wstępna.</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="67"/>
+        <location filename="../src/MainWindow.cpp" line="68"/>
         <source>Please run Initial Setup first!</source>
-        <translation type="unfinished">Proszę najpierw uruchomić Konfigurację wstępną!</translation>
+        <translation>Proszę najpierw uruchomić Konfigurację wstępną!</translation>
     </message>
 </context>
 <context>
@@ -516,65 +613,65 @@ Z czym potrzebujesz pomocy?</translation>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="14"/>
         <source>Problem Solver</source>
-        <translation type="unfinished">Rozwiązywanie problemów</translation>
+        <translation>Rozwiązywanie problemów</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="69"/>
         <source>For problems relating to Internet connectivity or web browser issues</source>
-        <translation type="unfinished">Dla problemów związanych z połączeniem z Internetem bądź przeglądarką</translation>
+        <translation>Dla problemów związanych z połączeniem z Internetem bądź przeglądarką</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="72"/>
         <source>  Web Browser/Internet</source>
-        <translation type="unfinished">  Przeglądarka internetowa/internet</translation>
+        <translation>  Przeglądarka internetowa/internet</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="95"/>
         <source>For problems relating to sound output</source>
-        <translation type="unfinished">Problemy związane z dźwiękiem</translation>
+        <translation>Problemy związane z dźwiękiem</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="98"/>
         <source>  Speakers</source>
-        <translation type="unfinished">  Głośniki</translation>
+        <translation>  Głośniki</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="128"/>
         <source>For problems relating to connectivity with the projector/TV</source>
-        <translation type="unfinished">Problemy związane z połączeniem z projektorem/TV</translation>
+        <translation>Problemy związane z połączeniem z projektorem/TV</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="131"/>
         <source>  Projector/TV</source>
-        <translation type="unfinished">  Projektor/TV</translation>
+        <translation>  Projektor/TV</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="154"/>
         <source>For problems relating to the display of presentations</source>
-        <translation type="unfinished">Problemy związane z pokazywaniem prezentacji</translation>
+        <translation>Problemy związane z wyświetlaniem prezentacji</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="157"/>
         <source>  Presentations</source>
-        <translation type="unfinished">  Prezentacje</translation>
+        <translation>  Prezentacje</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="187"/>
         <source>Hello! What do you require help with?</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj! Z jakim problemem potrzebna jest pomoc?</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="218"/>
         <source>Browser/Internet connection</source>
-        <translation type="unfinished">Przeglądarka internetowa/połączenie internetowe</translation>
+        <translation>Przeglądarka internetowa/połączenie internetowe</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="232"/>
-        <location filename="../ui/ProblemDialog.ui" line="434"/>
-        <location filename="../ui/ProblemDialog.ui" line="643"/>
-        <location filename="../ui/ProblemDialog.ui" line="847"/>
+        <location filename="../ui/ProblemDialog.ui" line="468"/>
+        <location filename="../ui/ProblemDialog.ui" line="673"/>
+        <location filename="../ui/ProblemDialog.ui" line="880"/>
         <source>Step 1</source>
-        <translation type="unfinished">Krok 1</translation>
+        <translation>Krok 1</translation>
     </message>
     <message>
         <location filename="../ui/ProblemDialog.ui" line="258"/>
@@ -583,125 +680,193 @@ Z czym potrzebujesz pomocy?</translation>
 a) The Ethernet cable is plugged into the Ethernet port firmly (until it clicks);
 or:
 b) The computer is connected to the appropriate WiFi network.</source>
-        <translation type="unfinished">Proszę upewnić się, że:
+        <translation>Proszę upewnić się, że:
 
 a) Kabel internetowy (Ethernet) jest dobrze podpięty do portu Ethernet (wpiąć, aż kliknie).
 bądź:
 b) Komputer jest podłączony do odpowiedniej sieci WiFi.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="308"/>
-        <location filename="../ui/ProblemDialog.ui" line="507"/>
-        <location filename="../ui/ProblemDialog.ui" line="719"/>
-        <location filename="../ui/ProblemDialog.ui" line="950"/>
+        <location filename="../ui/ProblemDialog.ui" line="339"/>
+        <location filename="../ui/ProblemDialog.ui" line="544"/>
+        <location filename="../ui/ProblemDialog.ui" line="752"/>
+        <location filename="../ui/ProblemDialog.ui" line="992"/>
         <source>Step 2</source>
-        <translation type="unfinished">Krok 2</translation>
+        <translation>Krok 2</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="337"/>
+        <location filename="../ui/ProblemDialog.ui" line="368"/>
         <source>Please also make sure that:
 
 1) The URL you are typing in is correct;
 
 2) The site isn&apos;t experiencing other problems (check whether it&apos;s accessible using another device).</source>
-        <translation type="unfinished">Proszę także upewnić się, że:
+        <translation>Proszę także upewnić się, że:
 
 1) Adres URL jest wpisywany poprawnie;
 
 2) Strona działa z innych urządzeń.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="420"/>
+        <location filename="../ui/ProblemDialog.ui" line="454"/>
         <source>Projector/TV</source>
-        <translation type="unfinished">Projektor/TV</translation>
+        <translation>Projektor/TV</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="460"/>
+        <location filename="../ui/ProblemDialog.ui" line="494"/>
         <source>Please make sure that:
 
 1) The projector/TV is plugged into a socket/extension cord and turned on;
 
 2) The projector/TV is connected to the computer via a VGA/HDMI/DP cable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę upewnić się, że:
+
+1) Projektor/TV jest podłączony do prądu i włączony;
+
+2) Projektor/TV jest podłączony do komputera z użyciem kabla VGA/HDMI/DP.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="528"/>
-        <source>Image 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/ProblemDialog.ui" line="571"/>
+        <location filename="../ui/ProblemDialog.ui" line="570"/>
         <source>Please also make sure that:
 
 1) The &quot;source&quot; on the projector/TV is set to &quot;Computer&quot;, VGA, HDMI or DP;
 
 2) The screen mirroring mode is either set to &quot;duplicate&quot; or &quot;extend&quot; (you can change it by pressing the Windows key and P simultaneously).</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę także upewnić się, że:
+
+1) Źródło (source) obrazu na projektorze/TV ustawione jest na &quot;Komputer&quot; bądź VGA/HDMI/DP;
+
+2) Tryb wyświetlania na drugim ekranie jest ustawiony na &quot;duplikuj&quot; bądź &quot;rozszerz&quot; (można to zmienić naciskając jednocześnie klawisze Windows oraz P).</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="623"/>
+        <location filename="../ui/ProblemDialog.ui" line="653"/>
         <source>Speakers</source>
-        <translation type="unfinished">Głośniki</translation>
+        <translation>Głośniki</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="672"/>
+        <location filename="../ui/ProblemDialog.ui" line="702"/>
         <source>Please make sure that:
 
 1) The speakers are plugged into the wall socket/extension cord;
 
 2) The speaker cable is plugged into the computer&apos;s headphone/speaker port (green or colourless).</source>
-        <translation type="unfinished">Proszę upewnić się, że:
+        <translation>Proszę upewnić się, że:
 
 1) Głośniki są podłączone do prądu;
 
 2) Głośniki są podłączone do portu słuchawkowego/głośnikowego w komputerze (zielony bądź bez koloru).</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="804"/>
+        <location filename="../ui/ProblemDialog.ui" line="837"/>
         <source>Please also make sure that:
 
 1) The computer volume is set to a non-zero value;
 
 2) The correct output device is selected in the operating system&apos;s audio device settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę także upewnić się, że:
+
+1) Głośność komputera jest ustawiona na wartość większą, niż zero;
+
+2) Poprawne urządzenie odtwarzające jest wybrane w ustawieniach audio systemu operacyjnego.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="873"/>
+        <location filename="../ui/ProblemDialog.ui" line="906"/>
         <source>Please make sure that:
 
  The correct screen mirroring option is set (&quot;mirror&quot; will display the same thing on the projector/TV as on the computer&apos;s display, &quot;extend&quot; will display a control interface on one of the screens). Refer to the &quot;Projector/TV&quot; problem helper secrtion for more information.</source>
-        <translation type="unfinished">Proszę upewnić się, że:
+        <translation>Proszę upewnić się, że:
 
  Odpowiedni tryb wyświetlania na dodatkowym ekranie jest wybrany (&quot;duplikuj&quot; spowoduje wyświetlanie tego samego obrazu na ekranie komputera oraz projektora/TV podczas gdy&quot;rozszerz&quot; spowoduje, że na jednym z ekranów będzie wyświetlany interfejs prezentera). Więcej informacji można znaleźć w sekcji pomocy technicznej &quot;Projektor/TV&quot;.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="1004"/>
+        <location filename="../ui/ProblemDialog.ui" line="1049"/>
         <source>Please also make sure that:
 
 You are using the correct software to open presentations. Use PowerPoint Viewer for .pptx files and LibreOffice Impress for .odp files.</source>
-        <translation type="unfinished">Proszę także upewnić się, że:
+        <translation>Proszę także upewnić się, że:
 
 Do otwierania prezentacji używane jest odpowiednie oprogramowanie. Użyj programu PowerPoint Viewer dla plików .pptx i LibreOffice Impress dla plików .odp.</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="1034"/>
+        <location filename="../ui/ProblemDialog.ui" line="1079"/>
         <source>Presentations</source>
-        <translation type="unfinished">Prezentacje</translation>
+        <translation>Prezentacje</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="1067"/>
+        <location filename="../ui/ProblemDialog.ui" line="1112"/>
         <source>Back</source>
-        <translation type="unfinished">Wstecz</translation>
+        <translation>Wstecz</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="1083"/>
+        <location filename="../ui/ProblemDialog.ui" line="1128"/>
         <source>Next</source>
-        <translation type="unfinished">Następny</translation>
+        <translation>Następny</translation>
     </message>
     <message>
-        <location filename="../ui/ProblemDialog.ui" line="1096"/>
+        <location filename="../ui/ProblemDialog.ui" line="1141"/>
         <source>Close</source>
-        <translation type="unfinished">Zamknij</translation>
+        <translation>Zamknij</translation>
+    </message>
+</context>
+<context>
+    <name>Procedure</name>
+    <message>
+        <location filename="../src/Procedure.cpp" line="74"/>
+        <source>Desktop path: </source>
+        <translation>Ścieżka do pulpitu: </translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="75"/>
+        <location filename="../src/Procedure.cpp" line="76"/>
+        <location filename="../src/Procedure.cpp" line="77"/>
+        <source>Checking for the existence of: </source>
+        <translation>Sprawdzanie istnienia pliku: </translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="89"/>
+        <source>Creating shortcut to: </source>
+        <translation>Tworzenie skrótu do: </translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="111"/>
+        <location filename="../src/Procedure.cpp" line="112"/>
+        <source>Starting cleaner…
+—————————————————</source>
+        <translation>Rozpoczynanie czyszczenia…
+—————————————————</translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="116"/>
+        <location filename="../src/Procedure.cpp" line="117"/>
+        <source>Removing .bat and .cmd files from the desktop…</source>
+        <translation>Usuwanie plików .bat i .cmd z pulpitu…</translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="149"/>
+        <location filename="../src/Procedure.cpp" line="150"/>
+        <source>Downloading BleachBit (cleaning engine)…</source>
+        <translation>Pobieranie BleachBit (narzędzie używane do czyszczenia)…</translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="158"/>
+        <location filename="../src/Procedure.cpp" line="159"/>
+        <source>Cleaning temporary files and caches…</source>
+        <translation>Czyszczenie plików tymczasowych i cache…</translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="180"/>
+        <source>Cleaning temporary files and caches (extended)…</source>
+        <translation>Czyszczenie plików tymczasowych i cache (rozszerzone)…</translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="470"/>
+        <source>Downloading </source>
+        <translation>Pobieranie </translation>
+    </message>
+    <message>
+        <location filename="../src/Procedure.cpp" line="496"/>
+        <source>Installing: </source>
+        <translation>Instalowanie: </translation>
     </message>
 </context>
 <context>
