@@ -24,7 +24,7 @@ class Procedure : public QObject
 
     public:
         bool check_shortcut(const QString &exe_path, const int &NAME_NUM);
-        int clean(const bool EXT);
+        int clean(const bool EXT, const bool BAT);
         int install_bb();
         int install_software(const bool INS_FF, const bool INS_RDC, const bool INS_LOF, const bool INS_VLC, const bool INS_PPV, const bool INS_7Z);
         bool qtcurl_dl(const char* url, const char* filename);

@@ -160,6 +160,9 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
       </item>
       <item>
        <widget class="QRadioButton" name="radio_simple">
+        <property name="toolTip">
+         <string>A shorter, less thorough cleaning</string>
+        </property>
         <property name="text">
          <string>Simple</string>
         </property>
@@ -170,8 +173,25 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
       </item>
       <item>
        <widget class="QRadioButton" name="radio_extended">
+        <property name="toolTip">
+         <string>A longer, more thorough cleaning</string>
+        </property>
         <property name="text">
          <string>Extended</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="bat_check_box">
+        <property name="toolTip">
+         <string>Delete all .bat and .cmd scripts from the user's Desktop</string>
+        </property>
+        <property name="text">
+         <string>Clean scripts
+from desktop</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -182,6 +202,9 @@ The &quot;simple&quot; cleaning type takes less time, but is less accurate than 
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Start the cleaner</string>
         </property>
         <property name="text">
          <string>Clean!</string>

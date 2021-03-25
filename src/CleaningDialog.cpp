@@ -45,13 +45,14 @@ void CleaningDialog::on_clean_button_clicked()
     ui->cleaning_log->clear();
     ui->radio_simple->setEnabled(false);
     ui->radio_extended->setEnabled(false);
+    ui->bat_check_box->setEnabled(false);
     QApplication::processEvents();
     // Actually run the cleaning process
     // ---------------------------------
     Procedure cleaning;
     QObject::connect(&cleaning, SIGNAL(progress_description(QString)), this->ui->cleaning_log, SLOT(append(QString)));
     QObject::connect(&cleaning, SIGNAL(progress_changed(int)), this->ui->progress_bar, SLOT(setValue(int)));
-    cleaning.clean(ui->radio_extended->isChecked());
+    cleaning.clean(ui->radio_extended->isChecked(), ui->bat_check_box->isChecked());
     // Finalize — set UI element states
     // --------------------------------
     g_cleaning_running = false;
@@ -66,6 +67,7 @@ void CleaningDialog::on_clean_button_clicked()
     ui->radio_extended->setEnabled(true);
     ui->clean_button->setEnabled(true);
     ui->button_box->setEnabled(true);
+    ui->bat_check_box->setEnabled(true);
 }
 // Ignore close events if a process is running
 // -------------------------------------------

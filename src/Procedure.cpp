@@ -104,35 +104,39 @@ bool Procedure::check_shortcut(const QString &exe_path, const int &NAME_NUM = -1
     }
 }
 
-int Procedure::clean(const bool EXT)
+int Procedure::clean(const bool EXT, const bool BAT)
 {
     // Find and remove all .bat and .cmd files from all users' desktops
     // ----------------------------------------------------------------
     qInfo() << tr("Starting cleaner…\n—————————————————");
     emit progress_description(tr("Starting cleaner…\n—————————————————"));
-    qInfo() << tr("Removing .bat and .cmd files from the desktop…");
-    emit progress_description(tr("Removing .bat and .cmd files from the desktop…"));
 
-    try
+    if (BAT)
     {
-        QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
-        qDebug() << "Dekstop path: " << desktop.absolutePath();
-        QStringList filters;
-        filters << "*.bat" << "*.cmd";
-        desktop.setNameFilters(filters);
+        qInfo() << tr("Removing .bat and .cmd files from the desktop…");
+        emit progress_description(tr("Removing .bat and .cmd files from the desktop…"));
 
-        for (QFileInfo &file_info : desktop.entryInfoList())
+        try
         {
-            QFile file = file_info.absoluteFilePath();
-            qDebug() << "Removing: " << file.fileName() << "\n";
-            file.setPermissions(QFile::WriteOther);
-            file.remove();
+            QDir desktop(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+            qDebug() << "Dekstop path: " << desktop.absolutePath();
+            QStringList filters;
+            filters << "*.bat" << "*.cmd";
+            desktop.setNameFilters(filters);
+
+            for (QFileInfo &file_info : desktop.entryInfoList())
+            {
+                QFile file = file_info.absoluteFilePath();
+                qDebug() << "Removing: " << file.fileName() << "\n";
+                file.setPermissions(QFile::WriteOther);
+                file.remove();
+            }
         }
-    }
-    catch (const std::exception &e)
-    {
-        // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
-        // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
+        catch (const std::exception &e)
+        {
+            // Catch permission denied and no such file or directory errors. We can't really do much about them, though,
+            // since the application is supposed to run as administrator anyways and we can't account for a lack of C:/Users/
+        }
     }
 
     // Install BleachBit if not installed
