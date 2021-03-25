@@ -113,6 +113,9 @@
     </item>
     <item row="5" column="0" colspan="2">
      <widget class="QPushButton" name="install_button">
+      <property name="toolTip">
+       <string>Start the installation of selected software</string>
+      </property>
       <property name="text">
        <string>Install</string>
       </property>

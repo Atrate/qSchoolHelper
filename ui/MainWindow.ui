@@ -218,7 +218,7 @@ What would you like to do today?</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuas">
@@ -231,7 +231,7 @@ What would you like to do today?</string>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="action_about"/>
     <addaction name="action_open_help"/>
