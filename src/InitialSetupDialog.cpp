@@ -48,6 +48,7 @@ void InitialSetupDialog::initial_setup()
     ui->progress_bar->setEnabled(true);
     ui->button_box->setEnabled(false);
     ui->install_check_box->setEnabled(false);
+    ui->bat_check_box->setEnabled(false);
     ui->progress_bar->setValue(0);
     ui->setup_log->clear();
     qInfo() << tr("Starting initial setup…\n——————————");
@@ -158,7 +159,7 @@ void InitialSetupDialog::initial_setup()
     {
         qInfo() << tr("Cleaning temporary files…\n");
         ui->setup_log->append(tr("Cleaning temporary files…\n"));
-        initial_procedures.clean(true);
+        initial_procedures.clean(true, ui->bat_check_box->isChecked());
         QApplication::processEvents();
     }
 
@@ -180,6 +181,7 @@ void InitialSetupDialog::initial_setup()
     ui->install_check_box->setEnabled(true);
     ui->start_button->setEnabled(true);
     ui->button_box->setEnabled(true);
+    ui->bat_check_box->setEnabled(true);
 }
 // Ignore close events if a process is running
 // -------------------------------------------

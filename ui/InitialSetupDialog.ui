@@ -59,6 +59,76 @@
     <property name="horizontalSpacing">
      <number>30</number>
     </property>
+    <item row="4" column="0">
+     <widget class="QLabel" name="setup_label">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Setup progress:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QCheckBox" name="install_check_box">
+      <property name="toolTip">
+       <string>Installs all software specified in the &quot;Software Installer&quot; section</string>
+      </property>
+      <property name="text">
+       <string>Install all needed software</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QProgressBar" name="progress_bar">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QDialogButtonBox" name="button_box">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="start_button">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/data/icons/go.png</normaloff>:/data/icons/go.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QTextBrowser" name="setup_log">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="title_label">
       <property name="sizePolicy">
@@ -82,34 +152,20 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QTextBrowser" name="setup_log">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="1">
-     <widget class="QProgressBar" name="progress_bar">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="setup_label">
-      <property name="enabled">
-       <bool>false</bool>
+     <widget class="QCheckBox" name="bat_check_box">
+      <property name="toolTip">
+       <string>Delete all .bat and .cmd scripts from the user's Desktop</string>
       </property>
       <property name="text">
-       <string>Setup progress:</string>
+       <string>Clean scripts from Desktop</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" rowspan="2">
+    <item row="1" column="0" rowspan="3">
      <widget class="QLabel" name="description_label">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -137,49 +193,6 @@
       </property>
       <property name="wordWrap">
        <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QDialogButtonBox" name="button_box">
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Close</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QCheckBox" name="install_check_box">
-      <property name="toolTip">
-       <string>Installs all software specified in the &quot;Software Installer&quot; section</string>
-      </property>
-      <property name="text">
-       <string>Install all needed software</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="start_button">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Start</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources.qrc">
-        <normaloff>:/data/icons/go.png</normaloff>:/data/icons/go.png</iconset>
       </property>
      </widget>
     </item>
