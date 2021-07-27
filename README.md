@@ -10,6 +10,11 @@ This project has been designed and configured for use on Windows 10 computers.
 - Grab the latest .exe from the [releases page](https://gitlab.com/Atrate/qschoolhelper/releases) or compile the app from source.
 - Launch the app and follow the instructions on screen.
 
+## Screenshots
+
+![Main screen](./data/images/program_screenshots/main_screen.jpg) ![Initial setup screen](./data/images/program_screenshots/initial_setup.jpg) ![Software installer screen](./data/images/program_screenshots/software_installer.jpg) ![Cleaning screen](./data/images/program_screenshots/cleaning.jpg) ![Problem solver main screen](./data/images/program_screenshots/problem_solver_1.jpg) ![Problem solver speaker screen](./data/images/program_screenshots/problem_solver_2.jpg)
+
+
 ### [Changelog](./CHANGELOG)
 
 ## Contributing
